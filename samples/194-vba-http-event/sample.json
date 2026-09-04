@@ -1,0 +1,38 @@
+{
+  "id": "194",
+  "title": "WithEventsでHTTP完了イベントを受け取る",
+  "summary": "短い実験で「WithEventsでHTTP完了イベントを受け取る」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "VBA Deep Dive",
+  "audience": [
+    "学生",
+    "初学者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "VBA",
+    "COM",
+    "Win32"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のテストデータ、一時ファイル、localhost、自分のPCのみ",
+  "demo_file": "demo.bas",
+  "folder": "samples/194-vba-http-event",
+  "tags": [
+    "VBA Deep Dive",
+    "VBA",
+    "COM",
+    "Win32",
+    "experimental",
+    "learning"
+  ]
+}

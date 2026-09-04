@@ -1,0 +1,1 @@
+$cap=3;$cache=@{};$order=[Collections.Generic.List[string]]::new();function Put($k,$v){if($cache.ContainsKey($k)){$order.Remove($k)|Out-Null};$cache[$k]=$v;$order.Add($k);if($order.Count-gt$cap){$old=$order[0];$order.RemoveAt(0);$cache.Remove($old)};"Order=$($order-join',')"};Put A 1;Put B 2;Put C 3;Put A 1;Put D 4

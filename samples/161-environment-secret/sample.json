@@ -1,0 +1,38 @@
+{
+  "id": "161",
+  "title": "環境変数へ秘密情報を置くとプロセスからどう見えるかを自分のテスト値で確認する",
+  "summary": "短い実験で「環境変数へ秘密情報を置くとプロセスからどう見えるかを自分のテスト値で確認する」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "Visual Security Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "PowerShell",
+    ".NET Cryptography",
+    "Windows Security"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のテストデータ、一時ファイル、localhost、自分のPCのみ",
+  "demo_file": "demo.ps1",
+  "folder": "samples/161-environment-secret",
+  "tags": [
+    "Visual Security Lab",
+    "PowerShell",
+    ".NET Cryptography",
+    "Windows Security",
+    "experimental",
+    "learning"
+  ]
+}

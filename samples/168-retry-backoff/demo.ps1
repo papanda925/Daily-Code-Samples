@@ -1,0 +1,1 @@
+$attempt=0;1..4|%{$attempt++;try{if($attempt-lt4){throw'demo failure'};"Attempt $attempt -> OK";break}catch{$wait=[math]::Pow(2,$attempt-1);"Attempt $attempt -> NG / wait "+$wait+"s";Start-Sleep -Seconds $wait}}

@@ -1,0 +1,36 @@
+{
+  "id": "186",
+  "title": "Cache-Aside Patternを小さな辞書とファイルで再現する",
+  "summary": "短い実験で「Cache-Aside Patternを小さな辞書とファイルで再現する」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "Architecture & Algorithm Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "PowerShell",
+    "VBA"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のテストデータ、一時ファイル、localhost、自分のPCのみ",
+  "demo_file": "demo.ps1",
+  "folder": "samples/186-cache-aside",
+  "tags": [
+    "Architecture & Algorithm Lab",
+    "PowerShell",
+    "VBA",
+    "experimental",
+    "learning"
+  ]
+}

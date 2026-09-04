@@ -1,0 +1,1 @@
+foreach($n in 1000,10000,100000){$salt=New-Object byte[] 16;$sw=[Diagnostics.Stopwatch]::StartNew();$k=[Security.Cryptography.Rfc2898DeriveBytes]::new("demo",$salt,$n,[Security.Cryptography.HashAlgorithmName]::SHA256);[void]$k.GetBytes(32);$k.Dispose();$sw.Stop();[pscustomobject]@{Iterations=$n;Milliseconds=$sw.ElapsedMilliseconds}}

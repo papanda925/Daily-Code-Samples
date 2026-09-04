@@ -1,0 +1,1 @@
+function H([string]$s){$sha=[Security.Cryptography.SHA256]::Create();try{[Convert]::ToHexString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($s)))}finally{$sha.Dispose()}};$chain=@();$prev='GENESIS';foreach($data in'A','B','C'){$hash=H("$prev|$data");$chain+=[pscustomobject]@{Data=$data;Previous=$prev;Hash=$hash};$prev=$hash};$chain|Format-Table

@@ -1,0 +1,1 @@
+$q=Join-Path $env:TEMP 'dailycode-queue';New-Item $q -ItemType Directory -Force|Out-Null;1..3|%{@{id=$_;text="message $_"}|ConvertTo-Json|Set-Content(Join-Path $q ("{0:D3}.json"-f$_))};Get-ChildItem $q -Filter *.json|Sort Name|%{Get-Content $_ -Raw;Remove-Item $_};Remove-Item $q

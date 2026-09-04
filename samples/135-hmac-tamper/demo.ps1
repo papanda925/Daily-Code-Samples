@@ -1,0 +1,1 @@
+$k=[Text.Encoding]::UTF8.GetBytes('demo-key');$h=[Security.Cryptography.HMACSHA256]::new($k);try{foreach($s in 'amount=1000','amount=1001'){"$s -> $([Convert]::ToHexString($h.ComputeHash([Text.Encoding]::UTF8.GetBytes($s))))"}}finally{$h.Dispose()}

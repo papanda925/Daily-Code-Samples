@@ -1,0 +1,1 @@
+$state='CLOSED';$fail=0;foreach($result in'NG','NG','NG','SKIP','OK'){if($state-eq'OPEN'){"OPEN -> blocked";$state='HALF-OPEN';continue};if($result-eq'NG'){$fail++;if($fail-ge3){$state='OPEN'}}else{$fail=0;$state='CLOSED'};"result=$result state=$state"}

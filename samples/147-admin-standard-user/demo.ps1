@@ -1,0 +1,1 @@
+$id=[Security.Principal.WindowsIdentity]::GetCurrent();$p=[Security.Principal.WindowsPrincipal]::new($id);[pscustomobject]@{User=$id.Name;IsAdministrator=$p.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)}

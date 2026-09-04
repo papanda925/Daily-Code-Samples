@@ -1,0 +1,1 @@
+$r=Join-Path $env:TEMP 'acl-demo';$c=Join-Path $r 'child';New-Item $c -ItemType Directory -Force|Out-Null;"Parent";(Get-Acl $r).Access|Select -First 5 IdentityReference,IsInherited;"Child";(Get-Acl $c).Access|Select -First 5 IdentityReference,IsInherited;Remove-Item $r -Recurse -Force

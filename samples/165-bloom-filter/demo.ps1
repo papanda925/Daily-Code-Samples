@@ -1,0 +1,1 @@
+$bits=New-Object bool[] 32;function I([string]$s,[int]$salt){[math]::Abs(($s.GetHashCode()+$salt)%$bits.Length)};function A($s){1,17|%{$bits[(I $s $_)]=$true}};function M($s){-not(1,17|?{-not$bits[(I $s $_)]})};'apple','orange','grape'|%{A $_};'apple','banana','grape','melon'|%{[pscustomobject]@{Value=$_;MaybePresent=(M $_)}}

@@ -1,0 +1,1 @@
+$a=[Text.Encoding]::UTF8.GetBytes('same-value-1234');$b=[Text.Encoding]::UTF8.GetBytes('same-value-1235');"SequenceEqual=$([Linq.Enumerable]::SequenceEqual([byte[]]$a,[byte[]]$b))";"FixedTimeEquals=$([Security.Cryptography.CryptographicOperations]::FixedTimeEquals($a,$b))"

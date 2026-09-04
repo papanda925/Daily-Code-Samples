@@ -1,0 +1,1 @@
+$password="demo-password";1..3|%{$salt=New-Object byte[] 16;[Security.Cryptography.RandomNumberGenerator]::Fill($salt);$k=[Security.Cryptography.Rfc2898DeriveBytes]::new($password,$salt,10000,[Security.Cryptography.HashAlgorithmName]::SHA256);try{"Salt=$([Convert]::ToHexString($salt)) Hash=$([Convert]::ToHexString($k.GetBytes(32)))"}finally{$k.Dispose()}}

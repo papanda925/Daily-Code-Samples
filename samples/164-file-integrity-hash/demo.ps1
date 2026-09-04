@@ -1,0 +1,1 @@
+function H([string]$s){$x=[Security.Cryptography.SHA256]::Create();try{[Convert]::ToHexString($x.ComputeHash([Text.Encoding]::UTF8.GetBytes($s)))}finally{$x.Dispose()}};$l='A','B','C','D'|%{H $_};$h12=H($l[0]+$l[1]);$h34=H($l[2]+$l[3]);[pscustomobject]@{Root=H($h12+$h34);H12=$h12;H34=$h34}

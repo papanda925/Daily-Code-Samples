@@ -1,0 +1,1 @@
+$o=Join-Path $env:TEMP 'outbox.jsonl';@{event='Created';id=1}|ConvertTo-Json -Compress|Add-Content $o;@{event='Updated';id=1}|ConvertTo-Json -Compress|Add-Content $o;Get-Content $o|%{$_|ConvertFrom-Json};Remove-Item $o

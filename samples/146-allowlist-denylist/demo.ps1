@@ -1,0 +1,1 @@
+$allow='excel.exe','winword.exe';$deny='unknown.exe';foreach($x in 'excel.exe','unknown.exe','tool.exe'){[pscustomobject]@{Name=$x;AllowedByAllowlist=$allow-contains$x;BlockedByDenylist=$deny-contains$x}}

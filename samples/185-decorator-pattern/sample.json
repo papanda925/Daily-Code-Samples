@@ -1,0 +1,36 @@
+{
+  "id": "185",
+  "title": "Decorator Patternでログ機能を後付けする",
+  "summary": "短い実験で「Decorator Patternでログ機能を後付けする」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "Architecture & Algorithm Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "PowerShell",
+    "VBA"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のテストデータ、一時ファイル、localhost、自分のPCのみ",
+  "demo_file": "demo.ps1",
+  "folder": "samples/185-decorator-pattern",
+  "tags": [
+    "Architecture & Algorithm Lab",
+    "PowerShell",
+    "VBA",
+    "experimental",
+    "learning"
+  ]
+}

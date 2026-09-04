@@ -1,0 +1,1 @@
+$p=Join-Path $env:TEMP 'integrity-demo.txt';'version1'|Set-Content $p;$h1=(Get-FileHash $p).Hash;'version2'|Set-Content $p;$h2=(Get-FileHash $p).Hash;[pscustomobject]@{Before=$h1;After=$h2;Same=($h1-eq$h2)};Remove-Item $p

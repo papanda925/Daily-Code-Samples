@@ -1,0 +1,1 @@
+$h="example.com";$tcp=[Net.Sockets.TcpClient]::new($h,443);$ssl=[Net.Security.SslStream]::new($tcp.GetStream(),$false,({$true}));try{$ssl.AuthenticateAsClient($h);$c=[Security.Cryptography.X509Certificates.X509Certificate2]::new($ssl.RemoteCertificate);$c|Select Subject,Issuer,NotBefore,NotAfter,Thumbprint}finally{$ssl.Dispose();$tcp.Dispose()}

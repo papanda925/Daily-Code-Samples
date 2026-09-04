@@ -37,6 +37,20 @@ def load_samples():
     items=[]
     for p in sorted((ROOT/"samples").glob("*/sample.json")):
         x=json.loads(p.read_text(encoding="utf-8-sig"))
+
+        # メタデータに配列の入れ子や数値が混ざっても、
+        # 検索ページ全体を落とさず文字列の一覧へ正規化します。
+        # 手入力・将来自動生成の形式ゆれに対する防御です。
+        for key in ("purposes", "apps", "methods", "tags"):
+            values=x.get(key, [])
+            flat=[]
+            for value in values:
+                if isinstance(value, list):
+                    flat.extend(str(v) for v in value)
+                else:
+                    flat.append(str(value))
+            x[key]=flat
+
         x["_folder"]=p.parent.name
         items.append(x)
     return items

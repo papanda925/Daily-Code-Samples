@@ -1,0 +1,31 @@
+{
+  "id": "NNN",
+  "title": "タイトル",
+  "summary": "何を操作し、何の違いを体験するサンプルか",
+  "status": "sample",
+  "maturity": "experimental",
+  "article_ready": false,
+  "track": "OS Fundamentals Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "PC・Office利用者"
+  ],
+  "apps": [
+    "PowerShell"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "ちょっと応用",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のPC・自分のテストデータを対象にした観察・実験",
+  "tags": [
+    "learning",
+    "trace"
+  ]
+}

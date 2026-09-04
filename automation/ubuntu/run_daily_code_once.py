@@ -65,9 +65,30 @@ def title_of(markdown, sid):
     return re.sub(rf"^{re.escape(sid)}\s*[:：-]\s*", "", title)
 
 def body_of(markdown):
+    """READMEの本文部分をブログ記事へ再利用する。
+
+    README側の説明はそのまま活かします。
+    実コードは後段でファイル本体から掲載するため、
+    READMEに同じコードが含まれていても二重掲載しないようarticle()側で判定します。
+    """
     markdown = re.sub(r"^#\s+.*\n", "", markdown, count=1)
     markdown = re.sub(r"\n##\s+関連記事\s*\n.*\Z", "", markdown, flags=re.S)
     return markdown.strip()
+
+
+def read_metadata(sample):
+    path = sample / "sample.json"
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def article_ready(sample):
+    """新規自動生成サンプルはレビュー前にブログへ流さない。
+
+    既存サンプルはarticle_ready項目を持たないため、後方互換としてTrue扱いです。
+    #301以降の自動生成ではfalseから開始し、レビュー後にtrueへ変更します。
+    """
+    metadata = read_metadata(sample)
+    return metadata.get("article_ready", True) is not False
 
 def github_repo_slug(repo):
     configured = os.getenv("GITHUB_REPOSITORY", "").strip()
@@ -84,9 +105,18 @@ def github_repo_slug(repo):
     raise RuntimeError("Set GITHUB_REPOSITORY=owner/repository.")
 
 def metadata_lines(metadata):
-    """Turn sample.json's editorial metadata into a compact article brief."""
+    """sample.jsonを、読者が最初に確認できる短い前提情報へ変換する。"""
     labels = []
-    for key, label in (("audience", "対象"), ("purposes", "目的"), ("apps", "環境"), ("methods", "方法"), ("tags", "タグ")):
+    if metadata.get("track"):
+        labels.append(f"- シリーズ：{metadata['track']}")
+    if metadata.get("maturity"):
+        labels.append(f"- 成熟度：{metadata['maturity']}")
+    for key, label in (
+        ("audience", "対象"),
+        ("purposes", "目的"),
+        ("apps", "環境"),
+        ("methods", "方法"),
+    ):
         values = metadata.get(key) or []
         if isinstance(values, list) and values:
             labels.append(f"- {label}：{'、'.join(str(v) for v in values)}")
@@ -94,41 +124,113 @@ def metadata_lines(metadata):
         labels.append(f"- 難しさ：{metadata['level']}")
     if metadata.get("estimated_minutes"):
         labels.append(f"- 所要時間：約{metadata['estimated_minutes']}分")
+    if metadata.get("requires_admin") is not None:
+        labels.append(
+            "- 管理者権限：" + ("必要" if metadata.get("requires_admin") else "不要")
+        )
     return "\n".join(labels)
 
 def article(sample, slug):
     sid = sample_id(sample)
-    readme = (sample / "README.md").read_text(encoding="utf-8")
-    metadata = json.loads((sample / "sample.json").read_text(encoding="utf-8"))
+    readme = (sample / "README.md").read_text(encoding="utf-8-sig")
+    metadata = read_metadata(sample)
     if str(metadata.get("id", "")) != sid:
         raise ValueError(f"sample.json id mismatch for {sid}")
+
     title = f"Daily Code #{sid}：{title_of(readme, sid)}"
     brief = metadata_lines(metadata)
+    track = str(metadata.get("track", ""))
+
+    if track and track != "Daily Practical":
+        intro = (
+            "WindowsやOffice、ネットワーク、セキュリティなどの仕組みを、"
+            "実際に動かして『目で見て・差を確認して』学ぶDaily Codeです。"
+        )
+    else:
+        intro = (
+            "日々の事務作業やPC操作でそのまま試せる、小さな実用サンプルを紹介するDaily Codeです。"
+        )
+
     output = [
-        f"# {title}", "",
-        "日々の事務作業や学習でそのまま試せる小さなサンプルを紹介する「Daily Code」です。",
-        "", "## この記事の対象と前提", "", brief,
-        "", body_of(readme),
+        f"# {title}",
+        "",
+        intro,
+        "",
+        "## この記事の対象と前提",
+        "",
+        brief,
+        "",
+        "## このDaily Codeの進め方",
+        "",
+        "1. まずコードを読む",
+        "2. 実行前の状態を確認する",
+        "3. そのまま一度動かす",
+        "4. 値や条件を1つだけ変え、前後の差を確認する",
+        "",
+        "コード内のコメントには、処理内容だけでなく『なぜそのAPIや書き方を使うのか』も残す方針です。",
+        "",
+        body_of(readme),
     ]
+
     code_blocks = []
     for path in sorted(sample.iterdir()):
-        if not path.is_file() or path.name.lower() in {"readme.md", "sample.json"} or path.name.startswith("."):
+        if (
+            not path.is_file()
+            or path.name.lower() in {"readme.md", "sample.json"}
+            or path.name.startswith(".")
+        ):
             continue
         try:
-            text = path.read_text(encoding="utf-8")
+            text = path.read_text(encoding="utf-8-sig")
         except UnicodeDecodeError:
             continue
         if len(text) > 120000:
             continue
-        code_blocks += [f"### {path.name}", "", FENCE + EXT.get(path.suffix.lower(), "text"), text.rstrip(), FENCE, ""]
+
+        # READMEに同じコードがすでに全文掲載されている場合は、
+        # ブログで二重表示しないよう追加掲載を省略します。
+        if text.strip() and text.strip() in readme:
+            continue
+
+        suffix = path.suffix.lower()
+        if suffix == ".ps1":
+            note = (
+                "PowerShellでは、取得している情報の層（.NET / WinRT / Win32 / CIM等）と、"
+                "変更を伴う処理かどうかをコメントで確認してください。"
+            )
+        elif suffix in {".bas", ".cls"}:
+            note = (
+                "VBAでは、標準モジュールかクラスモジュールか、"
+                "ByVal / ByRef、Event、COMなどの役割もコメントと合わせて確認してください。"
+            )
+        else:
+            note = "最初から全部覚えず、入力→処理→結果の順に追ってください。"
+
+        code_blocks += [
+            f"### {path.name}",
+            "",
+            note,
+            "",
+            FENCE + EXT.get(suffix, "text"),
+            text.rstrip(),
+            FENCE,
+            "",
+        ]
+
     if code_blocks:
-        output += ["", "## サンプルコード", ""] + code_blocks
+        output += ["", "## ソースコードをもう一度確認する", ""] + code_blocks
+
     url = f"https://github.com/{slug}/tree/main/samples/{sample.name}"
     output += [
-        "", "## GitHubで確認する", "",
+        "",
+        "## GitHubで確認する",
+        "",
         f"最新のREADMEとソースコードは [Daily-Code-Samples #{sid}]({url}) で確認できます。",
-        "", "## まとめ", "",
-        "まずはそのまま動かし、次に値や条件を少し変えて試してください。業務利用時は実行環境と元データを十分確認してください。",
+        "",
+        "## まとめ",
+        "",
+        "まずはそのまま動かし、その後に値・状態・実行条件を1つだけ変えてください。"
+        "変化した点を確認することで、単なるコピペではなく仕組みとして理解しやすくなります。",
     ]
     return title, "\n".join(output).strip() + "\n"
 
@@ -217,12 +319,33 @@ def writeback(repo, sample, sid, url, branch, push=True):
     if updated == text and link not in text:
         updated = text.rstrip() + "\n\n## 関連記事\n\n" + link + "\n"
     if updated != text:
-        sample_readme.write_text(updated if updated.endswith("\n") else updated + "\n", encoding="utf-8")
+        sample_readme.write_text(
+            updated if updated.endswith("\n") else updated + "\n",
+            encoding="utf-8",
+        )
+        changed = True
+
+    # Pagesの詳細画面でもブログ記事へ直接移動できるよう、
+    # sample.jsonにも記事URLを書き戻します。
+    sample_json = sample / "sample.json"
+    metadata = read_metadata(sample)
+    if metadata.get("article_url") != url:
+        metadata["article_url"] = url
+        sample_json.write_text(
+            json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
         changed = True
 
     # Even when the link was already written by a failed prior attempt,
     # stage and retry any pending writeback diff.
-    git(repo, "add", "README.md", str(sample_readme.relative_to(repo)))
+    git(
+        repo,
+        "add",
+        "README.md",
+        str(sample_readme.relative_to(repo)),
+        str(sample_json.relative_to(repo)),
+    )
     diff = git(repo, "diff", "--cached", "--quiet", check=False)
     if diff.returncode:
         git(repo, "commit", "-m", f"docs: add blog link for sample {sid}")
@@ -250,11 +373,25 @@ def main():
         raise SystemExit("git pull failed: " + pull.stderr.strip())
 
     state = load(state_path)
-    sample = next((path for path in sample_dirs(repo)
-                   if not state["samples"].get(sample_id(path), {}).get("wordpress_post_id")
-                   or not state["samples"].get(sample_id(path), {}).get("github_writeback")), None)
+
+    # article_ready=false の新規自動生成サンプルは、
+    # GitHub教材としては公開しつつ、レビュー前のWordPress記事化を止めます。
+    eligible = [path for path in sample_dirs(repo) if article_ready(path)]
+    sample = next(
+        (
+            path
+            for path in eligible
+            if not state["samples"].get(sample_id(path), {}).get("wordpress_post_id")
+            or not state["samples"].get(sample_id(path), {}).get("github_writeback")
+        ),
+        None,
+    )
     if not sample:
-        print(json.dumps({"result": "no_pending_sample"}, ensure_ascii=False))
+        skipped = len(sample_dirs(repo)) - len(eligible)
+        print(json.dumps({
+            "result": "no_pending_sample",
+            "article_not_ready": skipped,
+        }, ensure_ascii=False))
         return 0
 
     sid = sample_id(sample)

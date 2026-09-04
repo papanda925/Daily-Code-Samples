@@ -1,0 +1,36 @@
+{
+  "id": "011",
+  "title": "Excelの選択範囲だけ列幅を自動で見やすくしたい",
+  "summary": "Excel VBAで選択したセル範囲の列幅を内容に合わせて自動調整し、手作業の列幅調整を減らす。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Excel",
+    "定型作業の自動化"
+  ],
+  "apps": [
+    "Excel",
+    "VBA"
+  ],
+  "methods": [
+    "GUI",
+    "コピペ",
+    "自動化",
+    "試して理解"
+  ],
+  "level": "ちょっと応用",
+  "level_mark": "🟡",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Excel",
+    "VBA",
+    "列幅",
+    "AutoFit",
+    "自動化"
+  ]
+}

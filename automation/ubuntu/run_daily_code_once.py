@@ -1,94 +1,255 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, datetime as dt, json, os, re, subprocess, sys, tempfile
+
+import argparse
+import datetime as dt
+import json
+import os
+import re
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
+from urllib.parse import urlparse
 
-HOME=Path.home(); REPO0=HOME/'Daily-Code-Samples'; BOT0=HOME/'new_gemini_postbot'; WP0=Path('/var/www/papanda925.com')
-EXT={'.ps1':'powershell','.bas':'vb','.cls':'vb','.py':'python','.js':'javascript','.json':'json','.xml':'xml','.html':'html','.css':'css','.sql':'sql','.m':'text','.txt':'text','.csv':'csv'}
-FENCE=chr(96)*3
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO0 = SCRIPT_DIR.parents[1]
+WP0 = Path("/var/www/wordpress")
+EXT = {
+    ".ps1": "powershell", ".bas": "vb", ".cls": "vb", ".py": "python",
+    ".js": "javascript", ".json": "json", ".xml": "xml", ".html": "html",
+    ".css": "css", ".sql": "sql", ".m": "text", ".txt": "text", ".csv": "csv",
+}
+FENCE = chr(96) * 3
 
-def cmd(a,check=True): return subprocess.run(a,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=check)
-def git(repo,*a,check=True): return cmd(['git','-C',str(repo),*a],check)
-def load(p):
-    if not p.exists(): return {'version':1,'samples':{}}
-    d=json.loads(p.read_text(encoding='utf-8')); d.setdefault('samples',{}); return d
-def save(p,d):
-    p.parent.mkdir(parents=True,exist_ok=True); q=p.with_suffix('.tmp'); q.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); q.replace(p)
-def sid(p): return re.match(r'^(\d{3,})-',p.name).group(1)
-def samples(repo):
-    a=[]
-    for p in (repo/'samples').iterdir():
-        m=re.match(r'^(\d{3,})-',p.name)
-        if p.is_dir() and m: a.append((int(m.group(1)),p))
-    return [p for _,p in sorted(a)]
-def title_of(md,s):
-    m=re.search(r'^#\s+(.+)$',md,re.M); t=m.group(1).strip() if m else f'Daily Code #{s}'
-    return re.sub(rf'^{re.escape(s)}\s*[:：-]\s*','',t)
-def body_of(md):
-    md=re.sub(r'^#\s+.*\n','',md,count=1)
-    md=re.sub(r'\n##\s+関連記事\s*\n.*\Z','',md,flags=re.S)
-    return md.strip()
-def article(sample,slug):
-    s=sid(sample); md=(sample/'README.md').read_text(encoding='utf-8'); title=f'Daily Code #{s}：{title_of(md,s)}'
-    out=[f'# {title}','', '日々の事務作業や学習でそのまま試せる小さなサンプルを紹介する「Daily Code」です。','',body_of(md)]
-    code=[]
-    for p in sorted(sample.iterdir()):
-        if not p.is_file() or p.name.lower() in {'readme.md','sample.json'} or p.name.startswith('.'): continue
-        try: t=p.read_text(encoding='utf-8')
-        except UnicodeDecodeError: continue
-        if len(t)>120000: continue
-        code += [f'### {p.name}','',FENCE+EXT.get(p.suffix.lower(),'text'),t.rstrip(),FENCE,'']
-    if code: out += ['','## サンプルコード','']+code
-    url=f'https://github.com/{slug}/tree/main/samples/{sample.name}'
-    out += ['','## GitHubで確認する','',f'最新のREADMEとソースコードは [Daily-Code-Samples #{s}]({url}) で確認できます。','','## まとめ','','まずはそのまま動かし、次に値や条件を少し変えて試してください。業務利用時は実行環境と元データを十分確認してください。']
-    return title,'\n'.join(out).strip()+'\n'
-def serialize(md,bot):
-    sys.path.insert(0,str(bot)); from utils.gutenberg_serializer import serialize_markdown_to_gutenberg
-    return serialize_markdown_to_gutenberg(md)
-def category(wp,wppath):
-    p=cmd([wp,f'--path={wppath}','term','get','category','daily-code','--by=slug','--field=term_id'],False)
-    if p.returncode==0 and p.stdout.strip().isdigit(): return int(p.stdout)
-    return int(cmd([wp,f'--path={wppath}','term','create','category','Daily Code','--slug=daily-code','--porcelain']).stdout)
-def publish(wp,wppath,title,content,status,cat):
-    with tempfile.NamedTemporaryFile('w',encoding='utf-8',suffix='.html',delete=False) as f: f.write(content); tmp=Path(f.name)
+def cmd(args, check=True):
+    return subprocess.run(args, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=check)
+
+def git(repo, *args, check=True):
+    return cmd(["git", "-C", str(repo), *args], check)
+
+def default_state_path():
+    base = Path(os.getenv("XDG_STATE_HOME", str(Path.home() / ".local" / "state")))
+    return base / "daily-code-wordpress" / "state.json"
+
+def load(path):
+    if not path.exists():
+        return {"version": 1, "samples": {}}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data.setdefault("samples", {})
+    return data
+
+def save(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(path)
+
+def sample_id(path):
+    match = re.match(r"^(\d{3,})-", path.name)
+    if not match:
+        raise ValueError(f"sample id not found: {path.name}")
+    return match.group(1)
+
+def sample_dirs(repo):
+    result = []
+    for path in (repo / "samples").iterdir():
+        match = re.match(r"^(\d{3,})-", path.name)
+        if path.is_dir() and match:
+            result.append((int(match.group(1)), path))
+    return [path for _, path in sorted(result)]
+
+def title_of(markdown, sid):
+    match = re.search(r"^#\s+(.+)$", markdown, re.M)
+    title = match.group(1).strip() if match else f"Daily Code #{sid}"
+    return re.sub(rf"^{re.escape(sid)}\s*[:：-]\s*", "", title)
+
+def body_of(markdown):
+    markdown = re.sub(r"^#\s+.*\n", "", markdown, count=1)
+    markdown = re.sub(r"\n##\s+関連記事\s*\n.*\Z", "", markdown, flags=re.S)
+    return markdown.strip()
+
+def github_repo_slug(repo):
+    configured = os.getenv("GITHUB_REPOSITORY", "").strip()
+    if configured:
+        return configured.removesuffix(".git")
+    remote = git(repo, "remote", "get-url", "origin", check=False).stdout.strip()
+    ssh = re.match(r"git@github\.com:([^/]+/[^/]+?)(?:\.git)?$", remote)
+    if ssh:
+        return ssh.group(1).removesuffix(".git")
+    if remote.startswith("http"):
+        parsed = urlparse(remote)
+        if parsed.hostname == "github.com":
+            return parsed.path.strip("/").removesuffix(".git")
+    raise RuntimeError("Set GITHUB_REPOSITORY=owner/repository.")
+
+def article(sample, slug):
+    sid = sample_id(sample)
+    readme = (sample / "README.md").read_text(encoding="utf-8")
+    title = f"Daily Code #{sid}：{title_of(readme, sid)}"
+    output = [
+        f"# {title}", "",
+        "日々の事務作業や学習でそのまま試せる小さなサンプルを紹介する「Daily Code」です。",
+        "", body_of(readme),
+    ]
+    code_blocks = []
+    for path in sorted(sample.iterdir()):
+        if not path.is_file() or path.name.lower() in {"readme.md", "sample.json"} or path.name.startswith("."):
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if len(text) > 120000:
+            continue
+        code_blocks += [f"### {path.name}", "", FENCE + EXT.get(path.suffix.lower(), "text"), text.rstrip(), FENCE, ""]
+    if code_blocks:
+        output += ["", "## サンプルコード", ""] + code_blocks
+    url = f"https://github.com/{slug}/tree/main/samples/{sample.name}"
+    output += [
+        "", "## GitHubで確認する", "",
+        f"最新のREADMEとソースコードは [Daily-Code-Samples #{sid}]({url}) で確認できます。",
+        "", "## まとめ", "",
+        "まずはそのまま動かし、次に値や条件を少し変えて試してください。業務利用時は実行環境と元データを十分確認してください。",
+    ]
+    return title, "\n".join(output).strip() + "\n"
+
+def serialize(markdown, bot_root):
+    if not bot_root.exists():
+        raise RuntimeError("POSTBOT_ROOT is not configured or does not exist.")
+    sys.path.insert(0, str(bot_root))
+    from utils.gutenberg_serializer import serialize_markdown_to_gutenberg
+    return serialize_markdown_to_gutenberg(markdown)
+
+def category(wp, wp_path):
+    slug = os.getenv("DAILY_CODE_CATEGORY_SLUG", "daily-code")
+    name = os.getenv("DAILY_CODE_CATEGORY_NAME", "Daily Code")
+    result = cmd([wp, f"--path={wp_path}", "term", "get", "category", slug, "--by=slug", "--field=term_id"], False)
+    if result.returncode == 0 and result.stdout.strip().isdigit():
+        return int(result.stdout)
+    return int(cmd([wp, f"--path={wp_path}", "term", "create", "category", name, f"--slug={slug}", "--porcelain"]).stdout)
+
+def publish(wp, wp_path, title, content, status, category_id):
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".html", delete=False) as handle:
+        handle.write(content)
+        tmp = Path(handle.name)
     try:
-        pid=int(cmd([wp,f'--path={wppath}','post','create',str(tmp),'--post_type=post',f'--post_status={status}',f'--post_title={title}',f'--post_category={cat}','--porcelain']).stdout)
-        actual=cmd([wp,f'--path={wppath}','post','get',str(pid),'--field=post_status']).stdout.strip()
-        if actual!=status: raise RuntimeError(f'status mismatch: {actual}')
-        url=cmd([wp,f'--path={wppath}','eval',f'echo get_permalink({pid});']).stdout.strip()
-        if not url.startswith('http'): raise RuntimeError(f'bad permalink: {url}')
-        return pid,url
-    finally: tmp.unlink(missing_ok=True)
-def writeback(repo,sample,s,url,push=True):
-    root=repo/'README.md'; lines=root.read_text(encoding='utf-8').splitlines(); changed=False
-    for i,line in enumerate(lines):
-        if re.match(rf'^\|\s*{re.escape(s)}\s*\|',line):
-            c=[x.strip() for x in line.strip('|').split('|')]
-            if len(c)>=6: c[-1]=f'[記事]({url})'; lines[i]='| '+' | '.join(c)+' |'; changed=True
+        post_id = int(cmd([
+            wp, f"--path={wp_path}", "post", "create", str(tmp),
+            "--post_type=post", f"--post_status={status}",
+            f"--post_title={title}", f"--post_category={category_id}", "--porcelain",
+        ]).stdout)
+        actual = cmd([wp, f"--path={wp_path}", "post", "get", str(post_id), "--field=post_status"]).stdout.strip()
+        if actual != status:
+            raise RuntimeError(f"status mismatch: {actual}")
+        url = cmd([wp, f"--path={wp_path}", "eval", f"echo get_permalink({post_id});"]).stdout.strip()
+        if not url.startswith("http"):
+            raise RuntimeError(f"bad permalink: {url}")
+        return post_id, url
+    finally:
+        tmp.unlink(missing_ok=True)
+
+def writeback(repo, sample, sid, url, branch, push=True):
+    root = repo / "README.md"
+    lines = root.read_text(encoding="utf-8").splitlines()
+    changed = False
+    for index, line in enumerate(lines):
+        if re.match(rf"^\|\s*(?:\[{re.escape(sid)}\][^|]*|{re.escape(sid)})\s*\|", line):
+            cells = [cell.strip() for cell in line.strip("|").split("|")]
+            if len(cells) >= 6:
+                cells[-1] = f"[記事]({url})"
+                lines[index] = "| " + " | ".join(cells) + " |"
+                changed = True
             break
-    if changed: root.write_text('\n'.join(lines)+'\n',encoding='utf-8')
-    sr=sample/'README.md'; t=sr.read_text(encoding='utf-8'); link=f'[papanda925.com の解説記事]({url})'
-    n=re.sub(r'papanda925\.com\s*に解説記事を追加予定です。',link,t)
-    if n==t and link not in t: n=t.rstrip()+'\n\n## 関連記事\n\n'+link+'\n'
-    if n!=t: sr.write_text(n if n.endswith('\n') else n+'\n',encoding='utf-8'); changed=True
-    if not changed: return {'changed':False,'pushed':False}
-    git(repo,'add','README.md',str(sr.relative_to(repo))); d=git(repo,'diff','--cached','--quiet',check=False)
-    if d.returncode: git(repo,'commit','-m',f'docs: add blog link for sample {s}')
-    if push: git(repo,'push','origin','main')
-    return {'changed':True,'pushed':push}
+    if changed:
+        root.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    sample_readme = sample / "README.md"
+    text = sample_readme.read_text(encoding="utf-8")
+    link = f"[ブログの解説記事]({url})"
+    updated = re.sub(r"(?:papanda925\.com\s*に)?解説記事を追加予定です。", link, text)
+    if updated == text and link not in text:
+        updated = text.rstrip() + "\n\n## 関連記事\n\n" + link + "\n"
+    if updated != text:
+        sample_readme.write_text(updated if updated.endswith("\n") else updated + "\n", encoding="utf-8")
+        changed = True
+
+    if not changed:
+        return {"changed": False, "pushed": False}
+    git(repo, "add", "README.md", str(sample_readme.relative_to(repo)))
+    diff = git(repo, "diff", "--cached", "--quiet", check=False)
+    if diff.returncode:
+        git(repo, "commit", "-m", f"docs: add blog link for sample {sid}")
+    if push:
+        git(repo, "push", "origin", branch)
+    return {"changed": True, "pushed": push}
+
 def main():
-    a=argparse.ArgumentParser(); a.add_argument('--dry-run',action='store_true'); a.add_argument('--no-push',action='store_true'); a.add_argument('--status',default=os.getenv('DAILY_CODE_WP_STATUS','publish'),choices=['draft','publish','private']); x=a.parse_args()
-    repo=Path(os.getenv('DAILY_CODE_REPO',REPO0)).expanduser(); bot=Path(os.getenv('POSTBOT_ROOT',BOT0)).expanduser(); wppath=Path(os.getenv('WP_PATH',WP0)); wp=os.getenv('WP_BIN','/usr/local/bin/wp'); statep=bot/'state/daily_code_wordpress.json'
-    p=git(repo,'pull','--ff-only','origin','main',check=False)
-    if p.returncode: raise SystemExit('git pull failed: '+p.stderr.strip())
-    st=load(statep); sample=next((p for p in samples(repo) if not st['samples'].get(sid(p),{}).get('wordpress_post_id') or not st['samples'].get(sid(p),{}).get('github_writeback')),None)
-    if not sample: print(json.dumps({'result':'no_pending_sample'},ensure_ascii=False)); return 0
-    s=sid(sample); row=st['samples'].setdefault(s,{})
-    if row.get('wordpress_post_id') and row.get('wordpress_url'):
-        if x.dry_run: print(json.dumps({'result':'would_retry_writeback','sample_id':s},ensure_ascii=False)); return 0
-        r=writeback(repo,sample,s,row['wordpress_url'],not x.no_push); row['github_writeback']=bool(r['pushed'] or x.no_push); save(statep,st); print(json.dumps({'result':'writeback_ok','sample_id':s,**r},ensure_ascii=False)); return 0
-    title,md=article(sample,'papanda925/Daily-Code-Samples')
-    if x.dry_run: print(json.dumps({'result':'dry_run','sample_id':s,'title':title,'markdown_chars':len(md)},ensure_ascii=False)); return 0
-    content=serialize(md,bot); pid,url=publish(wp,wppath,title,content,x.status,category(wp,wppath)); row.update({'sample_dir':sample.name,'wordpress_post_id':pid,'wordpress_url':url,'wordpress_status':x.status,'published_at':dt.datetime.now(dt.timezone.utc).isoformat(),'github_writeback':False}); save(statep,st)
-    r=writeback(repo,sample,s,url,not x.no_push); row['github_writeback']=bool(r['pushed'] or x.no_push); save(statep,st); print(json.dumps({'result':'publish_ok','sample_id':s,'post_id':pid,'url':url,'github':r},ensure_ascii=False)); return 0
-if __name__=='__main__': raise SystemExit(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--no-push", action="store_true")
+    parser.add_argument("--status", default=os.getenv("DAILY_CODE_WP_STATUS", "draft"), choices=["draft", "publish", "private"])
+    args = parser.parse_args()
+
+    repo = Path(os.getenv("DAILY_CODE_REPO", str(REPO0))).expanduser()
+    bot_value = os.getenv("POSTBOT_ROOT", "").strip()
+    bot_root = Path(bot_value).expanduser() if bot_value else Path("/nonexistent")
+    wp_path = Path(os.getenv("WP_PATH", str(WP0))).expanduser()
+    wp = os.getenv("WP_BIN", "wp")
+    branch = os.getenv("GIT_BRANCH", "main")
+    state_path = Path(os.getenv("DAILY_CODE_STATE", str(default_state_path()))).expanduser()
+
+    pull = git(repo, "pull", "--ff-only", "origin", branch, check=False)
+    if pull.returncode:
+        raise SystemExit("git pull failed: " + pull.stderr.strip())
+
+    state = load(state_path)
+    sample = next((path for path in sample_dirs(repo)
+                   if not state["samples"].get(sample_id(path), {}).get("wordpress_post_id")
+                   or not state["samples"].get(sample_id(path), {}).get("github_writeback")), None)
+    if not sample:
+        print(json.dumps({"result": "no_pending_sample"}, ensure_ascii=False))
+        return 0
+
+    sid = sample_id(sample)
+    row = state["samples"].setdefault(sid, {})
+
+    if row.get("wordpress_post_id") and row.get("wordpress_url"):
+        if args.dry_run:
+            print(json.dumps({"result": "would_retry_writeback", "sample_id": sid}, ensure_ascii=False))
+            return 0
+        result = writeback(repo, sample, sid, row["wordpress_url"], branch, not args.no_push)
+        row["github_writeback"] = bool(result["pushed"] or args.no_push)
+        save(state_path, state)
+        print(json.dumps({"result": "writeback_ok", "sample_id": sid, **result}, ensure_ascii=False))
+        return 0
+
+    title, markdown = article(sample, github_repo_slug(repo))
+    if args.dry_run:
+        print(json.dumps({
+            "result": "dry_run", "sample_id": sid, "title": title,
+            "markdown_chars": len(markdown), "wordpress_status": args.status,
+        }, ensure_ascii=False))
+        return 0
+
+    content = serialize(markdown, bot_root)
+    post_id, url = publish(wp, wp_path, title, content, args.status, category(wp, wp_path))
+    row.update({
+        "sample_dir": sample.name, "wordpress_post_id": post_id,
+        "wordpress_url": url, "wordpress_status": args.status,
+        "published_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "github_writeback": False,
+    })
+    save(state_path, state)
+
+    result = writeback(repo, sample, sid, url, branch, not args.no_push)
+    row["github_writeback"] = bool(result["pushed"] or args.no_push)
+    save(state_path, state)
+    print(json.dumps({
+        "result": "publish_ok", "sample_id": sid, "post_id": post_id,
+        "url": url, "github": result,
+    }, ensure_ascii=False))
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())

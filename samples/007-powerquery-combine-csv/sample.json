@@ -1,0 +1,36 @@
+{
+  "id": "007",
+  "title": "同じ形式のCSVをまとめて1つの表にしたい",
+  "summary": "Power Queryでフォルダー内のCSVをまとめて読み込み、繰り返しコピー＆貼り付けを減らす。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Excel",
+    "定型作業の自動化"
+  ],
+  "apps": [
+    "Excel",
+    "Power Query"
+  ],
+  "methods": [
+    "GUI",
+    "コピペ",
+    "自動化",
+    "試して理解"
+  ],
+  "level": "ちょっと応用",
+  "level_mark": "🟡",
+  "estimated_minutes": 20,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Excel",
+    "Power Query",
+    "CSV",
+    "フォルダー",
+    "集計"
+  ]
+}

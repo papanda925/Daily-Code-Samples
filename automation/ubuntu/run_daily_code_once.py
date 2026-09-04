@@ -167,7 +167,7 @@ def writeback(repo, sample, sid, url, branch, push=True):
     sample_readme = sample / "README.md"
     text = sample_readme.read_text(encoding="utf-8")
     link = f"[ブログの解説記事]({url})"
-    updated = re.sub(r"(?:papanda925\.com\s*に)?解説記事を追加予定です。", link, text)
+    updated = re.sub(r"(?:[A-Za-z0-9.-]+\\s*に)?解説記事を追加予定です。", link, text)
     if updated == text and link not in text:
         updated = text.rstrip() + "\n\n## 関連記事\n\n" + link + "\n"
     if updated != text:

@@ -156,11 +156,14 @@ def daily_slug(sid):
 
 def existing_post(wp, wp_path, sid):
     """Recover a prior post when local state was lost after WordPress success."""
-    result = cmd([wp, f"--path={wp_path}", "post", "list", f"--name={daily_slug(sid)}",
-                  "--post_status=any", "--format=json"], check=False)
+    result = cmd([wp, f"--path={wp_path}", "post", "list",
+                  "--post_status=any", "--posts_per_page=-1",
+                  "--fields=ID,post_name", "--format=json"], check=False)
     if result.returncode:
         raise RuntimeError("WordPress duplicate lookup failed")
-    rows = json.loads(result.stdout or "[]")
+    target = daily_slug(sid)
+    rows = [row for row in json.loads(result.stdout or "[]")
+            if row.get("post_name") == target]
     if len(rows) > 1:
         raise RuntimeError(f"multiple WordPress posts use Daily Code sample ID {sid}")
     if not rows:

@@ -32,59 +32,43 @@ Excel、Word、PowerPoint、Windows、Power Query、Power Automate など、オ�
 
 ## 🖥 PC・Windowsを便利に使いたい
 
-画面、音、ファイル、フォルダ、クリップボード、検索、バックアップ、設定確認など。
-
 | No. | やりたいこと | 方法 | 目安 |
 |---:|---|---|:---:|
-| [001](./samples/001-powershell-sha256/) | 2つのファイルが本当に同じ内容か確認したい | Windows + PowerShell | 🟢 |
+| [001](./samples/001-powershell-sha256/) | 2つのファイルが本当に同じ内容か確認したい | PowerShell | 🟢 |
+| [002](./samples/002-windows-clipboard-history/) | コピーした文字をあとから呼び出したい | GUI | 🟢 |
+| [003](./samples/003-windows-sound-output/) | 音が出ないときに出力先を確認したい | GUI | 🟢 |
+| [004](./samples/004-windows-display-scale/) | 文字が小さいときに画面を見やすくしたい | GUI | 🟢 |
+| [010](./samples/010-powershell-file-list-csv/) | フォルダー内のファイル一覧をExcelで見たい | PowerShell | 🟡 |
 
 ## 📊 Excelの作業を楽にしたい
 
-今後、次のようなテーマを追加します。
-
-- FILTER / XLOOKUP / LET などのモダンExcel
-- 複数ファイルの集計
-- 表の整形
-- 条件付き書式
-- 日付・営業日処理
-- Power Query
-- VBAによる繰り返し作業の自動化
+| No. | やりたいこと | 方法 | 目安 |
+|---:|---|---|:---:|
+| [005](./samples/005-excel-filter-pending/) | 未処理の行だけ別の場所に表示したい | FILTER | 🟢 |
+| [006](./samples/006-excel-xlookup-master/) | コードから名前や部署を自動表示したい | XLOOKUP | 🟢 |
+| [007](./samples/007-powerquery-combine-csv/) | 同じ形式のCSVをまとめて1つの表にしたい | Power Query | 🟡 |
+| [010](./samples/010-powershell-file-list-csv/) | フォルダー内のファイル一覧をExcelで見たい | PowerShell | 🟡 |
+| [011](./samples/011-excel-vba-autofit-selection/) | 選択範囲だけ列幅を自動で見やすくしたい | VBA | 🟡 |
 
 ## 📝 Wordの作業を楽にしたい
 
-- 書式を揃える
-- 定型文書を作る
-- 差し込み
-- 複数ファイルの処理
-- VBAやPowerShellからWordを操作する
+| No. | やりたいこと | 方法 | 目安 |
+|---:|---|---|:---:|
+| [008](./samples/008-word-navigation-pane/) | 長い文書で目的の場所へすぐ移動したい | GUI | 🟢 |
 
 ## 📽 PowerPointの作業を楽にしたい
 
-- 画像サイズを揃える
-- スライドの書式を揃える
-- 定型資料を作る
-- PowerPoint VBAによる自動処理
+| No. | やりたいこと | 方法 | 目安 |
+|---:|---|---|:---:|
+| [009](./samples/009-powerpoint-align-objects/) | 図や画像をきれいに揃えたい | GUI | 🟢 |
 
 ## 🔁 繰り返し作業を自動化したい
 
-- Power Automate
-- Power Automate Desktop
-- VBA
-- PowerShell
-- Power Query
-- Microsoft 365
+#005〜#011では、Excel関数、Power Query、PowerShell、VBAなどへ少しずつ広げています。最初はGUIや1行の式から入り、「10件、100件なら自動化すると楽」という流れを重視します。
 
 ## 🔍 設定や状態を確認したい
 
-GUIで一つずつ確認するだけでなく、PowerShellなどを使って
-
-- Windowsの設定を確認
-- ネットワーク状態を確認
-- ファイルを確認
-- PC情報を確認
-- Office環境を確認
-
-といった「確認の自動化」も扱います。
+#001、#003、#004のように、まずGUIや簡単な確認方法で現在状態を知るテーマも扱います。今後はネットワーク、PC情報、Office環境などへ広げます。
 
 ---
 
@@ -147,6 +131,16 @@ GUIで一つずつ確認するだけでなく、PowerShellなどを使って
 | No. | 公開日 | 分類 | やりたいこと | アプリ・機能 | 方法 | 難しさ | ブログ |
 |---:|:---:|---|---|---|---|:---:|---|
 | [001](./samples/001-powershell-sha256/) | 2026-09-04 | ファイル・安全確認 | 2つのファイルが本当に同じ内容か確認したい | Windows / PowerShell | 📋 🧪 | 🟢 | 準備中 |
+| [002](./samples/002-windows-clipboard-history/) | 2026-09-04 | PC・Windows | コピーした文字をあとから呼び出したい | Windows | 🖱 🧪 | 🟢 | 準備中 |
+| [003](./samples/003-windows-sound-output/) | 2026-09-04 | PC・トラブル確認 | 音が出ないときに出力先を確認したい | Windows | 🖱 🧪 | 🟢 | 準備中 |
+| [004](./samples/004-windows-display-scale/) | 2026-09-04 | PC・設定確認 | 文字が小さいときに画面を見やすくしたい | Windows | 🖱 🧪 | 🟢 | 準備中 |
+| [005](./samples/005-excel-filter-pending/) | 2026-09-04 | Excel・抽出 | 未処理の行だけ別の場所に表示したい | Excel | 📋 🧪 | 🟢 | 準備中 |
+| [006](./samples/006-excel-xlookup-master/) | 2026-09-04 | Excel・検索 | コードから名前や部署を自動表示したい | Excel | 📋 🧪 | 🟢 | 準備中 |
+| [007](./samples/007-powerquery-combine-csv/) | 2026-09-04 | Excel・自動化 | 同じ形式のCSVをまとめて1つの表にしたい | Excel / Power Query | 🖱 📋 ⚙ | 🟡 | 準備中 |
+| [008](./samples/008-word-navigation-pane/) | 2026-09-04 | Word・文書整理 | 長いWord文書で目的の場所へすぐ移動したい | Word | 🖱 🧪 | 🟢 | 準備中 |
+| [009](./samples/009-powerpoint-align-objects/) | 2026-09-04 | PowerPoint・書式整理 | PowerPointの図や画像をきれいに揃えたい | PowerPoint | 🖱 🧪 | 🟢 | 準備中 |
+| [010](./samples/010-powershell-file-list-csv/) | 2026-09-04 | ファイル・自動化 | フォルダー内のファイル一覧をExcelで見たい | Windows / PowerShell / Excel | 📋 ⚙ 🧪 | 🟡 | 準備中 |
+| [011](./samples/011-excel-vba-autofit-selection/) | 2026-09-04 | Excel・自動化 | Excelの選択範囲だけ列幅を自動で見やすくしたい | Excel / VBA | 🖱 📋 ⚙ | 🟡 | 準備中 |
 
 機械的な分類情報は [catalog/samples.csv](./catalog/samples.csv) と各サンプルの `sample.json` にも保存します。将来、GitHub Pagesなどで絞り込み・並べ替えできる一覧へ発展させられる構造です。
 

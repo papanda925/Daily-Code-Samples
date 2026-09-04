@@ -1,0 +1,19 @@
+name: Public safety check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  public-safety:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for accidentally committed secrets
+        run: python3 tools/check_public_safety.py

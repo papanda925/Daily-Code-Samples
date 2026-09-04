@@ -52,7 +52,7 @@ def shell(title, description, canonical, body, structured=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(description)}">
+<meta name="description" content="{esc(description)}">\n<meta name="google-site-verification" content="keoWiVOQke6IeKbY9fTOYm8W-eCr2RZUNmlJ7UQXH8A">
 <link rel="canonical" href="{esc(canonical)}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">

@@ -1,92 +1,214 @@
 # Daily-Code-Samples
 
-小さく試せる実用コードや業務TIPSを、1日1サンプルを目安に追加していく学習用リポジトリです。
+**「プログラミングを勉強する」より先に、「毎日の仕事をちょっと楽にする」ためのサンプル集です。**
 
-VBA、PowerShell、JavaScript、Python に加えて、Power Query、モダンExcel、Word、PowerPoint、Power Automate、Power Automate Desktop、Power Apps、Power BI なども対象にします。初心者・事務処理担当者が「動かして、処理を追って、少し改造できる」ことを重視します。
+Excel、Word、PowerPoint、Windows、Power Query、Power Automate など、オフィスワーカーが普段使う道具を中心に扱います。
 
-## このリポジトリの方針
+難しいコードから始めません。
 
-- 1サンプル = 1テーマ
-- 日常の事務処理でそのまま試せる内容を優先
-- できるだけ短く、単独で試せるコード・式・手順
-- 初心者向けに日本語コメントと説明を多めに記載
-- README に「何ができるか」「どんな業務に役立つか」「処理の流れ」「実行方法」「注意点」を記載
-- 大きく育ったテーマは、必要に応じて独立リポジトリへ発展
-- papanda925.com の解説記事と自動連携
+- まずは画面操作だけでできる方法
+- 次に、コピー＆ペーストで試せる方法
+- さらに便利にしたい人向けに、PowerShell や VBA での確認・自動化
 
-## 対象テーマ
+という順番を基本にします。
 
-- VBA / PowerShell / JavaScript / Python
-- Power Query / M言語
-- モダンExcel（動的配列、LET、LAMBDA、XLOOKUP、FILTER、TEXTSPLIT など）
-- Word / PowerPoint の業務TIPS・自動化
-- Power Automate / Power Automate Desktop
-- Power Apps / Power BI
-- Microsoft 365を使った事務処理の効率化
+> 「こんなことまでPCにやらせられるの？」を1日1つ増やしていくことが目標です。
 
-## サンプル一覧
+---
 
-| No. | 公開日 | 言語 | テーマ | 難易度 | ブログ |
-|---:|:---:|---|---|:---:|---|
-| 001 | 2026-09-04 | PowerShell | ファイルの SHA-256 ハッシュを確認する | ★☆☆ | 準備中 |
+## こんな人向け
 
-## ディレクトリ構成
+- ExcelやWordを毎日使っている事務職・オフィスワーカー
+- PCは使えるけれど、プログラミングはやったことがない方
+- 同じ作業を何度も繰り返している方
+- Windowsの便利な機能をもっと知りたい方
+- VBA、PowerShell、Power Query、Power Automateを少しだけ試してみたい方
+
+**エンジニア向けのコード集ではありません。**
+
+---
+
+# 何をしたいですか？
+
+## 🖥 PC・Windowsを便利に使いたい
+
+画面、音、ファイル、フォルダ、クリップボード、検索、バックアップ、設定確認など。
+
+| No. | やりたいこと | 方法 | 目安 |
+|---:|---|---|:---:|
+| [001](./samples/001-powershell-sha256/) | 2つのファイルが本当に同じ内容か確認したい | Windows + PowerShell | 🟢 |
+
+## 📊 Excelの作業を楽にしたい
+
+今後、次のようなテーマを追加します。
+
+- FILTER / XLOOKUP / LET などのモダンExcel
+- 複数ファイルの集計
+- 表の整形
+- 条件付き書式
+- 日付・営業日処理
+- Power Query
+- VBAによる繰り返し作業の自動化
+
+## 📝 Wordの作業を楽にしたい
+
+- 書式を揃える
+- 定型文書を作る
+- 差し込み
+- 複数ファイルの処理
+- VBAやPowerShellからWordを操作する
+
+## 📽 PowerPointの作業を楽にしたい
+
+- 画像サイズを揃える
+- スライドの書式を揃える
+- 定型資料を作る
+- PowerPoint VBAによる自動処理
+
+## 🔁 繰り返し作業を自動化したい
+
+- Power Automate
+- Power Automate Desktop
+- VBA
+- PowerShell
+- Power Query
+- Microsoft 365
+
+## 🔍 設定や状態を確認したい
+
+GUIで一つずつ確認するだけでなく、PowerShellなどを使って
+
+- Windowsの設定を確認
+- ネットワーク状態を確認
+- ファイルを確認
+- PC情報を確認
+- Office環境を確認
+
+といった「確認の自動化」も扱います。
+
+---
+
+# 探し方
+
+サンプルは、**技術名ではなく利用者の目的から探せる**ように分類します。
+
+## 目的別
+
+- 🖥 PC・Windows
+- 📁 ファイル・フォルダ
+- 📊 Excel
+- 📝 Word
+- 📽 PowerPoint
+- ✉ Outlook・メール
+- 💬 Teams
+- ☁ OneDrive・SharePoint
+- 🔁 定型作業の自動化
+- 🔍 設定・状態確認
+- 🛠 困ったとき・トラブル確認
+- 🔐 安全確認・セキュリティ基礎
+
+## アプリ・機能別
+
+- Windows
+- Excel
+- Word
+- PowerPoint
+- Outlook
+- Teams
+- Power Query
+- Power Automate
+- Power Automate Desktop
+- Power Apps
+- Power BI
+- VBA
+- PowerShell
+
+## やり方別
+
+| 表示 | 意味 |
+|---|---|
+| 🖱 GUI | 画面操作だけで試せる |
+| 📋 コピペ | コマンドや数式をコピーして試せる |
+| ⚙ 自動化 | VBA / PowerShell / Power Automate等で繰り返し作業を減らす |
+| 🧪 試して理解 | 自分で結果の違いを確認できる |
+
+## 難しさ
+
+| レベル | 目安 |
+|---|---|
+| 🟢 はじめて | PCの基本操作ができればOK |
+| 🟡 ちょっと応用 | 数式やコマンドをコピーして試す |
+| 🔵 一歩進む | コードや設定を少し変更して使う |
+
+---
+
+# サンプル一覧
+
+| No. | 公開日 | 分類 | やりたいこと | アプリ・機能 | 方法 | 難しさ | ブログ |
+|---:|:---:|---|---|---|---|:---:|---|
+| [001](./samples/001-powershell-sha256/) | 2026-09-04 | ファイル・安全確認 | 2つのファイルが本当に同じ内容か確認したい | Windows / PowerShell | 📋 🧪 | 🟢 | 準備中 |
+
+機械的な分類情報は [catalog/samples.csv](./catalog/samples.csv) と各サンプルの `sample.json` にも保存します。将来、GitHub Pagesなどで絞り込み・並べ替えできる一覧へ発展させられる構造です。
+
+---
+
+# 001から試す
+
+最初のサンプルは、難しい「SHA-256の勉強」ではありません。
+
+**「同じ名前のファイルが2つあるけど、本当に中身も同じ？」**
+
+をWindows標準のPowerShellで確かめます。
+
+[▶ 001: 2つのファイルが本当に同じ内容か確認する](./samples/001-powershell-sha256/)
+
+---
+
+# サンプルの基本構成
+
+各テーマはできるだけ次の順番で説明します。
+
+1. こんなときに使える
+2. まず画面操作でできること
+3. もっと確実・便利にする方法
+4. コピーして試す
+5. 実際に自分でテストする
+6. 結果を見る
+7. うまくいかないとき
+8. 少しだけ応用する
+9. 仕組みを知りたい人向けの解説
+
+**「仕組みの説明」より「まず使える」を先にします。**
+
+---
+
+# papanda925.com 自動連携
+
+Ubuntu上の既存ブログ生成環境と連携し、14:00の1スロットを Daily Code 専用枠として利用できます。
 
 ```text
-Daily-Code-Samples/
-├─ README.md
-├─ LICENSE
-├─ automation/
-│  └─ ubuntu/
-│     ├─ README.md
-│     ├─ install.sh
-│     ├─ dispatch_with_daily_code.sh
-│     └─ run_daily_code_once.py
-└─ samples/
-   └─ 001-powershell-sha256/
-      ├─ README.md
-      └─ Get-FileSha256.ps1
-```
-
-## papanda925.com 自動連携
-
-Ubuntu上の既存ブログ生成環境と連携し、14:00の1スロットを Daily Code 専用枠として利用できるようにしています。
-
-処理の流れは次のとおりです。
-
-```text
-GitHub更新
+GitHubにサンプル追加
   ↓
 Ubuntuでgit pull
   ↓
 未記事化サンプルを検出
   ↓
-README + ソースから記事Markdownを生成
+README + 必要なファイルからブログ記事を生成
   ↓
-new_gemini_postbot の Gutenberg serializer で変換
+WordPress向けGutenberg形式へ変換
   ↓
-WordPressへ公開
+papanda925.comへ公開
   ↓
-記事URLを取得
-  ↓
-GitHub READMEへ記事URLを書き戻し
-  ↓
-git commit / push
+記事URLをGitHubへ書き戻す
 ```
 
 導入手順は [automation/ubuntu/README.md](./automation/ubuntu/README.md) を参照してください。
 
-## 想定する読者
-
-- プログラミングを始めたばかりの方
-- ExcelやOfficeを使う事務処理担当者
-- VBA や PowerShell を仕事で少し使ってみたい方
-- Power QueryやPower Automateで定型作業を減らしたい方
-- サンプルを動かしながら仕組みを理解したい方
+---
 
 ## ライセンス
 
-MIT License です。詳しくは [LICENSE](./LICENSE) を参照してください。
+MIT License。詳しくは [LICENSE](./LICENSE) を参照してください。
 
 ## 関連リンク
 

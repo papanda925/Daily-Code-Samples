@@ -1,0 +1,37 @@
+{
+  "id": "010",
+  "title": "フォルダー内のファイル一覧をExcelで見たい",
+  "summary": "PowerShellでフォルダー内のファイル名・更新日時・サイズをCSVへ出し、Excelで確認できるようにする。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "ファイル・フォルダ",
+    "Excel",
+    "定型作業の自動化"
+  ],
+  "apps": [
+    "Windows",
+    "PowerShell",
+    "Excel"
+  ],
+  "methods": [
+    "コピペ",
+    "自動化",
+    "試して理解"
+  ],
+  "level": "ちょっと応用",
+  "level_mark": "🟡",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "PowerShell",
+    "Excel",
+    "CSV",
+    "ファイル一覧",
+    "フォルダー"
+  ]
+}

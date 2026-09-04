@@ -1,0 +1,33 @@
+name: Test PowerShell samples
+
+on:
+  push:
+    paths:
+      - "samples/**/*.ps1"
+      - "tests/**/*.ps1"
+      - ".github/workflows/test-powershell.yml"
+  pull_request:
+    paths:
+      - "samples/**/*.ps1"
+      - "tests/**/*.ps1"
+      - ".github/workflows/test-powershell.yml"
+  workflow_dispatch:
+
+jobs:
+  test-sample-001:
+    name: Sample 001 - file hash
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test with Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          .\tests\Test-001-FileHash.ps1
+
+      - name: Test with PowerShell 7
+        shell: pwsh
+        run: |
+          .\tests\Test-001-FileHash.ps1

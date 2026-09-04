@@ -35,6 +35,10 @@ fi
 
 POSTBOT_ROOT="$POSTBOT_ROOT" WP_PATH="$WP_PATH" DAILY_CODE_REPO="$DAILY_CODE_REPO" "$PYTHON_BIN" "$DAILY_CODE_REPO/automation/ubuntu/run_daily_code_once.py" --dry-run
 
+# #301以降の1日1本生成は、実際のCodex実行をせずに次のID/Trackだけ確認します。
+# 本番有効化前に、既存300本の次が正しく選ばれることをここで確認できます。
+DAILY_CODE_REPO="$DAILY_CODE_REPO" "$PYTHON_BIN" "$DAILY_CODE_REPO/automation/ubuntu/generate_daily_sample_once.py" --dry-run
+
 DROPIN_DIR="/etc/systemd/system/$TARGET_SERVICE.d"
 DROPIN_FILE="$DROPIN_DIR/daily-code.conf"
 

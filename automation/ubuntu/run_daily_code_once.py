@@ -33,7 +33,7 @@ def article(sample,slug):
     out=[f'# {title}','', '日々の事務作業や学習でそのまま試せる小さなサンプルを紹介する「Daily Code」です。','',body_of(md)]
     code=[]
     for p in sorted(sample.iterdir()):
-        if not p.is_file() or p.name.lower()=='readme.md' or p.name.startswith('.'): continue
+        if not p.is_file() or p.name.lower() in {'readme.md','sample.json'} or p.name.startswith('.'): continue
         try: t=p.read_text(encoding='utf-8')
         except UnicodeDecodeError: continue
         if len(t)>120000: continue

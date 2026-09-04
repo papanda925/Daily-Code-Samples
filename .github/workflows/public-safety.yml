@@ -18,7 +18,10 @@ jobs:
       - name: Check Python syntax
         run: |
           python3 -m py_compile tools/check_public_safety.py
+          python3 -m py_compile tools/validate_sample.py
+          python3 -m py_compile tools/build_pages_index.py
           python3 -m py_compile automation/ubuntu/run_daily_code_once.py
+          python3 -m py_compile automation/ubuntu/generate_daily_sample_once.py
 
       - name: Check shell syntax
         run: bash -n automation/ubuntu/dispatch_with_daily_code.sh automation/ubuntu/install.sh

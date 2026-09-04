@@ -18,10 +18,10 @@ FORBIDDEN_NAMES = {
 }
 
 PRIVATE_KEY_MARKERS = (
-    "-----BEGIN OPENSSH PRIVATE KEY-----",
-    "-----BEGIN RSA PRIVATE KEY-----",
-    "-----BEGIN EC PRIVATE KEY-----",
-    "-----BEGIN PRIVATE KEY-----",
+    "-----BEGIN " + "OPENSSH PRIVATE KEY-----",
+    "-----BEGIN " + "RSA PRIVATE KEY-----",
+    "-----BEGIN " + "EC PRIVATE KEY-----",
+    "-----BEGIN " + "PRIVATE KEY-----",
 )
 
 SECRET_ASSIGNMENT = re.compile(

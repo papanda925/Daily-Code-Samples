@@ -1,18 +1,27 @@
-# Daily-Code-Samples
+# Daily Code Samples
 
-**「プログラミングを勉強する」より先に、「毎日の仕事をちょっと楽にする」ためのサンプル集です。**
+**仕事の「ちょっと困った」を、PC・Officeの小さな工夫で解決する実用サンプル集です。**
 
-Excel、Word、PowerPoint、Windows、Power Query、Power Automate など、オフィスワーカーが普段使う道具を中心に扱います。
+Windows、Excel、Word、PowerPoint、PowerShell、VBA、Power Query などを使い、
+**技術名ではなく「何をしたいか」から探せる**ことを大切にしています。
 
-難しいコードから始めません。
+### まずはこちら
 
-- まずは画面操作だけでできる方法
-- 次に、コピー＆ペーストで試せる方法
-- さらに便利にしたい人向けに、PowerShell や VBA での確認・自動化
+| 入口 | できること |
+|---|---|
+| **[🔎 Daily Code を検索](https://papanda925.github.io/Daily-Code-Samples/)** | 「CSV」「未処理」「音が出ない」など、困りごとからサンプルを検索 |
+| **[📝 papanda925.com](https://papanda925.com/)** | 実際に調べたこと・試したことを詳しい記事で読む |
+| **[🏠 papanda925 Portfolio](https://papanda925.github.io/)** | 公開プロジェクト全体の入口 |
+| **[💻 GitHub @papanda925](https://github.com/papanda925)** | VBA / PowerShell / AI / API など他のコードを見る |
 
-という順番を基本にします。
+> **プログラミングを勉強すること自体が目的ではありません。**  
+> 「こんなことまでPCにやらせられるの？」を1日1つ増やしていくことを目指しています。
 
-> 「こんなことまでPCにやらせられるの？」を1日1つ増やしていくことが目標です。
+### 今あるサンプル
+
+**11本公開中** — Windows / Excel / Word / PowerPoint / PowerShell / VBA / Power Query
+
+**[検索ページを開く →](https://papanda925.github.io/Daily-Code-Samples/)**
 
 ---
 

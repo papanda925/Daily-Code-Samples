@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT="${POSTBOT_ROOT:-/home/papanda925/new_gemini_postbot}"
-DAILY_REPO="${DAILY_CODE_REPO:-/home/papanda925/Daily-Code-Samples}"
-PYTHON="${ROOT}/venv/bin/python"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DAILY_REPO="${DAILY_CODE_REPO:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+
+: "${POSTBOT_ROOT:?Set POSTBOT_ROOT in the private server environment file.}"
+
+PYTHON_BIN="${PYTHON_BIN:-$POSTBOT_ROOT/venv/bin/python}"
+BLOG_DISPATCHER="${BLOG_DISPATCHER:-$POSTBOT_ROOT/tools/production_dispatcher.py}"
+DAILY_CODE_HOUR="${DAILY_CODE_HOUR:-14}"
+DAILY_CODE_GRACE_MINUTES="${DAILY_CODE_GRACE_MINUTES:-10}"
+
 hour="$(date +%H)"
 minute="$(date +%M)"
-# 14:00枠だけDaily Codeへ。再実行時の二重投稿はPython側のstateで防止。
-if [[ "$hour" == "14" && $((10#$minute)) -le 10 ]]; then
-  exec "$PYTHON" "$DAILY_REPO/automation/ubuntu/run_daily_code_once.py"
+
+# 指定した1枠だけDaily Codeへ分岐します。
+# 二重投稿防止はrun_daily_code_once.py側のstateで行います。
+if [[ "$((10#$hour))" -eq "$((10#$DAILY_CODE_HOUR))"    && "$((10#$minute))" -le "$((10#$DAILY_CODE_GRACE_MINUTES))" ]]; then
+    exec "$PYTHON_BIN" "$DAILY_REPO/automation/ubuntu/run_daily_code_once.py"
 fi
-# その他9枠は既存dispatcherをそのまま実行。
-exec "$PYTHON" "$ROOT/tools/production_dispatcher.py"
+
+# それ以外の枠は既存ブログdispatcherへ戻します。
+exec "$PYTHON_BIN" "$BLOG_DISPATCHER"

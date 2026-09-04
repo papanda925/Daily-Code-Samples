@@ -1,0 +1,22 @@
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+!*.env.example
+wp-config.php
+credentials.json
+secrets.json
+
+# Private keys
+*.pem
+*.key
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+
+# Local state and caches
+.local-state/
+state/
+__pycache__/
+*.pyc

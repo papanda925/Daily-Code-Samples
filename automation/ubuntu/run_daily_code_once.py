@@ -83,13 +83,29 @@ def github_repo_slug(repo):
             return parsed.path.strip("/").removesuffix(".git")
     raise RuntimeError("Set GITHUB_REPOSITORY=owner/repository.")
 
+def metadata_lines(metadata):
+    """Turn sample.json's editorial metadata into a compact article brief."""
+    labels = []
+    for key, label in (("audience", "対象"), ("purposes", "目的"), ("apps", "環境"), ("methods", "方法"), ("tags", "タグ")):
+        values = metadata.get(key) or []
+        if isinstance(values, list) and values:
+            labels.append(f"- {label}：{'、'.join(str(v) for v in values)}")
+    if metadata.get("level"):
+        labels.append(f"- 難しさ：{metadata['level']}")
+    if metadata.get("estimated_minutes"):
+        labels.append(f"- 所要時間：約{metadata['estimated_minutes']}分")
+    return "\n".join(labels)
+
 def article(sample, slug):
     sid = sample_id(sample)
     readme = (sample / "README.md").read_text(encoding="utf-8")
+    metadata = sample["metadata"]
     title = f"Daily Code #{sid}：{title_of(readme, sid)}"
+    brief = metadata_lines(metadata)
     output = [
         f"# {title}", "",
         "日々の事務作業や学習でそのまま試せる小さなサンプルを紹介する「Daily Code」です。",
+        "", "## この記事の対象と前提", "", brief,
         "", body_of(readme),
     ]
     code_blocks = []
@@ -133,6 +149,26 @@ def category(wp, wp_path):
         return int(result.stdout)
     return int(cmd([wp, f"--path={wp_path}", "term", "create", "category", name, f"--slug={slug}", "--porcelain"]).stdout)
 
+def daily_slug(sid):
+    return f"daily-code-{sid}"
+
+def existing_post(wp, wp_path, sid):
+    """Recover a prior post when local state was lost after WordPress success."""
+    result = cmd([wp, f"--path={wp_path}", "post", "list", f"--name={daily_slug(sid)}",
+                  "--post_status=any", "--format=json"], check=False)
+    if result.returncode:
+        raise RuntimeError("WordPress duplicate lookup failed")
+    rows = json.loads(result.stdout or "[]")
+    if len(rows) > 1:
+        raise RuntimeError(f"multiple WordPress posts use Daily Code sample ID {sid}")
+    if not rows:
+        return None
+    post_id = int(rows[0]["ID"])
+    url = cmd([wp, f"--path={wp_path}", "eval", f"echo get_permalink({post_id});"]).stdout.strip()
+    if not url.startswith("http"):
+        raise RuntimeError("existing Daily Code post has no valid permalink")
+    return post_id, url
+
 def publish(wp, wp_path, title, content, status, category_id):
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".html", delete=False) as handle:
         handle.write(content)
@@ -141,7 +177,8 @@ def publish(wp, wp_path, title, content, status, category_id):
         post_id = int(cmd([
             wp, f"--path={wp_path}", "post", "create", str(tmp),
             "--post_type=post", f"--post_status={status}",
-            f"--post_title={title}", f"--post_category={category_id}", "--porcelain",
+            f"--post_title={title}", f"--post_name={daily_slug(re.search(r"Daily Code #(\d+)", title).group(1))}",
+            f"--post_category={category_id}", "--porcelain",
         ]).stdout)
         actual = cmd([wp, f"--path={wp_path}", "post", "get", str(post_id), "--field=post_status"]).stdout.strip()
         if actual != status:
@@ -237,6 +274,19 @@ def main():
         return 0
 
     content = serialize(markdown, bot_root)
+    recovered = existing_post(wp, wp_path, sid)
+    if recovered:
+        post_id, url = recovered
+        row.update({"sample_dir": sample.name, "wordpress_post_id": post_id,
+                    "wordpress_url": url, "wordpress_status": args.status,
+                    "github_writeback": False})
+        save(state_path, state)
+        result = writeback(repo, sample, sid, url, branch, not args.no_push)
+        row["github_writeback"] = bool(result["pushed"] or args.no_push)
+        save(state_path, state)
+        print(json.dumps({"result": "recovered_existing_post", "sample_id": sid,
+                          "post_id": post_id, "url": url, "github": result}, ensure_ascii=False))
+        return 0
     post_id, url = publish(wp, wp_path, title, content, args.status, category(wp, wp_path))
     row.update({
         "sample_dir": sample.name, "wordpress_post_id": post_id,

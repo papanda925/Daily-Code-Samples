@@ -99,7 +99,9 @@ def metadata_lines(metadata):
 def article(sample, slug):
     sid = sample_id(sample)
     readme = (sample / "README.md").read_text(encoding="utf-8")
-    metadata = sample["metadata"]
+    metadata = json.loads((sample / "sample.json").read_text(encoding="utf-8"))
+    if str(metadata.get("id", "")) != sid:
+        raise ValueError(f"sample.json id mismatch for {sid}")
     title = f"Daily Code #{sid}：{title_of(readme, sid)}"
     brief = metadata_lines(metadata)
     output = [
@@ -169,7 +171,7 @@ def existing_post(wp, wp_path, sid):
         raise RuntimeError("existing Daily Code post has no valid permalink")
     return post_id, url
 
-def publish(wp, wp_path, title, content, status, category_id):
+def publish(wp, wp_path, title, content, status, category_id, sid):
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".html", delete=False) as handle:
         handle.write(content)
         tmp = Path(handle.name)
@@ -177,7 +179,7 @@ def publish(wp, wp_path, title, content, status, category_id):
         post_id = int(cmd([
             wp, f"--path={wp_path}", "post", "create", str(tmp),
             "--post_type=post", f"--post_status={status}",
-            f"--post_title={title}", f"--post_name={daily_slug(re.search(r"Daily Code #(\d+)", title).group(1))}",
+            f"--post_title={title}", f"--post_name={daily_slug(sid)}",
             f"--post_category={category_id}", "--porcelain",
         ]).stdout)
         actual = cmd([wp, f"--path={wp_path}", "post", "get", str(post_id), "--field=post_status"]).stdout.strip()
@@ -287,7 +289,7 @@ def main():
         print(json.dumps({"result": "recovered_existing_post", "sample_id": sid,
                           "post_id": post_id, "url": url, "github": result}, ensure_ascii=False))
         return 0
-    post_id, url = publish(wp, wp_path, title, content, args.status, category(wp, wp_path))
+    post_id, url = publish(wp, wp_path, title, content, args.status, category(wp, wp_path), sid)
     row.update({
         "sample_dir": sample.name, "wordpress_post_id": post_id,
         "wordpress_url": url, "wordpress_status": args.status,

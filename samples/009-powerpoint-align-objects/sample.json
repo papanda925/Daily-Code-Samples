@@ -1,0 +1,33 @@
+{
+  "id": "009",
+  "title": "PowerPointの図や画像をきれいに揃えたい",
+  "summary": "PowerPointの配置・整列・均等配置を使い、目測で位置合わせする作業を減らす。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "PowerPoint",
+    "定型作業の効率化"
+  ],
+  "apps": [
+    "PowerPoint"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "PowerPoint",
+    "整列",
+    "配置",
+    "画像",
+    "図形"
+  ]
+}

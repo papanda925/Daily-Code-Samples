@@ -1,0 +1,33 @@
+{
+  "id": "008",
+  "title": "長いWord文書で目的の場所へすぐ移動したい",
+  "summary": "Wordの見出しスタイルとナビゲーションウィンドウを使い、長い文書を探しやすくする。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Word",
+    "定型作業の効率化"
+  ],
+  "apps": [
+    "Word"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Word",
+    "見出し",
+    "ナビゲーション",
+    "長文",
+    "スタイル"
+  ]
+}

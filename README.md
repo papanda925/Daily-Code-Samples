@@ -182,9 +182,9 @@ GUIで一つずつ確認するだけでなく、PowerShellなどを使って
 
 ---
 
-# papanda925.com 自動連携
+# GitHub → WordPress 自動連携サンプル
 
-Ubuntu上の既存ブログ生成環境と連携し、14:00の1スロットを Daily Code 専用枠として利用できます。
+このリポジトリには、GitHubに追加したサンプルをUbuntuで検出し、WordPressの記事へ変換して、記事URLをGitHubへ書き戻す自動連携の**汎用サンプル**も含めています。
 
 ```text
 GitHubにサンプル追加
@@ -197,12 +197,16 @@ README + 必要なファイルからブログ記事を生成
   ↓
 WordPress向けGutenberg形式へ変換
   ↓
-papanda925.comへ公開
+WordPressへ投稿
   ↓
 記事URLをGitHubへ書き戻す
 ```
 
-導入手順は [automation/ubuntu/README.md](./automation/ubuntu/README.md) を参照してください。
+公開リポジトリには、本番サーバーのIPアドレス、Linuxユーザー名、実ディレクトリ、実際のsystemd service名、パスワード、token、秘密鍵などを保存しません。
+
+公開サンプルの既定はWordPressの **draft（下書き）** です。完全自動公開にする場合は、本番Ubuntu側だけに置く非公開設定で `publish` へ切り替えます。
+
+詳しくは [automation/ubuntu/README.md](./automation/ubuntu/README.md) と [SECURITY.md](./SECURITY.md) を参照してください。
 
 ---
 

@@ -1,0 +1,40 @@
+{
+  "id": "224",
+  "title": "PowerShellからClipboard APIを操作する",
+  "summary": "短い実験で「PowerShellからClipboard APIを操作する」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "PowerShell / WinRT / .NET Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "PC・Office利用者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "PowerShell",
+    ".NET",
+    "WinRT",
+    "Windows App SDK"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "比較"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のPC・自分のテストデータを対象にした短い実験",
+  "demo_file": "demo.ps1",
+  "folder": "samples/224-winrt-clipboard",
+  "tags": [
+    "PowerShell / WinRT / .NET Lab",
+    "PowerShell",
+    ".NET",
+    "WinRT",
+    "Windows App SDK",
+    "learning"
+  ]
+}

@@ -1,0 +1,1 @@
+$v=[Windows.ApplicationModel.DataTransfer.Clipboard,Windows.ApplicationModel.DataTransfer,ContentType=WindowsRuntime]::GetContent();$v.AvailableFormats;"HasText=$($v.Contains([Windows.ApplicationModel.DataTransfer.StandardDataFormats]::Text))"

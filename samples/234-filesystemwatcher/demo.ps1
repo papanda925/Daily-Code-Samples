@@ -1,0 +1,1 @@
+$p=Join-Path $env:TEMP 'watch-demo';New-Item $p -ItemType Directory -Force|Out-Null;$w=[IO.FileSystemWatcher]::new($p);$w.EnableRaisingEvents=$true;$s=Register-ObjectEvent $w Created -Action{Write-Host "Created: $($Event.SourceEventArgs.Name)"};'hello'|Set-Content(Join-Path $p 'a.txt');Start-Sleep 1;Unregister-Event $s.Name;$w.Dispose();Remove-Item $p -Recurse

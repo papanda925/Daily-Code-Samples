@@ -1,0 +1,1 @@
+$lines=@('01PAPANDA925          0000010000','01SAMPLE             0000002500');$rows=$lines|%{[pscustomobject]@{Type=$_.Substring(0,2);Name=$_.Substring(2,20).Trim();Amount=[int]$_.Substring(22,10)}};$rows|ConvertTo-Csv -NoTypeInformation

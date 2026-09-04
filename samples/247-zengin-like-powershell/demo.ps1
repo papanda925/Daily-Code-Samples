@@ -1,0 +1,1 @@
+$s='1'+'1234'+'001'+'PAPANDA             '+'0000010000';[pscustomobject]@{Type=$s.Substring(0,1);Bank=$s.Substring(1,4);Branch=$s.Substring(5,3);Name=$s.Substring(8,20).Trim();Amount=[int]$s.Substring(28,10)};"教育用の全銀風ダミー"

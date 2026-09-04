@@ -1,0 +1,1 @@
+"CIM:";Get-CimInstance Win32_OperatingSystem|Select Caption,Version;if(Get-Command Get-WmiObject -EA 0){"WMI:";Get-WmiObject Win32_OperatingSystem|Select Caption,Version}else{"Get-WmiObject unavailable"}

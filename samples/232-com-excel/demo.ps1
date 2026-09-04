@@ -1,0 +1,1 @@
+$excel=New-Object -ComObject Excel.Application;try{$excel.Visible=$false;$wb=$excel.Workbooks.Add();$ws=$wb.Worksheets.Item(1);$ws.Cells.Item(1,1).Value2='PowerShell -> COM -> Excel';$ws.Cells.Item(1,1).Value2}finally{$wb.Close($false);$excel.Quit();[Runtime.InteropServices.Marshal]::ReleaseComObject($excel)|Out-Null}

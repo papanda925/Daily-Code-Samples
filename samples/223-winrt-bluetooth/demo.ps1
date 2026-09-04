@@ -1,0 +1,1 @@
+$sel=[Windows.Devices.Bluetooth.BluetoothDevice,Windows.Devices.Bluetooth,ContentType=WindowsRuntime]::GetDeviceSelector();$op=[Windows.Devices.Enumeration.DeviceInformation,Windows.Devices.Enumeration,ContentType=WindowsRuntime]::FindAllAsync($sel);while($op.Status-eq0){Start-Sleep -Milliseconds 20};$op.GetResults()|Select Name,Id

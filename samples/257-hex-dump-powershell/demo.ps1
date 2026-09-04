@@ -1,0 +1,1 @@
+param([string]$Path="$env:WINDIR\win.ini");$b=[IO.File]::ReadAllBytes($Path);for($i=0;$i-lt[Math]::Min($b.Length,256);$i+=16){$c=$b[$i..([Math]::Min($i+15,$b.Length-1))];"{0:X8}  {1}"-f$i,(($c|%{$_.ToString('X2')})-join' ')}

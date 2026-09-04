@@ -1,0 +1,1 @@
+param([string]$Path);if(!$Path){throw'自分のBMPを-Path指定'};$b=[IO.File]::ReadAllBytes($Path);[pscustomobject]@{Signature=[Text.Encoding]::ASCII.GetString($b,0,2);Width=[BitConverter]::ToInt32($b,18);Height=[BitConverter]::ToInt32($b,22)}

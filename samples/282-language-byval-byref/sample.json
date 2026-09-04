@@ -1,0 +1,36 @@
+{
+  "id": "282",
+  "title": "値渡しと参照渡しで元の値が変わるか試す",
+  "summary": "短い実験で「値渡しと参照渡しで元の値が変わるか試す」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "Language Basics Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "PC・Office利用者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "VBA",
+    "PowerShell"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "比較"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のPC・自分のテストデータを対象にした短い実験",
+  "demo_file": "demo.ps1",
+  "folder": "samples/282-language-byval-byref",
+  "tags": [
+    "Language Basics Lab",
+    "VBA",
+    "PowerShell",
+    "learning"
+  ]
+}

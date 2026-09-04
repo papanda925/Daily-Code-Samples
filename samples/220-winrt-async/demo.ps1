@@ -1,0 +1,1 @@
+$op=[Windows.Storage.StorageFile,Windows.Storage,ContentType=WindowsRuntime]::GetFileFromPathAsync("$env:WINDIR\win.ini");"type=$($op.GetType().FullName)";while($op.Status-eq0){Start-Sleep -Milliseconds 20};if($op.Status-eq1){"Completed: $($op.GetResults().Path)"}else{"Status=$($op.Status)"}

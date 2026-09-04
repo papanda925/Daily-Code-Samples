@@ -1,0 +1,1 @@
+$p=[PowerShell]::Create();$p.AddScript('Start-Sleep 2; "background result"')|Out-Null;$a=$p.BeginInvoke();"foreground continues";while(-not$a.IsCompleted){Write-Host '.' -NoNewline;Start-Sleep -Milliseconds 200};"";$p.EndInvoke($a);$p.Dispose()

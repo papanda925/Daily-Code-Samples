@@ -1,0 +1,1 @@
+function CRC32([byte[]]$data){[uint32]$crc=0xFFFFFFFF;foreach($b in$data){$crc=$crc-bxor$b;1..8|%{if($crc-band1){$crc=($crc-shr1)-bxor0xEDB88320}else{$crc=$crc-shr1}}};-bnot$crc};$d=[Text.Encoding]::ASCII.GetBytes("123456789");"{0:X8}"-f(CRC32 $d)

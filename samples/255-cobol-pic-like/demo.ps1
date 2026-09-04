@@ -1,0 +1,1 @@
+$def=@([pscustomobject]@{Name='Code';Width=4;Align='Right';Pad='0'},[pscustomobject]@{Name='Name';Width=10;Align='Left';Pad=' '});$v=@{Code='25';Name='ABC'};foreach($f in$def){$x=[string]$v[$f.Name];if($f.Align-eq'Right'){$x=$x.PadLeft($f.Width,$f.Pad)}else{$x=$x.PadRight($f.Width,$f.Pad)};$x}

@@ -118,8 +118,12 @@ def serialize(markdown, bot_root):
     if not bot_root.exists():
         raise RuntimeError("POSTBOT_ROOT is not configured or does not exist.")
     sys.path.insert(0, str(bot_root))
-    from utils.gutenberg_serializer import serialize_markdown_to_gutenberg
-    return serialize_markdown_to_gutenberg(markdown)
+    # Use the production common entrance: normalizer -> Mermaid 11.9 parser
+    # -> Gutenberg/MerPress serializer -> preflight. No Daily Code serializer.
+    from utils.wordpress_content import prepare_markdown_for_wordpress, preflight_wordpress_content
+    content = prepare_markdown_for_wordpress(markdown)
+    preflight_wordpress_content(content)
+    return content
 
 def category(wp, wp_path):
     slug = os.getenv("DAILY_CODE_CATEGORY_SLUG", "daily-code")
@@ -174,8 +178,8 @@ def writeback(repo, sample, sid, url, branch, push=True):
         sample_readme.write_text(updated if updated.endswith("\n") else updated + "\n", encoding="utf-8")
         changed = True
 
-    if not changed:
-        return {"changed": False, "pushed": False}
+    # Even when the link was already written by a failed prior attempt,
+    # stage and retry any pending writeback diff.
     git(repo, "add", "README.md", str(sample_readme.relative_to(repo)))
     diff = git(repo, "diff", "--cached", "--quiet", check=False)
     if diff.returncode:

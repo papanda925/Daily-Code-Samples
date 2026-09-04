@@ -1,0 +1,38 @@
+name: Sample quality check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "samples/**"
+      - "tools/validate_sample.py"
+      - "SAMPLE_STYLE_GUIDE.md"
+      - ".github/workflows/sample-quality.yml"
+  pull_request:
+    paths:
+      - "samples/**"
+      - "tools/validate_sample.py"
+      - "SAMPLE_STYLE_GUIDE.md"
+      - ".github/workflows/sample-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile validator
+        run: python3 -m py_compile tools/validate_sample.py
+
+      - name: Validate all sample structures
+        run: python3 tools/validate_sample.py --all
+
+      - name: Explain strict rule
+        run: |
+          echo "Samples #001-#300: basic structural validation"
+          echo "Samples #301 and later: strict README/comment/test validation"

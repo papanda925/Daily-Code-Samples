@@ -1,7 +1,7 @@
-# Daily Code Samples — Roadmap #042〜#300
+# Daily Code Samples — Engineering Lab Index #042〜#300
 
-現在の **#001〜#041 は実装済み**です。  
-この文書は、今後1本ずつ短いサンプルへ育てる **#042〜#300 の実装候補バックログ（259件）**です。
+**#001〜#300 はすべて `samples/` 配下へ実体化済みです。**  
+この文書は #042〜#300 のEngineering / OS / Security系サンプルを探すための索引です。高度なテーマは `experimental` として、短い学習・実験コードを収録しています。
 
 > 目標は「コードを覚える」だけではなく、**PC・Office・Windowsの仕組みを、自分の目で見て、操作して、前後差をトレースしながら理解すること**です。
 
@@ -16,7 +16,7 @@
 - Security / Network系は、自分のPC・自分のデータ・自分のネットワーク・ローカル実験を基本とする
 - 実環境の認証情報や秘密情報を教材へ入れない
 - 全銀フォーマット等は、実データではなく**教育用のダミー／全銀風固定長データ**を基本とする
-- 未実装アイデアは `samples/` へ置かず、完成してから公開サンプルへ昇格する
+- #042〜#300 は experimental sample として実体化済み。今後は個別レビューを重ね、必要に応じて stable へ昇格する
 
 ## 学び方
 
@@ -375,4 +375,4 @@ WindowsやOfficeで利用できる言語・スクリプト・コマンドの役�
 
 ## 機械可読カタログ
 
-全259件は [catalog/ideas.csv](./catalog/ideas.csv) にも保存しています。実装時に `status=idea` から公開サンプルへ昇格し、`samples/NNN-...` と `catalog/samples.csv` へ移します。
+全259件は [catalog/ideas.csv](./catalog/ideas.csv) にも保存しており、現在の status は `implemented-experimental` です。実サンプル一覧は [catalog/samples.csv](./catalog/samples.csv) に統合済みです。

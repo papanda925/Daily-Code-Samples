@@ -19,12 +19,14 @@ Windows、Excel、Word、PowerPoint、PowerShell、VBA、Power Query などを�
 
 ### 今あるサンプル
 
-**41本公開中** — Windows / Excel / Word / PowerPoint / PowerShell / VBA / Power Query
+**300本公開中** — Windows / Excel / Word / PowerPoint / PowerShell / VBA / WinRT / .NET / Security / Network / OS Fundamentals
 
-**さらに #042〜#300 の259件を実装候補として整理済みです。**  
-OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、非同期処理、固定長ファイル、Hex、VBA設計、PowerShell/.NET、文法比較などを、短い実験として順次追加します。
+**#042〜#300も実際のサンプルフォルダーとして実装済みです。**  
+OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、非同期処理、固定長ファイル、Hex、VBA設計、PowerShell/.NET、文法比較などを、短い実験として `samples/` 配下へ収録しています。
 
-**[🗺 #042〜#300 のRoadmapを見る](./ROADMAP.md)**
+高度なテーマは **experimental（学習・実験用）** とし、実務向け完成ライブラリではなく「目で見る・動かす・差を確認する」ことを優先しています。
+
+**[🗺 #042〜#300 のEngineering Lab一覧を見る](./ROADMAP.md)**
 
 **[検索ページを開く →](https://papanda925.github.io/Daily-Code-Samples/)**
 
@@ -46,7 +48,7 @@ OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、
 
 ## 🧪 これから増やす Engineering / OS / Security Lab
 
-公開済み41本とは別に、**#042〜#300（259件）**の実装候補をRoadmap化しています。
+**#042〜#300（259件）も実サンプルとして `samples/` に展開済みです。** RoadmapはEngineering Labの索引として利用します。
 
 - 🧩 OS Fundamentals — Process / Thread / HWND / Event Loop / Mutex / Memory / IPC
 - 🖥 Windows & Device Trace — USB / Bluetooth / Display / Battery / CPU / Device

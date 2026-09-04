@@ -40,3 +40,262 @@ No,公開日,分類,やりたいこと,アプリ・機能,方法,難しさ,目�
 039,2026-09-04,ファイル・状態確認,最近更新されたファイルだけ一覧で確認したい,Windows / PowerShell,コピペ / 試して理解,ちょっと応用,15分,samples/039-powershell-recent-files
 040,2026-09-04,Excel・自動化,Excelの今見ているシートをPDFで保存したい,Excel / VBA,コピペ / 自動化 / 試して理解,ちょっと応用,20分,samples/040-excel-vba-export-sheet-pdf
 041,2026-09-04,Power Automate・自動化,メール添付ファイルをOneDriveへ自動保存したい,Power Automate / Outlook / OneDrive,GUI / 自動化 / 試して理解,ちょっと応用,25分,samples/041-power-automate-save-attachments
+042,2026-09-04,OS Fundamentals Lab,ウィンドウには番号がある？ HWNDを実際に見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/042-hwnd
+043,2026-09-04,OS Fundamentals Lab,ウィンドウを動かして座標の変化をGetWindowRectで見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/043-window-rect
+044,2026-09-04,OS Fundamentals Lab,WM_CLOSEと強制終了は何が違う？,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/044-wm-close
+045,2026-09-04,OS Fundamentals Lab,WindowsのMessage Loopを小さなGUIで体験する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/045-message-loop
+046,2026-09-04,OS Fundamentals Lab,UIスレッドを重い処理で止めると画面はなぜ固まる？,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/046-ui-thread-freeze
+047,2026-09-04,OS Fundamentals Lab,VBAのDoEventsでWindows Messageが処理される様子を見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/047-doevents
+048,2026-09-04,OS Fundamentals Lab,DoEvents中に同じボタンを押して再入問題を起こしてみる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/048-doevents-reentrancy
+049,2026-09-04,OS Fundamentals Lab,Process ID（PID）は何のためにある？,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/049-process-id
+050,2026-09-04,OS Fundamentals Lab,1つのプロセスに複数Threadがあることを観察する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/050-threads
+051,2026-09-04,OS Fundamentals Lab,逐次実行と並列実行を時間で比べる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/051-sequential-parallel
+052,2026-09-04,OS Fundamentals Lab,Concurrency・Parallelism・Asyncの違いを実験で比べる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/052-concurrency-parallel-async
+053,2026-09-04,OS Fundamentals Lab,共有カウンターでRace Conditionを起こしてみる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/053-race-condition
+054,2026-09-04,OS Fundamentals Lab,Mutexで2つのPowerShellを順番に動かす,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/054-mutex
+055,2026-09-04,OS Fundamentals Lab,Semaphoreで同時実行数を2つに制限する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/055-semaphore
+056,2026-09-04,OS Fundamentals Lab,Event Wait Handleで「合図が来るまで待つ」を体験する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/056-event-wait-handle
+057,2026-09-04,OS Fundamentals Lab,Timerもイベント？ 1秒ごとのTickを記録する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/057-timer-event
+058,2026-09-04,OS Fundamentals Lab,プロセス終了イベントを監視してみる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/058-process-exit-event
+059,2026-09-04,OS Fundamentals Lab,ファイルを開くとHandleが使われることを確認する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/059-handle-count
+060,2026-09-04,OS Fundamentals Lab,File Lockをかけたまま別プロセスから開いてみる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/060-file-lock
+061,2026-09-04,OS Fundamentals Lab,Named Pipeで2つのPowerShellを会話させる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/061-named-pipe
+062,2026-09-04,OS Fundamentals Lab,Named PipeとTCP Socketの違いを同じ文字列送信で比べる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/062-pipe-vs-tcp
+063,2026-09-04,OS Fundamentals Lab,環境変数PATH・TEMPはどこから見える？,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/063-environment-variables
+064,2026-09-04,OS Fundamentals Lab,Registryを読み取り専用で観察する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/064-registry-read
+065,2026-09-04,OS Fundamentals Lab,Windows ServiceのRunning・Stoppedを一覧で見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/065-windows-service
+066,2026-09-04,OS Fundamentals Lab,Windows Event Logから自分の操作に近いイベントを探す,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/066-event-log
+067,2026-09-04,OS Fundamentals Lab,Physical MemoryとVirtual Memoryの違いを数字で見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/067-physical-virtual-memory
+068,2026-09-04,OS Fundamentals Lab,Working Setはアプリのメモリ量と同じなのか？,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/068-working-set
+069,2026-09-04,OS Fundamentals Lab,.NETのGarbage Collection前後でメモリ表示を比べる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/069-garbage-collection
+070,2026-09-04,OS Fundamentals Lab,Process Priorityを観察してOSの優先度という考え方を知る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/070-process-priority
+071,2026-09-04,OS Fundamentals Lab,CPU負荷をかけてOS Schedulerの仕事を観察する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/071-scheduler
+072,2026-09-04,OS Fundamentals Lab,親Processと子Processの関係をツリーで見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/072-parent-child-process
+073,2026-09-04,OS Fundamentals Lab,標準入力・標準出力・標準エラーをリダイレクトしてみる,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/073-stdio-redirection
+074,2026-09-04,OS Fundamentals Lab,Exit Code 0と1を自作スクリプトで体験する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/074-exit-code
+075,2026-09-04,OS Fundamentals Lab,Current DirectoryとScript Directoryの違いを確認する,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/075-current-vs-script-directory
+076,2026-09-04,OS Fundamentals Lab,Foreground Windowが切り替わるたびにHWNDとタイトルを見る,PowerShell / VBA / Win32 / .NET,コピペ / 試して理解 / トレース,深掘り,15分,samples/076-hwnd
+077,2026-09-04,Windows & Device Trace Lab,USBデバイスを一覧表示して何がつながっているか見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/077-usb-devices
+078,2026-09-04,Windows & Device Trace Lab,USBを抜き差ししてDevice一覧の差分を取る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/078-usb-diff
+079,2026-09-04,Windows & Device Trace Lab,USBメモリを挿すとDrive情報がどう増えるか見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/079-usb-drive-diff
+080,2026-09-04,Windows & Device Trace Lab,PnP DeviceのStatusを一覧で確認する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/080-pnp-status
+081,2026-09-04,Windows & Device Trace Lab,Device Instance IDって何？ 実物を見てみる,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/081-device-instance-id
+082,2026-09-04,Windows & Device Trace Lab,BluetoothデバイスをWindowsから列挙する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/082-bluetooth-devices
+083,2026-09-04,Windows & Device Trace Lab,BluetoothのPairedとConnectedの違いを見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/083-bluetooth-paired-connected
+084,2026-09-04,Windows & Device Trace Lab,BLE Advertisementを自分の周囲で観察する入門,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/084-ble-advertisement
+085,2026-09-04,Windows & Device Trace Lab,バッテリー残量・充電状態をリアルタイム表示する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/085-battery-status
+086,2026-09-04,Windows & Device Trace Lab,ACアダプターを抜き差ししてPower状態の差分を見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/086-ac-power-state
+087,2026-09-04,Windows & Device Trace Lab,CPU使用率を1秒ごとに表示して負荷の変化を見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/087-cpu-usage
+088,2026-09-04,Windows & Device Trace Lab,メモリ使用量をアプリ起動前後で比較する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/088-memory-usage
+089,2026-09-04,Windows & Device Trace Lab,Disk I/Oの読み書き量を処理前後で観察する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/089-disk-io
+090,2026-09-04,Windows & Device Trace Lab,ネットワークアダプターごとの送受信バイトを追跡する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/090-network-bytes
+091,2026-09-04,Windows & Device Trace Lab,ディスプレイの解像度をPowerShellから取得する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/091-display-resolution
+092,2026-09-04,Windows & Device Trace Lab,マルチディスプレイの座標と負の座標を見てみる,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/092-multi-display-coordinates
+093,2026-09-04,Windows & Device Trace Lab,DPIと拡大率150%で座標がどう見えるか確認する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/093-dpi-scaling
+094,2026-09-04,Windows & Device Trace Lab,マウスカーソルのX・Y座標をリアルタイム表示する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/094-mouse-coordinates
+095,2026-09-04,Windows & Device Trace Lab,アクティブウィンドウのタイトルと位置を追跡する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/095-active-window
+096,2026-09-04,Windows & Device Trace Lab,自作GUIのKeyDown・KeyUpイベントだけをトレースする,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/096-keyboard-events
+097,2026-09-04,Windows & Device Trace Lab,自作GUIのMouseDown・MouseUp・Clickの順序を見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/097-mouse-events
+098,2026-09-04,Windows & Device Trace Lab,Clipboardに入っているデータ形式を調べる,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/098-clipboard-formats
+099,2026-09-04,Windows & Device Trace Lab,現在の音声出力デバイスを確認する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/099-audio-output
+100,2026-09-04,Windows & Device Trace Lab,音声出力先を切り替えてデバイス情報の差分を見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/100-audio-output-diff
+101,2026-09-04,Windows & Device Trace Lab,カメラデバイスがWindowsからどう見えているか確認する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/101-camera-devices
+102,2026-09-04,Windows & Device Trace Lab,マイクデバイスの存在と状態だけを確認する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/102-microphone-devices
+103,2026-09-04,Windows & Device Trace Lab,プリンター一覧とDefault Printerを確認する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/103-printers
+104,2026-09-04,Windows & Device Trace Lab,Power Planの現在状態を読み取る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/104-power-plan
+105,2026-09-04,Windows & Device Trace Lab,PCの起動時間とUptimeを表示する,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/105-uptime
+106,2026-09-04,Windows & Device Trace Lab,画面の一部をキャプチャして座標とピクセルの関係を見る,PowerShell / WinRT / CIM / Windows API,コピペ / 試して理解 / トレース,深掘り,15分,samples/106-screen-capture
+107,2026-09-04,Network & Wireless Lab,Wi-FiのSSID・BSSID・Channelを同時に見る,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/107-wifi-interface
+108,2026-09-04,Network & Wireless Lab,Wi-Fi信号強度をリアルタイムの棒グラフで表示する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/108-wifi-signal
+109,2026-09-04,Network & Wireless Lab,2.4GHz・5GHz・6GHzの接続情報を比べる,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/109-wifi-bands
+110,2026-09-04,Network & Wireless Lab,周囲のWi-Fi Channelを一覧にして混雑を可視化する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/110-wifi-channels
+111,2026-09-04,Network & Wireless Lab,同じSSIDでBSSIDが変わるローミングを記録する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/111-wifi-roaming
+112,2026-09-04,Network & Wireless Lab,WindowsにあるNetwork Adapterを全部並べる,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/112-network-adapters
+113,2026-09-04,Network & Wireless Lab,Link Speedは実効速度と同じ？ まず値を確認する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/113-link-speed
+114,2026-09-04,Network & Wireless Lab,IPv4アドレスとIPv6アドレスを並べて見る,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/114-ip-addresses
+115,2026-09-04,Network & Wireless Lab,Route Tableを読んでパケットの行き先を考える,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/115-route-table
+116,2026-09-04,Network & Wireless Lab,Default Gatewayは何をしている？ 設定値から確認する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/116-default-gateway
+117,2026-09-04,Network & Wireless Lab,ARP／Neighbor Cacheを見て同一LANの相手を理解する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/117-neighbor-cache
+118,2026-09-04,Network & Wireless Lab,DNS名前解決で名前がIPアドレスになる流れを見る,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/118-dns-resolution
+119,2026-09-04,Network & Wireless Lab,DNS Cacheを名前解決の前後で比較する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/119-dns-cache
+120,2026-09-04,Network & Wireless Lab,DHCPでもらったIP・Gateway・DNS情報を確認する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/120-dhcp-info
+121,2026-09-04,Network & Wireless Lab,localhostへPingしてLoopbackを体験する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/121-loopback-ping
+122,2026-09-04,Network & Wireless Lab,自分で用意したホストへTracerouteして経路を見る,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/122-traceroute
+123,2026-09-04,Network & Wireless Lab,TCP接続のESTABLISHED・LISTENなどの状態を見る,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/123-tcp-states
+124,2026-09-04,Network & Wireless Lab,自分のPCでListening Portを一覧表示する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/124-listening-ports
+125,2026-09-04,Network & Wireless Lab,PowerShellだけでlocalhost簡易HTTPサーバーを動かす,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/125-local-http-server
+126,2026-09-04,Network & Wireless Lab,TCPとUDPで同じ文字列を送って違いを見る,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/126-tcp-vs-udp
+127,2026-09-04,Network & Wireless Lab,localhostでHTTPとHTTPSの通信手順の違いを追う,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/127-http-vs-https
+128,2026-09-04,Network & Wireless Lab,127.0.0.1とlocalhostと::1の違いを試す,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/128-loopback-addresses
+129,2026-09-04,Network & Wireless Lab,保存済みWi-Fi Profileの名前だけを一覧にする,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/129-wifi-profiles
+130,2026-09-04,Network & Wireless Lab,MTUを変えずにサイズ違いPingで断片化の概念を学ぶ,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/130-mtu-probe
+131,2026-09-04,Network & Wireless Lab,Latency・Packet Loss・Jitterを自分の通信で記録する,PowerShell / netsh / .NET / WinRT,コピペ / 試して理解 / トレース,深掘り,15分,samples/131-latency-loss-jitter
+132,2026-09-04,Visual Security Lab,1文字変えるとSHA-256はどれだけ変わる？ Avalanche Effectを見る,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/132-sha256-avalanche
+133,2026-09-04,Visual Security Lab,Base64は暗号化ではないことをEncode→Decodeで確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/133-base64-not-encryption
+134,2026-09-04,Visual Security Lab,AESで暗号化してから復号して元に戻ることを確かめる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/134-aes-roundtrip
+135,2026-09-04,Visual Security Lab,HMACで1文字の改ざんを検知してみる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/135-hmac-tamper
+136,2026-09-04,Visual Security Lab,電子署名した文書を1文字変えて検証NGにしてみる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/136-digital-signature
+137,2026-09-04,Visual Security Lab,同じパスワードでもSaltを変えるとHashが変わることを見る,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/137-password-salt
+138,2026-09-04,Visual Security Lab,PBKDF2の反復回数を増やすと処理時間がどう変わる？,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/138-pbkdf2-iterations
+139,2026-09-04,Visual Security Lab,乱数と単純な連番を並べて予測しやすさを考える,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/139-random-vs-sequence
+140,2026-09-04,Visual Security Lab,ランダムなバイト列をヒストグラムで眺める,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/140-random-histogram
+141,2026-09-04,Visual Security Lab,HTTPSサイトのTLS証明書をPowerShellで見る,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/141-tls-certificate
+142,2026-09-04,Visual Security Lab,Root CA→Intermediate CA→Server Certificateの鎖をたどる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/142-certificate-chain
+143,2026-09-04,Visual Security Lab,証明書の有効期限を一覧にして期限切れを理解する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/143-certificate-expiry
+144,2026-09-04,Visual Security Lab,localhostでHTTPとHTTPSの見える情報の違いを比べる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/144-local-http-https
+145,2026-09-04,Visual Security Lab,ダウンロード前後のファイルHashで完全性を確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/145-file-integrity-hash
+146,2026-09-04,Visual Security Lab,AllowlistとDenylistを小さな文字列判定で比べる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/146-allowlist-denylist
+147,2026-09-04,Visual Security Lab,管理者権限と標準ユーザー権限の違いを状態表示で見る,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/147-admin-standard-user
+148,2026-09-04,Visual Security Lab,NTFSアクセス権を読み取り専用で一覧表示する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/148-ntfs-acl
+149,2026-09-04,Visual Security Lab,フォルダーの権限継承を親子で見比べる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/149-acl-inheritance
+150,2026-09-04,Visual Security Lab,Windows FirewallのProfile状態とRule件数を確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/150-firewall-profile
+151,2026-09-04,Visual Security Lab,Microsoft Defenderの基本状態を読み取り専用で確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,はじめて,15分,samples/151-defender-status
+152,2026-09-04,Visual Security Lab,ダウンロードファイルのMark of the Webを自分のファイルで見る,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/152-mark-of-the-web
+153,2026-09-04,Visual Security Lab,Alternate Data Streamに小さなテスト文字列を保存して仕組みを知る,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/153-alternate-data-stream
+154,2026-09-04,Visual Security Lab,PowerShellでAuthenticode署名の有無を確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/154-authenticode
+155,2026-09-04,Visual Security Lab,DPAPIで自分のテスト文字列を暗号化・復号する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/155-dpapi
+156,2026-09-04,Visual Security Lab,パスワード長で組み合わせ数がどう増えるか可視化する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/156-password-combinations
+157,2026-09-04,Visual Security Lab,固定時間比較と普通の文字列比較の考え方を小さく試す,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/157-fixed-time-compare
+158,2026-09-04,Visual Security Lab,CSVの先頭記号が表計算で式扱いされる例を安全な文字列で確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/158-csv-formula-text
+159,2026-09-04,Visual Security Lab,入力値をそのまま使う場合と検証する場合の差をローカル実験する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/159-input-validation
+160,2026-09-04,Visual Security Lab,ログに秘密情報を書かないRedactionを実装して比べる,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/160-log-redaction
+161,2026-09-04,Visual Security Lab,環境変数へ秘密情報を置くとプロセスからどう見えるかを自分のテスト値で確認する,PowerShell / .NET Cryptography / Windows Security,コピペ / 試して理解 / トレース,深掘り,15分,samples/161-environment-secret
+162,2026-09-04,Architecture & Algorithm Lab,PowerShellでミニBlockchainを作る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/162-blockchain-powershell
+163,2026-09-04,Architecture & Algorithm Lab,Excel VBAでセルが変わると壊れるBlockchainを可視化する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/163-blockchain-vba
+164,2026-09-04,Architecture & Algorithm Lab,Merkle Treeを4つのファイルHashから作る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/164-file-integrity-hash
+165,2026-09-04,Architecture & Algorithm Lab,Bloom Filterで「たぶんある／絶対ない」を体験する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/165-bloom-filter
+166,2026-09-04,Architecture & Algorithm Lab,LRU Cacheで最近使っていないデータが追い出される様子を見る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/166-lru-cache
+167,2026-09-04,Architecture & Algorithm Lab,Token BucketでAPI Rate Limitを再現する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/167-token-bucket
+168,2026-09-04,Architecture & Algorithm Lab,RetryとExponential Backoffを失敗するローカル処理で試す,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/168-retry-backoff
+169,2026-09-04,Architecture & Algorithm Lab,Circuit BreakerのCLOSED・OPEN・HALF-OPENを色で見る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/169-circuit-breaker
+170,2026-09-04,Architecture & Algorithm Lab,フォルダーをMessage QueueにしてProducer／Consumerを作る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/170-folder-queue
+171,2026-09-04,Architecture & Algorithm Lab,VBAのEventでPub/Subを再現する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/171-pubsub-vba
+172,2026-09-04,Architecture & Algorithm Lab,ExcelでEvent Sourcingを実装して現在状態を再構築する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/172-event-sourcing
+173,2026-09-04,Architecture & Algorithm Lab,VBAでCQRS風にWrite ModelとRead Modelを分ける,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/173-cqrs-vba
+174,2026-09-04,Architecture & Algorithm Lab,申請フローをState Machineとして実装する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/174-state-machine
+175,2026-09-04,Architecture & Algorithm Lab,PowerShell RunspaceでActor Model風のMailboxを作る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/175-actor-model
+176,2026-09-04,Architecture & Algorithm Lab,DAGで依存関係のあるJobを順番・並列に実行する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/176-dag-jobs
+177,2026-09-04,Architecture & Algorithm Lab,Producer-Consumer PatternをQueueで体験する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/177-producer-consumer
+178,2026-09-04,Architecture & Algorithm Lab,Observer PatternをVBAのWithEventsで実装する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/178-observer-pattern
+179,2026-09-04,Architecture & Algorithm Lab,Strategy Patternで処理方法を差し替える,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/179-strategy-pattern
+180,2026-09-04,Architecture & Algorithm Lab,Factory Patternで作るオブジェクトを切り替える,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/180-factory-pattern
+181,2026-09-04,Architecture & Algorithm Lab,Repository PatternでExcelセルへの直接アクセスを隠す,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/181-repository-pattern
+182,2026-09-04,Architecture & Algorithm Lab,Dependency Injectionで本番処理とMockを差し替える,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/182-dependency-injection
+183,2026-09-04,Architecture & Algorithm Lab,Command Patternで操作をオブジェクトとして記録する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/183-command-pattern
+184,2026-09-04,Architecture & Algorithm Lab,Adapter Patternで異なるAPIの呼び方を同じ形にそろえる,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/184-adapter-pattern
+185,2026-09-04,Architecture & Algorithm Lab,Decorator Patternでログ機能を後付けする,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/185-decorator-pattern
+186,2026-09-04,Architecture & Algorithm Lab,Cache-Aside Patternを小さな辞書とファイルで再現する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/186-cache-aside
+187,2026-09-04,Architecture & Algorithm Lab,同じ要求を2回送っても結果が増えないIdempotencyを体験する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/187-idempotency
+188,2026-09-04,Architecture & Algorithm Lab,Saga Patternを3段階の処理と補償処理で模型化する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/188-saga-pattern
+189,2026-09-04,Architecture & Algorithm Lab,Outbox PatternをCSV／JSONファイルで再現する,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/189-outbox-pattern
+190,2026-09-04,Architecture & Algorithm Lab,Consistent Hashingでデータの割り当て先がどう変わるか見る,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/190-consistent-hashing
+191,2026-09-04,Architecture & Algorithm Lab,Fixed WindowとSliding WindowのRate Limitを比べる,PowerShell / VBA,コピペ / 試して理解 / トレース,深掘り,15分,samples/191-rate-limit-windows
+192,2026-09-04,VBA Deep Dive,VBAで本当の非同期HTTPを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/192-vba-async-http
+193,2026-09-04,VBA Deep Dive,DoEventsは非同期処理ではないことをログで確認する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/193-vba-doevents-not-async
+194,2026-09-04,VBA Deep Dive,WithEventsでHTTP完了イベントを受け取る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/194-vba-http-event
+195,2026-09-04,VBA Deep Dive,Implementsを使ってVBAでInterfaceを作る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/195-vba-interface
+196,2026-09-04,VBA Deep Dive,VBAでDependency Injectionを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/196-dependency-injection
+197,2026-09-04,VBA Deep Dive,VBAでStrategy Patternを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/197-strategy-pattern
+198,2026-09-04,VBA Deep Dive,VBAでFactory Patternを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/198-factory-pattern
+199,2026-09-04,VBA Deep Dive,VBAでObserver Patternを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/199-observer-pattern
+200,2026-09-04,VBA Deep Dive,VBAでRepository Patternを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/200-repository-pattern
+201,2026-09-04,VBA Deep Dive,VBAでState Machineを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/201-state-machine
+202,2026-09-04,VBA Deep Dive,VBAでPromise風AsyncTaskクラスを作る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/202-vba-promise
+203,2026-09-04,VBA Deep Dive,VBAでキャンセル可能な長時間処理を作る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/203-vba-cancellation
+204,2026-09-04,VBA Deep Dive,VBAの非同期処理へTimeoutを追加する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/204-vba-timeout
+205,2026-09-04,VBA Deep Dive,VBAでRetry処理を共通化する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/205-vba-retry
+206,2026-09-04,VBA Deep Dive,VBAでExponential Backoffを実装する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/206-vba-backoff
+207,2026-09-04,VBA Deep Dive,VBAで簡易Event Queueを作る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/207-vba-event-queue
+208,2026-09-04,VBA Deep Dive,CollectionとClassでDomain Object一覧を扱う,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/208-vba-domain-object
+209,2026-09-04,VBA Deep Dive,Property Get／Let／Setでカプセル化を体験する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/209-vba-properties
+210,2026-09-04,VBA Deep Dive,On Errorだけに頼らないエラー伝播の設計を試す,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/210-vba-error-flow
+211,2026-09-04,VBA Deep Dive,VBAで共通Loggerクラスを作る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/211-vba-logger
+212,2026-09-04,VBA Deep Dive,VBAだけで小さなJSON Serializerを作って構造を理解する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/212-vba-json-serializer
+213,2026-09-04,VBA Deep Dive,Application.OnTimeで擬似的な非同期スケジュールを作る,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/213-vba-ontime
+214,2026-09-04,VBA Deep Dive,AddressOfとCallbackの制約をWin32 APIで体験する,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/214-vba-callback
+215,2026-09-04,VBA Deep Dive,Early BindingとLate Bindingの違いを同じCOM操作で比べる,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/215-vba-binding
+216,2026-09-04,VBA Deep Dive,32bit／64bit VBAとPtrSafe・LongPtrの違いを学ぶ,VBA / COM / Win32,コピペ / 試して理解 / トレース,深掘り,15分,samples/216-vba-64bit-ptrsafe
+217,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShell + WinRTでWindowsに文章を読み上げさせる,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/217-winrt-speech-synthesis
+218,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShell + WinRTでWindows標準の音声認識を試す,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/218-winrt-speech-recognition
+219,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShell + WinRTで画像OCRを試す,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/219-winrt-ocr
+220,2026-09-04,PowerShell / WinRT / .NET Lab,WinRTのIAsyncOperationをPowerShellから待つ,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/220-winrt-async
+221,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellからWindows通知を表示する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/221-windows-notification
+222,2026-09-04,PowerShell / WinRT / .NET Lab,WinRT DeviceInformationでデバイスを列挙する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/222-winrt-device-info
+223,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellからWinRT Bluetooth APIを触る,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/223-winrt-bluetooth
+224,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellからClipboard APIを操作する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/224-winrt-clipboard
+225,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellだけでWPFの小さなGUIを作る,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/225-powershell-wpf
+226,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellだけでWindows Formsの小さなGUIを作る,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/226-powershell-winforms
+227,2026-09-04,PowerShell / WinRT / .NET Lab,RunspaceでUIを固めずバックグラウンド処理する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/227-powershell-runspace-ui
+228,2026-09-04,PowerShell / WinRT / .NET Lab,.NET TaskをPowerShellから作って待つ,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/228-dotnet-task
+229,2026-09-04,PowerShell / WinRT / .NET Lab,ForEach-Object -Parallelで並列処理を体験する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/229-foreach-parallel
+230,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellから.NET Classを直接newして使う,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/230-dotnet-class
+231,2026-09-04,PowerShell / WinRT / .NET Lab,Add-TypeでUser32.dllのWin32 APIを呼ぶ,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/231-add-type-win32
+232,2026-09-04,PowerShell / WinRT / .NET Lab,PowerShellからCOM経由でExcelを操作する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/232-com-excel
+233,2026-09-04,PowerShell / WinRT / .NET Lab,CIMとWMIは何が違う？ 同じPC情報を取得して比べる,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/233-cim-vs-wmi
+234,2026-09-04,PowerShell / WinRT / .NET Lab,FileSystemWatcherでフォルダー変更イベントを監視する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/234-filesystemwatcher
+235,2026-09-04,PowerShell / WinRT / .NET Lab,HttpClientで同期風処理と非同期処理を比べる,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/235-httpclient-async
+236,2026-09-04,PowerShell / WinRT / .NET Lab,Visual StudioなしでWindows App SDK／WinUI 3の最小構成を理解する,PowerShell / .NET / WinRT / Windows App SDK,コピペ / 試して理解 / トレース,深掘り,15分,samples/236-windows-app-sdk
+237,2026-09-04,Legacy Data & File Format Lab,VBAで固定長ファイルを1レコードずつ分解する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/237-fixed-width-vba
+238,2026-09-04,Legacy Data & File Format Lab,PowerShellで固定長ファイルをSubstringで分解する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/238-fixed-width-powershell
+239,2026-09-04,Legacy Data & File Format Lab,固定長ファイルをCSVへ変換する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/239-fixed-to-csv
+240,2026-09-04,Legacy Data & File Format Lab,CSVから固定長ファイルを生成する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/240-csv-to-fixed
+241,2026-09-04,Legacy Data & File Format Lab,Header・Detail・Trailerレコードを判定する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/241-record-types
+242,2026-09-04,Legacy Data & File Format Lab,固定長レコードの桁数エラーを検出する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/242-record-length-check
+243,2026-09-04,Legacy Data & File Format Lab,数値をゼロ埋めして固定桁へ整形する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/243-zero-padding
+244,2026-09-04,Legacy Data & File Format Lab,文字列の左詰め・右詰めをVBAとPowerShellで比べる,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/244-padding-compare
+245,2026-09-04,Legacy Data & File Format Lab,Shift_JISで文字数とバイト数が違うことを体験する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/245-shiftjis-byte-length
+246,2026-09-04,Legacy Data & File Format Lab,全銀フォーマット風の教育用固定長データをVBAで解析する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/246-zengin-like-vba
+247,2026-09-04,Legacy Data & File Format Lab,全銀フォーマット風の教育用固定長データをPowerShellで解析する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/247-zengin-like-powershell
+248,2026-09-04,Legacy Data & File Format Lab,ダミー振込データのHeader・明細・Trailer合計を照合する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/248-zengin-total-check
+249,2026-09-04,Legacy Data & File Format Lab,CRLFとLFの違いを同じテキストで確認する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/249-crlf-lf
+250,2026-09-04,Legacy Data & File Format Lab,CSVのカンマ・ダブルクォート・改行を正しくEscapeする,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/250-csv-escaping
+251,2026-09-04,Legacy Data & File Format Lab,TSVならカンマ入り文字列をどう扱えるか比べる,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/251-tsv
+252,2026-09-04,Legacy Data & File Format Lab,INIファイルを読み書きして昔ながらの設定ファイルを理解する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/252-ini-file
+253,2026-09-04,Legacy Data & File Format Lab,XMLをPowerShellで読み、階層構造をたどる,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/253-xml-powershell
+254,2026-09-04,Legacy Data & File Format Lab,VBAでXML DOMを使って要素を読む,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/254-xml-vba
+255,2026-09-04,Legacy Data & File Format Lab,COBOLのPIC風フィールド定義をExcel表から固定長へ変換する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/255-cobol-pic-like
+256,2026-09-04,Legacy Data & File Format Lab,桁位置のある古いログをVBA／PowerShellで表形式へ変換する,VBA / PowerShell / Text / CSV / XML,コピペ / 試して理解 / トレース,深掘り,15分,samples/256-positional-log
+257,2026-09-04,Binary / Hex / Encoding Lab,PowerShellだけでミニHex Dump Viewerを作る,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/257-hex-dump-powershell
+258,2026-09-04,Binary / Hex / Encoding Lab,Excel VBAで簡易Hex Viewerを作る,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/258-hex-viewer-vba
+259,2026-09-04,Binary / Hex / Encoding Lab,PNG・JPEG・PDF・ZIPのFile SignatureをHexで見る,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/259-file-signatures
+260,2026-09-04,Binary / Hex / Encoding Lab,XLSX・DOCX・PPTXの先頭がZIP系であることを確認する,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/260-office-zip-signature
+261,2026-09-04,Binary / Hex / Encoding Lab,UTF-8 BOMのEF BB BFを実際に見る,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/261-utf8-bom
+262,2026-09-04,Binary / Hex / Encoding Lab,UTF-16 LEの文字列がバイト列でどう見えるか確認する,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/262-utf16le
+263,2026-09-04,Binary / Hex / Encoding Lab,CRLFが0D 0Aとして保存されることを見る,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/263-crlf-hex
+264,2026-09-04,Binary / Hex / Encoding Lab,Little EndianとBig Endianで整数の並びを比べる,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/264-endianness
+265,2026-09-04,Binary / Hex / Encoding Lab,整数を4バイトへ変換してHex表示する,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/265-integer-bytes
+266,2026-09-04,Binary / Hex / Encoding Lab,IEEE 754の浮動小数点をバイト列で眺める,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/266-ieee754
+267,2026-09-04,Binary / Hex / Encoding Lab,大きなファイルをChunk単位で読む処理を作る,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/267-chunk-read
+268,2026-09-04,Binary / Hex / Encoding Lab,Base64変換前後のバイト数を比べる,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/268-base64-size
+269,2026-09-04,Binary / Hex / Encoding Lab,GUIDを文字列と16バイト表現で比べる,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/269-guid-bytes
+270,2026-09-04,Binary / Hex / Encoding Lab,CRC32をPowerShellで実装してChecksumを理解する,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/270-crc32
+271,2026-09-04,Binary / Hex / Encoding Lab,BMPヘッダーを読み取り画像サイズを取り出す,PowerShell / VBA / Binary / Encoding,コピペ / 試して理解 / トレース,深掘り,15分,samples/271-bmp-header
+272,2026-09-04,Language Basics Lab,変数って何？ VBAのDimとPowerShellの$変数を比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/272-language-variables
+273,2026-09-04,Language Basics Lab,型って何？ String・Integer・Dateを比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/273-language-types
+274,2026-09-04,Language Basics Lab,文字列の結合・切り出しをVBAとPowerShellで比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/274-language-strings
+275,2026-09-04,Language Basics Lab,配列を作る・追加する・取り出すを比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/275-language-arrays
+276,2026-09-04,Language Basics Lab,Dictionary／Hashtableでキーと値を扱う,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/276-language-dictionary
+277,2026-09-04,Language Basics Lab,If文で条件分岐を同じ問題で比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/277-language-if
+278,2026-09-04,Language Basics Lab,For／For Each／foreachの違いを比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/278-language-loops
+279,2026-09-04,Language Basics Lab,Functionを作って同じ計算を呼び出す,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/279-language-functions
+280,2026-09-04,Language Basics Lab,引数って何？ ByVal／ByRefとparam()を比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/280-language-arguments
+281,2026-09-04,Language Basics Lab,戻り値はどう返る？ VBA FunctionとPowerShell Pipelineを比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/281-language-return
+282,2026-09-04,Language Basics Lab,値渡しと参照渡しで元の値が変わるか試す,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/282-language-byval-byref
+283,2026-09-04,Language Basics Lab,ローカル変数とグローバル変数のScopeを比べる,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/283-language-scope
+284,2026-09-04,Language Basics Lab,Null・Empty・Nothing・$nullの違いを体験する,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/284-language-null
+285,2026-09-04,Language Basics Lab,On Errorとtry/catchで同じエラーを処理する,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/285-language-errors
+286,2026-09-04,Language Basics Lab,ClassとObjectをVBAとPowerShellで最小実装する,VBA / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/286-language-classes
+287,2026-09-04,Built-in Tools & Scripting Map,cmd.exeとBatchは今どんな場面で使う？,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/287-cmd-batch
+288,2026-09-04,Built-in Tools & Scripting Map,Windows PowerShell 5.1は何ができる？,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/288-windows-powershell-51
+289,2026-09-04,Built-in Tools & Scripting Map,PowerShell 7はWindows PowerShell 5.1と何が違う？,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/289-windows-powershell-51
+290,2026-09-04,Built-in Tools & Scripting Map,Windows Script HostとVBScriptの現在位置を知る,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/290-wsh-vbscript
+291,2026-09-04,Built-in Tools & Scripting Map,JScript／WSHで簡単なスクリプトを動かして歴史を知る,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/291-wsh-jscript
+292,2026-09-04,Built-in Tools & Scripting Map,Office VBAは何が得意で何が苦手？,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/292-office-vba-role
+293,2026-09-04,Built-in Tools & Scripting Map,Windows標準のcurl.exeでHTTPを確認する,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/293-builtin-curl
+294,2026-09-04,Built-in Tools & Scripting Map,tar.exeでZIP／tarアーカイブを扱ってみる,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/294-builtin-tar
+295,2026-09-04,Built-in Tools & Scripting Map,robocopyで大量ファイルコピーのログを読む,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/295-builtin-robocopy
+296,2026-09-04,Built-in Tools & Scripting Map,certutilで証明書・Hash関連の基本情報を見る,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,はじめて,15分,samples/296-builtin-certutil
+297,2026-09-04,Built-in Tools & Scripting Map,schtasksでTask Schedulerの登録内容を読む,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/297-builtin-schtasks
+298,2026-09-04,Built-in Tools & Scripting Map,netshでネットワーク設定を読み取る,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/298-builtin-netsh
+299,2026-09-04,Built-in Tools & Scripting Map,wevtutilでEvent Logをコマンドから読む,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/299-builtin-wevtutil
+300,2026-09-04,Built-in Tools & Scripting Map,tasklist・taskkillとPowerShell Process操作を比べる,Windows標準ツール / Office / PowerShell,コピペ / 試して理解 / トレース,深掘り,15分,samples/300-builtin-tasklist

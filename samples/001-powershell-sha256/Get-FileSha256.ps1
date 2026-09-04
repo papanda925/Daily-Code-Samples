@@ -2,71 +2,74 @@
 
 <#
 .SYNOPSIS
-    指定したファイルのSHA-256ハッシュを表示します。
+    ファイルの「指紋（SHA-256）」を確認します。
 
 .DESCRIPTION
-    PowerShell標準の Get-FileHash を使って、
-    指定されたファイルのSHA-256ハッシュ値を計算します。
+    指定したファイルの内容からSHA-256という値を計算します。
 
-    初心者向けサンプルとして、
-    ・ファイルが存在するか
-    ・指定されたパスがフォルダではないか
-    も確認します。
+    難しく考えなくて大丈夫です。
+    同じ内容のファイルなら、基本的に同じ値になります。
 
-.EXAMPLE
-    .\Get-FileSha256.ps1 -Path "C:\Temp\sample.zip"
+    このスクリプトはファイルを読み取るだけです。
+    ファイルの内容を書き換えたり、削除したりはしません。
 
 .EXAMPLE
-    .\Get-FileSha256.ps1 -Path ".\sample.txt"
+    .\Get-FileSha256.ps1 -Path "C:\Temp\sample.txt"
 #>
 
 param(
-    # ハッシュ値を確認したいファイルのパス
+    # 確認したいファイルの場所を指定します。
+    # 例: C:\Temp\sample.txt
     [Parameter(Mandatory = $true)]
     [string]$Path
 )
 
 # ------------------------------------------------------------
-# 1. 指定されたパスが存在するか確認する
+# 1. ファイルが本当にあるか確認
 # ------------------------------------------------------------
-# -LiteralPath を使うと、[ ] などの特殊文字を含むパスも
-# そのままの文字列として扱えます。
+# 入力ミスのまま処理を続けると分かりにくいので、
+# 最初に「その場所に何かあるか」を確認します。
 if (-not (Test-Path -LiteralPath $Path)) {
-    Write-Error "指定されたパスが見つかりません: $Path"
+    Write-Host ""
+    Write-Host "ファイルが見つかりません。" -ForegroundColor Yellow
+    Write-Host "指定した場所: $Path"
+    Write-Host ""
+    Write-Host "ファイルの場所と名前をもう一度確認してください。"
     exit 1
 }
 
 # ------------------------------------------------------------
-# 2. 相対パスを絶対パスへ変換する
+# 2. Windowsが認識している正式なファイルの場所を取得
 # ------------------------------------------------------------
-# Resolve-Path で、実際のファイル位置を取得します。
 $resolvedPath = (Resolve-Path -LiteralPath $Path).Path
 
 # ------------------------------------------------------------
-# 3. フォルダではなく、ファイルが指定されているか確認する
+# 3. 間違ってフォルダを指定していないか確認
 # ------------------------------------------------------------
 $item = Get-Item -LiteralPath $resolvedPath
 
 if ($item.PSIsContainer) {
-    Write-Error "フォルダではなく、ファイルを指定してください: $resolvedPath"
+    Write-Host ""
+    Write-Host "フォルダではなく、確認したいファイルを指定してください。" -ForegroundColor Yellow
+    Write-Host "指定した場所: $resolvedPath"
     exit 1
 }
 
 # ------------------------------------------------------------
-# 4. SHA-256ハッシュを計算する
+# 4. ファイルの「指紋」を計算
 # ------------------------------------------------------------
-# Get-FileHash は PowerShell 標準コマンドです。
-# -Algorithm SHA256 で SHA-256 を指定します。
+# Get-FileHash はPowerShellに標準で用意されている機能です。
+# ファイルを書き換える処理ではありません。
 $hashResult = Get-FileHash -LiteralPath $resolvedPath -Algorithm SHA256
 
 # ------------------------------------------------------------
-# 5. 結果を見やすい形で表示する
+# 5. 結果を見やすく表示
 # ------------------------------------------------------------
-# PSCustomObject にすると、項目名付きで結果を扱えます。
-$result = [PSCustomObject]@{
-    File      = $resolvedPath
-    Algorithm = $hashResult.Algorithm
-    Hash      = $hashResult.Hash
-}
-
-$result | Format-List
+Write-Host ""
+Write-Host "=== ファイル確認結果 ==="
+Write-Host ""
+Write-Host "ファイル : $resolvedPath"
+Write-Host "方式     : $($hashResult.Algorithm)"
+Write-Host "指紋     : $($hashResult.Hash)"
+Write-Host ""
+Write-Host "別のファイルも確認し、「指紋」が同じか比べてみてください。"

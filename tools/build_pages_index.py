@@ -21,7 +21,7 @@ a{color:var(--accent)}.wrap{max-width:1100px;margin:auto;padding:28px 20px 60px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.card,.detail{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
 .card h2{font-size:1.15rem}.meta,.tags{display:flex;gap:6px;flex-wrap:wrap}.pill{font-size:.82rem;padding:3px 8px;border-radius:999px;background:#eef2f6}.summary,.count,footer{color:var(--muted)}
 .kv{display:grid;grid-template-columns:150px 1fr;gap:8px 14px}.kv dt{font-weight:700}.kv dd{margin:0}.button{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--line);margin:18px 8px 0 0}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-footer{margin-top:36px}@media(max-width:700px){.controls{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:4px 0 22px;border-bottom:1px solid var(--line);margin-bottom:34px}.brand{font-weight:800;color:var(--text);text-decoration:none}.nav{display:flex;gap:16px;flex-wrap:wrap}.nav a{font-size:.9rem;text-decoration:none}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}.button{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--line);margin:18px 8px 0 0}.hero-actions .button{margin:0}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.site-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--line)}footer{margin-top:36px}@media(max-width:700px){.topbar{align-items:flex-start;flex-direction:column}.controls{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
 """
 
 JS = """
@@ -83,12 +83,23 @@ def build_index(items):
         entries.append({"@type":"ListItem","position":i,"url":f"{BASE_URL}/sample/{x['id']}/","name":x["title"]})
     options="".join(f'<option value="{esc(c)}">{esc(c)}</option>' for c in cats)
     body=f"""
-<section class="hero"><p>Daily-Code-Samples</p>
+<header class="topbar">
+<a class="brand" href="https://papanda925.github.io/">papanda925</a>
+<nav class="nav" aria-label="関連サイト">
+<a href="https://papanda925.com/">Blog</a>
+<a href="https://github.com/papanda925">GitHub</a>
+</nav>
+</header>
+<section class="hero"><p>Daily Code Samples</p>
 <h1>仕事の「ちょっと困った」を検索</h1>
-<p>Windows、Excel、Word、PowerPoint、PowerShell、VBAなどの実用サンプルを、技術名ではなく「やりたいこと」から探せます。</p></section>
+<p>Windows、Excel、Word、PowerPoint、PowerShell、VBAなどの実用サンプルを、技術名ではなく「やりたいこと」から探せます。</p>
+<div class="hero-actions">
+<a class="button primary" href="https://papanda925.com/">papanda925.com の技術ブログを読む</a>
+<a class="button" href="https://papanda925.github.io/">papanda925 の公開プロジェクトを見る</a>
+</div></section>
 <section class="controls"><input id="q" type="search" placeholder="例：未処理、CSV、音が出ない、列幅…"><select id="cat"><option value="">すべての分類</option>{options}</select></section>
 <p id="count" class="count"></p><main class="grid">{''.join(cards)}</main>
-<footer><a href="https://github.com/papanda925/Daily-Code-Samples">GitHubリポジトリを見る</a></footer><script>{JS}</script>"""
+<footer class="site-footer"><span>Daily Code Samples by papanda925</span><span><a href="https://papanda925.com/">Blog</a> · <a href="https://papanda925.github.io/">Portfolio</a> · <a href="https://github.com/papanda925/Daily-Code-Samples">GitHub</a></span></footer><script>{JS}</script>"""
     structured={"@context":"https://schema.org","@type":"ItemList","name":"Daily Code Samples","itemListElement":entries}
     return shell("Daily Code Samples｜仕事の困りごとから探せるPC・Office実用サンプル",
                  "Windows、Excel、Word、PowerPoint、PowerShell、VBAなどの実用サンプルを、やりたいことから検索できます。",
@@ -107,11 +118,11 @@ def build_detail(x):
     kv="".join(f"<dt>{esc(k)}</dt><dd>{esc(v)}</dd>" for k,v in fields if v)
     tags="".join(f'<span class="pill">{esc(v)}</span>' for v in x.get("tags",[]))
     github=f"https://github.com/papanda925/Daily-Code-Samples/tree/main/samples/{x['_folder']}"
-    body=f"""<p><a href="../../">← サンプル一覧へ</a></p><article class="detail">
+    body=f"""<header class="topbar"><a class="brand" href="https://papanda925.github.io/">papanda925</a><nav class="nav" aria-label="関連サイト"><a href="https://papanda925.com/">Blog</a><a href="https://github.com/papanda925">GitHub</a></nav></header><p><a href="../../">← サンプル一覧へ</a></p><article class="detail">
 <div class="meta"><span class="pill">#{esc(x['id'])}</span></div><h1>{esc(x['title'])}</h1>
 <p class="summary">{esc(x.get('summary',''))}</p><dl class="kv">{kv}</dl><div class="tags">{tags}</div>
-<a class="button primary" href="{esc(github)}">GitHubで詳しい手順を見る</a><a class="button" href="../../">別のサンプルを検索</a>
-</article><footer>Daily Code Samples</footer>"""
+<a class="button primary" href="{esc(github)}">GitHubで詳しい手順を見る</a><a class="button" href="../../">別のサンプルを検索</a><a class="button" href="https://papanda925.com/">技術ブログを見る</a>
+</article><footer class="site-footer"><span>Daily Code Samples by papanda925</span><span><a href="https://papanda925.com/">Blog</a> · <a href="https://papanda925.github.io/">Portfolio</a></span></footer>"""
     structured={"@context":"https://schema.org","@type":"LearningResource","name":x["title"],
         "description":x.get("summary",""),"url":canonical,"learningResourceType":"Tutorial",
         "educationalLevel":x.get("level",""),"isAccessibleForFree":True}

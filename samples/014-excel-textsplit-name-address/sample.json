@@ -1,0 +1,34 @@
+{
+  "id": "014",
+  "title": "Excelで1つのセルの文字を列ごとに分けたい",
+  "summary": "TEXTSPLITを使って氏名や区切り付きデータを複数列へ分ける。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Excel・文字列"
+  ],
+  "apps": [
+    "Excel"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Excel",
+    "文字列",
+    "コピペ",
+    "試して理解",
+    [
+      "Excelで1つのセルの文字を列ごとに分けたい"
+    ]
+  ]
+}

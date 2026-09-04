@@ -1,0 +1,34 @@
+{
+  "id": "035",
+  "title": "Teamsで前に見たメッセージをすぐ探したい",
+  "summary": "Teamsの検索とフィルターを使い、送信者・期間・キーワードで絞り込む。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Teams・検索"
+  ],
+  "apps": [
+    "Teams"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Teams",
+    "検索",
+    "GUI",
+    "試して理解",
+    [
+      "Teamsで前に見たメッセージをすぐ探したい"
+    ]
+  ]
+}

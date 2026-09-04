@@ -1,0 +1,34 @@
+{
+  "id": "027",
+  "title": "Wordの長い表で見出し行を各ページに表示したい",
+  "summary": "表の先頭行をページごとに繰り返して、長い表を読みやすくする。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Word・表"
+  ],
+  "apps": [
+    "Word"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Word",
+    "表",
+    "GUI",
+    "試して理解",
+    [
+      "Wordの長い表で見出し行を各ページに表示したい"
+    ]
+  ]
+}

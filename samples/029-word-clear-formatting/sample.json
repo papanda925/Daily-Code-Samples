@@ -1,0 +1,34 @@
+{
+  "id": "029",
+  "title": "Wordでバラバラになった書式をいったん揃えたい",
+  "summary": "貼り付けで崩れた文字書式や段落書式をクリアして整え直す。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Word・書式"
+  ],
+  "apps": [
+    "Word"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Word",
+    "書式",
+    "GUI",
+    "試して理解",
+    [
+      "Wordでバラバラになった書式をいったん揃えたい"
+    ]
+  ]
+}

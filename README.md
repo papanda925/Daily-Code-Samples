@@ -19,7 +19,7 @@ Windows、Excel、Word、PowerPoint、PowerShell、VBA、Power Query などを�
 
 ### 今あるサンプル
 
-**11本公開中** — Windows / Excel / Word / PowerPoint / PowerShell / VBA / Power Query
+**41本公開中** — Windows / Excel / Word / PowerPoint / PowerShell / VBA / Power Query
 
 **[検索ページを開く →](https://papanda925.github.io/Daily-Code-Samples/)**
 
@@ -81,6 +81,46 @@ Windows、Excel、Word、PowerPoint、PowerShell、VBA、Power Query などを�
 
 ---
 
+## 🆕 追加したサンプル #012〜#041
+
+| No. | 分類 | やりたいこと | 難しさ |
+|---:|---|---|:---:|
+| [012](./samples/012-excel-highlight-duplicates/) | Excel・確認 | Excelで重複している値を色で見つけたい | 🟢 |
+| [013](./samples/013-excel-business-day-deadline/) | Excel・日付 | Excelで土日・祝日を除いた締切日を出したい | 🟢 |
+| [014](./samples/014-excel-textsplit-name-address/) | Excel・文字列 | Excelで1つのセルの文字を列ごとに分けたい | 🟢 |
+| [015](./samples/015-excel-clean-spaces/) | Excel・文字列 | Excelで余計な空白や改行をまとめて消したい | 🟢 |
+| [016](./samples/016-excel-combine-sheets-powerquery/) | Excel・自動化 | 複数のExcelシートを1つの一覧にまとめたい | 🟡 |
+| [017](./samples/017-excel-protect-formulas/) | Excel・安全確認 | Excelで数式セルだけ誤って消さないようにしたい | 🟢 |
+| [018](./samples/018-excel-convert-text-date/) | Excel・日付 | Excelで文字列の日付を本当の日付に直したい | 🟢 |
+| [019](./samples/019-excel-dropdown-validation/) | Excel・入力 | Excelで入力候補をプルダウンから選びたい | 🟢 |
+| [020](./samples/020-excel-countifs-status/) | Excel・集計 | Excelで条件に合う件数だけ数えたい | 🟢 |
+| [021](./samples/021-excel-overdue-conditional-format/) | Excel・確認 | Excelで期限切れの行だけ自動で目立たせたい | 🟡 |
+| [022](./samples/022-windows-current-wifi/) | PC・ネットワーク | 今どのWi-Fiにつながっているか詳しく確認したい | 🟢 |
+| [023](./samples/023-windows-copy-file-path/) | ファイル・フォルダ | ファイルの場所を正確にコピーして相手へ伝えたい | 🟢 |
+| [024](./samples/024-powershell-bulk-rename-prefix/) | ファイル・自動化 | たくさんのファイル名の先頭に同じ文字を付けたい | 🟡 |
+| [025](./samples/025-powershell-disk-free-space/) | PC・状態確認 | PCの空き容量を数字で確認したい | 🟢 |
+| [026](./samples/026-powershell-find-large-files/) | ファイル・状態確認 | 容量の大きいファイルを探したい | 🟡 |
+| [027](./samples/027-word-repeat-table-header/) | Word・表 | Wordの長い表で見出し行を各ページに表示したい | 🟢 |
+| [028](./samples/028-word-compare-documents/) | Word・確認 | 2つのWord文書の違いを確認したい | 🟢 |
+| [029](./samples/029-word-clear-formatting/) | Word・書式 | Wordでバラバラになった書式をいったん揃えたい | 🟢 |
+| [030](./samples/030-powerpoint-crop-same-size/) | PowerPoint・画像 | PowerPointの複数画像を同じ大きさに揃えたい | 🟢 |
+| [031](./samples/031-powerpoint-compress-pictures/) | PowerPoint・ファイル | PowerPointのファイルサイズを小さくしたい | 🟢 |
+| [032](./samples/032-outlook-search-attachments/) | Outlook・検索 | Outlookで添付ファイル付きメールだけ探したい | 🟢 |
+| [033](./samples/033-outlook-schedule-send/) | Outlook・メール | Outlookでメールを指定した時刻に送信したい | 🟢 |
+| [034](./samples/034-outlook-reuse-reply-text/) | Outlook・メール | Outlookでよく使う返信文をすぐ呼び出したい | 🟢 |
+| [035](./samples/035-teams-search-past-messages/) | Teams・検索 | Teamsで前に見たメッセージをすぐ探したい | 🟢 |
+| [036](./samples/036-onedrive-version-history/) | OneDrive・安全確認 | OneDriveで上書き前のファイルに戻したい | 🟢 |
+| [037](./samples/037-sharepoint-check-sharing/) | SharePoint・安全確認 | SharePointのファイルを誰と共有しているか確認したい | 🟢 |
+| [038](./samples/038-powershell-ping-list-csv/) | ネットワーク・自動化 | 複数のPCやサーバーへ順番にPingして結果をCSVにしたい | 🟡 |
+| [039](./samples/039-powershell-recent-files/) | ファイル・状態確認 | 最近更新されたファイルだけ一覧で確認したい | 🟡 |
+| [040](./samples/040-excel-vba-export-sheet-pdf/) | Excel・自動化 | Excelの今見ているシートをPDFで保存したい | 🟡 |
+| [041](./samples/041-power-automate-save-attachments/) | Power Automate・自動化 | メール添付ファイルをOneDriveへ自動保存したい | 🟡 |
+
+**検索ページでは、これら41本をキーワード・分類から横断検索できます。**
+
+[🔎 Daily Code Samples を検索する →](https://papanda925.github.io/Daily-Code-Samples/)
+
+---
 # 探し方
 
 サンプルは、**技術名ではなく利用者の目的から探せる**ように分類します。

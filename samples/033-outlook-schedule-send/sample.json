@@ -1,0 +1,34 @@
+{
+  "id": "033",
+  "title": "Outlookでメールを指定した時刻に送信したい",
+  "summary": "予約送信・配信タイミングを使い、作成したメールを後で送る。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Outlook・メール"
+  ],
+  "apps": [
+    "Outlook"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Outlook",
+    "メール",
+    "GUI",
+    "試して理解",
+    [
+      "Outlookでメールを指定した時刻に送信したい"
+    ]
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "024",
+  "title": "たくさんのファイル名の先頭に同じ文字を付けたい",
+  "summary": "PowerShellのWhatIfで変更予定を確認してから一括リネームする。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "ファイル・自動化"
+  ],
+  "apps": [
+    "Windows",
+    "PowerShell"
+  ],
+  "methods": [
+    "コピペ",
+    "自動化",
+    "試して理解"
+  ],
+  "level": "ちょっと応用",
+  "level_mark": "🟡",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Windows",
+    "PowerShell",
+    "ファイル",
+    "自動化",
+    "コピペ",
+    "試して理解",
+    [
+      "たくさんのファイル名の先頭に同じ文字を付けたい"
+    ]
+  ]
+}

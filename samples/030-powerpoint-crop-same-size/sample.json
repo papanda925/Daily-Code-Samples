@@ -1,0 +1,34 @@
+{
+  "id": "030",
+  "title": "PowerPointの複数画像を同じ大きさに揃えたい",
+  "summary": "トリミングとサイズ指定を組み合わせ、写真を同じ見た目で並べる。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "PowerPoint・画像"
+  ],
+  "apps": [
+    "PowerPoint"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "PowerPoint",
+    "画像",
+    "GUI",
+    "試して理解",
+    [
+      "PowerPointの複数画像を同じ大きさに揃えたい"
+    ]
+  ]
+}

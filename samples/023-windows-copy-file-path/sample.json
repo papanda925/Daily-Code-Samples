@@ -1,0 +1,35 @@
+{
+  "id": "023",
+  "title": "ファイルの場所を正確にコピーして相手へ伝えたい",
+  "summary": "エクスプローラーの「パスのコピー」でファイルの場所を正確に取得する。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "ファイル・フォルダ"
+  ],
+  "apps": [
+    "Windows"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 5,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Windows",
+    "ファイル",
+    "フォルダ",
+    "GUI",
+    "試して理解",
+    [
+      "ファイルの場所を正確にコピーして相手へ伝えたい"
+    ]
+  ]
+}

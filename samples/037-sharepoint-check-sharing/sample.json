@@ -1,0 +1,36 @@
+{
+  "id": "037",
+  "title": "SharePointのファイルを誰と共有しているか確認したい",
+  "summary": "アクセスの管理から共有相手・リンクの範囲を確認する。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "SharePoint・安全確認"
+  ],
+  "apps": [
+    "SharePoint",
+    "Microsoft 365"
+  ],
+  "methods": [
+    "GUI",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "SharePoint",
+    "Microsoft 365",
+    "安全確認",
+    "GUI",
+    "試して理解",
+    [
+      "SharePointのファイルを誰と共有しているか確認したい"
+    ]
+  ]
+}

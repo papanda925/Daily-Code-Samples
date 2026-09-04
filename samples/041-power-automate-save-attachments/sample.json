@@ -1,0 +1,39 @@
+{
+  "id": "041",
+  "title": "メール添付ファイルをOneDriveへ自動保存したい",
+  "summary": "Power Automateで受信メールの添付ファイルを決めたフォルダーへ保存する流れを学ぶ。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Power Automate・自動化"
+  ],
+  "apps": [
+    "Power Automate",
+    "Outlook",
+    "OneDrive"
+  ],
+  "methods": [
+    "GUI",
+    "自動化",
+    "試して理解"
+  ],
+  "level": "ちょっと応用",
+  "level_mark": "🟡",
+  "estimated_minutes": 25,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Power Automate",
+    "Outlook",
+    "OneDrive",
+    "自動化",
+    "GUI",
+    "試して理解",
+    [
+      "メール添付ファイルをOneDriveへ自動保存したい"
+    ]
+  ]
+}

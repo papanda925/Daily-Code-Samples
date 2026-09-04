@@ -1,0 +1,36 @@
+{
+  "id": "032",
+  "title": "Outlookで添付ファイル付きメールだけ探したい",
+  "summary": "検索条件を使い、差出人や添付有無で目的のメールを絞り込む。",
+  "audience": [
+    "PC初心者",
+    "事務職",
+    "オフィスワーカー"
+  ],
+  "purposes": [
+    "Outlook・検索"
+  ],
+  "apps": [
+    "Outlook"
+  ],
+  "methods": [
+    "GUI",
+    "コピペ",
+    "試して理解"
+  ],
+  "level": "はじめて",
+  "level_mark": "🟢",
+  "estimated_minutes": 10,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "tags": [
+    "Outlook",
+    "検索",
+    "GUI",
+    "コピペ",
+    "試して理解",
+    [
+      "Outlookで添付ファイル付きメールだけ探したい"
+    ]
+  ]
+}

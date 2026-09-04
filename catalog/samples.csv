@@ -10,3 +10,33 @@ No,公開日,分類,やりたいこと,アプリ・機能,方法,難しさ,目�
 009,2026-09-04,PowerPoint・書式整理,PowerPointの図や画像をきれいに揃えたい,PowerPoint,GUI / 試して理解,はじめて,10分,samples/009-powerpoint-align-objects
 010,2026-09-04,ファイル・自動化,フォルダー内のファイル一覧をExcelで見たい,Windows / PowerShell / Excel,コピペ / 自動化 / 試して理解,ちょっと応用,15分,samples/010-powershell-file-list-csv
 011,2026-09-04,Excel・自動化,Excelの選択範囲だけ列幅を自動で見やすくしたい,Excel / VBA,GUI / コピペ / 自動化 / 試して理解,ちょっと応用,15分,samples/011-excel-vba-autofit-selection
+012,2026-09-04,Excel・確認,Excelで重複している値を色で見つけたい,Excel,GUI / コピペ / 試して理解,はじめて,10分,samples/012-excel-highlight-duplicates
+013,2026-09-04,Excel・日付,Excelで土日・祝日を除いた締切日を出したい,Excel,コピペ / 試して理解,はじめて,10分,samples/013-excel-business-day-deadline
+014,2026-09-04,Excel・文字列,Excelで1つのセルの文字を列ごとに分けたい,Excel,コピペ / 試して理解,はじめて,10分,samples/014-excel-textsplit-name-address
+015,2026-09-04,Excel・文字列,Excelで余計な空白や改行をまとめて消したい,Excel,コピペ / 試して理解,はじめて,10分,samples/015-excel-clean-spaces
+016,2026-09-04,Excel・自動化,複数のExcelシートを1つの一覧にまとめたい,Excel / Power Query,GUI / 自動化 / 試して理解,ちょっと応用,20分,samples/016-excel-combine-sheets-powerquery
+017,2026-09-04,Excel・安全確認,Excelで数式セルだけ誤って消さないようにしたい,Excel,GUI / 試して理解,はじめて,15分,samples/017-excel-protect-formulas
+018,2026-09-04,Excel・日付,Excelで文字列の日付を本当の日付に直したい,Excel,GUI / コピペ / 試して理解,はじめて,10分,samples/018-excel-convert-text-date
+019,2026-09-04,Excel・入力,Excelで入力候補をプルダウンから選びたい,Excel,GUI / 試して理解,はじめて,10分,samples/019-excel-dropdown-validation
+020,2026-09-04,Excel・集計,Excelで条件に合う件数だけ数えたい,Excel,コピペ / 試して理解,はじめて,10分,samples/020-excel-countifs-status
+021,2026-09-04,Excel・確認,Excelで期限切れの行だけ自動で目立たせたい,Excel,GUI / コピペ / 試して理解,ちょっと応用,15分,samples/021-excel-overdue-conditional-format
+022,2026-09-04,PC・ネットワーク,今どのWi-Fiにつながっているか詳しく確認したい,Windows / PowerShell,GUI / コピペ / 試して理解,はじめて,10分,samples/022-windows-current-wifi
+023,2026-09-04,ファイル・フォルダ,ファイルの場所を正確にコピーして相手へ伝えたい,Windows,GUI / 試して理解,はじめて,5分,samples/023-windows-copy-file-path
+024,2026-09-04,ファイル・自動化,たくさんのファイル名の先頭に同じ文字を付けたい,Windows / PowerShell,コピペ / 自動化 / 試して理解,ちょっと応用,15分,samples/024-powershell-bulk-rename-prefix
+025,2026-09-04,PC・状態確認,PCの空き容量を数字で確認したい,Windows / PowerShell,コピペ / 試して理解,はじめて,10分,samples/025-powershell-disk-free-space
+026,2026-09-04,ファイル・状態確認,容量の大きいファイルを探したい,Windows / PowerShell,コピペ / 試して理解,ちょっと応用,15分,samples/026-powershell-find-large-files
+027,2026-09-04,Word・表,Wordの長い表で見出し行を各ページに表示したい,Word,GUI / 試して理解,はじめて,10分,samples/027-word-repeat-table-header
+028,2026-09-04,Word・確認,2つのWord文書の違いを確認したい,Word,GUI / 試して理解,はじめて,15分,samples/028-word-compare-documents
+029,2026-09-04,Word・書式,Wordでバラバラになった書式をいったん揃えたい,Word,GUI / 試して理解,はじめて,10分,samples/029-word-clear-formatting
+030,2026-09-04,PowerPoint・画像,PowerPointの複数画像を同じ大きさに揃えたい,PowerPoint,GUI / 試して理解,はじめて,15分,samples/030-powerpoint-crop-same-size
+031,2026-09-04,PowerPoint・ファイル,PowerPointのファイルサイズを小さくしたい,PowerPoint,GUI / 試して理解,はじめて,10分,samples/031-powerpoint-compress-pictures
+032,2026-09-04,Outlook・検索,Outlookで添付ファイル付きメールだけ探したい,Outlook,GUI / コピペ / 試して理解,はじめて,10分,samples/032-outlook-search-attachments
+033,2026-09-04,Outlook・メール,Outlookでメールを指定した時刻に送信したい,Outlook,GUI / 試して理解,はじめて,10分,samples/033-outlook-schedule-send
+034,2026-09-04,Outlook・メール,Outlookでよく使う返信文をすぐ呼び出したい,Outlook,GUI / 試して理解,はじめて,15分,samples/034-outlook-reuse-reply-text
+035,2026-09-04,Teams・検索,Teamsで前に見たメッセージをすぐ探したい,Teams,GUI / 試して理解,はじめて,10分,samples/035-teams-search-past-messages
+036,2026-09-04,OneDrive・安全確認,OneDriveで上書き前のファイルに戻したい,OneDrive / Microsoft 365,GUI / 試して理解,はじめて,10分,samples/036-onedrive-version-history
+037,2026-09-04,SharePoint・安全確認,SharePointのファイルを誰と共有しているか確認したい,SharePoint / Microsoft 365,GUI / 試して理解,はじめて,10分,samples/037-sharepoint-check-sharing
+038,2026-09-04,ネットワーク・自動化,複数のPCやサーバーへ順番にPingして結果をCSVにしたい,Windows / PowerShell / Excel,コピペ / 自動化 / 試して理解,ちょっと応用,20分,samples/038-powershell-ping-list-csv
+039,2026-09-04,ファイル・状態確認,最近更新されたファイルだけ一覧で確認したい,Windows / PowerShell,コピペ / 試して理解,ちょっと応用,15分,samples/039-powershell-recent-files
+040,2026-09-04,Excel・自動化,Excelの今見ているシートをPDFで保存したい,Excel / VBA,コピペ / 自動化 / 試して理解,ちょっと応用,20分,samples/040-excel-vba-export-sheet-pdf
+041,2026-09-04,Power Automate・自動化,メール添付ファイルをOneDriveへ自動保存したい,Power Automate / Outlook / OneDrive,GUI / 自動化 / 試して理解,ちょっと応用,25分,samples/041-power-automate-save-attachments

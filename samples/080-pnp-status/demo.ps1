@@ -1,0 +1,1 @@
+if(Get-Command Get-PnpDevice -EA 0){Get-PnpDevice|Group Status;Get-PnpDevice|? Status -ne 'OK'|Select -First 30 Status,Class,FriendlyName}else{Get-CimInstance Win32_PnPEntity|Select -First 30 Status,Name}

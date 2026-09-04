@@ -1,0 +1,1 @@
+Get-Process|Sort-Object WorkingSet64 -Descending|Select-Object -First 15 Name,Id,@{N='WorkingSetMB';E={[math]::Round($_.WorkingSet64/1MB,1)}},@{N='PrivateMB';E={[math]::Round($_.PrivateMemorySize64/1MB,1)}}

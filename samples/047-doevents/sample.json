@@ -1,0 +1,41 @@
+{
+  "id": "047",
+  "title": "VBAのDoEventsでWindows Messageが処理される様子を見る",
+  "summary": "短い実験で「VBAのDoEventsでWindows Messageが処理される様子を見る」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "OS Fundamentals Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "PC・Office利用者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "PowerShell",
+    "VBA",
+    "Win32",
+    ".NET"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のPC・自分のデータ・localhost・自分のネットワークを対象にした観察/実験",
+  "demo_file": "demo.bas",
+  "folder": "samples/047-doevents",
+  "tags": [
+    "OS Fundamentals Lab",
+    "PowerShell",
+    "VBA",
+    "Win32",
+    ".NET",
+    "trace",
+    "learning"
+  ]
+}

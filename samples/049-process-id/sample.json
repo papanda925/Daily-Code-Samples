@@ -1,0 +1,41 @@
+{
+  "id": "049",
+  "title": "Process ID（PID）は何のためにある？",
+  "summary": "短い実験で「Process ID（PID）は何のためにある」を体験し、操作前後の状態やログの差を確認する。",
+  "status": "sample",
+  "maturity": "experimental",
+  "track": "OS Fundamentals Lab",
+  "audience": [
+    "学生",
+    "初学者",
+    "PC・Office利用者",
+    "エンジニア学習者"
+  ],
+  "apps": [
+    "PowerShell",
+    "VBA",
+    "Win32",
+    ".NET"
+  ],
+  "methods": [
+    "コピペ",
+    "試して理解",
+    "トレース"
+  ],
+  "level": "深掘り",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "自分のPC・自分のデータ・localhost・自分のネットワークを対象にした観察/実験",
+  "demo_file": "demo.ps1",
+  "folder": "samples/049-process-id",
+  "tags": [
+    "OS Fundamentals Lab",
+    "PowerShell",
+    "VBA",
+    "Win32",
+    ".NET",
+    "trace",
+    "learning"
+  ]
+}

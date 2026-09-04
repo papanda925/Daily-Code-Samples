@@ -145,6 +145,11 @@ def normalize_list(value):
 def load_samples():
     items=[]
     for path in sorted((ROOT/"samples").glob("*/sample.json")):
+        # _template/sample.json は作成見本であり、公開サンプルではありません。
+        # 数字IDで始まるフォルダーだけをPagesへ載せます。
+        if not path.parent.name[:3].isdigit():
+            continue
+
         data=json.loads(path.read_text(encoding="utf-8-sig"))
 
         for key in ("purposes","apps","methods","tags","audience"):
@@ -164,7 +169,7 @@ def load_samples():
 def shell(title,description,canonical,body,structured=None):
     ld=""
     if structured is not None:
-        raw=json.dumps(structured,ensure_ascii=False).replace("</","<\/")
+        raw=json.dumps(structured,ensure_ascii=False).replace("</","<\\/")
         ld=f'<script type="application/ld+json">{raw}</script>'
     return f"""<!doctype html>
 <html lang="ja">

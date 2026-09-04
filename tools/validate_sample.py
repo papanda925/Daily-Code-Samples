@@ -82,8 +82,12 @@ def validate(path: Path, strict: bool) -> list[str]:
         p for p in path.iterdir()
         if p.is_file() and p.suffix.lower() in CODE_SUFFIXES
     ]
-    if not code_files:
-        problems.append(f"{path.name}: 実行・学習用コードファイルがありません")
+
+    # #001〜#300にはGUIだけで完結するTIPSもあります。
+    # 「GUI TIPSも教材として有効」という既存方針を壊さないため、
+    # コードファイル必須は#301以降のstrictルールだけにします。
+    if strict and not code_files:
+        problems.append(f"{path.name}: strict sampleには実行・学習用コードファイルが必要です")
 
     if not strict:
         return problems

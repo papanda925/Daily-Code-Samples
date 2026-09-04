@@ -1,2 +1,12 @@
 No,公開日,分類,やりたいこと,アプリ・機能,方法,難しさ,目安時間,フォルダ
 001,2026-09-04,ファイル・安全確認,2つのファイルが本当に同じ内容か確認したい,Windows / PowerShell,コピペ / 試して理解,はじめて,5〜10分,samples/001-powershell-sha256
+002,2026-09-04,PC・Windows,コピーした文字をあとから呼び出したい,Windows,GUI / 試して理解,はじめて,5分,samples/002-windows-clipboard-history
+003,2026-09-04,PC・トラブル確認,音が出ないときに出力先を確認したい,Windows,GUI / 試して理解,はじめて,5分,samples/003-windows-sound-output
+004,2026-09-04,PC・設定確認,文字が小さいときに画面を見やすくしたい,Windows,GUI / 試して理解,はじめて,5分,samples/004-windows-display-scale
+005,2026-09-04,Excel・抽出,未処理の行だけ別の場所に表示したい,Excel,コピペ / 試して理解,はじめて,10分,samples/005-excel-filter-pending
+006,2026-09-04,Excel・検索,コードから名前や部署を自動表示したい,Excel,コピペ / 試して理解,はじめて,10分,samples/006-excel-xlookup-master
+007,2026-09-04,Excel・自動化,同じ形式のCSVをまとめて1つの表にしたい,Excel / Power Query,GUI / コピペ / 自動化 / 試して理解,ちょっと応用,20分,samples/007-powerquery-combine-csv
+008,2026-09-04,Word・文書整理,長いWord文書で目的の場所へすぐ移動したい,Word,GUI / 試して理解,はじめて,10分,samples/008-word-navigation-pane
+009,2026-09-04,PowerPoint・書式整理,PowerPointの図や画像をきれいに揃えたい,PowerPoint,GUI / 試して理解,はじめて,10分,samples/009-powerpoint-align-objects
+010,2026-09-04,ファイル・自動化,フォルダー内のファイル一覧をExcelで見たい,Windows / PowerShell / Excel,コピペ / 自動化 / 試して理解,ちょっと応用,15分,samples/010-powershell-file-list-csv
+011,2026-09-04,Excel・自動化,Excelの選択範囲だけ列幅を自動で見やすくしたい,Excel / VBA,GUI / コピペ / 自動化 / 試して理解,ちょっと応用,15分,samples/011-excel-vba-autofit-selection

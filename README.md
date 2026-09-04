@@ -46,7 +46,7 @@ OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、
 
 ---
 
-## 🧪 これから増やす Engineering / OS / Security Lab
+## 🧪 Engineering / OS / Security Lab
 
 **#042〜#300（259件）も実サンプルとして `samples/` に展開済みです。** RoadmapはEngineering Labの索引として利用します。
 
@@ -63,6 +63,22 @@ OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、
 - 🧰 Built-in Tools — Batch / PowerShell / VBA / curl / robocopy / netsh / wevtutil
 
 [▶ Roadmap #042〜#300 を見る](./ROADMAP.md)
+
+### #301以降は1日1本ずつ追加
+
+300本を土台に、#301以降は **1日1本・品質ゲート付き**で増やす方針です。
+
+新規サンプルでは、コード量よりも次を重視します。
+
+- 「何をしているか」だけでなく **「なぜこの書き方なのか」** をコード内コメントで説明
+- READMEに実行前確認・コードの流れ・結果の見方を記載
+- テスト1 / テスト2を必須化
+- OS / Win32 / WinRT / .NET / COMなど、今回触った技術の層を表示
+- Security / Networkは自分のPC・自分のデータ・localhost等の安全な実験に限定
+- 自動検証に通ったものだけGitHubへ追加
+
+詳しい品質ルールは [SAMPLE_STYLE_GUIDE.md](./SAMPLE_STYLE_GUIDE.md)、
+自動処理は [automation/ubuntu/DAILY_SAMPLE_GENERATOR.md](./automation/ubuntu/DAILY_SAMPLE_GENERATOR.md) にまとめています。
 
 ---
 

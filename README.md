@@ -21,6 +21,11 @@ Windows、Excel、Word、PowerPoint、PowerShell、VBA、Power Query などを�
 
 **41本公開中** — Windows / Excel / Word / PowerPoint / PowerShell / VBA / Power Query
 
+**さらに #042〜#300 の259件を実装候補として整理済みです。**  
+OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、非同期処理、固定長ファイル、Hex、VBA設計、PowerShell/.NET、文法比較などを、短い実験として順次追加します。
+
+**[🗺 #042〜#300 のRoadmapを見る](./ROADMAP.md)**
+
 **[検索ページを開く →](https://papanda925.github.io/Daily-Code-Samples/)**
 
 ---
@@ -33,7 +38,29 @@ Windows、Excel、Word、PowerPoint、PowerShell、VBA、Power Query などを�
 - Windowsの便利な機能をもっと知りたい方
 - VBA、PowerShell、Power Query、Power Automateを少しだけ試してみたい方
 
-**エンジニア向けのコード集ではありません。**
+**初心者の「まず使える」を入口にしつつ、興味があればOS・ネットワーク・セキュリティ・アーキテクチャの深いところまで進める構成です。**
+
+上級側では「目で見る → 操作する → 差分をトレースする」を重視し、学生や初学者でもWindowsやOfficeの内部概念を体験できる教材を目指します。
+
+---
+
+## 🧪 これから増やす Engineering / OS / Security Lab
+
+公開済み41本とは別に、**#042〜#300（259件）**の実装候補をRoadmap化しています。
+
+- 🧩 OS Fundamentals — Process / Thread / HWND / Event Loop / Mutex / Memory / IPC
+- 🖥 Windows & Device Trace — USB / Bluetooth / Display / Battery / CPU / Device
+- 📡 Network & Wireless — Wi-Fi / BSSID / Channel / DNS / TCP / UDP / Routing
+- 🔐 Visual Security — Hash / AES / HMAC / Signature / TLS / ACL / DPAPI
+- 🧠 Architecture & Algorithm — Blockchain / Merkle Tree / Queue / CQRS / Circuit Breaker
+- 🟣 VBA Deep Dive — Async / Event / Interface / DI / OOP / Win32
+- 🪟 PowerShell / WinRT / .NET — Speech / OCR / Notification / Runspace / WinUI
+- 📜 Legacy Data — 固定長 / 全銀風フォーマット / Shift_JIS / CSV / XML
+- 🔢 Binary / Hex — Hex Dump / BOM / Endian / File Signature / CRC
+- 📚 Language Basics — 型 / 引数 / 配列 / Scope / Error / Class
+- 🧰 Built-in Tools — Batch / PowerShell / VBA / curl / robocopy / netsh / wevtutil
+
+[▶ Roadmap #042〜#300 を見る](./ROADMAP.md)
 
 ---
 

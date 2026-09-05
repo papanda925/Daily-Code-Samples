@@ -68,10 +68,10 @@ OSの基礎、Win32 / WinRT、USB・Bluetooth・Wi-Fi、Security、Blockchain、
 
 300本を土台に、#301以降は **1日1本・品質ゲート付き**で増やす方針です。
 
-**現在は #301〜#420 の120件を追加候補（planned）として登録済みです。**  
+**現在は #301〜#421 の121件を追加候補（planned）として登録済みです。**  
 VBAコピペ部品、VBA Windows APIのConst / Enum / 型、PowerShell、Linuxコマンド分解、Mermaid図解、Excel、Codex、Ubuntu運用、WordPress運用まで含め、公開済み300本とは分けて順次実装します。
 
-[▶ Snippet & Copy/Paste Roadmap #301〜#420 を見る](./SNIPPET_ROADMAP.md)
+[▶ Snippet & Copy/Paste Roadmap #301〜#421 を見る](./SNIPPET_ROADMAP.md)
 
 新規サンプルでは、コード量よりも次を重視します。
 

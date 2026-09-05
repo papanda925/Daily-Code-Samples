@@ -354,4 +354,4 @@ Get-FileHash -Path "C:\Users\User\Documents\会議 資料.xlsx"
 
 ## 関連記事
 
-papanda925.com に解説記事を追加予定です。
+[ブログの解説記事](https://papanda925.com/?p=15107)

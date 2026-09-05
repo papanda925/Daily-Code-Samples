@@ -1,0 +1,19 @@
+{
+  "id": "301",
+  "title": "ファイルの種類が分からないとき、拡張子を表示して見分けたい",
+  "summary": "Windowsでファイル名の末尾に .xlsx や .pdf などの拡張子を表示し、GUIでの切替とPowerShellでの設定確認・切替を比べる。",
+  "status": "published",
+  "maturity": "experimental",
+  "article_ready": false,
+  "track": "Daily Practical",
+  "audience": ["PC初心者", "事務職", "オフィスワーカー"],
+  "purposes": ["ファイル・フォルダ", "設定確認", "トラブル防止"],
+  "apps": ["Windows", "エクスプローラー", "PowerShell"],
+  "methods": ["GUI", "コピペ", "自動化", "試して理解"],
+  "level": "はじめて",
+  "estimated_minutes": 10,
+  "changes_pc_settings": true,
+  "requires_admin": false,
+  "safety_scope": "自分のWindowsユーザーのエクスプローラー表示設定だけを変更する。ファイル内容やファイル名そのものは変更しない。",
+  "tags": ["Windows", "エクスプローラー", "拡張子", "ファイル", "PowerShell", "初心者"]
+}

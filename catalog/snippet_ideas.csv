@@ -119,3 +119,4 @@ No,Status,Track,Title,PrimaryTech,Experience,Level
 "418","planned","VBA Windows API Constants & Types Lab","PROCESS_* アクセス権定数を必要最小限で指定する考え方を学ぶ","VBA / Win32 API / Process","Windows APIをVBAから安全に使うための「PROCESS_* アクセス権定数を必要最小限で指定する考え方を学ぶ」を、コピペ可能な定義・型の意味・実行例・64bit注意点付きで学ぶ。","入門〜中級"
 "419","planned","VBA Windows API Constants & Types Lab","APIのフラグを Or で組み合わせ、And で判定するVBAのビット演算入門","VBA / Bit Flags / Win32 API","Windows APIをVBAから安全に使うための「APIのフラグを Or で組み合わせ、And で判定するVBAのビット演算入門」を、コピペ可能な定義・型の意味・実行例・64bit注意点付きで学ぶ。","入門〜中級"
 "420","planned","VBA Windows API Constants & Types Lab","コピペ用「VBA Windows API定義モジュール」最小テンプレートを作る","VBA / Win32 API / Template","Windows APIをVBAから安全に使うための「コピペ用「VBA Windows API定義モジュール」最小テンプレートを作る」を、コピペ可能な定義・型の意味・実行例・64bit注意点付きで学ぶ。","入門〜中級"
+"421","planned","AI Sharing Sanitization Lab","設定ファイルをAIへ渡す前に秘密情報を **** へ自動マスクするBashスクリプト","Bash / Security / AI","実環境の設定ファイルをAIへ共有する前に、秘密情報を自動マスクし、元ファイルを変更せず、人間の最終確認を必須にする安全な共有手順を学ぶ。","入門"

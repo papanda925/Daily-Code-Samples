@@ -1,4 +1,4 @@
-# Daily Code Samples — Snippet & Copy/Paste Roadmap #301〜#360
+# Daily Code Samples — Snippet & Copy/Paste Roadmap #301〜#400
 
 この文書は、**「そのままコピペして使える」「短時間で意味まで分かる」**ことを重視した Daily Code の追加候補です。
 
@@ -107,6 +107,71 @@
 
 ---
 
+## 🟣 VBA Practical Utility Lab
+
+- **#361** VBAでRange.Findを安全に使って文字列を検索する
+- **#362** VBAでExcelテーブル（ListObject）を名前で取得して扱う
+- **#363** VBAでRangeを2次元配列へ一括取得して高速化する
+- **#364** VBAでScreenUpdating・EnableEvents・Calculationを一時停止して必ず元へ戻す
+- **#365** VBAのFileDialogでファイル選択画面を表示する
+- **#366** VBAのFileDialogでフォルダー選択画面を表示する
+- **#367** VBA + ADODB.StreamでUTF-8テキストを読み込む
+- **#368** VBA + ADODB.StreamでUTF-8テキストを書き出す
+
+---
+
+## 🧭 Mermaid Network Architecture Lab
+
+- **#369** MermaidでVLAN分割された社内ネットワーク図を描く
+- **#370** MermaidでNAT / ルーター / Internetの関係を描く
+- **#371** MermaidでReverse Proxy→Webサーバーの構成を描く
+- **#372** MermaidでLoad Balancer配下の複数Webサーバーを描く
+- **#373** MermaidでFirewall / DMZ / 社内LANの基本構成を描く
+- **#374** MermaidでIPv4とIPv6の通信経路を比較する
+- **#375** MermaidでリモートアクセスVPNの接続経路を描く
+- **#376** Mermaidでオンプレミス→Internet→SaaSの通信経路を描く
+
+---
+
+## 🐧 Ubuntu Operations Copy & Paste Lab
+
+- **#377** df -h と du -sh でディスク使用量を確認する
+- **#378** ss -lntup で待受ポートとプロセスを確認する
+- **#379** ip addr / ip route でIPアドレスと経路を確認する
+- **#380** digでDNS名前解決の結果を確認する
+- **#381** nginx -t で設定変更前後の構文チェックをする
+- **#382** systemctl list-units --failed で失敗サービスを確認する
+- **#383** logrotateの設定とdry-runでログローテーションを確認する
+- **#384** certbot certificates / renew --dry-run でTLS証明書更新を確認する
+
+---
+
+## 🤖 Codex / AI Development Workflow Lab
+
+- **#385** ~/.codex/config.toml の場所を確認してバックアップする
+- **#386** CodexのModelとEffortを作業内容に応じて使い分ける
+- **#387** AGENTS.mdの親ディレクトリ・子ディレクトリの適用範囲を理解する
+- **#388** Codexへ「変更せずに調査だけ」を依頼するプロンプトテンプレート
+- **#389** Codexへ障害原因調査を依頼するプロンプトテンプレート
+- **#390** Codexへコードレビューを依頼するプロンプトテンプレート
+- **#391** CodexへPRのmerge-readiness確認を依頼するプロンプトテンプレート
+- **#392** Codex CLIの更新前後でversion・設定・動作を確認する
+
+---
+
+## 🌐 WordPress Operations Copy & Paste Lab
+
+- **#393** WP-CLIでWordPress本体・PHP・WP-CLIのバージョンを確認する
+- **#394** WP-CLIで有効テーマとプラグイン一覧を確認する
+- **#395** WP-CLIでCronイベント一覧と次回実行時刻を確認する
+- **#396** WP-CLIでデータベースを変更前にバックアップする
+- **#397** wp core verify-checksums でWordPressコア改変の有無を確認する
+- **#398** wp-content配下のファイル権限をfindで点検する
+- **#399** curlでWordPress REST APIとHTTPステータスを確認する
+- **#400** WordPress障害時に使う読み取り中心の一次切り分けコマンド集
+
+---
+
 ## 推奨記事テンプレート
 
 ```markdown
@@ -135,4 +200,4 @@
 
 ## ステータス
 
-#301〜#360 は **planned**。既存 #001〜#300 の実体化済みサンプルとは区別し、今後 Daily Code の生成対象として順次実装する。
+#301〜#400 は **planned**。既存 #001〜#300 の実体化済みサンプルとは区別し、今後 Daily Code の生成対象として順次実装する。

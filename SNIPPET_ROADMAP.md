@@ -1,4 +1,4 @@
-# Daily Code Samples — Snippet & Copy/Paste Roadmap #301〜#420
+# Daily Code Samples — Snippet & Copy/Paste Roadmap #301〜#421
 
 この文書は、**「そのままコピペして使える」「短時間で意味まで分かる」**ことを重視した Daily Code の追加候補です。
 
@@ -200,6 +200,19 @@ Windows API をVBAから呼び出すときに頻出する **Declare / 型 / Cons
 
 ---
 
+## 🔐 AI Sharing Sanitization Lab
+
+- **#421** 設定ファイルをAIへ渡す前に秘密情報を `****` へ自動マスクするBashスクリプト
+
+  - 元ファイルは変更しない
+  - `password` / `passwd` / `secret` / `token` / `api_key` / `client_secret` / `access_token` / `refresh_token` / `authorization` などをマスク対象にする
+  - 実ドメイン・実ユーザー名・メールアドレス・SSID・MACアドレス・内部IP・ホスト名・秘密鍵・証明書関連情報なども、共有前に一般化・除去する
+  - 自動マスク後に**必ず人間が最終確認**してからAIへ共有する
+  - 正規表現だけでは複数行の秘密情報やJSON/YAML構造を取りこぼす可能性があることも説明する
+  - 「自動サニタイズ = 100%安全」ではないことを明記する
+
+---
+
 ## 推奨記事テンプレート
 
 ```markdown
@@ -228,4 +241,4 @@ Windows API をVBAから呼び出すときに頻出する **Declare / 型 / Cons
 
 ## ステータス
 
-#301〜#420 は **planned**。既存 #001〜#300 の実体化済みサンプルとは区別し、今後 Daily Code の生成対象として順次実装する。
+#301〜#421 は **planned**。既存 #001〜#300 の実体化済みサンプルとは区別し、今後 Daily Code の生成対象として順次実装する。

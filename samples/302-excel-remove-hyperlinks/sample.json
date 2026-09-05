@@ -1,0 +1,19 @@
+{
+  "id": "302",
+  "title": "Excelで勝手についたハイパーリンクをまとめて外したい",
+  "summary": "ExcelでURLやメールアドレスに付いたハイパーリンクを、GUIで1件ずつ解除する方法と、選択範囲だけVBAでまとめて解除する方法を比べる。",
+  "status": "published",
+  "maturity": "experimental",
+  "article_ready": false,
+  "track": "Daily Practical",
+  "audience": ["PC初心者", "事務職", "オフィスワーカー"],
+  "purposes": ["Excel", "リンク整理", "繰り返し作業の自動化"],
+  "apps": ["Excel", "VBA"],
+  "methods": ["GUI", "コピペ", "自動化", "試して理解"],
+  "level": "ちょっと応用",
+  "estimated_minutes": 15,
+  "changes_pc_settings": false,
+  "requires_admin": false,
+  "safety_scope": "現在開いているExcelブックで利用者が選択したセル範囲のハイパーリンク情報だけを削除する。Windows設定や他ファイルは変更しない。",
+  "tags": ["Excel", "VBA", "ハイパーリンク", "リンク", "一括解除", "事務効率化", "初心者"]
+}

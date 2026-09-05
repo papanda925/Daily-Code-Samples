@@ -1,4 +1,4 @@
-# Daily Code Samples — Snippet & Copy/Paste Roadmap #301〜#400
+# Daily Code Samples — Snippet & Copy/Paste Roadmap #301〜#420
 
 この文書は、**「そのままコピペして使える」「短時間で意味まで分かる」**ことを重視した Daily Code の追加候補です。
 
@@ -172,6 +172,34 @@
 
 ---
 
+## 🪟 VBA Windows API Constants & Types Lab
+
+Windows API をVBAから呼び出すときに頻出する **Declare / 型 / Const / Enum / ビットフラグ** を、
+「そのまま貼れる定義」と「なぜこの型・値なのか」の両方から学ぶ。
+
+- **#401** VBAの `Const` と `Enum` はどう使い分ける？ Windows API定数で比較する
+- **#402** `&H` から始まる16進数定数をVBAで読む（`&H10`, `&H80000000` など）
+- **#403** `Declare PtrSafe` / `LongPtr` / `LongLong` の役割を32bit・64bitで整理する
+- **#404** Windows APIの引数を全部 `LongPtr` にしてはいけない理由を型対応表で学ぶ
+- **#405** `HWND` とは何か？ VBAではウィンドウハンドルをどう宣言する？
+- **#406** `WM_*` 定数入門：`WM_CLOSE` / `WM_COMMAND` / `WM_USER` をEnumで整理する
+- **#407** `SW_*` 定数入門：`SW_HIDE` / `SW_SHOW` / `SW_RESTORE` をShowWindowで試す
+- **#408** `SWP_*` 定数入門：SetWindowPosのフラグをConstで整理する
+- **#409** `MB_*` 定数入門：MessageBoxのボタン・アイコンを `Or` で組み合わせる
+- **#410** `GW_*` 定数入門：GetWindowで前後・親子ウィンドウをたどる
+- **#411** `SM_*` 定数入門：GetSystemMetricsで画面サイズやシステム値を読む
+- **#412** `VK_*` 仮想キーコード入門：Enter / Esc / Shift / F1などをEnumで整理する
+- **#413** `WS_*` Window Style定数を読み解く：ビットフラグとしてのウィンドウ属性
+- **#414** `WS_EX_*` Extended Window Style定数を読み解く
+- **#415** `GWL_*` / `GWLP_*` の違いと32bit・64bit対応を理解する
+- **#416** `FILE_ATTRIBUTE_*` 定数でWindowsのファイル属性を読み解く
+- **#417** `WAIT_OBJECT_0` / `WAIT_TIMEOUT` / `INFINITE` でWait系APIの戻り値と待機時間を読む
+- **#418** `PROCESS_*` アクセス権定数を「必要最小限」で指定する考え方を学ぶ
+- **#419** APIのフラグを `Or` で組み合わせ、`And` で判定するVBAのビット演算入門
+- **#420** コピペ用「VBA Windows API定義モジュール」最小テンプレートを作る
+
+---
+
 ## 推奨記事テンプレート
 
 ```markdown
@@ -200,4 +228,4 @@
 
 ## ステータス
 
-#301〜#400 は **planned**。既存 #001〜#300 の実体化済みサンプルとは区別し、今後 Daily Code の生成対象として順次実装する。
+#301〜#420 は **planned**。既存 #001〜#300 の実体化済みサンプルとは区別し、今後 Daily Code の生成対象として順次実装する。

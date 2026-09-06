@@ -4,7 +4,11 @@ Windows Runtimeの `Windows.System.Power.PowerManager` をPowerShellから読み
 
 ## 前提
 
-Windows 10/11。デスクトップPCなどバッテリーを持たない環境では値の意味が異なる場合があります。
+この最小サンプルは **Windows PowerShell 5.1 + Windows 10/11** を対象にします。
+
+Windows PowerShell 5.1では `ContentType = WindowsRuntime` を使ってWinRT型を直接解決できます。PowerShell 7系ではWinRTの相互運用方法や利用可能性が異なるため、このコードをそのまま共通サンプルとはしません。PowerShell 7で試す場合はWindows SDK for .NET等の利用方法を別途確認してください。
+
+デスクトップPCなどバッテリーを持たない環境では値の意味が異なる場合があります。
 
 ## 検証状態
 

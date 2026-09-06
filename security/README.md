@@ -6,4 +6,5 @@
 
 - [設定ファイルの秘密情報をマスクする](./mask-config-secrets/)
 - [AI生成コマンドを安全な場所で確認する](./ai-command-preflight/)
+- [Windows DPAPIで現在ユーザー向けに秘密文字列を保護する](./dpapi-user-secret/)
 - [SHA-256で最小のハッシュチェーンを作る](./blockchain-hash-chain/)

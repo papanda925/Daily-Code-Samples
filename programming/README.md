@@ -5,4 +5,5 @@
 ## サンプル
 
 - [UTF-8とShift_JISのバイト数を比較する](./encoding-byte-count/)
+- [UriBuilderとEscapeDataStringでURLを組み立てる](./url-builder-powershell/)
 - [フィルターバブルを単純化してシミュレーションする](./filter-bubble-simulation/)

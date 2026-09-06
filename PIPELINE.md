@@ -3,25 +3,17 @@
 ## 正本
 
 - ネタ: `papanda925/Blog-Ideas/ideas`
-- コード/Tips: `papanda925/Daily-Code-Samples/samples-v2`
+- コード/Tips: `papanda925/Daily-Code-Samples/samples`
 - 公開原稿: `papanda925/Blog-Ideas/publish`
 
-## 14:00処理
+## 流れ
 
-1. Blog-Ideasを取得
-2. `daily_code_required: true` を探す
-3. `daily_code_status` が `none` または `planned` の候補から1件選ぶ
-4. 既存サンプルとの重複を確認
-5. `samples-v2/` に実装
-6. テスト可能なら実行
-7. 実行結果を記録
-8. Blog-Ideas側へ sample path / status を戻す
+1. Blog-Ideas から記事候補を選ぶ
+2. コード/Tipsが必要か確認する
+3. 必要な場合だけ `samples/` に実装する
+4. 実行・検証する
+5. Blog-Ideas側へ sample path / status を戻す
+6. 記事本文には最小例だけ載せる
+7. 記事末尾からGitHubの完全版へ直接リンクする
 
-トピックは14:00スロットへ固定しません。
-
-## 禁止
-
-- ROADMAPを埋めるためだけにサンプルを作る
-- 似たサンプルを番号違いで量産する
-- 未実行なのにtested/verifiedへする
-- ブログ本文へ完全版コードを重複掲載する
+時刻固定の Daily Code 生成は行いません。

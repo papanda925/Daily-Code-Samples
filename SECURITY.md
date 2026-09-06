@@ -1,37 +1,12 @@
-# Security Policy
+# SECURITY
 
-## Public repository policy
+この公開リポジトリには、実環境の秘密情報を置きません。
 
-このリポジトリは公開教材です。
+禁止例:
 
-実運用環境の以下の情報はcommitしません。
+- パスワード、APIキー、トークン、秘密鍵
+- 個人情報
+- 実運用のIPアドレス、ユーザー名、内部ホスト名
+- 実運用固有のパス、サービス名、認証情報
 
-- パスワード
-- APIキー / access token / client secret
-- SSH秘密鍵
-- `.env`
-- `wp-config.php`
-- 実サーバーのIPアドレスを含む本番接続情報
-- 本番固有のユーザー名、絶対パス、systemd service名
-
-公開可能なコードでは、実環境の値を環境変数やローカル設定ファイルに分離します。
-
-## Automated check
-
-`tools/check_public_safety.py` をGitHub Actionsとローカルの両方で実行できます。
-
-```bash
-python3 tools/check_public_safety.py
-```
-
-## If a secret is committed
-
-秘密情報を誤ってcommitした場合、Git履歴から削除するだけでは不十分です。
-
-1. 該当するpassword / token / keyを直ちに失効する
-2. 新しい資格情報を発行する
-3. 本番環境の設定を更新する
-4. 必要に応じてGit履歴から情報を除去する
-5. 不審なアクセス履歴を確認する
-
-秘密情報そのものを公開Issueへ貼り付けないでください。
+サンプルではダミー値・localhost・一般化したプレースホルダーを使います。

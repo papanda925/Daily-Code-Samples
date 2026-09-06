@@ -15,10 +15,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check helper syntax
-        run: |
-          python3 -m py_compile tools/check_public_safety.py
-          python3 -m py_compile tools/build_pages_index.py
+      - name: Check safety tool syntax
+        run: python3 -m py_compile _repo-tools/check_public_safety.py
 
       - name: Check for accidentally committed secrets
-        run: python3 tools/check_public_safety.py
+        run: python3 _repo-tools/check_public_safety.py

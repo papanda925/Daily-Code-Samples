@@ -1,19 +1,24 @@
 # Daily Code Samples
 
-papanda925.com の記事で使う、実行可能なコード・コマンド・Tipsを置くリポジトリです。
+ブログ公開日や連番ではなく、**カテゴリから探せる実用コード・ツール集**です。
 
-ネタの正本は `papanda925/Blog-Ideas/ideas` です。
+ネタの正本は `papanda925/Blog-Ideas/ideas`。ここには、記事で使う価値がある実装だけを置きます。
 
-`Blog-Ideas -> samples -> 検証 -> ブログ記事`
+## カテゴリ
 
-## フォルダ
+- `windows/` — Win32 / WinRT / OS / GUI / デバイス
+- `network/` — TCP/IP / HTTP / DNS / TLS / Socket
+- `powershell/` — PowerShell実用コード
+- `vba/` — Excel VBA / Office VBA / Windows API
+- `ubuntu/` — Bash / Linux / Nginx / PHP-FPM / systemd
+- `security/` — マスク / Hash / 権限 / 安全確認
+- `m365/` — Microsoft 365 / Graph / 認証 / メール
+- `office/` — Excel / Word / PowerPoint / Power Query
+- `programming/` — 言語共通・アルゴリズム・データ形式
+- `ai/` — AI利用支援・Codex・生成AI向けツール
 
-- `samples/` — 現行サンプル
-- `legacy/` — 旧サンプル・旧Roadmap・旧自動生成資産
-- `tools/` — 現行の補助ツール
-- `.github/` — GitHub Actions
+各サンプルはカテゴリ配下に、用途が分かる短い名前で置きます。
 
-旧番号ベースのサンプルは削除せず `legacy/` に保存しています。新方式では番号順の消化や時刻固定のDaily Code生成は行いません。
+例: `security/mask-config-secrets/`
 
-- [作成ルール](./SAMPLE_GUIDE.md)
-- [連携フロー](./PIPELINE.md)
+旧構成は `legacy-archive` ブランチに保存しています。

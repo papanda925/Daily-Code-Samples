@@ -1,2 +1,0 @@
-powercfg /getactivescheme
-powercfg /list

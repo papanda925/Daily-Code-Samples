@@ -1,2 +1,0 @@
-Get-NetIPConfiguration|Select InterfaceAlias,IPv4Address,IPv4DefaultGateway,DNSServer
-Get-CimInstance Win32_NetworkAdapterConfiguration -Filter "IPEnabled=True"|Select Description,DHCPEnabled,DHCPServer

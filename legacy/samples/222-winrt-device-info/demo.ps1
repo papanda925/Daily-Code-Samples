@@ -1,1 +1,0 @@
-$op=[Windows.Devices.Enumeration.DeviceInformation,Windows.Devices.Enumeration,ContentType=WindowsRuntime]::FindAllAsync();while($op.Status-eq0){Start-Sleep -Milliseconds 20};$op.GetResults()|Select -First 30 Name,Id,IsEnabled

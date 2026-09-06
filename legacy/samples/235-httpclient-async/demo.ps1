@@ -1,1 +1,0 @@
-$c=[Net.Http.HttpClient]::new();try{$sw=[Diagnostics.Stopwatch]::StartNew();$text=$c.GetStringAsync('https://example.com').GetAwaiter().GetResult();$sw.Stop();"chars=$($text.Length) ms=$($sw.ElapsedMilliseconds)"}finally{$c.Dispose()}

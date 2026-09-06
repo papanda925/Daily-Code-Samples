@@ -1,1 +1,0 @@
-Add-Type -AssemblyName PresentationFramework;$w=New-Object Windows.Window;$w.Title='PowerShell WPF';$w.Width=320;$w.Height=160;$b=New-Object Windows.Controls.Button;$b.Content='Click';$b.Add_Click({$b.Content='Clicked'});$w.Content=$b;[void]$w.ShowDialog()

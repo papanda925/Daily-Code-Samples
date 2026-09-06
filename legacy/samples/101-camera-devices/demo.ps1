@@ -1,1 +1,0 @@
-if(Get-Command Get-PnpDevice -EA 0){Get-PnpDevice|?{$_.Class-eq'Camera'-or$_.FriendlyName-match'Camera|Webcam'}|Select Status,Class,FriendlyName}else{Get-CimInstance Win32_PnPEntity|? Name -Match 'Camera|Webcam'|Select Name,Status}

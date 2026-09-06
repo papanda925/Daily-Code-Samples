@@ -1,1 +1,0 @@
-if(Get-Command Get-NetAdapterStatistics -EA 0){Get-NetAdapterStatistics|Select Name,ReceivedBytes,SentBytes}else{Get-CimInstance Win32_PerfFormattedData_Tcpip_NetworkInterface|Select Name,BytesReceivedPersec,BytesSentPersec}

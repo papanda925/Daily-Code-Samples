@@ -1,19 +1,16 @@
 # Blog-Ideas -> Daily-Code-Samples
 
-## 正本
+`Blog-Ideas/ideas` がネタの正本です。
 
-- ネタ: `papanda925/Blog-Ideas/ideas`
-- コード/Tips: `papanda925/Daily-Code-Samples/samples`
-- 公開原稿: `papanda925/Blog-Ideas/publish`
+記事候補にコード・ツール・Tipsが必要な場合だけ、このリポジトリの該当カテゴリへ実装します。
 
-## 流れ
+`idea -> category/sample -> verification -> article`
 
-1. Blog-Ideas から記事候補を選ぶ
-2. コード/Tipsが必要か確認する
-3. 必要な場合だけ `samples/` に実装する
-4. 実行・検証する
-5. Blog-Ideas側へ sample path / status を戻す
-6. 記事本文には最小例だけ載せる
-7. 記事末尾からGitHubの完全版へ直接リンクする
+## ルール
 
-時刻固定の Daily Code 生成は行いません。
+- 日付・公開順・固定時刻では分類しない
+- 連番を主キーにしない
+- カテゴリ + 用途名で探せるパスにする
+- 記事本文は最小例、完全版はGitHubへ置く
+- 実行証拠がないものを tested / verified にしない
+- 記事末尾の「GitHubサンプル」は対象フォルダへ直接リンクする

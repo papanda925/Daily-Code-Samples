@@ -1,1 +1,0 @@
-if(Get-Command Get-PnpDevice -EA 0){Get-PnpDevice|?{$_.Class-eq'AudioEndpoint'-and$_.FriendlyName-match'Microphone|マイク'}|Select Status,FriendlyName}else{Get-CimInstance Win32_SoundDevice|Select Name,Status}

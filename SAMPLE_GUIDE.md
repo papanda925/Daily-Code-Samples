@@ -1,14 +1,25 @@
 # Sample Guide
 
-新方式のサンプル作成ルールです。
+## 基本形
 
-- 1サンプル = 1目的
-- 元の `Blog-Ideas/ideas/...md` を必ず記録する
-- READMEと実コードを置く
-- 初心者が読めるコメント量にする
-- ブログ本文には最小例、完全版はGitHubへ置く
-- 秘密情報・個人情報・実環境固有値は載せない
-- 実行していないものを tested / verified / copy_paste_ready にしない
-- Security / Network は localhost、自分のPC、自分のデータなど安全な範囲で扱う
+`<category>/<purpose-name>/`
 
-詳しい記事設計は `papanda925/Blog-Ideas` を正本とします。
+例:
+
+- `powershell/file-hash/`
+- `vba/xmlhttp-async-get/`
+- `ubuntu/nginx-config-check/`
+- `security/mask-config-secrets/`
+
+## 1サンプル = 1目的
+
+各フォルダには原則として次を置きます。
+
+- `README.md`
+- 実コード / コマンド例
+- 必要に応じてテスト
+- 必要に応じて `sample.json`
+
+READMEには、何ができるか、前提条件、実行方法、期待結果、注意点を短く書きます。
+
+コード内コメントは「何をしているか」だけでなく「なぜそうするか」も説明します。

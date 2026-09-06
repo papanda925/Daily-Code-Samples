@@ -1,1 +1,0 @@
-$d=[Text.Encoding]::UTF8.GetBytes("demo secret");$e=[Security.Cryptography.ProtectedData]::Protect($d,$null,[Security.Cryptography.DataProtectionScope]::CurrentUser);$x=[Security.Cryptography.ProtectedData]::Unprotect($e,$null,[Security.Cryptography.DataProtectionScope]::CurrentUser);"Encrypted="+[Convert]::ToBase64String($e);"Decrypted="+[Text.Encoding]::UTF8.GetString($x)

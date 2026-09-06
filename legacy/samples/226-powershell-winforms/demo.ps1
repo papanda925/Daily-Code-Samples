@@ -1,1 +1,0 @@
-Add-Type -AssemblyName System.Windows.Forms;$f=New-Object Windows.Forms.Form;$f.Text='PowerShell WinForms';$b=New-Object Windows.Forms.Button;$b.Dock='Fill';$b.Text='Click';$b.Add_Click({$b.Text='Clicked'});$f.Controls.Add($b);[void]$f.ShowDialog()

@@ -6,3 +6,4 @@
 
 - [設定ファイルの秘密情報をマスクする](./mask-config-secrets/)
 - [AI生成コマンドを安全な場所で確認する](./ai-command-preflight/)
+- [SHA-256で最小のハッシュチェーンを作る](./blockchain-hash-chain/)

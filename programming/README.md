@@ -5,3 +5,4 @@
 ## サンプル
 
 - [UTF-8とShift_JISのバイト数を比較する](./encoding-byte-count/)
+- [フィルターバブルを単純化してシミュレーションする](./filter-bubble-simulation/)

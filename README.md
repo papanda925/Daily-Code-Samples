@@ -6,6 +6,7 @@
 
 ## カテゴリ
 
+- `office/` — Office Scripts / Power Query M / Excel関数
 - `windows/` — Win32 / WinRT / OS / GUI / デバイス
 - `network/` — TCP/IP / HTTP / DNS / TLS / Socket
 - `powershell/` — PowerShell実用コード

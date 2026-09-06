@@ -8,13 +8,13 @@ param(
 $resolved = (Resolve-Path -LiteralPath $Path -ErrorAction Stop).Path
 $watcher = [System.IO.FileSystemWatcher]::new($resolved, $Filter)
 $watcher.IncludeSubdirectories = $false
-$watcher.NotifyFilter = [System.IO.NotifyFilters]::FileName -bor
-                        [System.IO.NotifyFilters]::LastWrite -bor
-                        [System.IO.NotifyFilters]::Size
-$watcher.EnableRaisingEvents = $true
+$watcher.NotifyFilter = [System.IO.NotifyFilters]::FileName -bor [System.IO.NotifyFilters]::LastWrite -bor [System.IO.NotifyFilters]::Size
+$watcher.EnableRaisingEvents = $false
 
-$registrations = foreach ($eventName in "Created", "Changed", "Deleted", "Renamed") {
-    Register-ObjectEvent -InputObject $watcher -EventName $eventName -Action {
+$sourceIds = foreach ($eventName in "Created", "Changed", "Deleted", "Renamed") {
+    $sourceId = "FolderWatcher.$eventName"
+
+    Register-ObjectEvent -InputObject $watcher -EventName $eventName -SourceIdentifier $sourceId -Action {
         $args = $Event.SourceEventArgs
         $oldPath = ""
 
@@ -24,21 +24,29 @@ $registrations = foreach ($eventName in "Created", "Changed", "Deleted", "Rename
 
         [pscustomobject]@{
             Time    = Get-Date
-            Event   = $Event.SourceIdentifier.Split(".")[-1]
+            Event   = [string]$args.ChangeType
             Path    = $args.FullPath
             OldPath = $oldPath
         } | Format-Table -AutoSize
-    }
+    } | Out-Null
+
+    $sourceId
 }
+
+$watcher.EnableRaisingEvents = $true
 
 try {
     Write-Host "Watching: $resolved  Filter: $Filter"
     Write-Host "Ctrl+C で終了します。"
+
     while ($true) {
         Start-Sleep -Seconds 1
     }
 }
 finally {
-    $registrations | Unregister-Event -ErrorAction SilentlyContinue
+    foreach ($sourceId in $sourceIds) {
+        Unregister-Event -SourceIdentifier $sourceId -ErrorAction SilentlyContinue
+    }
+
     $watcher.Dispose()
 }

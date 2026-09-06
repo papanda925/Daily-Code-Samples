@@ -5,7 +5,7 @@ function Get-Sha256Hex {
     try {
         $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
         $hash = $sha.ComputeHash($bytes)
-        return [Convert]::ToHexString($hash)
+        return -join ($hash | ForEach-Object { $_.ToString("x2") })
     }
     finally {
         $sha.Dispose()

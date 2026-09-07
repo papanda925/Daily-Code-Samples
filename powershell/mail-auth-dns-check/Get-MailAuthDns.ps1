@@ -58,6 +58,58 @@ function Show-TxtRecord {
     }
 }
 
+function Show-DkimRecord {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    Write-Host ""
+    Write-Host "=== DKIM ==="
+    Write-Host "Name: $Name"
+
+    # Microsoft 365などでは、selector._domainkey が
+    # Microsoft側のホスト名へCNAME委任されている構成があります。
+    # まずCNAMEがあるかを確認します。
+    try {
+        $cname = Resolve-DnsName -Name $Name -Type CNAME -ErrorAction Stop
+        foreach ($record in $cname) {
+            if ($record.NameHost) {
+                Write-Output "CNAME -> $($record.NameHost)"
+            }
+        }
+    }
+    catch {
+        Write-Host "CNAMEは取得できませんでした。TXTを確認します。"
+    }
+
+    # 一般的なDKIM公開鍵はTXTとして公開されます。
+    # CNAME先をresolverが追跡する構成では、TXTが返る場合もあります。
+    try {
+        $txt = Resolve-DnsName -Name $Name -Type TXT -ErrorAction Stop
+        $values = @(
+            $txt |
+                ForEach-Object {
+                    if ($_.Strings) {
+                        $_.Strings -join ""
+                    }
+                }
+        )
+
+        if ($values.Count -gt 0) {
+            foreach ($value in $values) {
+                Write-Output $value
+            }
+        }
+        else {
+            Write-Host "表示できるTXT値はありませんでした。"
+        }
+    }
+    catch {
+        Write-Warning "DKIMのTXTを取得できませんでした: $($_.Exception.Message)"
+    }
+}
+
 # SPF:
 # SPFは通常、対象ドメイン自身のTXTに v=spf1... として公開されます。
 # ただし、DMARCで実際に評価されるSPF identityはMAIL FROM等なので、
@@ -72,7 +124,7 @@ Show-TxtRecord -Name "_dmarc.$Domain" -Label "DMARC"
 # DKIMはselectorが必要なので、指定されたときだけ問い合わせます。
 if (-not [string]::IsNullOrWhiteSpace($DkimSelector)) {
     $selector = $DkimSelector.Trim()
-    Show-TxtRecord -Name "$selector._domainkey.$Domain" -Label "DKIM ($selector)"
+    Show-DkimRecord -Name "$selector._domainkey.$Domain"
 }
 else {
     Write-Host ""

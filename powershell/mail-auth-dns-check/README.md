@@ -24,6 +24,8 @@ DKIM selectorも分かっている場合:
 - DMARC: `_dmarc.example.com` のTXT
 - DKIM: `selector1._domainkey.example.com` のTXT
 
+Microsoft 365などではDKIM selectorがMicrosoft側ホスト名へのCNAMEとして公開される構成があります。このサンプルはDKIMだけCNAMEとTXTの両方を確認します。
+
 ## 大事な注意
 
 このスクリプトは**DNSに何が公開されているかを見るだけ**です。

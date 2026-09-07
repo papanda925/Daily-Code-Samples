@@ -21,9 +21,19 @@ sudo ./find-listening-port.sh 5000
 - `Local Address:Port`: 待受IPアドレスとポート
 - `Process`: PIDやプロセス名。権限によって見え方が変わる場合があります
 
-## 検証状態
+## ローカル確認記録
 
-iproute2の `ss(8)` マニュアルでlistening/process表示オプションを確認して実装。対象Ubuntu環境での実行確認は未実施です。
+2026-09-07に次の環境でロジック確認を実施しました。
+
+- Debian GNU/Linux 13 (trixie)
+- Bash 5.2.37
+- iproute2 / `ss` 6.15.0
+- `bash -n`: 成功
+- 未使用ポートを指定: `No listening TCP socket found` を確認
+- 不正入力 `abc`: exit code 2 を確認
+- localhostで一時TCPサーバーを起動: LISTEN socketとpython3のPID/process表示を確認
+
+Ubuntu実機での確認ではないため、記事側は「実機確認済み」ではなくロジック確認済みとして扱います。
 
 ## 公式・一次情報
 

@@ -27,8 +27,9 @@ echo "=== TCP LISTEN sockets on port $port ==="
 # -n : 名前解決せず、IPアドレスとポート番号を数値のまま表示
 # -t : TCPだけを表示
 # -p : socketを使っているprocess情報も表示
+# -H : 見出し行を出さない。0件のとき空出力になるため判定しやすくします。
 # 一般ユーザーでは他ユーザーのprocess情報が省略される場合があります。
-output="$(ss -lntp "sport = :$port" || true)"
+output="$(ss -lntpH "sport = :$port" || true)"
 
 if [[ -z "${output//[[:space:]]/}" ]]; then
   echo "No listening TCP socket found on port $port."

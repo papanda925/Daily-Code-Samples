@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geolocation API + Leaflet 現在位置デモ</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <style>
+    :root { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.7; }
+    button { font: inherit; padding: 10px 16px; cursor: pointer; }
+    #status { margin: 16px 0; padding: 12px; background: #f3f4f6; white-space: pre-wrap; }
+    #map { height: 420px; margin-top: 16px; border: 1px solid #ccc; }
+    .note { font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>現在位置をブラウザで取得して地図に表示</h1>
+
+  <p>
+    ボタンを押すと、ブラウザ標準の Geolocation API が位置情報の許可を要求します。
+    許可された場合だけ緯度・経度を取得し、Leaflet の地図へマーカーを表示します。
+  </p>
+
+  <p class="note">
+    <strong>プライバシー:</strong>
+    このページのJavaScriptは取得した緯度・経度を保存せず、
+    papanda925.com や GitHub へ送信しません。
+    地図表示のため、地図タイル画像の取得通信は発生します。
+  </p>
+
+  <button id="getLocation" type="button">現在位置を取得</button>
+  <div id="status" role="status" aria-live="polite">まだ位置情報を取得していません。</div>
+  <div id="map" aria-label="現在位置を表示する地図"></div>
+
+  <script>
+    const status = document.getElementById("status");
+    const button = document.getElementById("getLocation");
+
+    const map = L.map("map").setView([35.681236, 139.767125], 5);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    let marker;
+    let accuracyCircle;
+
+    function showError(error) {
+      const names = {
+        1: "PERMISSION_DENIED（位置情報の利用が許可されませんでした）",
+        2: "POSITION_UNAVAILABLE（位置情報を取得できませんでした）",
+        3: "TIMEOUT（位置情報の取得がタイムアウトしました）"
+      };
+
+      status.textContent =
+        "取得失敗\n" +
+        "code: " + error.code + "\n" +
+        "reason: " + (names[error.code] || error.message || "不明なエラー");
+    }
+
+    function showPosition(position) {
+      const { latitude, longitude, accuracy } = position.coords;
+
+      status.textContent =
+        "取得成功\n" +
+        "latitude : " + latitude + "\n" +
+        "longitude: " + longitude + "\n" +
+        "accuracy : 約 " + Math.round(accuracy) + " m";
+
+      if (marker) {
+        marker.remove();
+      }
+      if (accuracyCircle) {
+        accuracyCircle.remove();
+      }
+
+      marker = L.marker([latitude, longitude])
+        .addTo(map)
+        .bindPopup("ブラウザが取得した現在位置")
+        .openPopup();
+
+      accuracyCircle = L.circle([latitude, longitude], {
+        radius: accuracy
+      }).addTo(map);
+
+      map.setView([latitude, longitude], 16);
+    }
+
+    button.addEventListener("click", () => {
+      if (!("geolocation" in navigator)) {
+        status.textContent = "このブラウザでは Geolocation API を利用できません。";
+        return;
+      }
+
+      status.textContent = "位置情報を要求しています…";
+
+      navigator.geolocation.getCurrentPosition(
+        showPosition,
+        showError,
+        {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    });
+  </script>
+</body>
+</html>

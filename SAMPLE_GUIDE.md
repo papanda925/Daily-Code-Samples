@@ -47,7 +47,25 @@ READMEには、何ができるか、前提条件、実行方法、期待結果�
 - READMEと実装がある
 - 記事本文は最小例に留め、完全版をこのリポジトリへ置く
 - 記事末尾の `GitHubサンプル` が対象フォルダへ直接リンクする
+- GitHub Actions の `Public safety check` / `Daily Code quality checks` / `CodeQL` が成功している
 - 実行した場合だけ `tested` / `verified` とする
+
+### GitHubチェックの扱い
+
+生成コードは、GitHubのチェックを通過することを標準の完了条件とします。
+
+自動チェック対象:
+
+- Python: 構文チェック + CodeQL
+- JavaScript / TypeScript: JavaScript構文チェック + CodeQL
+- GitHub Actions: CodeQL
+- Bash: `bash -n`
+- PowerShell: PowerShellパーサー
+- JSON: JSONパース
+- リポジトリ全体: 公開安全性・秘密情報混入チェック
+
+VBA、M言語、Excel数式などGitHub/CodeQLだけで完全検証できないものは、対象アプリで実行確認し、その結果をREADMEへ書きます。
+「GitHub Actionsが成功した」ことと「実機で動作確認した」ことは別の検証として扱います。
 
 ## Web公開・ライブデモ
 

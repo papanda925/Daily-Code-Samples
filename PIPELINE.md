@@ -19,7 +19,22 @@ Daily-Code-Samplesは独立した14:00生成処理ではありません。
 - 実コードまたは再利用できるコマンド例がある
 - 必要に応じてテストがある
 - 実行有無と検証状態が正しく記録されている
+- GitHub Actions の必須チェックが成功している
 - ブログ末尾の `GitHubサンプル` が対象フォルダへ直接リンクしている
+
+## GitHub品質ゲート
+
+生成したコードは、GitHubへ追加しただけでは `ready` にしません。
+
+PRまたはmainへの反映時に、次のGitHub Actionsを必ず実行します。
+
+- `Public safety check`: 秘密情報・公開不適切情報の混入確認
+- `Daily Code quality checks`: Python / JavaScript / Bash / PowerShell / JSON の構文・パース確認
+- `CodeQL`: Python / JavaScript・TypeScript / GitHub Actions のセキュリティ静的解析
+
+いずれかが失敗した場合は、そのサンプルを記事公開用の完成品として扱いません。
+
+CodeQLが直接対応しないVBA、PowerShell、Bash、M言語、Excel数式等については、可能な範囲の構文チェックに加え、実機または対象アプリでの実行確認結果をREADMEへ記録します。
 
 ## 分類
 

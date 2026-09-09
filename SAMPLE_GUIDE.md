@@ -10,6 +10,7 @@
 - `vba/xmlhttp-async-get/`
 - `ubuntu/nginx-config-check/`
 - `security/mask-config-secrets/`
+- `web/geolocation-leaflet/`
 
 ## 1サンプル = 1目的
 
@@ -48,6 +49,20 @@ READMEには、何ができるか、前提条件、実行方法、期待結果�
 - 記事末尾の `GitHubサンプル` が対象フォルダへ直接リンクする
 - 実行した場合だけ `tested` / `verified` とする
 
+## Web公開・ライブデモ
+
+ブラウザでそのまま動かせるHTML / CSS / JavaScriptやBrowser APIの教材は、**解説・教材の場所**と**Web公開の場所**を分けます。
+
+- 解説・教材: `web/<purpose-name>/README.md`
+- 公開デモ: `docs/demos/<purpose-name>/index.html`
+- 公開URL: `https://papanda925.github.io/Daily-Code-Samples/demos/<purpose-name>/`
+
+Web公開できるサンプルのREADMEには、冒頭付近へ必ず `## ライブデモ` を置き、クリック可能な公開URLを載せます。
+
+これによりブログ記事は従来どおり `GitHubサンプル` として教材READMEへリンクでき、読者はREADMEから実際に動くWebデモへ移動できます。
+
+アプリとして独立性が高いものは `docs/apps/<app-name>/` を使用してよいです。
+
 ## 分類
 
 公開日・記事ID・連番では分類しません。
@@ -62,5 +77,8 @@ READMEには、何ができるか、前提条件、実行方法、期待結果�
 - `ubuntu/`
 - `security/`
 - `programming/`
+- `web/`
+
+`docs/` はカテゴリではなくGitHub Pagesの公開専用領域です。
 
 変化の速い製品・サービス名は独立カテゴリにせず、内容に合う基礎カテゴリへ置きます。

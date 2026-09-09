@@ -3,6 +3,13 @@
 ブラウザ標準の **Geolocation API** で現在位置を取得し、
 **Leaflet** を使って地図上へ表示する最小デモです。
 
+## ライブデモ
+
+GitHub Pages で公開する実行用HTMLは、公開専用ディレクトリへ移しました。
+
+- 公開ソース: `docs/demos/geolocation-leaflet/index.html`
+- 公開URL: `https://papanda925.github.io/Daily-Code-Samples/demos/geolocation-leaflet/`
+
 ## このデモで分かること
 
 - 位置情報を取得するのは Leaflet ではなく `navigator.geolocation`
@@ -21,7 +28,7 @@
 
 ## 使い方
 
-1. HTTPSでこの `index.html` を開く
+1. GitHub Pages のライブデモを HTTPS で開く
 2. 「現在位置を取得」ボタンを押す
 3. ブラウザ/OSの位置情報アクセスを許可または拒否する
 4. 成功時は座標と精度、地図上のマーカーを確認する

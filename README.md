@@ -14,7 +14,8 @@
 - `ubuntu/` — Bash / Linux / Nginx / PHP-FPM / systemd
 - `security/` — マスク / Hash / 権限 / 安全確認
 - `programming/` — 言語共通・アルゴリズム・データ形式
-- `web/` — Browser API / JavaScript / ライブデモ / Webライブラリ
+- `web/` — Browser API / JavaScript / Webライブラリの解説・サンプル
+- `docs/` — GitHub Pagesで公開するサイトとライブデモ
 
 各サンプルはカテゴリ配下に、用途が分かる短い名前で置きます。
 
@@ -24,11 +25,25 @@
 
 旧構成は `legacy-archive` ブランチに保存しています。
 
+## GitHub Pages / ライブデモ
 
-## Webライブデモ
+GitHub Pages の公開物は **`docs/` に集約**します。
+通常のコードサンプルと、ブラウザから直接実行する公開ページを分離するためです。
 
-`web/` 配下では、GitHub Pages等でそのまま開いて動かせるHTML/CSS/JavaScriptサンプルを扱います。
+公開設定:
+
+- Branch: `main`
+- Folder: `/docs`
+
+公開URL:
+
+- トップ: `https://papanda925.github.io/Daily-Code-Samples/`
+- ライブデモ: `https://papanda925.github.io/Daily-Code-Samples/demos/<demo-name>/`
+
+ブラウザで実際に動かすデモは `docs/demos/` 配下へ追加します。
+説明や学習用ドキュメントは必要に応じて `web/` 側に置き、公開デモへリンクします。
+
 位置情報・カメラ・マイク等の権限を使うデモは、ユーザー操作後にだけ要求し、
 取得した個人情報を保存・送信しない最小構成を基本とします。
 
-最初の例: `web/geolocation-leaflet/`
+最初の例: `docs/demos/geolocation-leaflet/`

@@ -5,10 +5,12 @@
 
 ## ライブデモ
 
-GitHub Pages で公開する実行用HTMLは、公開専用ディレクトリへ移しました。
+**[▶ ブラウザで現在位置デモを開く](https://papanda925.github.io/Daily-Code-Samples/demos/geolocation-leaflet/)**
+
+GitHub Pages で公開する実行用HTMLは、公開専用ディレクトリに置いています。
 
 - 公開ソース: `docs/demos/geolocation-leaflet/index.html`
-- 公開URL: `https://papanda925.github.io/Daily-Code-Samples/demos/geolocation-leaflet/`
+- 公開URL: https://papanda925.github.io/Daily-Code-Samples/demos/geolocation-leaflet/
 
 ## このデモで分かること
 

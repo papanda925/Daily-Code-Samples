@@ -2,29 +2,29 @@
   "title": "Papanda Manga Viewer v0.1",
   "pages": [
     {
-      "image": "./pages/page-01.svg",
-      "alt": "1ページ目。Papandaがマンガビューアを試してみようと話しているイラスト",
-      "title": "1ページ目：まずは画像を切り替えてみる",
-      "caption": "同じimg要素を使い、表示する画像ファイルだけをJavaScriptで切り替えます。",
+      "image": "./pages/page-01.webp",
+      "alt": "1ページ目。Papandaがブラウザでページを切り替えるマンガビューアを紹介するイラスト",
+      "title": "1ページ目：ブラウザでページを切り替える",
+      "caption": "同じimg要素を使い、表示するマンガ画像をJavaScriptで切り替えます。",
       "tags": ["画像", "JavaScript", "ページ切り替え"]
     },
     {
-      "image": "./pages/page-02.svg",
-      "alt": "2ページ目。画像に加えてタイトルやタグなどの付帯データを扱うイラスト",
-      "title": "2ページ目：付帯データも一緒に読む",
+      "image": "./pages/page-02.webp",
+      "alt": "2ページ目。Papandaが画像と付帯データを分けて管理する考え方を紹介するイラスト",
+      "title": "2ページ目：画像と付帯データを分けて持つ",
       "caption": "画像パスだけでなく、タイトル・説明・タグもJSONから取得します。",
       "tags": ["JSON", "メタデータ", "付帯データ"]
     },
     {
-      "image": "./pages/page-03.svg",
-      "alt": "3ページ目。ブラウザで前へ次へボタンを使ってページを切り替えるイラスト",
-      "title": "3ページ目：ブラウザで前後へ移動する",
+      "image": "./pages/page-03.webp",
+      "alt": "3ページ目。Papandaが前へ次へボタンでマンガページを切り替えるイラスト",
+      "title": "3ページ目：前へ・次へでページを切り替える",
       "caption": "前へ・次へボタンと左右の矢印キーで、表示中の配列位置を変更します。",
-      "tags": ["ブラウザ", "UI", "キーボード操作"]
+      "tags": ["ブラウザ", "UI", "currentIndex"]
     },
     {
-      "image": "./pages/page-04.svg",
-      "alt": "4ページ目。PapandaがGitHub Pagesで公開できたことを喜んでいるイラスト",
+      "image": "./pages/page-04.webp",
+      "alt": "4ページ目。PapandaがGitHub Pagesでマンガビューアを公開できたことを喜ぶイラスト",
       "title": "4ページ目：GitHub Pagesで公開する",
       "caption": "HTML・CSS・JavaScript・JSON・画像だけなので、静的サイトとしてそのまま公開できます。",
       "tags": ["GitHub Pages", "静的サイト", "完成"]

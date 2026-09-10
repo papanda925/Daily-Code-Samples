@@ -1,0 +1,33 @@
+{
+  "title": "Papanda Manga Viewer - Vertical Reading",
+  "pages": [
+    {
+      "image": "../papanda-manga-viewer/pages/page-01.webp",
+      "alt": "1ページ目。Papandaがブラウザでページを切り替えるマンガビューアを紹介するイラスト",
+      "title": "1ページ目：ブラウザでページを切り替える",
+      "caption": "横向き版と同じ画像データを、縦読み版では上から順に並べて表示します。",
+      "tags": ["画像", "JavaScript", "縦読み"]
+    },
+    {
+      "image": "../papanda-manga-viewer/pages/page-02.webp",
+      "alt": "2ページ目。Papandaが画像と付帯データを分けて管理する考え方を紹介するイラスト",
+      "title": "2ページ目：画像と付帯データを分けて持つ",
+      "caption": "画像、タイトル、説明、タグをJSONの1ページ分としてまとめています。",
+      "tags": ["JSON", "メタデータ", "付帯データ"]
+    },
+    {
+      "image": "../papanda-manga-viewer/pages/page-03.webp",
+      "alt": "3ページ目。Papandaが前へ次へボタンでマンガページを切り替えるイラスト",
+      "title": "3ページ目：横向き版では前へ・次へ",
+      "caption": "縦読み版ではボタンで切り替えず、この画像も続けて下へ表示します。",
+      "tags": ["ブラウザ", "UI", "比較"]
+    },
+    {
+      "image": "../papanda-manga-viewer/pages/page-04.webp",
+      "alt": "4ページ目。PapandaがGitHub Pagesでマンガビューアを公開できたことを喜ぶイラスト",
+      "title": "4ページ目：GitHub Pagesで公開する",
+      "caption": "同じ4枚の画像を、PC向けページ送りとスマホ向け縦読みの2通りで見せられます。",
+      "tags": ["GitHub Pages", "静的サイト", "スマホ"]
+    }
+  ]
+}

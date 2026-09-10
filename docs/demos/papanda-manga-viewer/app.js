@@ -12,15 +12,17 @@ let currentIndex = 0;
 
 function renderPage() {
   const page = pages[currentIndex];
+  if (!page) return;
 
   image.src = page.image;
-  image.alt = page.alt;
+  image.alt = page.alt ?? '';
   counter.textContent = `${currentIndex + 1} / ${pages.length}`;
-  title.textContent = page.title;
-  caption.textContent = page.caption;
+  title.textContent = page.title ?? '';
+  caption.textContent = page.caption ?? '';
 
+  const pageTags = Array.isArray(page.tags) ? page.tags : [];
   tags.replaceChildren(
-    ...page.tags.map((tag) => {
+    ...pageTags.map((tag) => {
       const item = document.createElement('li');
       item.textContent = tag;
       return item;
@@ -35,6 +37,7 @@ function renderPage() {
 function movePage(step) {
   const nextIndex = currentIndex + step;
   if (nextIndex < 0 || nextIndex >= pages.length) return;
+
   currentIndex = nextIndex;
   renderPage();
 }
@@ -53,6 +56,10 @@ fetch('./manga.json')
     return response.json();
   })
   .then((data) => {
+    if (!Array.isArray(data.pages) || data.pages.length === 0) {
+      throw new Error('pages が空、または配列ではありません');
+    }
+
     pages = data.pages;
     renderPage();
   })

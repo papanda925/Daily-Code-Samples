@@ -1,0 +1,9 @@
+{
+  "title": "Papanda Manga Viewer v0.1",
+  "pages": [
+    {"image":"../../docs/demos/papanda-manga-viewer/pages/page-01.webp","alt":"1ページ目。ブラウザでページを切り替えるマンガビューア","title":"1ページ目：ブラウザでページを切り替える","caption":"同じimg要素を使い、表示する画像をJavaScriptで切り替えます。","tags":["画像","JavaScript","ページ切り替え"]},
+    {"image":"../../docs/demos/papanda-manga-viewer/pages/page-02.webp","alt":"2ページ目。画像と付帯データを分けて管理する説明","title":"2ページ目：画像と付帯データを分けて持つ","caption":"タイトル・説明・タグもJSONから取得します。","tags":["JSON","メタデータ","付帯データ"]},
+    {"image":"../../docs/demos/papanda-manga-viewer/pages/page-03.webp","alt":"3ページ目。前へ次へでマンガページを切り替える説明","title":"3ページ目：前へ・次へでページを切り替える","caption":"currentIndexを変更して同じrenderPageを再実行します。","tags":["ブラウザ","UI","currentIndex"]},
+    {"image":"../../docs/demos/papanda-manga-viewer/pages/page-04.webp","alt":"4ページ目。GitHub Pages公開の説明","title":"4ページ目：GitHub Pagesで公開する","caption":"静的ファイルだけでブラウザ公開できます。","tags":["GitHub Pages","静的サイト","完成"]}
+  ]
+}

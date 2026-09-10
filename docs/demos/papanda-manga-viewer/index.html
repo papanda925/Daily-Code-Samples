@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="画像データとJSONを使って、ブラウザで前後のページへ切り替える最小マンガビューアのデモです。">
+  <meta name="description" content="画像データとJSONを使って、ブラウザで前後のページへ切り替えるPapanda Manga Viewerのデモです。">
   <title>Papanda Manga Viewer v0.1</title>
   <link rel="stylesheet" href="./style.css">
 </head>
@@ -12,7 +12,8 @@
     <header class="viewer__header">
       <p class="eyebrow">Daily Code Samples / Live Demo</p>
       <h1 id="viewer-title">Papanda Manga Viewer v0.1</h1>
-      <p>画像とJSONの付帯データを読み込み、前へ・次へでページを切り替えます。</p>
+      <p>4枚のPapanda画像とJSONの付帯データを読み込み、前へ・次へでページを切り替えます。</p>
+      <p><a href="../papanda-manga-viewer-vertical/">スマホ向けの縦読み版も試す →</a></p>
     </header>
 
     <section class="manga" aria-live="polite">
@@ -38,6 +39,7 @@
     <section class="how-it-works">
       <h2>このデモで確認できること</h2>
       <p><code>manga.json</code> から画像パス・タイトル・説明・タグを読み、JavaScriptで同じ画面の内容を差し替えています。左右の矢印キーでも切り替えられます。</p>
+      <p>縦読み版では同じ画像を複製せず、JSONから全ページを順番にDOMへ追加します。表示方法とデータを分ける違いも比較できます。</p>
     </section>
   </main>
 

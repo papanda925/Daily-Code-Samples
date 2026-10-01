@@ -1,17 +1,38 @@
 # curlでHTTPレスポンスヘッダーを確認する
 
-papanda925.com の記事で使うコード／コマンドを、再利用しやすい形で保存したサンプルです。
+HTTPレスポンスの本文を保存せず、status と headers を読み取り専用で観察する教材です。Nginx の gzip 判定では、通常リクエストと Accept-Encoding: gzip を付けたリクエストを比べます。
 
-- 元記事ID: `20260906-02`
-- 分類: `network`
-- 検証状態: 記事制作時の構文・ロジック確認を引き継ぎます。実機実行を確認していない場合は、利用環境で確認してください。
+## まず試す
 
-## ファイル
+~~~bash
+./check-http-headers.sh https://example.com/
+~~~
 
-- `check-http-headers.sh` — 記事で扱ったコード／コマンドの再利用版
+対象URLを省略した場合は https://example.com/ を使います。本番サイトの設定変更は行いません。
 
-## 使い方
+## ここを見る
 
-ファイル内容と前提条件を確認し、ダミー値・安全な対象で試してください。
+- Content-Type: 応答のMIME type
+- Content-Encoding: gzip等のcontent coding
+- Content-Length: 応答に付く場合の長さ
+- Vary: キャッシュが要求ヘッダーを区別する手掛かり
 
-> 秘密情報、実環境のドメイン、アクセストークンなどはサンプルへ保存しません。
+2回目は明示的に Accept-Encoding: gzip を送ります。Nginx側がgzipを許可していても、MIME type、サイズ、設定等によって Content-Encoding: gzip が付かない場合があります。
+
+## 1か所変える
+
+同じURLのまま、Accept-Encoding: gzip の有無だけを変えます。対象ファイルやURLまで同時に変えると、何が差を生んだのか判断しにくくなります。
+
+## 仕事で使うなら
+
+まずheadersを観察し、必要ならNginxの有効設定を別途確認します。nginx -T は設定全体を標準出力へ出すため、公開チャットや記事へ貼る前にドメイン、パス、上流構成等をマスクしてください。
+
+## 検証状態
+
+curl/Nginx/HTTPの公式仕様を確認した教材です。この更新時点では、このリポジトリ上での実機実行結果は追加していません。
+
+## 公式情報
+
+- [nginx — ngx_http_gzip_module](https://nginx.org/en/docs/http/ngx_http_gzip_module.html)
+- [RFC 9110 — HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)
+- [curl — man page](https://curl.se/docs/manpage.html)

@@ -1,15 +1,44 @@
-# DNSのTXTレコードをPowerShellで確認する
+# DNSのTXTレコードをPowerShellで切り分ける
 
-papanda925.com の記事で使うコード／コマンドを、再利用しやすい形で保存したサンプルです。
+Microsoft 365等のドメイン確認でTXTを追加したのに外から見えないとき、NS → 通常の再帰DNS → 指定したDNSサーバーの順に応答を比べる読み取り専用サンプルです。
 
-- 元記事ID: `20260906-05`
-- 分類: `network`
-- 検証状態: 記事制作時の構文・ロジック確認を引き継ぎます。実機確認済みと明記していないものは、自分の環境で確認してください。
+## まず試す
 
-## ファイル
+~~~powershell
+./Check-DnsTxt.ps1 -Domain "example.com"
+~~~
 
-- `Check-DnsTxt.ps1`
+権威DNSサーバー名が分かっている場合は追加します。
+
+~~~powershell
+./Check-DnsTxt.ps1 -Domain "example.com" -Server "ns1.example.net"
+~~~
+
+実テナントの検証トークンをこのGitHubリポジトリへ保存しないでください。
+
+## ここを見る
+
+1. NSレコードで、どのDNS事業者が権威を持っているか
+2. 通常の Resolve-DnsName -Type TXT で、普段の再帰DNSから何が見えるか
+3. -Server 指定時に、そのDNSサーバーから何が返るか
+
+権威側には新しいTXTが見え、再帰DNSでは古い応答が残るなら、キャッシュ/TTLの影響を疑う手掛かりになります。両方に見えない場合は、ゾーンや入力値、保存先の確認へ戻ります。
+
+## 1か所変える
+
+まず -Server なしで実行し、その後サーバー指定だけを追加します。ドメイン名まで同時に変えないでください。
 
 ## 注意
 
-本番環境へ変更を加える前に、対象・権限・復旧方法を確認してください。秘密情報や実環境固有値は保存しません。
+- -Server に指定したDNSが本当に対象ゾーンの権威DNSかはNSレコードとDNS事業者の情報で確認します。
+- 「何分待てば必ず反映」と固定時間で断定しません。
+- 実際のMicrosoft 365検証値や内部DNS名を記事・Issueへ貼らないでください。
+
+## 検証状態
+
+Microsoft LearnのResolve-DnsNameとMicrosoft 365ドメイン確認資料を確認して更新しています。対象テナント/DNSでの実機変更・反映確認は行っていません。
+
+## 公式情報
+
+- [Microsoft Learn — Resolve-DnsName](https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname)
+- [Microsoft Learn — Add a domain to Microsoft 365](https://learn.microsoft.com/en-us/microsoft-365/admin/setup/add-domain)

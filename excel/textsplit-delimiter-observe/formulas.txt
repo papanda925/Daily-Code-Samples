@@ -1,0 +1,8 @@
+A1: red,green,blue
+B1: =TEXTSPLIT(A1,",")
+
+変更例
+A1: red;green;blue
+B1: =TEXTSPLIT(A1,";")
+
+観察: delimiterと入力文字列が一致すると、結果が隣接セルへspillします。

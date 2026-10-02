@@ -14,3 +14,12 @@ python3 demo.py 10.0.0.0/30
 [Python documentation — ipaddress](https://docs.python.org/3/library/ipaddress.html)
 
 検証状態: Python公式仕様確認済み。実行再確認は未実施。
+
+## strictの比較
+
+```bash
+python3 demo.py 192.168.1.10/24 --strict
+python3 demo.py 192.168.1.10/24 --no-strict
+```
+
+1本目はホスト部が残るため `FAILED`、2本目はnetworkへ正規化され `SUCCESS` になる点を観察します。

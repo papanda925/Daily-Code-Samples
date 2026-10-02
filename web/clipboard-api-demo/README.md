@@ -13,3 +13,7 @@ GitHub PagesなどのHTTPS環境で `index.html` を開き、文字を入力し�
 [MDN — Clipboard: writeText()](https://developer.mozilla.org/docs/Web/API/Clipboard/writeText)
 
 検証状態: API仕様確認済み。browser実機再確認は未実施。
+
+## ライブデモ
+
+https://papanda925.github.io/Daily-Code-Samples/demos/clipboard-api-demo/

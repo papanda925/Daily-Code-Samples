@@ -39,3 +39,11 @@ try {
 「なぜこのファイルだけ警告されるのか」の調査材料になります。Zone.Identifierを削除する操作はこの教材では扱いません。
 
 検証状態: 実装済み・Windows実機未確認。
+
+## 実行ファイル
+
+```powershell
+./Observe-ZoneIdentifier.ps1 -Path .\sample.txt
+```
+
+ファイルやstreamは変更せず、存在確認と読み取りだけを行います。

@@ -1,83 +1,26 @@
-# ------------------------------------------------------------
-# ブロックチェーンの「ハッシュで前後をつなぐ部分」だけを
-# PowerShellで体験する教育用サンプルです。
-#
-# BitcoinやEthereumの完全な実装ではありません。
-#
-# このサンプルには、
-# - P2Pネットワーク
-# - 電子署名
-# - Proof of Work
-# - 分散合意
-#
-# などは入っていません。
-# ------------------------------------------------------------
-
 function Get-Sha256Hex {
-    param(
-        # SHA-256を計算したい元の文字列です。
-        [Parameter(Mandatory)]
-        [string]$Text
-    )
+    param([Parameter(Mandatory)][string]$Text)
 
-    # SHA256.Create() は .NET が提供するSHA-256実装です。
-    #
-    # Get-FileHashのようなPowerShell cmdletではなく、
-    # .NETの暗号クラスを直接呼んでいます。
     $sha = [System.Security.Cryptography.SHA256]::Create()
-
     try {
-        # SHA-256は「文字列」ではなくbyte列を入力に取ります。
-        #
-        # 同じ文字列を同じbyte列へ変換できるよう、
-        # この教材ではUTF-8を使います。
         $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
-
-        # ComputeHash() の戻り値はbyte配列です。
         $hash = $sha.ComputeHash($bytes)
-
-        # byte配列のままだと人が読みづらいため、
-        # 各byteを2桁16進数へ変換して連結します。
-        #
-        # 例:
-        #   10進数 255 → "ff"
-        return -join (
-            $hash | ForEach-Object { $_.ToString("x2") }
-        )
+        return -join ($hash | ForEach-Object { $_.ToString("x2") })
     }
     finally {
-        # SHA256オブジェクトが持つリソースを解放します。
-        #
-        # 途中で例外が起きても実行されるようfinallyに置きます。
         $sha.Dispose()
     }
 }
 
 function New-DemoBlock {
     param(
-        # ブロックの通し番号です。
         [int]$Index,
-
-        # このブロックが持つ学習用データです。
         [string]$Data,
-
-        # 1つ前のブロックのHashを保存する欄です。
         [string]$PreviousHash
     )
 
-    # 今回の教材では、
-    #
-    #   Index | Data | PreviousHash
-    #
-    # の3つを1本の文字列へ連結し、
-    # その文字列全体からHashを計算します。
-    #
-    # DataだけでなくPreviousHashもHash計算へ含めることで、
-    # 「前のブロックとのつながり」も現在のHashへ反映されます。
     $payload = "$Index|$Data|$PreviousHash"
 
-    # PowerShellのカスタムオブジェクトを、
-    # 1つの「ブロック」として扱います。
     [pscustomobject]@{
         Index        = $Index
         Data         = $Data
@@ -86,21 +29,19 @@ function New-DemoBlock {
     }
 }
 
-function Test-DemoChain {
-    param(
-        # 検証するブロック配列です。
-        [object[]]$Chain
-    )
+function New-DemoChain {
+    $chain = @()
+    $chain += New-DemoBlock 0 "Genesis" ("0" * 64)
+    $chain += New-DemoBlock 1 "Alice -> Bob : 100" $chain[0].Hash
+    $chain += New-DemoBlock 2 "Bob -> Carol : 40" $chain[1].Hash
+    return ,$chain
+}
 
-    # 先頭から1ブロックずつ検証します。
+function Test-DemoChain {
+    param([object[]]$Chain)
+
     for ($i = 0; $i -lt $Chain.Count; $i++) {
         $block = $Chain[$i]
-
-        # 保存されているIndex / Data / PreviousHashから、
-        # Hashをもう一度計算します。
-        #
-        # 保存済みHashと違えば、
-        # ブロック内部の何かが書き換わったと判断できます。
         $recalculated = Get-Sha256Hex(
             "$($block.Index)|$($block.Data)|$($block.PreviousHash)"
         )
@@ -112,12 +53,7 @@ function Test-DemoChain {
             }
         }
 
-        # Block 0（Genesis）には前ブロックがないため、
-        # PreviousHashのつながり確認はBlock 1以降だけ行います。
-        if (
-            $i -gt 0 -and
-            $block.PreviousHash -ne $Chain[$i - 1].Hash
-        ) {
+        if ($i -gt 0 -and $block.PreviousHash -ne $Chain[$i - 1].Hash) {
             return [pscustomobject]@{
                 Valid  = $false
                 Reason = "Block $i のPreviousHashが前ブロックと一致しません"
@@ -125,49 +61,35 @@ function Test-DemoChain {
         }
     }
 
-    # 最後まで不一致がなければ、この教材上では正常です。
-    [pscustomobject]@{
-        Valid  = $true
-        Reason = "OK"
-    }
+    [pscustomobject]@{ Valid = $true; Reason = "OK" }
 }
 
-# ------------------------------------------------------------
-# ここから実際に3ブロックを作ります。
-# ------------------------------------------------------------
-
-$chain = @()
-
-# Genesis Blockは「最初のブロック」です。
-#
-# 前のブロックが存在しないので、
-# この教材ではPreviousHashを64個の0にしています。
-# SHA-256の16進表記が64文字なので、見た目を合わせています。
-$chain += New-DemoBlock 0 "Genesis" ("0" * 64)
-
-# Block 1は、Block 0のHashをPreviousHashとして持ちます。
-$chain += New-DemoBlock 1 "Alice -> Bob : 100" $chain[0].Hash
-
-# Block 2は、Block 1のHashをPreviousHashとして持ちます。
-$chain += New-DemoBlock 2 "Bob -> Carol : 40" $chain[1].Hash
-
-# 3ブロックの内容を見える形で表示します。
+Write-Host "=== 正常なチェーン ==="
+$chain = New-DemoChain
 $chain | Format-Table Index, Data, PreviousHash, Hash -AutoSize
-
-# まず、書き換える前のチェーンを検証します。
-Test-DemoChain $chain
-
-# ------------------------------------------------------------
-# 改ざん実験
-# ------------------------------------------------------------
+$result = Test-DemoChain $chain
+$result
+if (-not $result.Valid) { throw "[FAILED] initial chain validation failed" }
 
 Write-Host ""
-Write-Host "--- Block 1を書き換える ---"
-
-# Block 1のDataだけを100→999へ書き換えます。
-#
-# Hashは更新していないため、
-# Test-DemoChainで再計算Hashとの不一致が検出されます。
+Write-Host "=== 実験1: Block 1のDataだけを100→999へ変更 ==="
 $chain[1].Data = "Alice -> Bob : 999"
+$result = Test-DemoChain $chain
+$result
+if ($result.Valid -or $result.Reason -notlike "Block 1*") {
+    throw "[FAILED] direct tamper was not detected"
+}
+Write-Host "[SUCCESS] Block 1自身のHash不一致を検出"
 
-Test-DemoChain $chain
+Write-Host ""
+Write-Host "=== 実験2: 改ざん後のBlock 1 Hashだけを再計算 ==="
+# Block 1だけ帳尻を合わせても、Block 2は古いBlock 1 Hashを保持しています。
+$chain[1].Hash = Get-Sha256Hex(
+    "$($chain[1].Index)|$($chain[1].Data)|$($chain[1].PreviousHash)"
+)
+$result = Test-DemoChain $chain
+$result
+if ($result.Valid -or $result.Reason -notlike "Block 2*") {
+    throw "[FAILED] downstream link break was not detected"
+}
+Write-Host "[SUCCESS] Block 2のPreviousHash不一致を検出"

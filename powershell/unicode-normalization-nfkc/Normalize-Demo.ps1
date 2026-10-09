@@ -4,11 +4,12 @@ $values = @(
     'ｶﾀｶﾅ',
     '① Ⅳ'
 )
-foreach ($original in $values) {
+$results = foreach ($original in $values) {
     $normalized = $original.Normalize([Text.NormalizationForm]::FormKC)
     [pscustomobject]@{
         Before = $original
         After  = $normalized
         Changed = ($original -cne $normalized)
     }
-} | Format-Table -AutoSize
+}
+$results | Format-Table -AutoSize

@@ -31,7 +31,7 @@ let
     Checked =
         if List.IsEmpty(Missing)
         then Source
-        else error "Required column(s) missing: " & Text.Combine(Missing, ", ")
+        else error ("Required column(s) missing: " & Text.Combine(Missing, ", "))
 in
     Checked
 

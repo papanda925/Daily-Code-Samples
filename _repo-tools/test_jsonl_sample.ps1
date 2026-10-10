@@ -1,4 +1,4 @@
-# Executes the current JSONL sample with a throwaway temp file (PowerShell 7 CI).
+﻿# Executes the current JSONL sample with a throwaway temp file (PowerShell 7 CI).
 # A separate Windows PowerShell 5.1 host test remains required before claiming PS5.1 verified.
 $ErrorActionPreference = 'Stop'
 $sample = Join-Path $PSScriptRoot '..'

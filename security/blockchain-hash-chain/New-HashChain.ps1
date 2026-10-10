@@ -25,7 +25,7 @@ function New-DemoBlock {
         Index        = $Index
         Data         = $Data
         PreviousHash = $PreviousHash
-        Hash         = Get-Sha256Hex $payload
+        Hash         = (Get-Sha256Hex -Text $payload)
     }
 }
 
@@ -42,9 +42,7 @@ function Test-DemoChain {
 
     for ($i = 0; $i -lt $Chain.Count; $i++) {
         $block = $Chain[$i]
-        $recalculated = Get-Sha256Hex(
-            "$($block.Index)|$($block.Data)|$($block.PreviousHash)"
-        )
+        $recalculated = Get-Sha256Hex -Text ("$($block.Index)|$($block.Data)|$($block.PreviousHash)")
 
         if ($recalculated -ne $block.Hash) {
             return [pscustomobject]@{
@@ -84,9 +82,7 @@ Write-Host "[SUCCESS] Block 1自身のHash不一致を検出"
 Write-Host ""
 Write-Host "=== 実験2: 改ざん後のBlock 1 Hashだけを再計算 ==="
 # Block 1だけ帳尻を合わせても、Block 2は古いBlock 1 Hashを保持しています。
-$chain[1].Hash = Get-Sha256Hex(
-    "$($chain[1].Index)|$($chain[1].Data)|$($chain[1].PreviousHash)"
-)
+$chain[1].Hash = Get-Sha256Hex -Text ("$($chain[1].Index)|$($chain[1].Data)|$($chain[1].PreviousHash)")
 $result = Test-DemoChain $chain
 $result
 if ($result.Valid -or $result.Reason -notlike "Block 2*") {

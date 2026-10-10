@@ -3,6 +3,13 @@
 $ErrorActionPreference = 'Stop'
 $sample = Join-Path $PSScriptRoot '..'
 $sample = Join-Path $sample 'powershell/jsonl-event-log/Write-ReadJsonlDemo.ps1'
+# The .ps1 source contains Japanese string literals. WinPS 5.1 needs a UTF-8 BOM
+# to read the script from disk correctly (the resulting .jsonl must still have no BOM).
+$scriptBytes = [IO.File]::ReadAllBytes($sample)
+if ($scriptBytes.Length -lt 3 -or $scriptBytes[0] -ne 0xEF -or
+    $scriptBytes[1] -ne 0xBB -or $scriptBytes[2] -ne 0xBF) {
+    throw 'Source .ps1 with Japanese text must use UTF-8 BOM for WinPS 5.1.'
+}
 $messages = @(& $sample -KeepFiles 3>&1 | ForEach-Object { [string]$_ })
 
 if (-not ($messages -match '^\[RESULT\] valid=2 invalid=1$')) {

@@ -2,7 +2,9 @@
 
 Windows PowerShell 5.1とPowerShell 7以降の両方を対象とします。ダミーイベント2件をUTF-8（BOMなし）のJSONLへ追記し、わざと壊れた行を追加して、正常な行だけを読み込む教材です。
 
-**状態: implemented／PowerShell実機による実行確認は未実施。** 以下は期待結果の例です。
+**状態: implemented／Windows PowerShell 5.1実機による修正版の実行確認は未実施。** CIではPowerShell 7での実行とUTF-8 BOMなしのJSONL出力を確認するテストを追加していますが、CI成功前には成功済みとは記載しません。以下は期待結果の例です。
+
+**文字コードの重要な区別**：教材の `.ps1` ファイルは日本語文字列をWindows PowerShell 5.1が正しく読み込めるよう **UTF-8 BOM付き**で保存します。教材が出力する `.jsonl` ファイルは形式要件に合わせて **UTF-8 BOMなし**にします。別ファイルの異なる要件です。
 
 ## まず試す
 

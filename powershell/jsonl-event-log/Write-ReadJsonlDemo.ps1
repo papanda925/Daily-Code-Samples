@@ -1,4 +1,4 @@
-# PowerShell 7+ / 無害な一時ディレクトリだけを使う JSONL 学習サンプル
+# Windows PowerShell 5.1 / PowerShell 7+ 共通・無害な一時ディレクトリだけを使う JSONL 学習サンプル
 # 元ファイルや本番ログにはアクセスしない
 [CmdletBinding()]
 param(
@@ -12,6 +12,9 @@ $log = Join-Path $work 'events.jsonl'
 try {
     New-Item -ItemType Directory -Path $work -ErrorAction Stop | Out-Null
 
+    # 5.1 / 7共通でUTF-8 (BOMなし) を明示する
+    $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+
     # 同じ形式のイベントを1件ずつ、必ず1行のJSONとして追記する
     $events = @(
         [ordered]@{ event_id = 'evt-001'; status = 'START'; message = '開始' }
@@ -20,11 +23,15 @@ try {
 
     foreach ($event in $events) {
         $line = ConvertTo-Json -InputObject $event -Compress -Depth 5 -ErrorAction Stop
-        Add-Content -LiteralPath $log -Value $line -Encoding utf8NoBOM -ErrorAction Stop
+        [System.IO.File]::AppendAllText(
+            $log, $line + [Environment]::NewLine, $utf8NoBom
+        )
     }
 
     # 末尾1レコードだけ壊れたケースを再現する（学習用）
-    Add-Content -LiteralPath $log -Value '{broken json' -Encoding utf8NoBOM -ErrorAction Stop
+    [System.IO.File]::AppendAllText(
+        $log, '{broken json' + [Environment]::NewLine, $utf8NoBom
+    )
 
     $valid = 0
     $invalid = 0

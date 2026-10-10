@@ -1,12 +1,14 @@
 # PowerShellでJSON Lines（JSONL）を追記・検査する
 
-PowerShell 7以降向け。ダミーイベント2件をUTF-8（BOMなし）のJSONLへ追記し、わざと壊れた行を追加して、正常な行だけを読み込む教材です。
+Windows PowerShell 5.1とPowerShell 7以降の両方を対象とします。ダミーイベント2件をUTF-8（BOMなし）のJSONLへ追記し、わざと壊れた行を追加して、正常な行だけを読み込む教材です。
 
-**状態: implemented／PowerShell実機による実行確認は未実施。** 以下は期待結果の例です。
+**状態: implemented／Windows PowerShell 5.1実機による修正版の実行確認は未実施。** CIではPowerShell 7での実行とUTF-8 BOMなしのJSONL出力を確認するテストを追加していますが、CI成功前には成功済みとは記載しません。以下は期待結果の例です。
+
+**文字コードの重要な区別**：教材の `.ps1` ファイルは日本語文字列をWindows PowerShell 5.1が正しく読み込めるよう **UTF-8 BOM付き**で保存します。教材が出力する `.jsonl` ファイルは形式要件に合わせて **UTF-8 BOMなし**にします。別ファイルの異なる要件です。
 
 ## まず試す
 
-PowerShell 7以降で、このフォルダーから実行します。外部モジュール、管理者権限、ネットワーク接続は不要です。
+Windows PowerShell 5.1 または PowerShell 7以降で、まず `$PSVersionTable.PSVersion` を確認してからこのフォルダーで実行します。外部モジュール、管理者権限、ネットワーク接続は不要です。掲載する出力は期待例であり、変更後のPowerShell実機検証は未完了です。
 
 ```powershell
 ./Write-ReadJsonlDemo.ps1
@@ -27,14 +29,14 @@ WARNINGの見え方はホストによって変わります。
 
 1. ランダム名の新規一時フォルダーを作成。既存ログに触れません。
 2. ConvertTo-Json -Compress -Depth 5 で1件を改行のないJSON文字列にします。
-3. Add-Content -Encoding utf8NoBOM で1行ずつ追記します。
+3. PowerShell 5.1と7で共通の `[System.IO.File]::AppendAllText` と `[System.Text.UTF8Encoding]::new($false)` で、BOMなしUTF-8として1行ずつ追記します。
 4. 不正なJSONを意図的に1行追記します。
 5. Get-Contentで読み込み、ConvertFrom-Jsonのエラーを行単位で捕捉します。
 6. 既定ではfinallyで、この処理が新規作成した一時フォルダーだけを削除します。
 
 ## 1か所変える
 
-不正な1行のAdd-Contentをコメントアウトし、再実行してみてください。期待結果が valid=2 invalid=0 に変わります。
+不正な1行を書き込む `AppendAllText` の呼び出し（3行）をコメントアウトし、再実行してみてください。期待結果が valid=2 invalid=0 に変わります。
 
 生成したJSONLを自分で確認したい場合:
 
@@ -58,4 +60,5 @@ WARNINGの見え方はホストによって変わります。
 - [Microsoft Learn — ConvertTo-Json](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/convertto-json)
 - [Microsoft Learn — ConvertFrom-Json](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/convertfrom-json)
 - [Microsoft Learn — Add-Content](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/add-content)
+- [Microsoft Learn — PowerShellの文字コードと5.1/7の違い](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_character_encoding)
 - [Microsoft Learn — Get-Content](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content)

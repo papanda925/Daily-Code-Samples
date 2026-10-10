@@ -68,6 +68,10 @@ jobs:
             throw "PowerShell parse check failed: $($allErrors.Count) error(s)"
           }
 
+      - name: JSONL executable tutorial regression (PowerShell 7)
+        shell: pwsh
+        run: ./_repo-tools/test_jsonl_sample.ps1
+
       - name: JSON parse
         shell: bash
         run: |

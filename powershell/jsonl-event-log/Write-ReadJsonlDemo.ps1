@@ -1,4 +1,4 @@
-# Windows PowerShell 5.1 / PowerShell 7+ 共通・無害な一時ディレクトリだけを使う JSONL 学習サンプル
+﻿# Windows PowerShell 5.1 / PowerShell 7+ 共通・無害な一時ディレクトリだけを使う JSONL 学習サンプル
 # 元ファイルや本番ログにはアクセスしない
 [CmdletBinding()]
 param(

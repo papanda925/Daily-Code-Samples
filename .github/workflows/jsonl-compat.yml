@@ -1,0 +1,41 @@
+name: JSONL PowerShell 5.1 and 7 compatibility
+
+# Daily-Code-Samples is public; this executes only on relevant changes,
+# with GitHub-hosted standard runners. No Gemini/OpenAI API is called.
+on:
+  pull_request:
+    paths:
+      - 'powershell/jsonl-event-log/**'
+      - '_repo-tools/test_jsonl_sample.ps1'
+      - '.github/workflows/jsonl-compat.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'powershell/jsonl-event-log/**'
+      - '_repo-tools/test_jsonl_sample.ps1'
+      - '.github/workflows/jsonl-compat.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  winps51-and-pwsh7:
+    name: Windows PowerShell 5.1 and PowerShell 7 execution
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Windows PowerShell 5.1 — full JSONL execution and encoding tests
+        shell: powershell
+        run: |
+          if ($PSVersionTable.PSVersion.Major -ne 5) {
+            throw "Expected Windows PowerShell 5.x, found $($PSVersionTable.PSVersion)"
+          }
+          & ./_repo-tools/test_jsonl_sample.ps1
+      - name: PowerShell 7 — full JSONL execution and encoding tests
+        shell: pwsh
+        run: |
+          if ($PSVersionTable.PSVersion.Major -ne 7) {
+            throw "Expected PowerShell 7.x, found $($PSVersionTable.PSVersion)"
+          }
+          & ./_repo-tools/test_jsonl_sample.ps1

@@ -1,4 +1,3 @@
-Attribute VB_Name = "LastRowComparison"
 Option Explicit
 
 ' 対象はマクロを保存したブックにある検証用シートだけ。

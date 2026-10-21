@@ -1,0 +1,8 @@
+http {
+    client_header_buffer_size <環境に合わせた値>;
+    large_client_header_buffers <個数> <サイズ>;
+
+    server {
+        # このserverに固有の設定があれば確認する
+    }
+}

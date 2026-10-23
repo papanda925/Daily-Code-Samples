@@ -1,0 +1,1 @@
+=AND(ISNUMBER($B2),$C2<>"完了",$B2>=TODAY(),$B2<=TODAY()+7)

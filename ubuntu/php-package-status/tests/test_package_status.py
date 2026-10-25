@@ -44,7 +44,6 @@ printf '%s\\n' '  https://example.com/repository PRIVATE_FIXTURE_NOT_FOR_OUTPUT'
             **os.environ, "PATH": str(self.bin),
             "PHP_SAMPLE_TEST_DB": str(self.database),
             "PHP_SAMPLE_TEST_TRACE": str(self.trace),
-            "XDG_STATE_HOME": str(self.root / "state"),
         }
 
     def make_database(self, fpm_state="install ok installed"):
@@ -120,67 +119,35 @@ printf '%s\\n' '  https://example.com/repository PRIVATE_FIXTURE_NOT_FOR_OUTPUT'
         self.assertFalse(self.trace.exists())
 
 
-    def saved_logs(self):
-        return list((self.root / "state").glob("daily-code-samples/php-package-status/*.log"))
-
-    def test_result_log_persists_after_shell_returns(self):
-        result = self.run_script()
-        self.assertEqual(result.returncode, 0)
-        logs = self.saved_logs()
-        self.assertEqual(len(logs), 1)
-        self.assertEqual(logs[0].stat().st_mode & 0o777, 0o600)
-        self.assertIn("[RESULT_FILE] " + str(logs[0]), result.stdout)
-        self.assertIn("[REOPEN] cat --", result.stdout)
-        content = logs[0].read_text(encoding="utf-8")
-        self.assertIn("installed\tphp8.3-fpm", content)
-        self.assertIn("[EXIT_CODE] 0", content)
-
-    def test_invalid_input_still_writes_reopenable_failure_log(self):
-        result = self.run_script("--bad")
-        self.assertEqual(result.returncode, 2)
-        self.assertIn("[ERROR]", result.stderr)
-        logs = self.saved_logs()
-        self.assertEqual(len(logs), 1)
-        self.assertIn("[EXIT_CODE] 2", logs[0].read_text(encoding="utf-8"))
-
-    def test_pasting_full_source_into_interactive_shell_does_not_exit(self):
+    def test_pasted_script_leaves_interactive_shell_open(self):
+        """Running the entire sample as pasted text must not end the terminal."""
         result = subprocess.run(
             ["/bin/bash", "--noprofile", "--norc", "-i"],
-            input=SCRIPT.read_text(encoding="utf-8") + "\nprintf '%s\\n' SHELL_STILL_OPEN\n",
-            text=True, errors="replace", capture_output=True,
-            cwd=self.root, env=self.env, check=False,
+            input=SCRIPT.read_text(encoding="utf-8") + "\nprintf '%s\n' SHELL_STILL_OPEN\n",
+            text=True, encoding="utf-8", errors="replace",
+            capture_output=True, env=self.env, cwd=self.root, check=False,
         )
         self.assertIn("SHELL_STILL_OPEN", result.stdout)
-        self.assertIn("[RESULT_FILE]", result.stdout)
+        self.assertIn("STATE  PACKAGE  VERSION", result.stdout)
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(len(self.saved_logs()), 1)
 
-    def test_sourced_file_does_not_exit_shell(self):
+    def test_sourcing_script_leaves_shell_open_after_error(self):
         result = subprocess.run(
-            ["/bin/bash", "-c", '. "$1"; printf "%s\\n" SHELL_STILL_OPEN',
-             "test", str(SCRIPT)], text=True, capture_output=True,
-            cwd=self.root, env=self.env, check=False,
+            ["/bin/bash", "-c",
+             'source "$1" --version; rc=$?; printf "SHELL_STILL_OPEN:%d\n" "$rc"',
+             "test", str(SCRIPT)],
+            text=True, capture_output=True, env=self.env,
+            cwd=self.root, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("SHELL_STILL_OPEN", result.stdout)
-        self.assertEqual(len(self.saved_logs()), 1)
+        self.assertIn("SHELL_STILL_OPEN:2", result.stdout)
 
-    def test_failed_apt_check_results_are_saved_without_sensitive_lines(self):
-        result = self.run_script("php8.3-cli", env={**self.env, "PHP_SAMPLE_TEST_APT": "fail"})
-        self.assertEqual(result.returncode, 1)
-        logs = self.saved_logs()
-        self.assertEqual(len(logs), 1)
-        saved = logs[0].read_text(encoding="utf-8")
-        self.assertIn("[EXIT_CODE] 1", saved)
-        self.assertIn("候補情報を取得できません", saved)
-        self.assertNotIn("PRIVATE_FIXTURE", saved)
-        self.assertNotIn("example.com", saved)
-
-    def test_relative_output_home_is_rejected_before_check(self):
-        result = self.run_script(env={**self.env, "XDG_STATE_HOME": "relative/path"})
-        self.assertEqual(result.returncode, 2)
-        self.assertIn("絶対パス", result.stderr)
-        self.assertFalse(self.trace.exists())
+    def test_sample_does_not_create_log_file(self):
+        result = self.run_script()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("RESULT_FILE", result.stdout)
+        self.assertNotIn("REOPEN", result.stdout)
+        self.assertEqual(list(self.root.rglob("*.log")), [])
 
 
 if __name__ == "__main__":

@@ -11,6 +11,39 @@ PHPの上流版数、Ubuntu等の配布パッケージ版数、インストー�
 - 通常ユーザーで実行。sudo、追加ライブラリ、APIキーは不要です。
 - インターネットからの取得、apt update、インストール、設定変更、サービス再起動は行いません。APTの表示は既存のローカルキャッシュに基づきます。
 
+## 実行結果を必ず保存する（ターミナルが閉じても確認可能）
+
+**結果が確認できないサンプルは不合格**です。コマンドを直接貼り付けると、旧版の末尾の `exit "$result"` がログインシェルを終了させることがありました。修正版では、トップレベルの `exit` を廃止し、終了コードは呼出し先へ戻します。対話シェルの `set -u` や `umask` も変更しません。
+
+- **標準実行**：作業ディレクトリで `bash check-php-package-status.sh` を実行してください。ファイルを全行貼り付けたり、`source` しても端末そのものを閉じないように実装していますが、標準実行を推奨します。
+- **自動保存**：成功、対象パッケージ未導入、入力不正、APT取得失敗のいずれも、実行結果と `EXIT_CODE` を、ユーザー専用のローカルログへ保存します。
+- **出力表示**：コマンド実行後、通常の結果に加え `[RESULT_FILE]` と `[REOPEN]` が表示されます。`[REOPEN]` の行に記載された `cat -- ...` を実行すれば同じ結果を再表示できます。
+- **保存先**：既定は `~/.local/state/daily-code-samples/php-package-status/`。 `XDG_STATE_HOME` を設定している場合はその配下です。ログは毎回別ファイル、パーミッション `0600`、ディレクトリは新規作成時 `0700`。自動送信・Git登録は行いません。
+- **注意**：結果を外部共有するときは、パッケージ構成や版数が内部情報に当たらないか確認してください。出力が得られない保存先エラーは隠さず、検査開始前に中止します。
+
+画面が閉じたり過去の結果を見直したい場合は、新しいターミナルで次のようにログ一覧を表示します。
+
+```bash
+ls -lt "$HOME/.local/state/daily-code-samples/php-package-status/"*.log
+# 一覧に表示されたログのフルパスを指定
+cat -- "/表示されたログのフルパス"
+```
+
+実行例（保存先のホームパスは例示）：
+
+```text
+STATE  PACKAGE  VERSION
+installed    php8.3-fpm    8.3.6-0ubuntu0.24.04.13
+  Installed: 8.3.6-0ubuntu0.24.04.13
+  Candidate: 8.3.6-0ubuntu0.24.04.13
+[NOTE] 完了は安全性の判定ではありません。OS・配布元の公式通知と照合してください。
+[EXIT_CODE] 0
+[RESULT_FILE] /home/example/.local/state/daily-code-samples/php-package-status/php-package-status-20261025T100000-1234-2345-1.log
+[REOPEN] cat -- /home/example/.local/state/daily-code-samples/php-package-status/php-package-status-20261025T100000-1234-2345-1.log
+```
+
+これはログの出力例です。実機の更新・Web側PHP実行確認の証拠ではありません。
+
 ## まず試す
 
 ```bash
@@ -72,11 +105,11 @@ PHP本家の8.3.36等と、Ubuntuの8.3.6-0ubuntu0.24.04.13等は同じ版数体
 - dpkg-queryの版数だけでなく状態欄を見ます。
 - InstalledとCandidateを取り違えないでください。
 - クエリーのエラーを握りつぶして成功にはしません。生の診断文やAPTのリポジトリURLは表示しません。
-- 実環境のパッケージ構成・版数も公開範囲に注意してください。結果の外部送信・保存はしません。
+- 実環境のパッケージ構成・版数も公開範囲に注意してください。結果はユーザー専用ローカルログに自動保存しますが、外部送信はしません。
 
 ## 検証範囲
 
-Bash構文、架空のdpkgデータベース、APT出力の試験データで、installed/config-files/未登録・APT失敗・入力不正・コマンド不足・機密値の非表示を確認するテストを添付しています。実UbuntuのPHP更新、実PHP-FPM、実サイトの安全性は未検証です。
+Bash構文、架空のdpkgデータベース、APT出力の試験データ、および直接貼付・source実行・異常終了ログ保存を含めて、installed/config-files/未登録・APT失敗・入力不正・コマンド不足・機密値の非表示を確認するテストを添付しています。実UbuntuのPHP更新、実PHP-FPM、実サイトの安全性は未検証です。
 
 ```bash
 python3 -m unittest discover -s tests -v

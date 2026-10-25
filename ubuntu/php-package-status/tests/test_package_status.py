@@ -123,7 +123,7 @@ printf '%s\\n' '  https://example.com/repository PRIVATE_FIXTURE_NOT_FOR_OUTPUT'
         """Running the entire sample as pasted text must not end the terminal."""
         result = subprocess.run(
             ["/bin/bash", "--noprofile", "--norc", "-i"],
-            input=SCRIPT.read_text(encoding="utf-8") + "\nprintf '%s\n' SHELL_STILL_OPEN\n",
+            input=SCRIPT.read_text(encoding="utf-8") + "\nprintf '%s\\n' SHELL_STILL_OPEN\n",
             text=True, encoding="utf-8", errors="replace",
             capture_output=True, env=self.env, cwd=self.root, check=False,
         )
@@ -134,7 +134,7 @@ printf '%s\\n' '  https://example.com/repository PRIVATE_FIXTURE_NOT_FOR_OUTPUT'
     def test_sourcing_script_leaves_shell_open_after_error(self):
         result = subprocess.run(
             ["/bin/bash", "-c",
-             'source "$1" --version; rc=$?; printf "SHELL_STILL_OPEN:%d\n" "$rc"',
+             'source "$1" --version; rc=$?; printf "SHELL_STILL_OPEN:%d\\n" "$rc"',
              "test", str(SCRIPT)],
             text=True, capture_output=True, env=self.env,
             cwd=self.root, check=False,

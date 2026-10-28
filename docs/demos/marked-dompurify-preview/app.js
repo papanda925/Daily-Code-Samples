@@ -1,0 +1,2 @@
+function render(){try{const raw=marked.parse(document.querySelector('#source').value);const safe=DOMPurify.sanitize(raw,{FORBID_TAGS:['img','iframe','style','script'],FORBID_ATTR:['style']});const view=document.querySelector('#preview');view.innerHTML=safe;view.querySelectorAll('a').forEach(a=>a.removeAttribute('href'));document.querySelector('#status').textContent='SUCCESS: 解析→無害化→表示';}catch(e){document.querySelector('#status').textContent='FAILED: '+e.name;}}
+document.querySelector('#render').onclick=render;render();

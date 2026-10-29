@@ -1,0 +1,4 @@
+[app]
+name = "demo"
+enabled = true
+retries = 2

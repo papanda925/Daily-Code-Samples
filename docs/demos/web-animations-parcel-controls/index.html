@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web Animations APIで荷物カードを動かす</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f8fc;color:#254155;font:16px/1.7 system-ui,sans-serif}
+main{max-width:760px;margin:28px auto;padding:24px;background:#fff;border-radius:16px;border:1px solid #d8e7f1}
+h1{font-size:clamp(1.35rem,4vw,2rem);line-height:1.4}
+.about{background:#eaf5fc;border-left:6px solid #2580b8;padding:14px;border-radius:8px}
+.track{position:relative;min-height:140px;margin:18px 0;border:2px dashed #8ebbd8;border-radius:12px;background:#f2faff;overflow:hidden}
+.track:after{content:"";position:absolute;top:72px;left:0;right:0;border-top:2px dotted #c6dfea}
+.parcel{position:absolute;top:35px;left:16px;width:76px;height:70px;display:grid;place-content:center;text-align:center;border:2px solid #2877ac;border-radius:12px;background:#bce2f9;z-index:1;font-size:18px;font-weight:700}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button,select{font:inherit;border-radius:8px;padding:8px 12px;border:1px solid #2d78b1;background:#fff;color:#205a85}
+button{cursor:pointer}button.primary{background:#2379b6;color:white}
+button:focus-visible,select:focus-visible{outline:3px solid #efa83d;outline-offset:3px}
+button:disabled,select:disabled{opacity:.48;cursor:not-allowed}
+#status{padding:12px 14px;border-left:5px solid #2b80bd;background:#eef7fd;min-height:50px}
+.note{padding:12px 14px;border-left:5px solid #cb943c;background:#fff7e8}
+@media(max-width:550px){main{margin:0;border-radius:0;padding:16px}.controls button{flex:1 1 43%}}
+</style>
+<script src="./app.js" defer></script>
+</head>
+<body><main>
+<p>Daily Code / JavaScript・ブラウザ標準API</p>
+<h1>📦 Web Animations APIで荷物カードを運んでみよう</h1>
+<div class="about"><b>このデモについて</b><p>荷物カードの往復を再生・一時停止・速度変更して観察します。外部ライブラリ・ログイン・APIキーは不要です。</p></div>
+<h2>まず試す</h2><p>「再生」→「速度を2倍」→「一時停止」→「リセット」。動きと状態の文字表示を見比べます。</p>
+<div class="track" id="track" aria-label="荷物カードが移動する領域"><div id="parcel" class="parcel" role="img" aria-label="荷物カード">📦<small>荷物</small></div></div>
+<div class="controls">
+<button id="play" class="primary" type="button">▶ 再生</button>
+<button id="pause" type="button">⏸ 一時停止</button>
+<button id="reset" type="button">↺ リセット</button>
+<label for="speed">速度</label><select id="speed"><option value="0.5">0.5倍</option><option value="1" selected>1倍</option><option value="2">2倍</option></select>
+</div>
+<p id="status" role="status" aria-live="polite">読み込み中…</p>
+<div class="note"><b>動きを減らす設定</b><p>OSの動き軽減設定が有効なら静止表示にし、再生操作は無効にします。変更後は再読み込みして確認してください。</p></div>
+<h2>動く仕組み</h2><p>Element.animate() は Animation オブジェクトを返します。play()、pause()、cancel()、updatePlaybackRate()で制御します。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/API/Element/animate">MDN: Element.animate()</a> / <a href="https://developer.mozilla.org/ja/docs/Web/API/Animation">MDN: Animation</a></p>
+</main></body></html>

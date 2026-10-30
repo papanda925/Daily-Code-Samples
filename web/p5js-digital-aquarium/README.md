@@ -2,16 +2,18 @@
 
 ## ライブデモ
 
-[GitHub Pages デモ（現在未公開）](https://papanda925.github.io/Daily-Code-Samples/demos/p5js-digital-aquarium/)
+[GitHub Pages デモ（公開・動作は未検証）](https://papanda925.github.io/Daily-Code-Samples/demos/p5js-digital-aquarium/)
 
-GitHub Pages URLは正本にGitHub保存された後だけ到達可能。2026-10-27現在は未公開。
+GitHubにソースがあることと、GitHub Pagesで配信・表示できることは別です。公開URLの実ブラウザ動作は未検証です。表示できない場合は下記のローカル手順を使用してください。
 
 ## まず試す
 
-1. `docs/demos/p5js-digital-aquarium/index.html`と`app.js`を同じディレクトリに置く。
-2. Pythonが使えるならフォルダの親から `python -m http.server 8000` を起動し `http://localhost:8000/` で開く。
-3. クリックで魚を増やし、水族館の動きを見る。
-4. `SUCCESS` / `RUNNING` / `FAILED` の結果と画面の変化を照合する。現時点では実ブラウザ未検証。
+1. GitHubリポジトリを取得し、`docs/demos/p5js-digital-aquarium/` にある `index.html` と `app.js` を**同じフォルダ**に置く（`web/p5js-digital-aquarium/` には解説READMEだけがあります）。
+2. ターミナルでその **HTMLのあるフォルダ** に移動する。例：`cd docs/demos/p5js-digital-aquarium`（リポジトリのルートから実行）。
+3. macOS/Linuxなら `python3 -m http.server 8000`、WindowsでPython Launcherがあれば `py -m http.server 8000` を実行する。起動できない場合は `python -m http.server 8000` も試せる。Pythonとポート8000の空きが必要。
+4. ブラウザで `http://localhost:8000/` を開く。外部CDNからp5.jsを取得するため、初回はネット接続が必要。
+5. **期待値（実測ではない）**：初期は魚2匹、`魚を追加`を1回押すと3匹、`空にする`を押すと0匹。追加の上限は30匹。`RUNNING`の文字だけで成功とせず、魚の図形と表示匹数が一致するか確認する。
+6. 画面が空白なら開発者ツールのConsole/NetworkでCDN・`app.js`・DOM要素を確認する。現時点では実ブラウザ未検証。
 
 ## ここを見る
 

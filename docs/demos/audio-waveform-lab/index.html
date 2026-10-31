@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web Audioの波形観察ラボ｜Daily Code</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:820px;margin:0 auto;padding:1rem;line-height:1.7;color:#183149;background:#fff}
+header,main,footer{margin-bottom:1.2rem} .panel{background:#f3f8fd;border:1px solid #b5d4ec;border-radius:10px;padding:1rem;margin:.8rem 0}
+.controls{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+button{padding:.6rem .9rem;min-height:44px} input[type=range]{max-width:100%}
+canvas{width:100%;height:auto;border:1px solid #c6d7e5;display:block}
+:focus-visible{outline:3px solid #1762b5;outline-offset:3px}
+small{display:block;color:#345} @media print{button{display:none}canvas{max-width:100%}}
+</style></head><body>
+<header><h1>音の波形を見てみよう</h1><p>Web Audio APIで440 Hzなどの波をCanvasに描きます。<strong>初期状態は無音（ミュート）</strong>。マイクや個人情報は使いません。</p></header>
+<main>
+<section class="panel"><h2>まず試す：3操作</h2><ol><li>「開始」を押します。音は出ません。</li><li>周波数スライダーを220 Hzから440 Hzへ動かします。</li><li>波の山の間隔が狭くなるか観察します。止めるには「停止」を押します。</li></ol>
+<div class="controls"><button id="start" type="button">開始（初期ミュート）</button><button id="stop" type="button" disabled>停止</button><label for="hz">周波数</label><input id="hz" type="range" min="110" max="880" step="10" value="220"><output id="hz-value" for="hz">220 Hz</output></div>
+<div class="controls"><label><input id="mute" type="checkbox" checked> ミュート（推奨）</label><button id="snapshot" type="button" disabled>波形を1回描く</button></div>
+<p role="status" id="status" aria-live="polite"></p><small>ミュートを解除すると小さな正弦波音が鳴ります。音量に注意してください。画面を離れると自動停止します。動きを減らす設定では自動アニメーションを止め、手動描画できます。</small></section>
+<section><h2>操作後はここを見る</h2><canvas id="scope" width="720" height="240" role="img" aria-label="波形の描画エリア。数値は上の周波数表示で確認できます。"></canvas><p>横軸は時間に相当します。同じ表示幅で周波数を上げると山の間隔が短くなる想定です。実ブラウザ動作は未検証です。</p></section>
+<section><h2>しくみ</h2><p>OscillatorNode → AnalyserNode → GainNode → スピーカー。解析はミュート前なので、無音でも波形を描けます。</p></section>
+</main><footer><p>外部ライブラリなし／音声ファイル・マイク・位置情報なし。<a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/audio-waveform-lab">READMEとソース</a></p></footer>
+<script src="./app.js"></script></body></html>

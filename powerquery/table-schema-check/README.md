@@ -30,3 +30,15 @@ Power BI Desktop: [データの変換] → [新しいソース] → [空のク�
 - [Microsoft Learn: Table.HasColumns](https://learn.microsoft.com/en-us/powerquery-m/table-hascolumns)
 - [Microsoft Learn: Table.FromRows](https://learn.microsoft.com/en-us/powerquery-m/table-fromrows)
 - [Microsoft Learn: List.Difference](https://learn.microsoft.com/en-us/powerquery-m/list-difference)
+
+## 3つのクエリの期待結果
+
+[check-schema.pq](check-schema.pq) はコメント付きの3つの `let ... in ...` クエリを収録しています。**一度に貼り付けるのではなく、1つずつ別クエリとして**Power Queryの詳細エディターへコピーします。
+
+1. Query 1：`OrderId` / `Department` / `Amount` の列名・位置・型が表になる想定です。
+2. Query 2：`Amount` 列が存在しないため、`Required column(s) missing: Amount` のエラーを意図的に返します。
+3. Query 3：必須列の組合せは `true`、存在しない `Owner` を含む組合せは `false` となる想定です。
+
+## トラブル・安全・検証
+
+Query 2のエラーは教材の意図した結果で、事故ではありません。区切り位置を間違えるとMの構文エラーになるため、各クエリの `let` から `in` までを使ってください。2026-10-31：GitHub上のMコードと説明を照合。Power Query実行は未検証。外部データは使用しません。

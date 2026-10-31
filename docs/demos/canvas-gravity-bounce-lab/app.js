@@ -2,6 +2,7 @@
 "use strict";
 // position in px, velocity in px/s, acceleration in px/s^2
 function stepBall(b,g,e,dt,floor,r){
+  if (b.y >= floor-r && b.vy === 0 && b.hits > 0) return {y:floor-r,vy:0,hits:b.hits};
   let vy=b.vy+g*dt, y=b.y+vy*dt, hits=b.hits;
   if(y>=floor-r && vy>0){y=floor-r;vy=-vy*e;hits++;
     if(Math.abs(vy)<25)vy=0;

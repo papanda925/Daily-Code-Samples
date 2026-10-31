@@ -47,3 +47,18 @@ GitHub Pages の公開物は **`docs/` に集約**します。
 取得した個人情報を保存・送信しない最小構成を基本とします。
 
 最初の例: `docs/demos/geolocation-leaflet/`
+
+## はじめて使う方へ
+
+1. 興味のあるカテゴリのサンプルフォルダを開き、`README.md` の「何を体験するか」「まず試す」を読みます。
+2. Webデモがある場合はREADME内の「ライブデモ」から開き、記載された操作と結果を比べます。
+3. コードを理解したい場合は、READMEに示された実ファイル（通常 `docs/demos/<demo-name>/index.html` と `app.js`）を参照します。
+4. うまく動かない場合は、READMEの「うまくいかないとき」と「検証」を確認してください。動作未確認の環境は未検証と記載しています。
+
+### 動くWeb教材の例
+
+- [SVGベジェ曲線をスライダーで動かす（解説README）](web/svg-bezier-control-lab/README.md)
+- [Canvasの花火を操作する（解説README）](web/canvas-fireworks-accessible/README.md)
+- [Web Audioの波形を観察する（解説README）](web/audio-waveform-lab/README.md)
+
+**ブログとの関係**：papanda925.comの記事で考え方や最小例を紹介し、このリポジトリのREADME・実コードで操作と検証を詳しく説明します。READMEが空・見出しのみの場合は完成扱いせず、[SAMPLE_GUIDE.md](SAMPLE_GUIDE.md) の教材品質ゲートに従って個別修正します。GitHub Actionsは利用しません。

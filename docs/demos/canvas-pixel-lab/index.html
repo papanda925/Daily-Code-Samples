@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canvasピクセル実験：明るさと白黒を動かす</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #17304b; background: #f5f9fe; }
+    body { max-width: 850px; margin: auto; padding: 1rem; line-height: 1.65; }
+    h1 { font-size: clamp(1.3rem, 4vw, 2rem); }
+    .box { border: 1px solid #bdd3e8; border-radius: 12px; padding: 1rem; background: white; margin: 1rem 0; }
+    .pair { display: flex; flex-wrap: wrap; gap: 1rem; }
+    figure { margin: 0; flex: 1 1 190px; }
+    canvas { display: block; width: min(100%, 240px); height: auto; border: 1px solid #879db2; image-rendering: pixelated; }
+    label { display: block; font-weight: 650; margin: .6rem 0; }
+    input[type=range] { width: min(100%, 380px); min-height: 2rem; }
+    button { font: inherit; padding: .5rem .9rem; border: 1px solid #225b91; border-radius: 8px; background: #fff; }
+    button:focus-visible, input:focus-visible { outline: 3px solid #b56d00; outline-offset: 2px; }
+    #readout { overflow-wrap: anywhere; }
+    @media print { body { background: white; } .controls { display: none; } .box { break-inside: avoid; } }
+  </style>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+<main>
+  <h1>Canvasで色の変化を見てみよう</h1>
+  <p>架空の8×8色見本を使い、明るさと白黒の違いを体験します。写真アップロード・外部通信・ログインは不要です。</p>
+  <section class="box controls" aria-labelledby="controls">
+    <h2 id="controls">まず試す</h2>
+    <p>①明るさを+60へ → ②右の色とRGB数値を見る → ③白黒にチェック。</p>
+    <label for="brightness">明るさ（-100〜+100）</label>
+    <input id="brightness" type="range" min="-100" max="100" step="20" value="0">
+    <label for="grayscale"><input id="grayscale" type="checkbox"> 白黒にする</label>
+    <button id="reset" type="button">初期値に戻す</button>
+  </section>
+  <section class="box" aria-labelledby="preview">
+    <h2 id="preview">左が元画像、右が加工後</h2>
+    <div class="pair">
+      <figure><canvas id="original" width="192" height="192" role="img" aria-label="加工前の架空の色見本"></canvas><figcaption>元画像（変更なし）</figcaption></figure>
+      <figure><canvas id="result" width="192" height="192" role="img" aria-label="スライダーの値に応じて変わる色見本"></canvas><figcaption>加工後</figcaption></figure>
+    </div>
+    <p id="readout" role="status" aria-live="polite">読み込み中</p>
+    <p>色が見分けにくい場合も、上のRGB数値で変化を確認できます。</p>
+  </section>
+  <p>この教材はブラウザ標準のCanvas 2Dだけを使います。GitHub Pages上での公開到達・WordPress実表示は未確認です。</p>
+</main>
+</body>
+</html>

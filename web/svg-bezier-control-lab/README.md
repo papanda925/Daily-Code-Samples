@@ -14,7 +14,7 @@
 
 ## ここを見る
 
-| 操作 | 期待結果（ブラウザ未実測） |
+| 操作 | 期待結果（隔離Chromiumで確認。一般端末は未検証） |
 |---|---|
 | 初期表示 | M 60 160 C 200 70 400 250 540 160 |
 | 制御点1を160にする | Cの最初のY値が160になる |
@@ -28,7 +28,7 @@ SVGの`M`は始点、`C`は2つの制御点と終点を指定する三次ベジ�
 - `docs/demos/svg-bezier-control-lab/index.html`: 操作UIとSVG、最小限のCSS
 - `docs/demos/svg-bezier-control-lab/app.js`: 数値から`d`属性を更新する処理
 
-HTMLとJavaScriptを同じフォルダに保存して`index.html`を開けば、ネットワーク不要で動く設計です。ブラウザでの実測はまだありません。
+HTMLとJavaScriptを同じフォルダに保存して`index.html`を開けば、ネットワーク不要で動く設計です。隔離Chromium 144（Linux、headless）で実際のHTML/JSを使った操作テスト12項目がPASSしました。GitHub Pages公開URL・WordPress・一般端末の動作は未確認です。
 
 ## 1か所変えてみる
 
@@ -53,4 +53,8 @@ HTMLとJavaScriptを同じフォルダに保存して`index.html`を開けば、
 
 ## 検証
 
-2026-10-31: MDNの仕様確認、JavaScriptのV8構文検査を実施。ブラウザ実機、GitHub Pages到達、WordPress描画は未確認。外部画像・素材なし。GitHub Actions未使用。
+2026-10-31: MDNの仕様確認、V8構文検査、既存mock DOM 6件PASS。追加でGitHub取得のHTML/JSとGit blob SHAを一致照合し、隔離LinuxのChromium 144.0.7559.96（Playwright）でデスクトップ/モバイル12項目PASS。初期パス、スライダー、制御点、直線化、状態文、リセット、SVG描画、JSエラーなし、モバイル表示幅を確認。ローカルfile://直接移動は実行環境の管理制限で拒否されたため、同一HTMLをset_contentし同一JSをadd_script_tagで実行。公開Pages到達、実ユーザー端末、WordPress描画、印刷・支援技術は未確認。外部画像・素材なし。GitHub Actions未使用。
+
+### ブラウザ検証を再実行（任意）
+
+Python 3.9以降、PlaywrightとChromiumが必要です（通常のデモ閲覧には不要）。リポジトリのルートで `python -m pip install playwright`、`python -m playwright install chromium` を実行した検証環境で `python web/svg-bezier-control-lab/tests/browser_smoke.py` を実行します。組織端末ではパッケージ導入前にポリシーを確認してください。既存のChromiumを使う場合は環境変数 `CHROMIUM_PATH` に実行ファイルを指定します。12項目PASSとブラウザバージョンが出れば、隔離環境の操作テストが完了です。外部サイトの到達性は検査しません。

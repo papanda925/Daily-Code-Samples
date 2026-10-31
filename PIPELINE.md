@@ -19,22 +19,22 @@ Daily-Code-Samplesは独立した14:00生成処理ではありません。
 - 実コードまたは再利用できるコマンド例がある
 - 必要に応じてテストがある
 - 実行有無と検証状態が正しく記録されている
-- GitHub Actions の必須チェックが成功している
+- GitHub Actionsを使用せず、可能なローカル検査・README教材品質確認の結果が記録されている
 - ブログ末尾の `GitHubサンプル` が対象フォルダへ直接リンクしている
 
-## GitHub品質ゲート
+## GitHub品質ゲート（Actionsなし）
 
-生成したコードは、GitHubへ追加しただけでは `ready` にしません。
+GitHub Actions・有料Runnerは利用しません。記事制作を担当するChatGPTが、同じ制作作業でREADME・実コード・記事末尾リンクを突き合わせ、P1〜P5自己審査を実施します。実行できる環境がある場合のみ、Python/JavaScript/Bash/PowerShell/JSON等の構文・テストをローカルで実施します。
 
-PRまたはmainへの反映時に、次のGitHub Actionsを必ず実行します。
+確認項目は次のとおりです。
 
-- `Public safety check`: 秘密情報・公開不適切情報の混入確認
-- `Daily Code quality checks`: Python / JavaScript / Bash / PowerShell / JSON の構文・パース確認
-- `CodeQL`: Python / JavaScript・TypeScript / GitHub Actions のセキュリティ静的解析
+- READMEが見出しだけの空教材になっておらず、目的、具体的操作、期待結果、しくみ、変更実験、失敗時対処、安全、検証状況、公式資料を説明している。
+- READMEのファイル名・ボタン名・デモURLが実装と一致する。デモ未到達時は公開確認済みと書かない。
+- 秘密情報や実環境の内部情報を含まず、権限や外部通信の有無を説明する。
+- 実行結果・ローカル構文確認・未検証を区別し、未実行をPASSと記録しない。
+- ブログは簡潔な導入と最小例、GitHubは完全版・README教材と役割分担する。
 
-いずれかが失敗した場合は、そのサンプルを記事公開用の完成品として扱いません。
-
-CodeQLが直接対応しないVBA、PowerShell、Bash、M言語、Excel数式等については、可能な範囲の構文チェックに加え、実機または対象アプリでの実行確認結果をREADMEへ記録します。
+詳しいREADME品質基準は [SAMPLE_GUIDE.md](SAMPLE_GUIDE.md) を参照してください。既存の自動チェック用ファイルが残っていても、Actionsを実行する指示とはみなしません。
 
 ## 分類
 

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHA-256を1文字違いで比較 | Daily Code</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,sans-serif}
+body{max-width:850px;margin:0 auto;padding:1rem;line-height:1.65;background:#f6f9fd;color:#162b40}
+main{background:white;padding:1.2rem;border:1px solid #c5d8ed;border-radius:12px}
+h1{font-size:clamp(1.35rem,3vw,2rem)}h2{font-size:1.2rem}
+label{display:block;font-weight:bold;margin:.6rem 0 .2rem}
+input{width:100%;box-sizing:border-box;padding:.65rem;border:1px solid #647e9c;border-radius:5px;font:inherit}
+button{padding:.55rem 1rem;margin:.75rem .5rem .5rem 0;border:1px solid #254b76;border-radius:6px;background:#174b83;color:#fff;font:inherit;cursor:pointer}
+button.secondary{background:white;color:#174b83}
+button:focus-visible,input:focus-visible{outline:3px solid #e99b23;outline-offset:2px}
+.panel{padding:.7rem 1rem;margin:1rem 0;background:#eef5ff;border-left:4px solid #2166a5}
+.hash{overflow-wrap:anywhere;word-break:break-word;font-family:ui-monospace,monospace;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:.35rem;margin:1rem 0}
+.byte{display:block;text-align:center;border-radius:4px;padding:.45rem 0;font-weight:bold}
+.different{background:#a63b3b;color:white}.same{background:#d5e6f2;color:#162b40}
+small{display:block}.status{font-weight:bold}
+@media(max-width:500px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}main{padding:.8rem}}
+@media print{body{background:white}.panel{border-color:#333}.different{background:#ddd;color:black}.grid{grid-template-columns:repeat(8,1fr)}button{display:none}}
+</style>
+<script src="./app.js" defer></script>
+</head>
+<body>
+<main>
+<h1>SHA-256は1文字変えるとどうなる？</h1>
+<p>2つの架空文字列を比べ、64桁のハッシュと256ビット中の差を観察します。外部送信・保存は行いません。</p>
+<div class="panel"><strong>まず試す：</strong>「比較する」を押し、下の差分ビット数を見てください。次に右側の文字列を1文字だけ変えます。</div>
+<form id="form">
+<label for="textA">比較する文字列 A（80文字まで）</label>
+<input id="textA" maxlength="80" value="papanda" autocomplete="off" spellcheck="false">
+<label for="textB">比較する文字列 B（80文字まで）</label>
+<input id="textB" maxlength="80" value="papandb" autocomplete="off" spellcheck="false">
+<button type="submit">比較する</button><button type="button" id="reset" class="secondary">初期値に戻す</button>
+</form>
+<p id="status" class="status" role="status" aria-live="polite">準備中</p>
+<section aria-label="計算結果">
+<h2>操作後はここを見る</h2>
+<p>入力 A：UTF-8 <output id="bytesA">—</output>バイト ／ 入力 B：<output id="bytesB">—</output>バイト</p>
+<p>異なるビット：<strong><output id="diffBits">—</output> / 256</strong> ／ 異なるバイト：<output id="diffBytes">—</output> / 32</p>
+<div class="panel">赤いマスは、対応するハッシュの1バイトが異なる場所です。番号は1〜32。色以外に差分数も表示します。</div>
+<div id="byteGrid" class="grid" role="group" aria-label="32バイトの一致・不一致"></div>
+<h2>ハッシュ値（64桁の16進数）</h2>
+<p><strong>A</strong><br><output id="hashA" class="hash">—</output></p>
+<p><strong>B</strong><br><output id="hashB" class="hash">—</output></p>
+</section>
+<p><small>SHA-256は暗号化ではありません。入力の秘密やパスワードを入れないでください。結果の差は入力によって変わり、常に128ビット異なるわけではありません。HTTPSまたはlocalhostの安全な環境で動作します。</small></p>
+</main>
+</body>
+</html>

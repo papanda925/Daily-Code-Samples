@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>二分探索を動かして理解する｜数字を半分ずつ絞る</title>
+<style>
+:root{font-family:system-ui,sans-serif;color-scheme:light}
+body{max-width:850px;margin:auto;padding:1rem;line-height:1.7;background:#f7fbff;color:#172b45}
+main{background:white;border:1px solid #bdd3e8;border-radius:12px;padding:1rem}
+h1{font-size:1.55rem}button,input{font:inherit}
+button{margin:.3rem;padding:.55rem 1rem;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #175ca8}
+#cells{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.35rem;list-style:none;padding:0}
+#cells li{border:1px solid #9bb8d0;text-align:center;border-radius:5px;padding:.45rem 0;font-weight:700}
+.candidate{background:#e2f0ff}.excluded{background:#eee;color:#666;text-decoration:line-through}
+.compared{background:#ffe4a5;border-color:#8b6400!important}.found{background:#b5efc5;border-color:#157e37!important}
+#status{border-left:5px solid #2a6ab0;padding:.5rem;background:#eef6ff}
+@media print{button,input{display:none}body{background:white}main{border:0}}
+</style>
+</head>
+<body>
+<main>
+<h1>二分探索：数字を半分ずつ絞って探そう</h1>
+<p>1〜15の並んだ数字から、目標を探します。目標を選び「次の比較」を押すと、調べる範囲が狭まります。</p>
+<label for="target">探す数字：<strong id="target-value">8</strong></label>
+<input id="target" type="range" min="1" max="15" step="1" value="8">
+<div><button id="next" type="button">次の比較</button><button id="reset" type="button">最初から</button></div>
+<p id="status" role="status" aria-live="polite"></p>
+<p>青＝候補、灰＝除外、黄＝今回の比較、緑＝発見。色に頼らず下の履歴でも確認できます。</p>
+<ol id="cells" aria-label="1から15の探索対象"></ol>
+<h2>比較した履歴</h2>
+<ol id="history" aria-live="polite"></ol>
+<p>外部ライブラリ、ログイン、位置情報、音声、APIキーは不要。すべてブラウザ内の架空データです。</p>
+</main>
+<script src="./app.js" defer></script>
+</body>
+</html>

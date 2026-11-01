@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IntersectionObserver：スクロールで可視率を観察</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f8fc;color:#163a53;font:16px/1.65 system-ui,sans-serif}
+main{max-width:800px;margin:20px auto;padding:24px;background:white;border:1px solid #c5ddec;border-radius:12px}
+h1{font-size:clamp(1.35rem,4vw,2rem);line-height:1.35}
+.about,#status,#summary{padding:12px 16px;background:#eaf5fc;border-left:5px solid #277eae;border-radius:6px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0}
+button,select{font:inherit;padding:8px;border:1px solid #347eaa;border-radius:6px;background:#fff;color:#173b55}
+button:focus-visible,select:focus-visible,#viewport:focus-visible{outline:3px solid #de9b27;outline-offset:2px}
+#viewport{height:280px;overflow-y:auto;overscroll-behavior:contain;border:2px solid #297fae;border-radius:8px;padding:100px 14px;background:#f8fbfd}
+.card{min-height:160px;margin-bottom:36px;padding:20px;background:#fff;border:2px solid #97b9d2;border-radius:10px}
+.card[data-visible="yes"]{border-color:#168358;background:#eef9f1}
+.card h3{margin:0 0 8px}
+.ratio{display:block;font-weight:600}
+.note{padding:12px;border-left:4px solid #bd8b31;background:#fff8e9}
+@media(max-width:550px){main{margin:0;padding:16px;border-radius:0}}
+@media print{#viewport{height:auto;overflow:visible;padding:12px}button,select{display:none}}
+</style>
+<script src="./app.js" defer></script>
+</head>
+<body><main>
+<p>Daily Code / JavaScript・ブラウザ標準API</p>
+<h1>スクロールでカードの見え方を測ろう</h1>
+<p class="about"><strong>このデモについて</strong><br>青い枠の中でスクロールすると、カードが25%または75%見えたときに表示が変わります。架空データのみ・ログイン不要です。</p>
+<h2>まず試す</h2>
+<ol><li>下の枠内をスクロールして、緑色になるカードを見る。</li><li>「可視率の条件」を25%から75%へ変更する。</li><li>「観察停止」を押してスクロールし、表示が固定されることを比べる。「観察再開」で戻せます。</li></ol>
+<div class="controls">
+<label for="threshold">可視率の条件 <select id="threshold"><option value="0.25">25%</option><option value="0.75">75%</option></select></label>
+<button id="toggle" type="button">観察停止</button>
+<button id="reset" type="button">先頭に戻す</button>
+</div>
+<p id="status" role="status" aria-live="polite">準備中…</p>
+<div id="viewport" tabindex="0" role="region" aria-label="架空カードのスクロール領域。矢印キーでもスクロールできます">
+<section class="card" id="card-a" data-visible="no"><h3>架空タスクA</h3><p>資料の確認（ダミー）</p><span class="ratio">計測待ち</span></section>
+<section class="card" id="card-b" data-visible="no"><h3>架空タスクB</h3><p>図表の整理（ダミー）</p><span class="ratio">計測待ち</span></section>
+<section class="card" id="card-c" data-visible="no"><h3>架空タスクC</h3><p>結果の共有（ダミー）</p><span class="ratio">計測待ち</span></section>
+</div>
+<p id="summary" role="status" aria-live="polite">計測待ち</p>
+<p class="note">表示する割合は、IntersectionObserverから最後に通知された時点の値です。スクロールに連続追従する測定器ではありません。緑色は教材の条件を満たす意味で、実際の業務進捗を表しません。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">MDN公式：Intersection Observer API</a></p>
+</main></body></html>

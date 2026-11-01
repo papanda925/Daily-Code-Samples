@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ResizeObserverでカード幅を観察する</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f8fc;color:#173b55;font:16px/1.65 system-ui,sans-serif}
+main{max-width:800px;margin:24px auto;padding:24px;background:white;border:1px solid #c9dfed;border-radius:14px}
+h1{font-size:clamp(1.4rem,4vw,2rem);line-height:1.4}
+.about{background:#eaf5fc;border-left:5px solid #247eae;padding:12px 16px;border-radius:7px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+button,input{font:inherit}button{padding:8px 12px;background:#fff;color:#155780;border:1px solid #347eaa;border-radius:8px;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #e7a536;outline-offset:2px}
+input[type=range]{width:min(100%,320px)}
+.stage{width:300px;max-width:100%;border:2px solid #227bb0;border-radius:10px;background:#e9f5fc;margin:16px 0;overflow:hidden}
+.card{padding:16px;display:flex;flex-direction:column;gap:8px}
+.card strong{font-size:1.1rem}
+.stage[data-layout="wide"] .card{flex-direction:row;align-items:center;justify-content:space-between}
+#status{padding:12px;border-left:5px solid #267cae;background:#eff8ff;min-height:58px}
+.note{border-left:5px solid #c38c35;background:#fff8e9;padding:12px}
+@media(max-width:550px){main{margin:0;padding:16px;border-radius:0}}
+</style>
+<script src="./app.js" defer></script>
+</head>
+<body><main>
+<p>Daily Code / JavaScript・ブラウザ標準API</p>
+<h1>ResizeObserverでカードの幅を観察しよう</h1>
+<div class="about"><b>このデモについて</b><p>枠の幅が変わると、カードの並び方と「実測幅」の表示が切り替わります。外部ライブラリ、ログイン、個人情報、APIキーは不要です。</p></div>
+<h2>まず試す</h2>
+<ol><li>「300px」を押して縦並びを確認する。</li><li>「520px」を押して横並びと実測値の変化を見る。</li><li>「観察停止」を押してから幅を変え、表示が更新されないことを比べる。</li></ol>
+<div class="controls">
+<button id="narrow" type="button">300px</button>
+<button id="wide" type="button">520px</button>
+<label for="width">指定幅 <output id="requested" for="width">300px</output></label>
+<input id="width" type="range" min="240" max="640" step="10" value="300">
+<button id="toggle" type="button">観察停止</button>
+</div>
+<div id="stage" class="stage" data-layout="compact" aria-label="幅を変えられる架空のタスクカード">
+<div class="card"><strong>架空のタスクカード</strong><span>進捗 2 / 3（ダミー）</span></div>
+</div>
+<p id="status" role="status" aria-live="polite">観察の開始を待っています…</p>
+<p class="note">画面が狭い場合は、指定520pxでも実際の幅はそれより小さくなります。実測値を優先してください。</p>
+<h2>なぜ変わる？</h2>
+<p>ResizeObserverは監視対象の要素のサイズ変化を通知します。ここではcontent boxの幅を読み、360px未満なら縦並び、以上なら横並びにします。ウィンドウ全体の幅ではありません。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">MDN: ResizeObserver</a></p>
+</main></body></html>

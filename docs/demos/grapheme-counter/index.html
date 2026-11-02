@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>絵文字は1文字？ Intl.Segmenterの書記素カウンター</title>
+<style>
+body{font-family:system-ui,sans-serif;line-height:1.65;max-width:780px;margin:2rem auto;padding:0 1rem;color:#162b40;background:#f8fbff}
+main{background:white;border:1px solid #d8e7f5;border-radius:14px;padding:1.5rem}
+textarea{width:100%;box-sizing:border-box;min-height:100px;font:inherit;padding:.7rem}
+button{margin:.3rem .3rem .3rem 0;padding:.5rem .7rem;border:1px solid #4d83ad;border-radius:8px;background:#edf6ff;cursor:pointer}
+button:focus-visible,textarea:focus-visible{outline:3px solid #006eb9;outline-offset:2px}
+dl{display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;background:#eff7ff;padding:1rem;border-radius:8px}
+dd{font-weight:bold;margin:0;font-variant-numeric:tabular-nums}
+#status{padding:.6rem;background:#fff6e5;border-left:4px solid #bf7a00}
+</style>
+</head>
+<body><main>
+<h1>👨‍👩‍👧‍👦 は1文字？ 7文字？ 11文字？</h1>
+<p>架空の文字列だけをブラウザー内で数えます。外部送信・保存・CDNはありません。</p>
+<label for="text">比較したい文字列</label>
+<textarea id="text">👨‍👩‍👧‍👦</textarea>
+<div aria-label="入力例">
+<button type="button" data-example="日本語">日本語（基準）</button>
+<button type="button" data-example="😀">😀（絵文字）</button>
+<button type="button" data-example="👨‍👩‍👧‍👦">家族の絵文字</button>
+<button type="button" data-example="é">e＋結合アクセント</button>
+<button type="button" data-example="ABCDEFGHIJK">11個の英字</button>
+</div>
+<dl aria-label="数え方の比較">
+<dt>UTF-16単位：String.length</dt><dd id="utf16">—</dd>
+<dt>コードポイント：Array.from</dt><dd id="points">—</dd>
+<dt>書記素クラスター：Intl.Segmenter</dt><dd id="graphemes">—</dd>
+</dl>
+<p id="status" role="status" aria-live="polite"></p>
+<p>この「10個以内」は画面上の教材用判定です。HTMLのmaxlength、サーバー側のバイト制限とは別です。</p>
+<noscript>JavaScriptが無効です。スクリプトを有効にするか、READMEのNode.jsテストを参照してください。</noscript>
+</main><script src="./app.js"></script></body></html>

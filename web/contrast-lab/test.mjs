@@ -1,0 +1,15 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url);
+const c=require('./contrast.js');
+test('black and white is 21',()=>assert.equal(c.ratio('#000000','#ffffff'),21));
+test('same colors ratio 1',()=>assert.equal(c.ratio('#123456','#123456'),1));
+test('ratio symmetric',()=>assert.equal(c.ratio('#ff0000','#000000'),c.ratio('#000000','#ff0000')));
+test('white #777 below AA',()=>assert.equal(c.evaluate('#777777','#ffffff').aaNormal,false));
+test('white #767 passes AA',()=>assert.equal(c.evaluate('#767676','#ffffff').aaNormal,true));
+test('white #777 passes large',()=>assert.equal(c.evaluate('#777777','#ffffff').aaLarge,true));
+test('black white passes AAA',()=>assert.equal(c.evaluate('#000000','#ffffff').aaaNormal,true));
+test('same colors fail AA',()=>assert.equal(c.evaluate('#ffffff','#ffffff').aaNormal,false));
+test('invalid 3-digit rejected',()=>assert.throws(()=>c.ratio('#fff','#000000'),TypeError));
+test('invalid input rejected',()=>assert.throws(()=>c.ratio('url(https://example.com)','#ffffff'),TypeError));

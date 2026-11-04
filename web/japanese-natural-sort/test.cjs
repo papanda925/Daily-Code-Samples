@@ -1,0 +1,11 @@
+const {test}=require("node:test");const assert=require("node:assert/strict");
+const {sortNames}=require("./sort.js");
+test("numeric true",()=>assert.deepEqual(sortNames(["資料10","資料2","資料1"]),["資料1","資料2","資料10"]));
+test("numeric false",()=>assert.deepEqual(sortNames(["資料10","資料2","資料1"],{numeric:false}),["資料1","資料10","資料2"]));
+test("does not mutate input",()=>{const a=["資料10","資料2"];sortNames(a);assert.deepEqual(a,["資料10","資料2"])});
+test("stable ties",()=>assert.deepEqual(sortNames(["A","a","A"]),["A","a","A"]));
+test("empty",()=>assert.deepEqual(sortNames([]),[]));
+test("invalid locale",()=>assert.throws(()=>sortNames(["a"],{locale:"bad"}),RangeError));
+test("invalid element",()=>assert.throws(()=>sortNames([null]),TypeError));
+test("invalid option",()=>assert.throws(()=>sortNames(["a"],{numeric:"true"}),TypeError));
+test("too many",()=>assert.throws(()=>sortNames(Array(101).fill("x")),TypeError));

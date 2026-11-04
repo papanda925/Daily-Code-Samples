@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日本語ファイル名の自然順ソート｜Intl.Collator</title>
+<style>body{font-family:system-ui,sans-serif;max-width:780px;margin:2rem auto;padding:0 1rem;line-height:1.65}textarea,pre{width:100%;box-sizing:border-box;min-height:130px;padding:.75rem;border:1px solid #64748b;border-radius:.4rem}pre{white-space:pre-wrap;background:#eef5ff}button,select{padding:.5rem;margin:.3rem}label{display:inline-block;margin:.4rem}#status{min-height:1.5em}</style></head>
+<body><h1>ファイル名を「1、2、10」の順に並べる</h1><p>架空のファイル名だけを使うオフライン教材です。入力は送信・保存しません。</p>
+<label for="names">ファイル名（1行に1件・最大100件）</label><textarea id="names">資料10
+資料2
+資料1
+資料20</textarea>
+<div><label><input type="checkbox" id="numeric" checked>数字を数値として比較</label>
+<label for="sensitivity">文字の区別</label><select id="sensitivity"><option value="base">基本（大文字小文字などを緩く比較）</option><option value="variant">厳密</option></select></div>
+<button id="run" type="button">並べ替える</button><button id="reset" type="button">初期値に戻す</button>
+<p id="status" role="status" aria-live="polite"></p><h2>結果</h2><pre id="result" aria-label="並べ替え結果"></pre>
+<script src="sort.js"></script><script src="app.js"></script></body></html>

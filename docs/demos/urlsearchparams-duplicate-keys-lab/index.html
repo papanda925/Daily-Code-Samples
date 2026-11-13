@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLSearchParams: getAllとsetで同じキーを調べる</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#18304b;background:#f2f6fb}body{max-width:800px;margin:auto;padding:20px;line-height:1.65}
+h1{font-size:clamp(1.3rem,4vw,2rem)}.panel{background:white;border:1px solid #cbd9e8;border-radius:12px;margin:15px 0;padding:16px}
+label{display:block;font-weight:650;margin:12px 0 5px}input,textarea{width:100%;box-sizing:border-box;border:1px solid #8799af;border-radius:8px;font:inherit;padding:10px}
+textarea{min-height:88px}.buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+button{border:1px solid #245590;border-radius:8px;padding:10px 13px;background:#245590;color:#fff;font:inherit;cursor:pointer}
+button.secondary{background:#fff;color:#245590}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #ecb029;outline-offset:2px}
+p,pre,td{overflow-wrap:anywhere}pre{background:#eef3f9;padding:12px;border-radius:8px;white-space:pre-wrap}.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #dce4ed;padding:8px}th{background:#eef3f9}
+.note{font-size:.93rem;color:#415775}
+</style></head><body><main>
+<h1>同じURLパラメーターが2回あるとどうなる？</h1>
+<p>架空データで <code>get()</code>、<code>getAll()</code>、<code>append()</code>、<code>set()</code> の違いを体験します。</p>
+<section class="panel"><h2>1. 入力</h2>
+<p class="note">実際のトークン・氏名・URLは入力しないでください。ここではクエリー文字列だけを扱います。</p>
+<label for="query">クエリー文字列（最大2000文字）</label><textarea id="query" maxlength="2000"></textarea>
+<label for="key">検索するキー</label><input id="key" type="text" maxlength="80">
+<label for="value">追加・置換する値</label><input id="value" type="text" maxlength="120">
+<div class="buttons"><button id="parse" type="button">解析</button><button id="append" type="button">appendで追加</button><button id="set" type="button">setで置換</button><button id="reset" type="button" class="secondary">サンプルに戻す</button></div>
+</section>
+<section class="panel"><h2>2. 結果を観察</h2><p id="summary" role="status" aria-live="polite"></p>
+<h3>toString()の結果</h3><pre id="encoded"></pre>
+<h3>全パラメーター（入力順）</h3><div class="table-wrap"><table><thead><tr><th scope="col">順</th><th scope="col">キー</th><th scope="col">値</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<p class="note">外部ライブラリなし。入力はブラウザー内のメモリーだけで処理されます。GitHub Pages表示にはページ取得の通信が必要です。<a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/urlsearchparams-duplicate-keys-lab">解説README</a></p>
+</main><script type="module" src="./app.mjs"></script></body></html>

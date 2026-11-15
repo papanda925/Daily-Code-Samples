@@ -1,0 +1,12 @@
+import assert from "node:assert/strict";
+import { inspect, audit, dummy } from "./app.mjs";
+const original = dummy();
+const { encoded, decoded } = inspect(original);
+assert.equal(encoded, '{"id":"DUMMY-001","score":null,"limit":null,"at":"2026-01-01T00:00:00.000Z","items":["A",null,"C"]}');
+assert.deepEqual(audit(original, decoded), { missing:true, nanBecameNull:true, infinityBecameNull:true, dateBecameString:true, arrayHoleBecameNull:true });
+assert.equal(inspect({v:null}).decoded.v, null);
+assert.equal(inspect([undefined]).decoded[0], null);
+assert.equal(inspect({v:undefined}).decoded.v, undefined);
+assert.equal(inspect(undefined).encoded, undefined);
+assert.throws(() => inspect({big:1n}), TypeError);
+console.log("PASS: 7 assertions");

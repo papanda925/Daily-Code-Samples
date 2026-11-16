@@ -1,0 +1,12 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {makeFiles,names,MAX_CHARS} from "../../../docs/demos/jszip-local-bundle/logic.mjs";
+test("two default fixed filenames",()=>assert.deepEqual(makeFiles("a").map(f=>f.name),["README.txt","memo.txt"]));
+test("optional checklist adds one file",()=>assert.equal(makeFiles("a",true).length,3));
+test("false excludes checklist",()=>assert.equal(makeFiles("a",false).length,2));
+test("empty input allowed",()=>assert.equal(makeFiles("")[1].content,"\n"));
+test("non-string is rejected",()=>assert.throws(()=>makeFiles(123),TypeError));
+test("overlength rejected",()=>assert.throws(()=>makeFiles("x".repeat(MAX_CHARS+1)),RangeError));
+test("limit accepted",()=>assert.equal(makeFiles("x".repeat(MAX_CHARS))[1].content.length,MAX_CHARS+1));
+test("fixed names unaffected by user input",()=>assert.equal(names(makeFiles("../secret.txt")),"README.txt, memo.txt"));
+test("unicode characters measured as code points",()=>assert.equal(makeFiles("😀".repeat(MAX_CHARS))[1].content.endsWith("\n"),true));

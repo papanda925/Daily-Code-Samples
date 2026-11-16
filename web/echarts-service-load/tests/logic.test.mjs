@@ -1,0 +1,2 @@
+import test from "node:test";import assert from "node:assert/strict";import{usage,days,alertDays,maxUsage}from "../../../docs/demos/echarts-service-load/logic.mjs";
+test("7 fixtures",()=>assert.equal(usage.length,7));test("labels",()=>assert.equal(days.length,7));test("threshold75",()=>assert.equal(alertDays(75),2));test("threshold90",()=>assert.equal(alertDays(90),1));test("max",()=>assert.equal(maxUsage(),91));

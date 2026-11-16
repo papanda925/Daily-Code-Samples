@@ -1,0 +1,2 @@
+import test from "node:test";import assert from "node:assert/strict";import{nodes,dependencies,affectedBy}from "../../../docs/demos/cytoscape-service-dependencies/logic.mjs";
+test("nodes",()=>assert.equal(nodes.length,4));test("edges",()=>assert.equal(dependencies.length,3));test("DB propagation",()=>assert.deepEqual(affectedBy("db").sort(),["api","portal"]));test("Auth propagation",()=>assert.deepEqual(affectedBy("auth"),["portal"]));test("Portal leaf",()=>assert.deepEqual(affectedBy("portal"),[]));

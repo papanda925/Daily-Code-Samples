@@ -1,0 +1,2 @@
+import test from "node:test";import assert from "node:assert/strict";import{duplicates,safeCount}from "../../../docs/demos/papaparse-csv-collisions/logic.mjs";
+test("duplicate name",()=>assert.deepEqual(duplicates(["id","name","name"]),["name"]));test("no duplicate",()=>assert.deepEqual(duplicates(["a","b"]),[]));test("empty headers",()=>assert.deepEqual(duplicates([]),[]));test("repeated only once",()=>assert.deepEqual(duplicates(["a","a","a"]),["a"]));test("rows",()=>assert.equal(safeCount([[1,2],[3]]),2));

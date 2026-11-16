@@ -1,0 +1,3 @@
+export const nodes=[{id:"portal",label:"ポータル"},{id:"api",label:"API"},{id:"auth",label:"認証"},{id:"db",label:"DB"}];
+export const dependencies=[["portal","api"],["portal","auth"],["api","db"]];
+export function affectedBy(failed){const impacted=new Set(),queue=[failed];while(queue.length){const node=queue.shift();for(const [service,requires] of dependencies){if(requires===node&&!impacted.has(service)){impacted.add(service);queue.push(service);}}}return [...impacted];}

@@ -1,0 +1,2 @@
+import test from "node:test";import assert from "node:assert/strict";import{axis,surface,maximum}from "../../../docs/demos/plotly-3d-data-explorer/logic.mjs";
+test("grid size",()=>assert.equal(surface(1).length,5));test("rows size",()=>assert.equal(surface(1)[0].length,5));test("scale1 maximum",()=>assert.equal(maximum(surface(1)),16));test("scale3 maximum",()=>assert.equal(maximum(surface(3)),48));test("invalid scale",()=>assert.throws(()=>surface(0),RangeError));

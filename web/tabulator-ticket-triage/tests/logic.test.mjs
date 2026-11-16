@@ -1,0 +1,11 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {INITIAL_TICKETS,freshTickets,matches,summary} from "../../../docs/demos/tabulator-ticket-triage/logic.mjs";
+test("initial fictional records",()=>{assert.equal(INITIAL_TICKETS.length,8);assert.equal(new Set(INITIAL_TICKETS.map(x=>x.id)).size,8);});
+test("high-priority filter",()=>assert.equal(freshTickets().filter(x=>matches(x,"高")).length,3));
+test("search is combined with priority",()=>assert.equal(freshTickets().filter(x=>matches(x,"高","ネットワーク")).length,2));
+test("empty search shows all",()=>assert.equal(freshTickets().filter(x=>matches(x,"","")).length,8));
+test("unknown keyword shows zero",()=>assert.equal(freshTickets().filter(x=>matches(x,"","存在しない語")).length,0));
+test("summary preserves zero records",()=>assert.deepEqual(summary([]),{count:0,minutes:0}));
+test("copy does not mutate original",()=>{const items=freshTickets();items[0].status="完了";assert.equal(INITIAL_TICKETS[0].status,"対応中");});
+test("sum for high-priority records",()=>assert.equal(summary(freshTickets().filter(x=>matches(x,"高"))).minutes,170));

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tabulatorで障害チケットを整理する | Daily Code</title>
+<link rel="stylesheet" href="./vendor/tabulator.min.css"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main>
+<header><p class="eyebrow">Daily Code / 静的ライブ教材</p><h1>障害チケットを並べ替え・絞り込む</h1>
+<p>実在するユーザーやシステムの情報は使いません。架空の8件をブラウザー内だけで扱います。</p></header>
+<section class="controls" aria-label="絞り込み条件">
+<label>重要度 <select id="priority"><option value="">すべて</option><option value="高">高</option><option value="中">中</option><option value="低">低</option></select></label>
+<label>フリーワード検索 <input id="keyword" type="search" placeholder="例：ネットワーク" autocomplete="off"></label>
+<button id="add" type="button">架空チケットを1件追加</button>
+<button id="reset" type="button">最初の8件に戻す</button>
+</section>
+<p id="summary" role="status" aria-live="polite">読込み中…</p>
+<div id="table" aria-label="架空の障害チケット一覧"></div>
+<p id="error" role="alert" hidden></p>
+<section><h2>操作して確かめる</h2>
+<ol><li>重要度「高」を選び、表示件数が減ることを確認します。</li>
+<li>検索欄に「ネットワーク」と入れてさらに絞り込みます。</li>
+<li>表の「状態」セルをクリックし、対応中・完了などに変更します。通信も保存もされません。</li>
+<li>「追加」と「戻す」で表示が変わることを確認します。</li></ol></section>
+<section class="notes"><h2>実務への注意</h2>
+<p>これは閲覧・入力の練習用です。変更内容はサーバーへ送信されません。ブラウザーを再読込みすると元に戻ります。実システムでは更新の承認、監査証跡、権限、失敗時のロールバックが必要です。</p>
+<p>利用ライブラリ：<a href="https://tabulator.info/">Tabulator</a> v6.3.1（MIT）／通信不要の静的ファイル配信。ソースとライセンスは教材READMEを参照。</p></section>
+</main>
+<script src="./vendor/tabulator.min.js"></script><script type="module" src="./app.mjs"></script>
+</body></html>

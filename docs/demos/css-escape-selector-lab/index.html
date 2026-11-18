@@ -1,2 +1,28 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSS.escape セレクター実験</title><style>body{font:1rem/1.7 system-ui,sans-serif;max-width:45rem;margin:auto;padding:1.2rem}button,input{font:inherit;padding:.4rem}li{padding:.3rem}#status{border-left:4px solid #2771ad;padding:.6rem}</style></head><body><main><h1>特殊文字を含むIDを安全に探す</h1><p>架空のチケットを選び、CSS.escapeを使った検索結果を観察します。外部通信は不要です。</p><label for="target">探すID</label><input id="target" value="ticket:01" maxlength="80"><button id="run" type="button">検索</button><button id="reset" type="button">戻す</button><p id="status" role="status" aria-live="polite">未検索</p><ul id="tickets"></ul><p>比較: ticket:01 → ticket.02 → 123-start → a b → missing</p></main><script src="./app.js"></script></body></html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CSS.escape：特殊文字を含むID検索の比較</title>
+  <style>
+    body {font:1rem/1.7 system-ui,sans-serif;max-width:45rem;margin:auto;padding:1.2rem}
+    button,input {font:inherit;padding:.4rem}
+    li {padding:.3rem}
+    #status {border-left:4px solid #2771ad;padding:.6rem}
+  </style>
+</head>
+<body>
+<main>
+  <h1>特殊文字を含むIDを探す</h1>
+  <p>架空のチケットIDを変更して、見つかる結果を比べます。入力を外部送信しません。</p>
+  <label for="target">探すID</label>
+  <input id="target" value="ticket:01" maxlength="80">
+  <button id="run" type="button">検索</button>
+  <button id="reset" type="button">戻す</button>
+  <p id="status" role="status" aria-live="polite">未検索</p>
+  <ul id="tickets"></ul>
+  <p>比較用ID：<code>ticket:01</code>、<code>ticket.02</code>、<code>123-start</code>、<code>a[b]</code>。空欄と<code>missing</code>は一致なし。</p>
+</main>
+<script src="./app.js"></script>
+</body>
+</html>

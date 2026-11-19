@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AbortSignal.any と timeout 実験</title>
+<style>body{font-family:system-ui,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem;line-height:1.7}label{display:block;margin:1rem 0}input{font-size:1rem;width:9rem;padding:.5rem}button{padding:.6rem 1rem;margin-right:.5rem}#result{background:#eef4ff;border-left:4px solid #3569ab;padding:1rem;min-height:2rem}button:focus-visible,input:focus-visible{outline:3px solid #b65b00}</style></head>
+<body><h1>AbortSignal.any() と timeout() を比べる</h1>
+<p>通信なし・保存なし。擬似処理の終了、中止、時間切れを観察します。</p>
+<form id="lab"><label>擬似処理の長さ（ミリ秒） <input id="work" type="number" min="0" max="10000" value="3000" required></label>
+<label>時間制限（ミリ秒） <input id="limit" type="number" min="1" max="10000" value="1500" required></label>
+<button type="submit">開始</button><button type="button" id="stop" disabled>手動停止</button></form>
+<p id="result" role="status" aria-live="polite">開始を押してください。</p><script src="./app.js"></script></body></html>

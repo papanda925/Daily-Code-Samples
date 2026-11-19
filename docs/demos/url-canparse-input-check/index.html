@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>URL.canParse 入力チェック</title>
+<style>body{font-family:system-ui,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem;line-height:1.7}label{display:block;margin-top:1rem;font-weight:bold}input{width:100%;box-sizing:border-box;padding:.7rem;font-size:1rem}button{margin-top:1rem;padding:.7rem 1.2rem}pre{white-space:pre-wrap;background:#eef4fb;padding:1rem;border-radius:8px}small{color:#444}</style></head>
+<body><main><h1>URL.canParseで入力URLを判定</h1><p>架空のURLを入力し、解析結果を比べます。通信・保存は行いません。</p>
+<form id="check-form"><label for="url-input">判定するURL</label><input id="url-input" value="../guide?lang=ja" required>
+<label for="base-input">基準URL（相対URL用、空欄可）</label><input id="base-input" value="https://example.com/docs/start">
+<button type="submit">URLを確認</button></form>
+<h2>判定結果</h2><pre id="result" role="status" aria-live="polite">「URLを確認」を押してください。</pre>
+<small>URL.canParseは形式の判定です。悪意あるサイト・リダイレクト・SSRFの防御には使えません。</small></main><script src="./app.js"></script></body></html>

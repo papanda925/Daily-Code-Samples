@@ -43,4 +43,4 @@ https://papanda925.github.io/Daily-Code-Samples/demos/abortsignal-any-timeout-la
 - https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
 - https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal
 
-対応ブログ記事ID: 20261120-08（公開URLはWordPress GET確認後に確定）。
+対応ブログ記事ID: 20261121-05（公開URLはWordPress GET確認後に確定）。

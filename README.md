@@ -48,6 +48,21 @@ GitHub Pages の公開物は **`docs/` に集約**します。
 
 最初の例: `docs/demos/geolocation-leaflet/`
 
+## 新作の体験型ライブデモ10本
+
+[新作10本を一覧から触ってみる](https://papanda925.github.io/Daily-Code-Samples/)（Pagesへの反映とブラウザー実行は別途確認）
+
+- [CSS View Transitions](web/view-transition-card-morph/README.md)
+- [Pointer Events](web/pointer-neon-drawing/README.md)
+- [Canvas写真フィルター](web/canvas-photo-filter-lab/README.md)
+- [Pyodide Python](web/pyodide-python-playground/README.md)
+- [SVG水面フィルター](web/svg-water-ripple/README.md)
+- [Web Speech API](web/speech-synthesis-voice-lab/README.md)
+- [SQLite + WebAssembly](web/sqljs-sql-playground/README.md)
+- [CSS Container Queries](web/container-query-resize-lab/README.md)
+- [Web Components](web/web-components-color-badge/README.md)
+- [Service Worker](web/service-worker-offline-lab/README.md)
+
 ## はじめて使う方へ
 
 1. 興味のあるカテゴリのサンプルフォルダを開き、`README.md` の「何を体験するか」「まず試す」を読みます。

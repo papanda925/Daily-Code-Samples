@@ -1,0 +1,3 @@
+const hero=document.querySelector("#hero");const status=document.querySelector("#status");
+document.querySelector("#toggle").addEventListener("click",()=>{const change=()=>{hero.classList.toggle("expanded");status.textContent=hero.classList.contains("expanded")?"拡大表示です。":"通常表示です。";};if(document.startViewTransition){document.startViewTransition(change);}else{change();status.textContent+="（非対応のため即時切替）";}});
+document.querySelector("#hue").addEventListener("input",e=>{document.documentElement.style.setProperty("--hue",e.target.value);});

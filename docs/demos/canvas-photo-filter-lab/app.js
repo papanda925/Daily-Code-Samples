@@ -1,0 +1,6 @@
+const c=document.querySelector("#photo"),ctx=c.getContext("2d"),status=document.querySelector("#status");let img=null,url=null;
+function render(){ctx.clearRect(0,0,c.width,c.height);if(!img)return;const scale=Math.min(c.width/img.naturalWidth,c.height/img.naturalHeight);const w=img.naturalWidth*scale,h=img.naturalHeight*scale;ctx.filter="saturate("+document.querySelector("#saturation").value+"%) blur("+document.querySelector("#blur").value+"px)";ctx.drawImage(img,(c.width-w)/2,(c.height-h)/2,w,h);ctx.filter="none";}
+document.querySelector("#file").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;if(!f.type.startsWith("image/")||f.size>6*1024*1024){status.textContent="6MB以下の画像を選んでください。";return;}const next=URL.createObjectURL(f),image=new Image();image.onload=()=>{if(url)URL.revokeObjectURL(url);url=next;img=image;render();status.textContent="画像を表示しました。彩度とぼかしを試してください。";};image.onerror=()=>{URL.revokeObjectURL(next);status.textContent="画像を読み込めません。形式を確認してください。";};image.src=next;});
+for(const id of ["saturation","blur"]){document.getElementById(id).addEventListener("input",render);}
+document.querySelector("#reset").onclick=()=>{document.querySelector("#saturation").value=100;document.querySelector("#blur").value=0;render();status.textContent="フィルターを初期値に戻しました。";};
+window.addEventListener("pagehide",()=>{if(url)URL.revokeObjectURL(url);});

@@ -1,0 +1,5 @@
+const out=document.querySelector("#output"),key="dailycode-offline-lab-v1";const supported=("serviceWorker" in navigator)&&("caches" in window);
+if(!supported){out.textContent="このブラウザーは必要なAPIに対応していません。";document.querySelector("#register").disabled=true;}
+document.querySelector("#register").onclick=async()=>{try{const reg=await navigator.serviceWorker.register("./sw.js",{scope:"./"});await navigator.serviceWorker.ready;out.textContent="登録しました。ページを再読み込みしてから開発者ツールでオフラインに切り替えてください。範囲："+reg.scope;}catch(e){out.textContent="登録できません："+e.message;}};
+document.querySelector("#check").onclick=async()=>{if(!supported)return;const keys=await caches.keys(),cache=keys.filter(k=>k===key);out.textContent="教材キャッシュ："+(cache.length?"あり":"なし")+" / ネットワーク状態の参考値："+(navigator.onLine?"オンライン":"オフライン");};
+document.querySelector("#remove").onclick=async()=>{try{const reg=await navigator.serviceWorker.getRegistration("./");if(reg)await reg.unregister();await caches.delete(key);out.textContent="この教材の登録とキャッシュ削除を依頼しました。再読み込みすると反映されます。";}catch(e){out.textContent="解除できません："+e.message;}};

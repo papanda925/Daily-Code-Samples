@@ -1,0 +1,3 @@
+const scale=document.querySelector("#scale"),freq=document.querySelector("#frequency"),displacement=document.querySelector("#displacement"),noise=document.querySelector("#noise"),status=document.querySelector("#status");
+function draw(){displacement.setAttribute("scale",scale.value);noise.setAttribute("baseFrequency",(Number(freq.value)/100).toFixed(3));status.textContent="変形量="+scale.value+" / ノイズ周波数="+Number(freq.value)/100;}
+scale.addEventListener("input",draw);freq.addEventListener("input",draw);draw();

@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="架空の売上データをブラウザー内SQLiteへ読み込み、SELECTを変更して集計結果を確認します。"><title>SQLite + WebAssembly：SQLで集計する | Daily Code</title><link rel="stylesheet" href="../_shared/interactive-lab.css"></head>
+<body><main><p><a href="../../">Daily Codeトップ</a></p><h1>SQLite + WebAssembly：SQLで集計する</h1><p>架空の売上データをブラウザー内SQLiteへ読み込み、SELECTを変更して集計結果を確認します。</p><h2>触ってみる</h2><p><button id="load" type="button">SQLiteを読み込む（外部CDN通信）</button></p><label for="sql">SQL（SELECTだけ）</label><textarea id="sql" rows="5">SELECT category, SUM(amount) AS total
+FROM sales
+GROUP BY category
+ORDER BY total DESC;</textarea><p><button id="run" type="button" disabled>SQLを実行</button></p><pre id="output" role="status">読み込み前です。</pre><h2>仕組み</h2><p>sql.jsはSQLiteエンジンをWebAssemblyで実行する。JavaScriptがローカルDBを作り、db.execが結果行を返す。</p><p><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/sqljs-sql-playground">説明READMEとコードを読む</a></p></main><footer>GitHub Pages上で動く学習用デモ。未対応ブラウザーでは機能が使えないことがあります。</footer><script src="./app.js" defer></script></body></html>

@@ -1,0 +1,7 @@
+const status=document.querySelector("#status"),voices=document.querySelector("#voice"),speak=document.querySelector("#speak"),stop=document.querySelector("#stop");
+const supported=("speechSynthesis" in window)&&("SpeechSynthesisUtterance" in window);
+function populate(){if(!supported)return;const list=speechSynthesis.getVoices();const old=voices.value;voices.replaceChildren(new Option("既定の音声",""));for(const voice of list){const o=new Option(voice.name+" ("+voice.lang+")",voice.voiceURI);voices.append(o);}if([...voices.options].some(o=>o.value===old))voices.value=old;}
+if(supported){populate();speechSynthesis.addEventListener("voiceschanged",populate);}else{status.textContent="このブラウザーは音声合成に対応していません。";speak.disabled=true;}
+speak.onclick=()=>{if(!supported)return;const text=document.querySelector("#words").value.trim();if(!text){status.textContent="文章を入力してください。";return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="ja-JP";u.rate=Number(document.querySelector("#rate").value)/10;u.pitch=Number(document.querySelector("#pitch").value)/10;const selected=speechSynthesis.getVoices().find(v=>v.voiceURI===voices.value);if(selected)u.voice=selected;u.onstart=()=>status.textContent="読み上げ中";u.onend=()=>status.textContent="読み上げが終了しました。";u.onerror=e=>status.textContent="読み上げ失敗："+e.error;speechSynthesis.speak(u);};
+stop.onclick=()=>{if(supported)speechSynthesis.cancel();status.textContent="停止しました。";};
+window.addEventListener("pagehide",()=>{if(supported)speechSynthesis.cancel();});

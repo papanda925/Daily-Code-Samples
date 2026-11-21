@@ -37,4 +37,4 @@ https://papanda925.github.io/Daily-Code-Samples/demos/urlsearchparams-stable-sor
 - https://url.spec.whatwg.org/#dom-urlsearchparams-sort
 - https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/getAll
 
-対応ブログ記事ID: 20261121-07（公開URLはWordPress GET後に確定）。
+対応ブログ記事ID: 20261122-06（公開URLはWordPress GET後に確定）。

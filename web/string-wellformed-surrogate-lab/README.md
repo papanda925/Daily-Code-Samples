@@ -39,4 +39,4 @@ app.jsの0xD800を0xDC00へ変更すると、単独の下位サロゲートで�
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/isWellFormed
 
 ## 対応ブログ記事
-記事ID: 20261123-10。ブログで用途・結果・実務上の制限を説明し、完全なコードは本教材に置きます。WordPress公開URLは未確定です。
+記事ID: 20261124-01。ブログで用途・結果・実務上の制限を説明し、完全なコードは本教材に置きます。WordPress公開URLは未確定です。

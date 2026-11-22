@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Set.intersection() 権限照合ラボ</title>
+<style>body{font-family:system-ui,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem;line-height:1.7}label{display:block;margin:1rem 0}input{display:block;width:100%;box-sizing:border-box;padding:.6rem;font:inherit}button{padding:.7rem 1.3rem;font:inherit}pre{white-space:pre-wrap;background:#f0f3f6;color:#18222c;padding:1rem;border-radius:.5rem}</style>
+</head><body><main><h1>Set.intersection() 権限照合ラボ</h1>
+<p>要求された権限と許可済み権限の共通部分を、架空のIDで比較します。外部送信や保存はありません。</p>
+<label>要求する権限（カンマ区切り）<input id="requested" value="read, write, delete, read"></label>
+<label>許可済み権限（カンマ区切り）<input id="allowed" value="read, export"></label>
+<button id="run" type="button">照合する</button>
+<h2>結果</h2><pre id="result" role="status" aria-live="polite"></pre>
+<p>注意：これは集合演算の学習用です。実システムの認可判定には使用しないでください。</p></main><script src="app.js"></script></body></html>

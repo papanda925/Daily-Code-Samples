@@ -38,4 +38,4 @@
 公式資料: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/escape 、https://tc39.es/ecma262/#sec-regexp.escape
 
 ## ブログとの対応
-記事ID: `20261124-02`。記事は最小コードと考え方、こちらは操作できる完全版です。
+記事ID: `20261124-07`。記事は最小コードと考え方、こちらは操作できる完全版です。

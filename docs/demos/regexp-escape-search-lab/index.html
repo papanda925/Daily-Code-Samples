@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RegExp.escape()で文字列検索</title>
+<style>body{font:1rem/1.7 system-ui,sans-serif;max-width:48rem;margin:2rem auto;padding:0 1rem}label{display:block}input{padding:.6rem;max-width:100%;width:22rem}button{padding:.6rem 1rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f3f5;padding:1rem}button:focus-visible,input:focus-visible{outline:3px solid #1768b0}</style>
+</head><body><main><h1>RegExp.escape() 文字列検索ラボ</h1>
+<p>検索対象は架空の商品説明です。入力は外部送信されません。</p>
+<label for="needle">探したい文字列</label>
+<input id="needle" value="A+B"><button id="search" type="button">検索する</button>
+<h2>検索結果</h2><pre id="result" aria-live="polite"></pre>
+<p>次は「(税込)」「AB」「.」も試してください。大文字と小文字は区別します。</p>
+</main><script src="./app.js"></script></body></html>

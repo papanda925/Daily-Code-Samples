@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Array.fromAsync() 非同期データ収集ラボ</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;max-width:740px;margin:2rem auto;padding:0 1rem}textarea,select,button{font:inherit}textarea{width:100%;box-sizing:border-box}pre{background:#f1f5f9;padding:1rem;white-space:pre-wrap;overflow-wrap:anywhere}button{padding:.5rem 1rem}</style>
+</head><body><main><h1>Array.fromAsync() 非同期データ収集ラボ</h1>
+<p>1行ずつ非同期で取得した架空の作業名を、完了後に配列として表示します。通信は行いません。</p>
+<label for="input">作業名（1行1件、最大20行）</label>
+<textarea id="input" rows="4">受付
+確認
+完了</textarea>
+<p><label for="delay">1件あたりの待機時間</label>
+<select id="delay"><option value="100">100ミリ秒</option><option value="500">500ミリ秒</option></select></p>
+<button id="run" type="button">収集する</button>
+<h2>結果</h2><pre id="output" aria-live="polite">「収集する」を押してください。</pre>
+</main><script src="./app.js"></script></body></html>

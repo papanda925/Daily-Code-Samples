@@ -2,6 +2,12 @@
 
 通貨記号だけ色を変えたい場合や、金額の小数部分を小さく表示したい場合に、表示文字列を自力で切り分けず、部品の種類と順序を調べる教材です。架空の金額1234.5を米ドル・ユーロ・日本円として別々に表示します。為替換算ではありません。
 
+## ライブデモ
+
+[金額表示の分解ラボ](https://papanda925.github.io/Daily-Code-Samples/demos/javascript-intl-number-format-parts/)（Pages反映未確認）
+
+[ブラウザー版の操作・検証手順](../../web/javascript-intl-number-format-parts/README.md)
+
 ## まず試す
 
 Node.js 22系を使用します。外部パッケージ・ネットワーク接続は不要です。

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>金額表示の分解ラボ | Daily Code</title>
+<style>
+*{box-sizing:border-box}body{font:16px/1.6 system-ui,sans-serif;color:#172333;background:#f2f5f9;margin:0}main{max-width:760px;margin:auto;padding:20px}h1{font-size:1.65rem;line-height:1.35}h2{font-size:1.15rem}section{background:white;border:1px solid #d4dce5;border-radius:12px;padding:18px;margin:14px 0}label{display:block;font-weight:600}input,select,button{font:inherit;max-width:100%;padding:8px;border:1px solid #8191a3;border-radius:6px;background:white;color:inherit}input,select{width:100%}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2772c8;outline-offset:2px}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.price{font-size:clamp(1.4rem,5vw,2.6rem);font-weight:700;overflow-wrap:anywhere}.currency{color:#075da1}.fraction{color:#784b16;font-size:.65em}.minusSign{color:#a42130}.parts{display:flex;flex-wrap:wrap;gap:8px}.part{border:1px solid #bccada;border-radius:6px;padding:7px;min-width:60px;text-align:center}.part small{display:block;color:#44566a;font-size:.75rem}.part strong{white-space:pre-wrap}.hint{color:#44566a}#error{color:#a42130}code{overflow-wrap:anywhere}
+</style>
+</head>
+<body><main>
+<h1>金額表示の分解ラボ</h1>
+<p>金額は同じ。表示は地域によって変わる。通貨記号・小数・負号を観察しよう。</p>
+<section aria-labelledby="settings"><h2 id="settings">1. 条件を変える</h2>
+<div class="controls">
+<label>金額<input id="amount" type="number" step="any" value="1234.5"></label>
+<label>ロケール<select id="locale"><option value="en-US">米国 (en-US)</option><option value="de-DE">ドイツ (de-DE)</option><option value="ja-JP">日本 (ja-JP)</option></select></label>
+<label>通貨<select id="currency"><option>USD</option><option>EUR</option><option>JPY</option></select></label>
+</div><p><button id="negative" type="button">正負を反転</button> <button id="reset" type="button">初期値に戻す</button></p>
+<p class="hint">為替換算ではない。入力値は外部に送信・保存しない。</p><p id="error" role="alert" hidden></p>
+</section>
+<section aria-labelledby="result"><h2 id="result">2. 表示を比べる</h2><p>通常表示：<output id="plain"></output></p><div id="price" class="price" aria-live="polite"></div><p class="hint">青：通貨記号／茶：小数部分／赤：負号</p></section>
+<section aria-labelledby="breakdown"><h2 id="breakdown">3. 部品を観察する</h2><div id="parts" class="parts"></div><p id="check" role="status"></p><p class="hint">空白は観察用カードで「空白」と表示する。金額表示では元の空白を保持する。</p></section>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts">MDN：formatToParts()</a></p>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const amount = $('amount'), locale = $('locale'), currency = $('currency');
+function render() {
+  const error = $('error'), price = $('price'), cards = $('parts');
+  price.replaceChildren(); cards.replaceChildren(); $('plain').textContent = ''; $('check').textContent = '';
+  error.hidden = true;
+  try {
+    // 空欄を0として扱わない。数値の入力と表示の責任を分離する。
+    const value = amount.valueAsNumber;
+    if (!Number.isFinite(value)) throw new Error('有限の数値を入力してください。');
+    const nf = new Intl.NumberFormat(locale.value, {style:'currency', currency:currency.value});
+    const parts = nf.formatToParts(value);
+    $('plain').textContent = nf.format(value);
+    for (const part of parts) {
+      // 順序・負号・空白を保持する。HTMLとして解釈させない。
+      const span = document.createElement('span');
+      span.className = part.type; span.textContent = part.value; price.append(span);
+      const card = document.createElement('div'); card.className = 'part';
+      const name = document.createElement('small'); name.textContent = part.type;
+      const text = document.createElement('strong'); text.textContent = /^\s+$/.test(part.value) ? '空白' : part.value;
+      card.append(name,text); cards.append(card);
+    }
+    $('check').textContent = price.textContent === nf.format(value) ? '復元結果：通常表示と一致' : '復元結果：不一致';
+  } catch (e) { error.textContent = e.message; error.hidden = false; }
+}
+amount.addEventListener('input',render);
+locale.addEventListener('change',render);
+currency.addEventListener('change',render);
+$('negative').addEventListener('click',() => {if(Number.isFinite(amount.valueAsNumber)) amount.value=String(-amount.valueAsNumber);render();});
+$('reset').addEventListener('click',() => {amount.value='1234.5';locale.value='en-US';currency.value='USD';render();});
+render();
+</script>
+</body></html>

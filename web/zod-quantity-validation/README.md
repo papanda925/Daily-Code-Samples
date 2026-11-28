@@ -52,6 +52,6 @@ ZodはMITライセンスです。
 
 ## 検証状況
 
-実施: 現行HTML・共通JavaScript・原稿の操作名、初期値、Zodのバージョン、出力パスを照合。Node構文検査とHTML構造検査を行う予定です。
+実施: Node.js 24.22.3 の `node --check` がPASS。Python HTMLParserで実際のHTMLから `#live`、`#input`、`#run` を確認。Zod v4.6.7の固定指定、JSON.parse後にsafeParseを呼ぶ実装、エラーpath、READMEの専用ライブURLを静的照合しました。
 
-未確認: Day.js/Zodなど外部モジュールが実際に読み込まれるブラウザー環境、Pages上の操作、スクリーンリーダーによる確認。Zod実装の実行テストは外部npm取得が実行環境で失敗したため未実施です。
+未確認: Pages上の表示とブラウザー操作、スクリーンリーダーによる確認。npmからZodを取得する試みは実行環境のネットワーク制限で失敗したため、Zodパッケージ自体の実行テストは未実施です。

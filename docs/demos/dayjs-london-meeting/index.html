@@ -15,7 +15,7 @@
 <section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>冬の東京 00:30 を換算する。</p><p>日付を 2026-07-15 に変える。</p>
 <label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
 <div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
-<details><summary>実装コード</summary><pre><code>async v=&gt;{const [{default:d},{default:u},{default:t}]=await Promise.all([lib(&#x27;dayjs@1.11.13&#x27;),lib(&#x27;dayjs@1.11.13/plugin/utc&#x27;),lib(&#x27;dayjs@1.11.13/plugin/timezone&#x27;)]);d.extend(u);d.extend(t);const a=d.tz(v,&#x27;Asia/Tokyo&#x27;);say({東京:a.format(&#x27;YYYY-MM-DD HH:mm Z&#x27;),ロンドン:a.tz(&#x27;Europe/London&#x27;).format(&#x27;YYYY-MM-DD HH:mm Z&#x27;)})}</code></pre></details></section>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const [{default:d},{default:u},{default:t}]=await Promise.all([lib(&#x27;dayjs@1.11.23&#x27;),lib(&#x27;dayjs@1.11.23/plugin/utc&#x27;),lib(&#x27;dayjs@1.11.23/plugin/timezone&#x27;)]);d.extend(u);d.extend(t);const a=d.tz(v,&#x27;Asia/Tokyo&#x27;);say({東京:a.format(&#x27;YYYY-MM-DD HH:mm Z&#x27;),ロンドン:a.tz(&#x27;Europe/London&#x27;).format(&#x27;YYYY-MM-DD HH:mm Z&#x27;)})}</code></pre></details></section>
 <section><h2>結果の見方</h2><p>ロンドンは冬なら前日15:30。</p><p>夏は前日16:30。</p><p>東京の時刻には日付も含める。</p><p>現地が前日になる案内は、日付と曜日まで表示すると誤読を減らせる。</p></section>
 <section><h2>コードの要点</h2><p>utc と timezone の両プラグインを読み、dayjs.tz で東京として解釈して Europe/London に変換する。</p></section>
 <section><h2>仕事で使うとき</h2><p>会議案内には都市名と日付を含める。</p><p>時差を年中固定すると夏にずれる。</p></section>

@@ -1,55 +1,60 @@
-# 既存の候補を表示しながら新しい値も受け付ける｜datalist
+# 候補を出しながら自由入力を受け付ける｜datalist
 
-部署の入力欄では、よく使う値を候補に出すと便利です。一覧にない新しい部署を入力できるかも確認します。
-
-## 最初に知っておく用語
-
-- **候補リスト**は、入力の助けになる見本の一覧です。
-- **自由入力**は、一覧以外の値も入力できることです。
-
-## 処理のフローチャートで考える
-
-左から右に読みます。「候補リスト」が変わると「確定した値」にどう影響するかを予想します。
-
-```mermaid
-flowchart LR
-    A["部署の入力"] --> B["候補リスト"] --> C["確定した値"]
-```
+部署名を入力するとき、よく使う値を候補として見せつつ、新しい部署名も受け付ける方法を試します。ここで学ぶのはブラウザー標準のHTMLです。JavaScriptのライブラリーは入力候補の動作には使っていません。
 
 ## ライブデモ
 
-[公開用ライブデモ](https://papanda925.github.io/Daily-Code-Samples/demos/datalist-department-suggestions/#live) ／ [実装HTML](../../docs/demos/datalist-department-suggestions/index.html) ／ [共通JavaScript](../../docs/demos/browser-library-labs/daily.js)
+[部署候補のライブデモ](https://papanda925.github.io/Daily-Code-Samples/demos/datalist-department-suggestions/#live)
 
-1. 現行のブラウザーでデモを開く。Mermaidの描画や一部のライブラリーに外部通信を使用する。
-2. 「実行」を押す。下記の値や画面内の操作欄を試す。
+## まず試す
 
-総務を選ぶ。次は候補にない営業と入力して確認する。
+1. デモを開き、ページ内の「実行」を押します。
+2. 「部署名」欄に「総務」と入力し、ブラウザーが候補を示したら「総務」を選びます。表示や候補を開く操作はブラウザーで異なります。
+3. 「入力を確認」を押し、結果欄が「総務」になることを見ます。
+4. もう一度デモを実行し、「部署名」欄に候補にない「営業」と入力して確認します。結果は「営業」です。
 
-### 結果の見方
+| 入力欄で選ぶ／入力する値 | 結果 |
+|---|---|
+| 候補の「総務」 | 総務 |
+| 候補にない「営業」 | 営業 |
 
-どちらも入力した値として取得できる。
+候補を選んでも独自の値を入力しても、アプリが読み取るのはinputの現在値です。この実験では保存・送信をしません。
 
-ブラウザーによって候補を開く操作や表示が異なる。入力欄の値が採用されるので、見た目の候補から保存値を推測しない。
+## ファイル
 
-## コードの要点
+- Pages用HTML: `docs/demos/datalist-department-suggestions/index.html`
+- 共通デモ処理: `docs/demos/browser-library-labs/daily.js` の `demos[44]`
+- 解説と実験手順: `web/datalist-department-suggestions/README.md`
 
-input の list 属性を datalist のidへ向け、送信時に入力値を表示する。
+デモはHTMLの `input[list]` と `datalist` を接続します。候補値は「総務」「経理」です。ボタンの処理は `q.value` を読み取り、画面に表示します。フォーム送信処理やサーバー通信はありません。入力欄には「部署名」というアクセシブルネームを付けています。
 
-実装はデモ画面の「実装コード」で確認できます。
+## 変更して観察する
 
-## 仕事で使うとき
+ソースの `demos[44]` にある `['総務','経理']` を `['総務','経理','情報システム']` に変えて、候補と自由入力の結果を比べます。候補に「情報システム」が増えても、候補以外を入力できる点は変わりません。候補集合と許可値の集合は同じとは限りません。
 
-部署コードなど候補だけを許可する場合は、入力値を別途検証する。
+## 仕組みと実務での判断
 
-## 参考資料
+`input` の `list` 属性に、同じ文書内にある `datalist` の `id` を指定します。`datalist` の `option` は候補値です。`select` のように選択肢を限定する部品ではありません。部署コードなど許可値を限定する場合は、サーバー側でも値を検証してください。ブラウザー側の入力チェックは回避できるため、権限判定やデータ整合性の根拠にはできません。
 
-- [datalistの参照資料](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist)
-- [Mermaidの図の書き方](https://mermaid.js.org/intro/syntax-reference.html)
+## うまくいかないとき
 
-本文はAIを利用して作成しました。
+- 候補が出ない: `input` の `list` と `datalist` の `id` が完全一致しているか、実行後の要素を開発者ツールで確認します。
+- 候補の開き方が手順と違う: ドロップダウンの見た目や操作はユーザーエージェント依存です。文字を入力して候補が現れるか確認し、見た目だけで失敗と判断しません。
+- 候補外の値が結果に出ない: 「実行」後に入力を変更したか確認し、最後に「入力を確認」を押します。このデモは確認値を送信しません。
+- 候補UIが使いにくい: ブラウザーや支援技術の組み合わせによって案内が異なります。候補が業務上必須なら、キーボード・スクリーンリーダー・ズームで実機確認を行い、必要に応じて別の入力UIを選びます。
 
-## 実行環境と検証
+## 安全・検証
 
-JavaScriptの構文とファイル間の対応を確認した。 Pagesでの各機能の実行とMermaidの描画は検証範囲に含まれていない。
+入力はページ内に表示するだけで、ネットワーク送信や永続保存をしません。実名や社内情報ではなく、架空の値を使ってください。図の描画にはMermaidをCDNから取得しますが、datalistの実験自体は外部ライブラリーに依存しません。
 
-図が表示されない場合は、本文の読み方とMermaidソースを参照する。デモ欄に取得エラーが出る場合は通信条件を確認する。検証用の架空データを使う。
+本ファイルのHTMLとJavaScriptはリポジトリのMITライセンス対象です。Mermaidなどの外部ソフトウェアはそれぞれのライセンスに従います。
+
+- [WHATWG HTML Standard: The datalist element](https://html.spec.whatwg.org/multipage/input.html#the-datalist-element)
+- [MDN: <datalist> element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist)
+- [MDN: <input> list attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#list)
+
+## 検証状況
+
+Node.js `node --check` とHTML構造の静的確認を実行します。GitHub Pagesでのレンダリング、実ブラウザーでの候補表示、キーボード・スクリーンリーダー・モバイル対応は別途確認が必要です。実施していない確認は完了扱いにしません。
+
+関連する記事ID: `20261128-71-02`。記事の説明を日本語ブログに置き、デモHTMLと完全な手順はこのリポジトリで管理します。

@@ -52,7 +52,26 @@ const demos={
 32:async v=>{css('https://cdn.jsdelivr.net/npm/tabulator-tables@6.3.1/dist/css/tabulator.min.css');const {TabulatorFull:T}=await lib('tabulator-tables@6.3.1');const data=[{dept:'総務',name:'端末A'},{dept:'経理',name:'端末B'}],h=panel(),q=field('search');q.value=v;const t=new T(h,{data,layout:'fitColumns',columns:[{title:'部署',field:'dept'},{title:'名前（クリックで編集）',field:'name',editor:'input'}]});const apply=()=>q.value?t.setFilter('dept','=',q.value):t.clearFilter();t.on('tableBuilt',apply);q.oninput=apply;cleanup=()=>t.destroy();say('部署を空欄にすると全行を表示します。')},
 33:async()=>{css('https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css');const {default:F}=await lib('flatpickr@4.6.13');const f=F(field('text'),{inline:true,disable:[x=>x.getDay()===0||x.getDay()===6],onChange:(_,s)=>say(s)});cleanup=()=>f.destroy()},
 34:async v=>{const {default:I}=await lib('imask@7.6.1');const m=I(field('text'),{mask:'000-000'});const update=()=>say({表示:m.value,保存:m.unmaskedValue});m.unmaskedValue=v;m.on('accept',update);update();cleanup=()=>m.destroy()},
-35:async()=>{css('https://cdn.jsdelivr.net/npm/driver.js@1.3.6/dist/driver.css');const {driver}=await lib('driver.js@1.3.6');const a=button('検索',()=>say('検索を選びました。')),b=button('保存',()=>say('保存を選びました。'));const d=driver({showProgress:true,nextBtnText:'次へ',prevBtnText:'戻る',doneBtnText:'完了',steps:[{element:a,popover:{title:'検索',description:'対象の記録を探します。'}},{element:b,popover:{title:'保存',description:'変更した記録を保存します。'}}]});button('案内を開く',()=>d.drive());cleanup=()=>d.destroy()},
+35:async v=>{
+  // 入力文字列を吹き出しへ表示する。HTMLとして解釈される記号は取り除く。
+  const label=String(v??'').trim().replace(/[&<>"']/g,'').slice(0,20)||'記録';
+  css('https://cdn.jsdelivr.net/npm/driver.js@1.3.6/dist/driver.css');
+  const {driver}=await lib('driver.js@1.3.6');
+  // 対象ボタンを作成してから、各ステップへ実際の要素を渡す。
+  const search=button('検索',()=>say('検索を選びました。'));
+  const save=button('保存',()=>say('保存を選びました。'));
+  const d=driver({
+    showProgress:true,nextBtnText:'次へ',prevBtnText:'戻る',doneBtnText:'完了',
+    steps:[
+      {element:search,popover:{title:label+'を検索',description:'対象の記録を探します。'}},
+      {element:save,popover:{title:label+'を保存',description:'確認後に変更した記録を保存します。'}}
+    ]
+  });
+  // drive()までは案内を表示しない。再実行時にはdestroyする。
+  button('案内を開く',()=>d.drive());
+  cleanup=()=>d.destroy();
+  say('案内の題材: '+label+'。開始後は次へ進むか、閉じて元の画面を操作できます。');
+},
 36:async v=>{css('https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css');const {default:Q}=await lib('quill@2.0.3');const q=new Q(panel(),{theme:'snow',modules:{toolbar:[['bold']]}});const update=()=>say(q.getContents());q.setText(v);q.on('text-change',update);update()},
 37:async()=>{css('https://cdn.jsdelivr.net/npm/bpmn-js@18.3.1/dist/assets/diagram-js.css');css('https://cdn.jsdelivr.net/npm/bpmn-js@18.3.1/dist/assets/bpmn-font/css/bpmn.css');const {default:M}=await lib('bpmn-js@18.3.1/lib/Modeler');const h=panel();h.style.height='300px';const m=new M({container:h});await m.createDiagram();const f=m.get('elementFactory'),model=m.get('modeling'),root=m.get('canvas').getRootElement();const s=m.get('elementRegistry').getAll().find(x=>x.type==='bpmn:StartEvent');const a=model.appendShape(s,f.createShape({type:'bpmn:Task'}),{x:290,y:140},root),b=model.appendShape(a,f.createShape({type:'bpmn:Task'}),{x:490,y:140},root);model.updateLabel(a,'申請');model.updateLabel(b,'確認');model.updateLabel(model.connect(b,a),'差し戻し');m.get('canvas').zoom('fit-viewport');button('保存・再読込',async()=>{const {xml}=await m.saveXML({format:true});await m.importXML(xml);m.get('canvas').zoom('fit-viewport');say(xml)});cleanup=()=>m.destroy()},
 38:async()=>{const {default:W}=await lib('wavesurfer.js@7.9.1');const rate=8000,count=rate*6,b=new ArrayBuffer(44+count*2),d=new DataView(b);for(const [o,s] of [[0,'RIFF'],[8,'WAVEfmt '],[36,'data']])for(const [i,c] of [...s].entries())d.setUint8(o+i,c.charCodeAt(0));for(const [o,x] of [[4,b.byteLength-8],[16,16],[24,rate],[28,rate*2],[40,count*2]])d.setUint32(o,x,true);for(const [o,x] of [[20,1],[22,1],[32,2],[34,16]])d.setUint16(o,x,true);for(let i=0;i<count;i++){const t=i/rate;d.setInt16(44+2*i,Math.sin(t*Math.PI*600)*(t>2&&t<3?13000:1200),true)}const w=W.create({container:panel(),height:100,waveColor:'#38836a',progressColor:'#bb491f'});cleanup=()=>w.destroy();await w.loadBlob(new Blob([b],{type:'audio/wav'}));w.on('interaction',t=>say(t.toFixed(2)+'秒'));button('再生・停止',()=>w.playPause())},

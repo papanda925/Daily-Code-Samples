@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>業務フローの差し戻し経路を保存する｜bpmn-js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/bpmn-return-flow">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 37</p><h1>業務フローの差し戻し経路を保存する｜bpmn-js</h1><p>申請を差し戻す場合は、誰が手順をやり直すか示す必要があります。</p><p>二つの箱を結び、図を保存してから戻り先を確かめます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>BPMN</dt><dd>業務手順を共通の記号で表す規格</dd><dt>XML</dt><dd>要素と属性でデータを表す形式</dd></dl></section>
+<section><h2>フローチャートで考える</h2><p>確認から申請に戻る矢印を探します。</p><p>フォームの記入者に何が戻るかを検討できます。</p>
+<div class="diagram" id="figure" role="img" aria-label="フローチャート。確認から申請に戻る矢印を探します。フォームの記入者に何が戻るかを検討できます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart TD
+    A[&quot;申請&quot;] --&gt; B[&quot;確認&quot;]
+    B -- &quot;差し戻し&quot; --&gt; A
+    B -- &quot;承認&quot; --&gt; C[&quot;完了&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>図の「申請」をダブルクリックして編集する。</p><p>保存・再読込を押す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async()=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/bpmn-js@18.3.1/dist/assets/diagram-js.css&#x27;);css(&#x27;https://cdn.jsdelivr.net/npm/bpmn-js@18.3.1/dist/assets/bpmn-font/css/bpmn.css&#x27;);const {default:M}=await lib(&#x27;bpmn-js@18.3.1/lib/Modeler&#x27;);const h=panel();h.style.height=&#x27;300px&#x27;;const m=new M({container:h});await m.createDiagram();const f=m.get(&#x27;elementFactory&#x27;),model=m.get(&#x27;modeling&#x27;),root=m.get(&#x27;canvas&#x27;).getRootElement();const s=m.get(&#x27;elementRegistry&#x27;).getAll().find(x=&gt;x.type===&#x27;bpmn:StartEvent&#x27;);const a=model.appendShape(s,f.createShape({type:&#x27;bpmn:Task&#x27;}),{x:290,y:140},root),b=model.appendShape(a,f.createShape({type:&#x27;bpmn:Task&#x27;}),{x:490,y:140},root);model.updateLabel(a,&#x27;申請&#x27;);model.updateLabel(b,&#x27;確認&#x27;);model.updateLabel(model.connect(b,a),&#x27;差し戻し&#x27;);m.get(&#x27;canvas&#x27;).zoom(&#x27;fit-viewport&#x27;);button(&#x27;保存・再読込&#x27;,async()=&gt;{const {xml}=await m.saveXML({format:true});await m.importXML(xml);m.get(&#x27;canvas&#x27;).zoom(&#x27;fit-viewport&#x27;);say(xml)});cleanup=()=&gt;m.destroy()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>名前と差し戻し経路が復元される。</p><p>差し戻しの線がどこに戻るか確認する。</p><p>図を保存して開き直した後も、戻り先とラベルが維持されるかを見る。</p></section>
+<section><h2>コードの要点</h2><p>saveXML で編集中の図を XML に変えます。</p><p>importXML で読み込み直し、図の表示と書き出した結果を確認します。</p></section>
+<section><h2>仕事で使うとき</h2><p>保存ファイルを受け取る担当者と、使う記号の範囲をそろえる。</p></section>
+<footer><p><a href="https://github.com/bpmn-io/bpmn-js">bpmn-jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 37, "input": "図を編集", "diagram": "flowchart TD\n    A[\"申請\"] --> B[\"確認\"]\n    B -- \"差し戻し\" --> A\n    B -- \"承認\" --> C[\"完了\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>動画で日本語と英語の字幕を切り替える｜track | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/track-language-switch">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 49</p><h1>動画で日本語と英語の字幕を切り替える｜track</h1><p>一つの動画には、複数の言語の字幕を付けられます。</p><p>動画の同じ秒数を使って、字幕だけを切り替えます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>字幕トラック</dt><dd>時刻と字幕を組み合わせたデータ</dd><dt>WebVTT</dt><dd>ブラウザーで使える時刻付き字幕形式</dd></dl></section>
+<section><h2>タイムラインで考える</h2><p>字幕の表示は動画の時刻に沿って進みます。</p><p>1秒付近で言語の違いを確認できます。</p>
+<div class="diagram" id="figure" role="img" aria-label="タイムライン。字幕の表示は動画の時刻に沿って進みます。1秒付近で言語の違いを確認できます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>timeline
+    title 字幕の表示区間
+    開始 : 字幕なし
+    1.0秒 : 日英から選んだ字幕を表示
+    3.2秒 : 字幕が消える</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>日本語、英語、オフを順に選ぶ。</p><p>2秒付近の表示を見比べる。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async()=&gt;{const c=panel(&#x27;canvas&#x27;);c.width=320;c.height=180;const g=c.getContext(&#x27;2d&#x27;);const v=panel(&#x27;video&#x27;);v.controls=true;v.muted=true;v.playsInline=true;if(!c.captureStream||!window.MediaRecorder)throw Error(&#x27;この環境では動画生成に対応していません。&#x27;);const stream=c.captureStream(12),r=new MediaRecorder(stream),parts=[],urls=[];const done=new Promise(resolve=&gt;r.onstop=resolve);r.ondataavailable=e=&gt;parts.push(e.data);r.start();let frame=0;const draw=()=&gt;{g.fillStyle=&#x27;#173a32&#x27;;g.fillRect(0,0,320,180);g.fillStyle=&#x27;white&#x27;;g.font=&#x27;24px sans-serif&#x27;;g.fillText(&#x27;Daily Code &#x27;+Math.floor(frame/12),30,90);frame++};draw();const tick=setInterval(draw,83);await new Promise(resolve=&gt;setTimeout(resolve,3300));clearInterval(tick);r.stop();await done;stream.getTracks().forEach(t=&gt;t.stop());const url=(data,type)=&gt;{const u=URL.createObjectURL(new Blob(data,{type}));urls.push(u);return u};v.src=url(parts,r.mimeType);c.hidden=true;const tracks=[&#x27;ja&#x27;,&#x27;en&#x27;].map((l,i)=&gt;{const t=el(&#x27;track&#x27;,v);t.kind=&#x27;subtitles&#x27;;t.srclang=l;t.label=i?&#x27;English&#x27;:&#x27;日本語&#x27;;t.src=url([&#x27;WEBVTT\n\n00:00:01.000 --&gt; 00:00:03.200\n&#x27;+(i?&#x27;Sample caption&#x27;:&#x27;字幕の見本&#x27;)+&#x27;\n&#x27;],&#x27;text/vtt&#x27;);return t});for(const [i,label] of [&#x27;日本語&#x27;,&#x27;English&#x27;,&#x27;字幕オフ&#x27;].entries())button(label,()=&gt;{tracks.forEach((t,j)=&gt;t.track.mode=i===j?&#x27;showing&#x27;:&#x27;disabled&#x27;);v.currentTime=1.3;return v.play()});cleanup=()=&gt;urls.forEach(u=&gt;URL.revokeObjectURL(u));say(&#x27;字幕ボタンを選んで再生してください。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>選んだ言語の字幕だけが表示される。</p><p>同じタイミングで言語だけを切り替えて比べる。</p><p>選択メニューがない場合は、デモ内の字幕ボタンからも切り替えられる。</p></section>
+<section><h2>コードの要点</h2><p>track の kind、srclang、label を指定し、動画の字幕メニューから選ぶ。</p></section>
+<section><h2>仕事で使うとき</h2><p>公開前に実動画と字幕の時刻を合わせる。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track">trackの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 49, "input": "字幕を選ぶ", "diagram": "timeline\n    title 字幕の表示区間\n    開始 : 字幕なし\n    1.0秒 : 日英から選んだ字幕を表示\n    3.2秒 : 字幕が消える"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

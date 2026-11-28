@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>初めて使う画面の操作手順を順番に示す｜Driver.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/driverjs-guided-tour">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 35</p><h1>初めて使う画面の操作手順を順番に示す｜Driver.js</h1><p>初めて使う画面では、ボタンの場所が分かるだけでも迷いが減ります。</p><p>検索と保存を順番に案内し、途中で閉じたときの動作を見ます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>ツアー</dt><dd>操作箇所を順に示す案内</dd><dt>ステップ</dt><dd>案内の1段階</dd></dl></section>
+<section><h2>ユーザージャーニー図で考える</h2><p>利用者がたどる段階を示します。</p><p>1〜5の点数は操作の分かりやすさを想定した例です。</p>
+<div class="diagram" id="figure" role="img" aria-label="ユーザージャーニー図。利用者がたどる段階を示します。1〜5の点数は操作の分かりやすさを想定した例です。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>journey
+    title 初めての検索と保存
+    section 案内を読む
+      検索ボタンを見つける: 4: 初めての利用者
+      保存ボタンを見つける: 4: 初めての利用者
+    section 自分で操作
+      案内を閉じて検索する: 5: 初めての利用者</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>案内を開始する。</p><p>途中で閉じて画面のボタンを押す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async()=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/driver.js@1.3.6/dist/driver.css&#x27;);const {driver}=await lib(&#x27;driver.js@1.3.6&#x27;);const a=button(&#x27;検索&#x27;,()=&gt;say(&#x27;検索を選びました。&#x27;)),b=button(&#x27;保存&#x27;,()=&gt;say(&#x27;保存を選びました。&#x27;));const d=driver({showProgress:true,nextBtnText:&#x27;次へ&#x27;,prevBtnText:&#x27;戻る&#x27;,doneBtnText:&#x27;完了&#x27;,steps:[{element:a,popover:{title:&#x27;検索&#x27;,description:&#x27;対象の記録を探します。&#x27;}},{element:b,popover:{title:&#x27;保存&#x27;,description:&#x27;変更した記録を保存します。&#x27;}}]});button(&#x27;案内を開く&#x27;,()=&gt;d.drive());cleanup=()=&gt;d.destroy()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>操作の順番を確認できる。</p><p>閉じてもボタンは使える。</p><p>ガイドが示すボタン名と実際の画面をそろえる。</p><p>終了後に元の操作に戻れるか、マウスだけでなくキーでも試す。</p></section>
+<section><h2>コードの要点</h2><p>各ボタンを対象とする steps を作り、ガイドを起動する。</p></section>
+<section><h2>仕事で使うとき</h2><p>ガイドを毎回開くと慣れた利用者の邪魔になる。</p><p>任意に呼び出せるようにする。</p></section>
+<footer><p><a href="https://github.com/kamranahmedse/driver.js">Driver.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 35, "input": "ガイド開始", "diagram": "journey\n    title 初めての検索と保存\n    section 案内を読む\n      検索ボタンを見つける: 4: 初めての利用者\n      保存ボタンを見つける: 4: 初めての利用者\n    section 自分で操作\n      案内を閉じて検索する: 5: 初めての利用者"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

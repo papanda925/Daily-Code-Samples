@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>共有画面へ渡せる端末とコピーで共有する端末を扱う｜Web Share API | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/web-share-fallback">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 59</p><h1>共有画面へ渡せる端末とコピーで共有する端末を扱う｜Web Share API</h1><p>端末によっては、ブラウザーから共有先を選ぶ画面を呼び出せます。</p><p>使える端末と使えない端末に、それぞれ操作を用意します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>共有シート</dt><dd>端末が表示する共有先の選択画面</dd><dt>フォールバック</dt><dd>ある機能が使えない場合の代わりの操作</dd></dl></section>
+<section><h2>分岐のフローチャートで考える</h2><p>ひし形で「端末の共有機能は使える」を確認します。</p><p>結果によって次に進む先が変わります。</p>
+<div class="diagram" id="figure" role="img" aria-label="分岐のフローチャート。ひし形で「端末の共有機能は使える」を確認します。結果によって次に進む先が変わります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart TD
+    A[&quot;共有ボタンを押す&quot;] --&gt; B{&quot;端末の共有機能は使える？&quot;}
+    B -- &quot;はい&quot; --&gt; C[&quot;共有先の選択画面を開く&quot;]
+    B -- &quot;いいえ&quot; --&gt; D[&quot;コピー用のURLを表示&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>共有を押す。</p><p>選択画面が出た場合はキャンセルも試す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>()=&gt;{const u=location.href,p=panel(&#x27;textarea&#x27;);p.setAttribute(&#x27;aria-label&#x27;,&#x27;共有用URL&#x27;);p.readOnly=true;p.value=u;button(&#x27;共有する&#x27;,async()=&gt;{try{if(!navigator.share)throw Error();await navigator.share({title:document.title,url:u});say(&#x27;端末の共有処理に渡しました。&#x27;)}catch(e){if(e.name===&#x27;AbortError&#x27;)say(&#x27;共有を取り消しました。&#x27;);else{p.select();say(&#x27;選択したURLをコピーしてください。&#x27;)}}})}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>非対応端末では共有URLを選択できる。</p><p>選択画面を開いても送信先で受信したとは限らない。</p><p>このデモは端末の共有処理へ渡した時点を表示する。</p></section>
+<section><h2>コードの要点</h2><p>ユーザー操作で navigator.share を呼び、未対応時はURLを表示する。</p></section>
+<section><h2>仕事で使うとき</h2><p>共有したリンクは受け取る側の端末でも開けるか確認する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API">Web Share APIの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 59, "input": "共有を試す", "diagram": "flowchart TD\n    A[\"共有ボタンを押す\"] --> B{\"端末の共有機能は使える？\"}\n    B -- \"はい\" --> C[\"共有先の選択画面を開く\"]\n    B -- \"いいえ\" --> D[\"コピー用のURLを表示\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

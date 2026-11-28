@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>端末台帳の編集と絞り込みを一画面で行う｜Tabulator | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/tabulator-inventory">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 32</p><h1>端末台帳の編集と絞り込みを一画面で行う｜Tabulator</h1><p>端末台帳で部署を絞り込むと、編集する行を探しやすくなります。</p><p>表示を絞ったまま値を編集し、全行表示に戻します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>フィルター</dt><dd>条件に合う行だけを表示する機能</dd><dt>永続化</dt><dd>画面を閉じてもデータを残すこと</dd></dl></section>
+<section><h2>ツリーマップで考える</h2><p>外枠は全端末です。</p><p>部署の内側に端末を置きます。</p><p>面積の単位は端末1台です。</p>
+<div class="diagram" id="figure" role="img" aria-label="ツリーマップ。外枠は全端末です。部署の内側に端末を置きます。面積の単位は端末1台です。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>treemap-beta
+    &quot;端末台帳&quot;
+        &quot;総務&quot;
+            &quot;端末A&quot;: 1
+        &quot;経理&quot;
+            &quot;端末B&quot;: 1</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>総務で絞る。</p><p>名前のセルを編集する。</p><p>条件を空欄にして実行する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/tabulator-tables@6.3.1/dist/css/tabulator.min.css&#x27;);const {TabulatorFull:T}=await lib(&#x27;tabulator-tables@6.3.1&#x27;);const data=[{dept:&#x27;総務&#x27;,name:&#x27;端末A&#x27;},{dept:&#x27;経理&#x27;,name:&#x27;端末B&#x27;}],h=panel(),q=field(&#x27;search&#x27;);q.value=v;const t=new T(h,{data,layout:&#x27;fitColumns&#x27;,columns:[{title:&#x27;部署&#x27;,field:&#x27;dept&#x27;},{title:&#x27;名前（クリックで編集）&#x27;,field:&#x27;name&#x27;,editor:&#x27;input&#x27;}]});const apply=()=&gt;q.value?t.setFilter(&#x27;dept&#x27;,&#x27;=&#x27;,q.value):t.clearFilter();t.on(&#x27;tableBuilt&#x27;,apply);q.oninput=apply;cleanup=()=&gt;t.destroy();say(&#x27;部署を空欄にすると全行を表示します。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>条件を解除しても変更した値が見える。</p><p>絞り込み中に値を変更すると、表示されている行のデータが変わる。</p><p>ページを開き直す前に、保存先の有無を確認する。</p></section>
+<section><h2>コードの要点</h2><p>列に編集機能を指定し、部署フィルターを切り替える。</p></section>
+<section><h2>仕事で使うとき</h2><p>同期や保存を追加するまで、編集中の値はこの画面内だけで扱う。</p></section>
+<footer><p><a href="https://github.com/olifolkerd/tabulator">Tabulatorの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 32, "input": "総務", "diagram": "treemap-beta\n    \"端末台帳\"\n        \"総務\"\n            \"端末A\": 1\n        \"経理\"\n            \"端末B\": 1"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

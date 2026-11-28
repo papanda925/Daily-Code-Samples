@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>休業日を予約の候補から外す｜flatpickr | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/flatpickr-closed-days">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 33</p><h1>休業日を予約の候補から外す｜flatpickr</h1><p>窓口が土日に休むなら、予約フォームで土日を候補から外せます。</p><p>金曜と土曜を順に選び、入力欄の違いを確認します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>日付ピッカー</dt><dd>カレンダーから日付を選ぶ入力部品</dd><dt>無効日</dt><dd>選択できない日</dd></dl></section>
+<section><h2>分岐のフローチャートで考える</h2><p>ひし形で「土日」を確認します。</p><p>結果によって次に進む先が変わります。</p>
+<div class="diagram" id="figure" role="img" aria-label="分岐のフローチャート。ひし形で「土日」を確認します。結果によって次に進む先が変わります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart TD
+    A[&quot;予約日を選ぶ&quot;] --&gt; B{&quot;土日？&quot;}
+    B -- &quot;はい&quot; --&gt; C[&quot;その日を選択不可にする&quot;]
+    B -- &quot;いいえ&quot; --&gt; D[&quot;日付を受け付ける&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>カレンダーで金曜と土曜を押す。</p><p>入力欄が更新される日を確認する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async()=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css&#x27;);const {default:F}=await lib(&#x27;flatpickr@4.6.13&#x27;);const f=F(field(&#x27;text&#x27;),{inline:true,disable:[x=&gt;x.getDay()===0||x.getDay()===6],onChange:(_,s)=&gt;say(s)});cleanup=()=&gt;f.destroy()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>土日は選べない。</p><p>休日の範囲は地域や運用で違う。</p><p>土日だけで決められない場合は、祝日や臨時休業日も受付の条件へ追加する。</p></section>
+<section><h2>コードの要点</h2><p>disable に土日を返す関数を指定する。</p></section>
+<section><h2>仕事で使うとき</h2><p>予約受付側でも休業日を検証する。</p><p>クライアントのカレンダーは入力を助ける役割を持つ。</p></section>
+<footer><p><a href="https://github.com/flatpickr/flatpickr">flatpickrの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 33, "input": "カレンダーを開く", "diagram": "flowchart TD\n    A[\"予約日を選ぶ\"] --> B{\"土日？\"}\n    B -- \"はい\" --> C[\"その日を選択不可にする\"]\n    B -- \"いいえ\" --> D[\"日付を受け付ける\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

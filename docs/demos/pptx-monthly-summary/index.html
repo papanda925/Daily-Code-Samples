@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>定型の月次サマリーをPowerPointで作る｜PptxGenJS | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/pptx-monthly-summary">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 27</p><h1>定型の月次サマリーをPowerPointで作る｜PptxGenJS</h1><p>毎月の報告で変わるのが見出しと件数なら、同じ配置を使い回せます。</p><p>月名を入れてスライドを一枚生成します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>スライド</dt><dd>プレゼン資料の1画面</dd><dt>テキストボックス</dt><dd>文字を置く枠</dd></dl></section>
+<section><h2>カンバン図で考える</h2><p>列は月次報告の作業段階です。</p><p>生成できたら、最後の列の見た目も点検します。</p>
+<div class="diagram" id="figure" role="img" aria-label="カンバン図。列は月次報告の作業段階です。生成できたら、最後の列の見た目も点検します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>kanban
+    column1[入力]
+        task1[月名と件数を用意]
+    column2[生成]
+        task2[見出しと件数を配置]
+    column3[確認]
+        task3[長い見出しのはみ出しを点検]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>月名を変えて保存する。</p><p>長い見出しも試す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {default:P}=await lib(&#x27;pptxgenjs@3.12.0&#x27;);const p=new P(),s=p.addSlide();s.addText(v,{x:.6,y:.7,w:8.5,h:.7,fontSize:24});s.addText(&#x27;確認済み 18 件&#x27;,{x:.6,y:1.6,w:8.5,h:.6});save(&#x27;monthly.pptx&#x27;,await p.write({outputType:&#x27;blob&#x27;}));say(&#x27;見出しと件数を1枚に配置しました。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>同じ位置に月名と件数が入る。</p><p>タイトルを長くして、読みやすい文字サイズが維持されるか確認する。</p><p>数値が折り返す場合は、データより先に枠の幅を調べる。</p></section>
+<section><h2>コードの要点</h2><p>addSlide で1枚を追加します。</p><p>addText を使って見出しと件数の位置を指定します。</p><p>write でファイルにします。</p></section>
+<section><h2>仕事で使うとき</h2><p>月次報告を自動化するときは桁が増えた値と長い見出しをテストする。</p></section>
+<footer><p><a href="https://github.com/gitbrent/PptxGenJS">PptxGenJSの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 27, "input": "2026年11月", "diagram": "kanban\n    column1[入力]\n        task1[月名と件数を用意]\n    column2[生成]\n        task2[見出しと件数を配置]\n    column3[確認]\n        task3[長い見出しのはみ出しを点検]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

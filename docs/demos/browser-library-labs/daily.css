@@ -1,0 +1,35 @@
+:root{color-scheme:light;--ink:#142b25;--muted:#4e665d;--line:#cadcd5;--paper:#f7f7ee;--accent:#135e49}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.75 system-ui,sans-serif}
+main{width:min(100% - 2rem,850px);margin:auto;padding:1.5rem 0 4rem}
+header{padding:2rem 0;border-bottom:2px solid var(--ink)}
+h1,h2,h3{line-height:1.3}
+h1{font-size:clamp(1.75rem,5vw,3.2rem);margin:.35rem 0 1rem}
+h2{font-size:clamp(1.25rem,3vw,1.75rem)}
+section{margin:2.4rem 0}
+p{margin:.4rem 0;max-width:64ch}
+.series,.number{color:var(--accent);font-weight:700}
+a{color:var(--accent);text-underline-offset:.2em}
+nav{display:flex;gap:1rem;flex-wrap:wrap}
+button,.action{display:inline-block;border-radius:.5rem;padding:.47rem .9rem;border:1px solid var(--accent);background:var(--accent);color:#fff;font:inherit;text-decoration:none;margin:.4rem .45rem .4rem 0;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+:focus-visible{outline:3px solid #be4e29;outline-offset:3px}
+.catalog{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.catalog li{border-bottom:1px solid var(--line);padding:.7rem 0}
+.number{display:inline-block;min-width:2.5em}
+.catalog small{color:var(--muted);display:block;margin-left:3em}
+.diagram,.lab,.card{background:#fff;border:1px solid var(--line);border-radius:.75rem;padding:clamp(.7rem,3vw,1.5rem)}
+.diagram,.lab #scene{overflow:auto;margin:.7rem 0}
+.diagram svg{min-width:min(100%,360px);height:auto}
+.lab label,.lab textarea{display:block}
+.lab [hidden]{display:none}
+.lab textarea{width:100%;font:inherit;padding:.45rem .65rem}
+.lab img,.lab canvas,.lab video{max-width:100%;height:auto}
+.lab input,.lab textarea{font:inherit}
+.lab pre,pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef5f2;padding:.75rem;border-radius:.45rem}
+.lab details,.diagram + details{margin-top:1rem}
+ins{background:#d8f3df;color:#153b24}
+del{background:#ffe1d9;color:#692c1d}
+dt{font-weight:700}
+dd{margin:0 0 .6rem}
+footer{border-top:1px solid var(--line);padding-top:1rem;color:var(--muted)}

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>「1件」と「複数件」のメッセージを切り替える｜i18next | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/i18next-plural-count">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 39</p><h1>「1件」と「複数件」のメッセージを切り替える｜i18next</h1><p>件数の表記は、言語によって使う語が変わります。</p><p>英語と日本語で、同じ1件と2件を表示します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>ロケール</dt><dd>表示言語や地域の設定</dd><dt>複数形</dt><dd>件数に応じた単語の形</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「言語ごとの規則」が変わると「表示文」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「言語ごとの規則」が変わると「表示文」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;件数&quot;] --&gt; B[&quot;言語ごとの規則&quot;] --&gt; C[&quot;表示文&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>1 と 2 で実行する。</p><p>英語と日本語の表記を見る。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {default:i}=await lib(&#x27;i18next@24.2.3&#x27;);const x=i.createInstance();await x.init({lng:&#x27;en&#x27;,resources:{en:{translation:{item_one:&#x27;{{count}} item&#x27;,item_other:&#x27;{{count}} items&#x27;}},ja:{translation:{item_other:&#x27;{{count}}件&#x27;}}}});const count=Number(v);say({英語:x.t(&#x27;item&#x27;,{count,lng:&#x27;en&#x27;}),日本語:x.t(&#x27;item&#x27;,{count,lng:&#x27;ja&#x27;})})}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>英語は item と items が切り替わる。</p><p>日本語は件数が変わる。</p><p>この例は英語と日本語を並べる。</p><p>言語を追加するときは、0と1と2を実際に試して表示文を確認する。</p></section>
+<section><h2>コードの要点</h2><p>翻訳キーに count を渡し、英語の単数・複数用リソースを分ける。</p></section>
+<section><h2>仕事で使うとき</h2><p>翻訳キーは文単位で作る。</p><p>単語をつなぐと語順の違う言語に対応しにくい。</p></section>
+<footer><p><a href="https://github.com/i18next/i18next">i18nextの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 39, "input": "1", "diagram": "flowchart LR\n    A[\"件数\"] --> B[\"言語ごとの規則\"] --> C[\"表示文\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

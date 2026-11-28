@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>画像が読み込まれた瞬間のレイアウト移動を探す｜PerformanceObserver | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/performance-layout-shift">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 60</p><h1>画像が読み込まれた瞬間のレイアウト移動を探す｜PerformanceObserver</h1><p>画像が後から現れると、読んでいた本文が急に下へ動くことがあります。</p><p>画像の領域を予約し、移動量を予約なしの場合と比べます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>レイアウトシフト</dt><dd>表示済みの要素が意図せず移動すること</dd><dt>PerformanceObserver</dt><dd>ブラウザーの性能記録を受け取る仕組み</dd></dl></section>
+<section><h2>XYチャートで考える</h2><p>立ち上がる線は予約なしです。</p><p>水平な線は予約ありです。</p><p>この図は測定結果を予告する例で、実測値はライブデモで確かめます。</p>
+<div class="diagram" id="figure" role="img" aria-label="XYチャート。立ち上がる線は予約なしです。水平な線は予約ありです。この図は測定結果を予告する例で、実測値はライブデモで確かめます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>xychart-beta
+    title &quot;画像の高さが180pxの場合の説明例&quot;
+    x-axis [&quot;読込前&quot;, &quot;読込後&quot;]
+    y-axis &quot;本文の位置（相対値 px）&quot; 0 --&gt; 200
+    line [0, 180]
+    line [180, 180]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>予約なし、予約ありの順に試す。</p><p>本文の位置を見比べる。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>()=&gt;{let cancel=()=&gt;{};const h=panel();const sample=reserved=&gt;{cancel();h.replaceChildren();const events=[];let observer;const can=PerformanceObserver.supportedEntryTypes?.includes(&#x27;layout-shift&#x27;);if(can){observer=new PerformanceObserver(l=&gt;{for(const e of l.getEntries())events.push({時刻:Math.round(e.startTime),移動値:e.value,直近入力:e.hadRecentInput});say({本文の移動px:p.offsetTop-start,記録:events})});observer.observe({type:&#x27;layout-shift&#x27;})}const i=el(&#x27;img&#x27;,h);i.alt=&#x27;遅れて表示する画像&#x27;;if(reserved){i.width=480;i.height=180;i.style.aspectRatio=&#x27;8/3&#x27;;i.style.display=&#x27;block&#x27;}else{i.style.display=&#x27;none&#x27;}const p=el(&#x27;p&#x27;,h,&#x27;この本文の位置を観察します。&#x27;),start=p.offsetTop;const t=setTimeout(()=&gt;{i.onload=()=&gt;say({本文の移動px:p.offsetTop-start,記録:can?events:&#x27;この環境は layout-shift 非対応&#x27;});i.style.display=&#x27;block&#x27;;i.src=svg(480,180,&#x27;Daily Code&#x27;)},850);cancel=()=&gt;{clearTimeout(t);observer?.disconnect()}};button(&#x27;予約なし&#x27;,()=&gt;sample(false));button(&#x27;予約あり&#x27;,()=&gt;sample(true));cleanup=()=&gt;cancel()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>予約ありでは画像が現れても本文の位置が変わりにくい。</p><p>計測値に加えて本文の移動ピクセル数も表示する。</p><p>クリック直後の移動は、ページ全体の指標を集計する際に扱いが異なることがある。</p></section>
+<section><h2>コードの要点</h2><p>layout-shiftの対応を確認して記録し、移動値と発生時刻を比較する。</p></section>
+<section><h2>仕事で使うとき</h2><p>画像に幅と高さを指定する。</p><p>測定値が出ない環境では位置の差も確認する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver">PerformanceObserverの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 60, "input": "移動を測る", "diagram": "xychart-beta\n    title \"画像の高さが180pxの場合の説明例\"\n    x-axis [\"読込前\", \"読込後\"]\n    y-axis \"本文の位置（相対値 px）\" 0 --> 200\n    line [0, 180]\n    line [180, 180]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

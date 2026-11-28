@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>手順書の構成をWordファイルに書き出す｜docx | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/docx-heading-styles">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 26</p><h1>手順書の構成をWordファイルに書き出す｜docx</h1><p>手順書のファイルを自動生成する例です。</p><p>見出しに専用のスタイルを割り当て、Wordの見出し一覧で探せる形にします。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>段落スタイル</dt><dd>見出しや本文の種類を表す設定</dd><dt>DOCX</dt><dd>Wordで使う文書形式</dd></dl></section>
+<section><h2>マインドマップで考える</h2><p>文書を組み立てる要素を中心から分けて示します。</p><p>見出しには見出し用の書式を割り当てます。</p>
+<div class="diagram" id="figure" role="img" aria-label="マインドマップ。文書を組み立てる要素を中心から分けて示します。見出しには見出し用の書式を割り当てます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>mindmap
+    root((Wordの手順書))
+      見出し1
+        月次確認
+      本文
+        点検結果を記入</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>ダミー見出しを変えて生成する。</p><p>Wordのナビゲーションで確認する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const d=await lib(&#x27;docx@9.2.0&#x27;);const file=new d.Document({sections:[{children:[new d.Paragraph({text:v,heading:d.HeadingLevel.HEADING_1}),new d.Paragraph(&#x27;点検結果を記入します。&#x27;)]}]});save(&#x27;example.docx&#x27;,await d.Packer.toBlob(file));say(&#x27;見出し 1 を指定しました。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>見出しスタイルを割り当てた行が見出しとして扱われる。</p><p>太字と見出しスタイルは文書内で別の役割を持つ。</p><p>Wordの見出し一覧で見えるかを比べると、スタイルの効果を確認できる。</p></section>
+<section><h2>コードの要点</h2><p>Document に見出し段落と行を入れ、ブラウザーなら Packer.toBlob で取得する。</p></section>
+<section><h2>仕事で使うとき</h2><p>提出用Word文書は指定された提出版を直接ひな形に使う。</p><p>ここでは仕組みの説明用にサンプルを生成する。</p></section>
+<footer><p><a href="https://github.com/dolanmiu/docx">docxの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 26, "input": "月次確認", "diagram": "mindmap\n    root((Wordの手順書))\n      見出し1\n        月次確認\n      本文\n        点検結果を記入"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

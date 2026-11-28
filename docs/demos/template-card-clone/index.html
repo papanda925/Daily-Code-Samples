@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>カードのひな形を複製して別々の内容を入れる｜template | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/template-card-clone">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 50</p><h1>カードのひな形を複製して別々の内容を入れる｜template</h1><p>似たカードを追加するたびに画面の構造を書くと、項目が増えたときの修正が大変です。</p><p>ひな形を複製し、一枚ずつ内容を入れます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>テンプレート</dt><dd>複製して再利用するひな形</dd><dt>クローン</dt><dd>構造をコピーした要素</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「複製した要素」が変わると「個別の内容」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「複製した要素」が変わると「個別の内容」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;カードのひな形&quot;] --&gt; B[&quot;複製した要素&quot;] --&gt; C[&quot;個別の内容&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>備品Aと備品Bをカンマで並べる。</p><p>名前を増やして実行する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const t=panel(&#x27;template&#x27;),p=el(&#x27;p&#x27;,t.content);p.className=&#x27;card&#x27;;for(const name of split(v)){const c=t.content.cloneNode(true);c.firstElementChild.textContent=name;scene.append(c)}say(split(v).length+&#x27; 枚を複製しました。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>それぞれのカードに別の名前が入る。</p><p>ひな形を追加しただけではカードは表示されない。</p><p>複製した内容を画面へ挿入したときに初めて表示される。</p></section>
+<section><h2>コードの要点</h2><p>template.content を cloneNode(true) で複製し、各名前を textContent で設定する。</p></section>
+<section><h2>仕事で使うとき</h2><p>複製する中身のIDは重ならないように設計する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">templateの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 50, "input": "備品A,備品B", "diagram": "flowchart LR\n    A[\"カードのひな形\"] --> B[\"複製した要素\"] --> C[\"個別の内容\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

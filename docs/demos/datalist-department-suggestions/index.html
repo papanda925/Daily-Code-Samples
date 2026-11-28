@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>既存の候補を表示しながら新しい値も受け付ける｜datalist | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/datalist-department-suggestions">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 44</p><h1>既存の候補を表示しながら新しい値も受け付ける｜datalist</h1><p>部署の入力欄では、よく使う値を候補に出すと便利です。</p><p>一覧にない新しい部署を入力できるかも確認します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>候補リスト</dt><dd>入力の助けになる見本の一覧</dd><dt>自由入力</dt><dd>一覧以外の値も入力できること</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「候補リスト」が変わると「確定した値」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「候補リスト」が変わると「確定した値」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;部署の入力&quot;] --&gt; B[&quot;候補リスト&quot;] --&gt; C[&quot;確定した値&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>総務を選ぶ。</p><p>次は候補にない営業と入力して確認する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const q=field(&#x27;text&#x27;),d=panel(&#x27;datalist&#x27;);d.id=&#x27;departments&#x27;;for(const x of [&#x27;総務&#x27;,&#x27;経理&#x27;])el(&#x27;option&#x27;,d).value=x;q.setAttribute(&#x27;list&#x27;,d.id);q.value=v;button(&#x27;入力を確認&#x27;,()=&gt;say(q.value))}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>どちらも入力した値として取得できる。</p><p>ブラウザーによって候補を開く操作や表示が異なる。</p><p>入力欄の値が採用されるので、見た目の候補から保存値を推測しない。</p></section>
+<section><h2>コードの要点</h2><p>input の list 属性を datalist のidへ向け、送信時に入力値を表示する。</p></section>
+<section><h2>仕事で使うとき</h2><p>部署コードなど候補だけを許可する場合は、入力値を別途検証する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist">datalistの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 44, "input": "営業", "diagram": "flowchart LR\n    A[\"部署の入力\"] --> B[\"候補リスト\"] --> C[\"確定した値\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

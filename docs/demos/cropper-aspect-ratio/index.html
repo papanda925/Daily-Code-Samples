@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>写真を用途別の縦横比で切り抜く｜Cropper.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/cropper-aspect-ratio">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 29</p><h1>写真を用途別の縦横比で切り抜く｜Cropper.js</h1><p>横長のバナーと正方形のサムネイルでは、同じ写真でも残る範囲が異なります。</p><p>枠の比率と位置を変えて見比べます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>縦横比</dt><dd>横幅と高さの比</dd><dt>クロップ</dt><dd>画像の一部を切り出す処理</dd></dl></section>
+<section><h2>象限図で考える</h2><p>二つの軸で用途ごとの構図を比べます。</p><p>位置は判断の例です。</p>
+<div class="diagram" id="figure" role="img" aria-label="象限図。二つの軸で用途ごとの構図を比べます。位置は判断の例です。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>quadrantChart
+    title 構図を決めるときの比較例
+    x-axis 縦長 --&gt; 横長
+    y-axis 背景を狭く --&gt; 背景を広く
+    正方形カード: [0.5, 0.36]
+    横長バナー: [0.87, 0.65]
+    縦長サムネイル: [0.22, 0.31]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>1 と 1.7778 で切り抜く。</p><p>枠をドラッグして位置も変える。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css&#x27;);const {default:C}=await lib(&#x27;cropperjs@1.6.2&#x27;);const img=panel(&#x27;img&#x27;);img.alt=&#x27;切り抜き用のサンプル&#x27;;img.src=svg(480,250,&#x27;Example&#x27;);await img.decode();const cropper=new C(img,{aspectRatio:Number(v)&gt;0?Number(v):1,viewMode:1});button(&#x27;切り抜く&#x27;,()=&gt;{const img=panel(&#x27;img&#x27;);img.alt=&#x27;切り抜いた範囲&#x27;;img.src=cropper.getCroppedCanvas({maxWidth:480,maxHeight:400}).toDataURL();say(&#x27;切り抜いた結果を表示しました。&#x27;)});cleanup=()=&gt;cropper.destroy()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>同じ写真でも残る範囲が変わる。</p><p>用意した画像では真ん中以外にも文字がある。</p><p>枠を中央と左端に動かし、同じ比率でも何が残るか見る。</p></section>
+<section><h2>コードの要点</h2><p>選択範囲の縦横比を変え、トリミング後の画像を出力する。</p><p>利用する版のAPIに合わせる。</p></section>
+<section><h2>仕事で使うとき</h2><p>サムネイルを作るときは、文字や人物が小画面でも欠けないか見る。</p></section>
+<footer><p><a href="https://github.com/fengyuanchen/cropperjs">Cropper.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 29, "input": "1", "diagram": "quadrantChart\n    title 構図を決めるときの比較例\n    x-axis 縦長 --> 横長\n    y-axis 背景を狭く --> 背景を広く\n    正方形カード: [0.5, 0.36]\n    横長バナー: [0.87, 0.65]\n    縦長サムネイル: [0.22, 0.31]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

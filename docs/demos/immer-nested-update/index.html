@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>入れ子の一項目だけ更新して元データを残す｜Immer | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/immer-nested-update">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 21</p><h1>入れ子の一項目だけ更新して元データを残す｜Immer</h1><p>フォームの設定を一つ変えるときは、前回の値を戻せると便利です。</p><p>Immerで入れ子の一箇所だけを変え、変更しなかった部分も確かめます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>イミュータブル</dt><dd>既存の値を直接書き換えず扱う考え方</dd><dt>参照</dt><dd>同じオブジェクトを指す情報</dd></dl></section>
+<section><h2>クラス図で考える</h2><p>箱は更新前と更新後のデータ構造です。</p><p>Bを指す矢印が、同じオブジェクトに集まります。</p>
+<div class="diagram" id="figure" role="img" aria-label="クラス図。箱は更新前と更新後のデータ構造です。Bを指す矢印が、同じオブジェクトに集まります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>classDiagram
+    class Before {
+      A value 1
+      B value 2
+    }
+    class After {
+      A value 9
+      B value 2
+    }
+    class SharedB
+    Before --&gt; SharedB : B
+    After --&gt; SharedB : B</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>Aの値を 9 にする。</p><p>元の値とBの一致を確認する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {produce}=await lib(&#x27;immer@10.1.1&#x27;);const a={A:{値:1},B:{値:2}},b=produce(a,d=&gt;{d.A.値=Number(v)});say({更新前:a,更新後:b,Bの参照が同じ:a.B===b.B})}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>元のAは1のまま。</p><p>Bは同じオブジェクトを共有する。</p><p>更新していないBを共有すると、コピーする範囲を抑えられる。</p><p>Bを別の処理から書き換える設計は避ける。</p></section>
+<section><h2>コードの要点</h2><p>produce 内で draft のAを更新し、元の値と更新後の値を表示する。</p></section>
+<section><h2>仕事で使うとき</h2><p>画面状態の差分を追うときは、更新前後を別々に残す。</p></section>
+<footer><p><a href="https://github.com/immerjs/immer">Immerの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 21, "input": "9", "diagram": "classDiagram\n    class Before {\n      A value 1\n      B value 2\n    }\n    class After {\n      A value 9\n      B value 2\n    }\n    class SharedB\n    Before --> SharedB : B\n    After --> SharedB : B"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

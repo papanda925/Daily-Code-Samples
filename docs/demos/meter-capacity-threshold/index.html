@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>容量の警戒値をゲージで表す｜meter | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/meter-capacity-threshold">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 46</p><h1>容量の警戒値をゲージで表す｜meter</h1><p>ストレージの使用率は、パーセントだけでは緊急性が伝わりにくいことがあります。</p><p>数値に状態名を添え、しきい値の直前と直後を比べます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>ゲージ</dt><dd>範囲の中の現在値を示す表示</dd><dt>しきい値</dt><dd>状態を切り替える基準値</dd></dl></section>
+<section><h2>円グラフで考える</h2><p>全体を100%として内訳を示します。</p><p>危険かどうかの判断には70%と90%のしきい値を使います。</p>
+<div class="diagram" id="figure" role="img" aria-label="円グラフ。全体を100%として内訳を示します。危険かどうかの判断には70%と90%のしきい値を使います。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>pie showData
+    title 使用率85%の内訳
+    &quot;使用中&quot; : 85
+    &quot;空き&quot; : 15</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>69、70、89、90 を順に入れる。</p><p>数値と状態を見比べる。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const m=panel(&#x27;meter&#x27;);Object.assign(m,{min:0,max:100,low:70,high:90,optimum:0});m.setAttribute(&#x27;aria-label&#x27;,&#x27;容量の使用率&#x27;);const q=field(&#x27;range&#x27;);q.value=v;const update=()=&gt;{m.value=Number(q.value);say(m.value+&#x27;% ／ &#x27;+(m.value&gt;=90?&#x27;危険&#x27;:m.value&gt;=70?&#x27;警戒&#x27;:&#x27;正常&#x27;))};q.oninput=update;update()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>70から警戒。</p><p>90から危険を表示する。</p><p>使用量の例なら低い値を望ましい範囲として扱う。</p><p>温度など、中央の付近を望ましい範囲とする指標では設定を変える。</p></section>
+<section><h2>コードの要点</h2><p>max=100、low=70、high=90、optimum=0 を指定し、値の読み上げ用ラベルも付ける。</p></section>
+<section><h2>仕事で使うとき</h2><p>色だけに頼らず、状態名と使用率も一緒に表示する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter">meterの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 46, "input": "85", "diagram": "pie showData\n    title 使用率85%の内訳\n    \"使用中\" : 85\n    \"空き\" : 15"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

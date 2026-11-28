@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>入力を続けながら補足ヘルプを表示する｜popover | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/popover-input-hint">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 42</p><h1>入力を続けながら補足ヘルプを表示する｜popover</h1><p>申請理由を書くときに、入力例を少しだけ見たいことがあります。</p><p>入力欄の脇に補足を出し、書きかけの内容を保てるか試します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>ポップオーバー</dt><dd>画面の上に出る小さな補足表示</dd><dt>ライトディスミス</dt><dd>外側を操作すると閉じる仕組み</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「補足の表示」が変わると「入力の継続」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「補足の表示」が変わると「入力の継続」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;編集中の欄&quot;] --&gt; B[&quot;補足の表示&quot;] --&gt; C[&quot;入力の継続&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>入力欄に文字を書く。</p><p>入力例を開いて外側をクリックする。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>()=&gt;{const q=field(&#x27;text&#x27;),p=panel();p.id=&#x27;hint&#x27;;p.setAttribute(&#x27;popover&#x27;,&#x27;auto&#x27;);p.textContent=&#x27;例：備品 A を返却する。&#x27;;const b=button(&#x27;入力例&#x27;,()=&gt;{});b.setAttribute(&#x27;popovertarget&#x27;,&#x27;hint&#x27;);q.oninput=()=&gt;say(q.value)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>補足が閉じても入力内容は残る。</p><p>入力例を開いたまま文字を入力できる。</p><p>入力中に読ませたい短い補足なら、画面をロックする確認用の部品と使い分けやすい。</p></section>
+<section><h2>コードの要点</h2><p>popover を付けた要素を popovertarget ボタンで開き、外側をクリックする。</p></section>
+<section><h2>仕事で使うとき</h2><p>短い入力例に向いている。</p><p>必読事項は本文にも残す。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover">popoverの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 42, "input": "操作欄を試す", "diagram": "flowchart LR\n    A[\"編集中の欄\"] --> B[\"補足の表示\"] --> C[\"入力の継続\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

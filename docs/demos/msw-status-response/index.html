@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>API障害時の画面表示を本番に触らず確認する｜Mock Service Worker | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/msw-status-response">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 40</p><h1>API障害時の画面表示を本番に触らず確認する｜Mock Service Worker</h1><p>APIが止まったときの案内は、原因で変える必要があります。</p><p>正常、権限不足、一時停止の応答を作り、画面に出す文を確かめます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>モック</dt><dd>本物の代わりに決めた応答を返す処理</dd><dt>HTTPステータス</dt><dd>応答結果を表す番号</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「擬似応答」が変わると「利用者への案内」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「擬似応答」が変わると「利用者への案内」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;画面のリクエスト&quot;] --&gt; B[&quot;擬似応答&quot;] --&gt; C[&quot;利用者への案内&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>200、403、503 を順番に指定する。</p><p>案内の違いを見る。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const status=Number(v);if(![200,403,503].includes(status))throw Error(&#x27;200、403、503から選んでください&#x27;);const payload=status===200?[&#x27;資料A&#x27;,&#x27;資料B&#x27;]:{message:status===403?&#x27;利用権限を確認してください。&#x27;:&#x27;時間をおいて試してください。&#x27;};const display=async(response,mode)=&gt;say({方式:mode,status:response.status,結果:await response.json()});await display(Response.json(payload,{status}),&#x27;擬似応答から案内を試す&#x27;);button(&#x27;MSWで試す（設定後）&#x27;,async()=&gt;{const script=new URL(&#x27;./mockServiceWorker.js&#x27;,location.href);const check=await fetch(script);if(!check.ok){say(&#x27;READMEの手順でMSWを設定してください。&#x27;);return}const [msw,browser]=await Promise.all([lib(&#x27;msw@2.7.0&#x27;),lib(&#x27;msw@2.7.0/browser&#x27;)]);const uri=new URL(&#x27;./demo-api/items&#x27;,location.href);const worker=browser.setupWorker(msw.http.get(uri.href,()=&gt;msw.HttpResponse.json(payload,{status})));await worker.start({serviceWorker:{url:script.href},quiet:true,onUnhandledRequest:&#x27;bypass&#x27;});try{await display(await fetch(uri),&#x27;MSWが通信を受け止める&#x27;)}finally{worker.stop()}})}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>成功、権限の不足、一時的な停止を分けて表示する。</p><p>403 は権限の案内へ誘導する。</p><p>503 は時間を置く案内を出す。</p><p>同じ「エラー」でまとめると利用者は次の操作を選びにくい。</p></section>
+<section><h2>コードの要点</h2><p>対応する応答からブラウザー標準の Response を作り、案内の分岐を試します。</p><p>MSW を使う場合は、案内を分ける処理はそのままに、擬似応答を返す部分をハンドラーに置き換えます。</p></section>
+<section><h2>仕事で使うとき</h2><p>実環境へ接続する前に、異常時の案内と再試行の導線を確認する。</p></section>
+<footer><p><a href="https://github.com/mswjs/msw">Mock Service Workerの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 40, "input": "503", "diagram": "flowchart LR\n    A[\"画面のリクエスト\"] --> B[\"擬似応答\"] --> C[\"利用者への案内\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

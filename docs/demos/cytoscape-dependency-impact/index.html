@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>障害の影響確認で直接の依存先を探す｜Cytoscape.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/cytoscape-dependency-impact">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 13</p><h1>障害の影響確認で直接の依存先を探す｜Cytoscape.js</h1><p>決済機能の不調を調べるとき、注文画面だけを見ても原因を絞れません。</p><p>機能のつながりを描き、どこまで確認するかを切り替えます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>依存先</dt><dd>自分の動作に必要な別の機能</dd><dt>探索範囲</dt><dd>何段先までたどるか</dd></dl></section>
+<section><h2>C4コンテキスト図で考える</h2><p>機能の担当範囲とつながりを示します。</p><p>外部ゲートウェイへは決済を経由します。</p>
+<div class="diagram" id="figure" role="img" aria-label="C4コンテキスト図。機能の担当範囲とつながりを示します。外部ゲートウェイへは決済を経由します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>C4Context
+    System(order, &quot;注文&quot;, &quot;注文を受け付ける&quot;)
+    System_Ext(stock, &quot;在庫&quot;, &quot;引当を行う&quot;)
+    System_Ext(pay, &quot;決済&quot;, &quot;決済を依頼する&quot;)
+    System_Ext(gate, &quot;外部ゲートウェイ&quot;, &quot;決済を受け付ける&quot;)
+    Rel(order, stock, &quot;残数を確認&quot;)
+    Rel(order, pay, &quot;決済を依頼&quot;)
+    Rel(pay, gate, &quot;決済を転送&quot;)</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>1 と 2 を切り替える。</p><p>色が変わるノードを見る。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {default:cytoscape}=await lib(&#x27;cytoscape@3.31.1&#x27;);const host=panel();host.style.height=&#x27;320px&#x27;;const names={order:&#x27;注文&#x27;,stock:&#x27;在庫&#x27;,pay:&#x27;決済&#x27;,gate:&#x27;外部ゲートウェイ&#x27;};const cy=cytoscape({container:host,elements:[...Object.keys(names).map(id=&gt;({data:{id,label:names[id]}})),...[[&#x27;order&#x27;,&#x27;stock&#x27;],[&#x27;order&#x27;,&#x27;pay&#x27;],[&#x27;pay&#x27;,&#x27;gate&#x27;]].map(([source,target])=&gt;({data:{source,target}}))],style:[{selector:&#x27;node&#x27;,style:{label:&#x27;data(label)&#x27;}},{selector:&#x27;edge&#x27;,style:{&#x27;target-arrow-shape&#x27;:&#x27;triangle&#x27;,&#x27;curve-style&#x27;:&#x27;bezier&#x27;}},{selector:&#x27;.active&#x27;,style:{&#x27;background-color&#x27;:&#x27;#dd653e&#x27;,&#x27;line-color&#x27;:&#x27;#dd653e&#x27;}}],layout:{name:&#x27;breadthfirst&#x27;,directed:true,padding:32}});let nodes=cy.$id(&#x27;order&#x27;);for(let i=0;i&lt;(v===&#x27;2&#x27;?2:1);i++)nodes=nodes.union(nodes.outgoers());nodes.addClass(&#x27;active&#x27;);cleanup=()=&gt;cy.destroy();say(nodes.nodes().map(n=&gt;n.data(&#x27;label&#x27;)))}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>1段では在庫と決済が対象。</p><p>2段で外部ゲートウェイに届く。</p><p>矢印は依存の方向を示す。</p><p>影響を受ける側から逆向きに探す場合は、先へ進む探索と区別する。</p></section>
+<section><h2>コードの要点</h2><p>注文ノードの outgoers を強調する。</p></section>
+<section><h2>仕事で使うとき</h2><p>障害影響の調査では、直接の依存先と間接の依存先で確認順を分ける。</p></section>
+<footer><p><a href="https://github.com/cytoscape/cytoscape.js">Cytoscape.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 13, "input": "1", "diagram": "C4Context\n    System(order, \"注文\", \"注文を受け付ける\")\n    System_Ext(stock, \"在庫\", \"引当を行う\")\n    System_Ext(pay, \"決済\", \"決済を依頼する\")\n    System_Ext(gate, \"外部ゲートウェイ\", \"決済を受け付ける\")\n    Rel(order, stock, \"残数を確認\")\n    Rel(order, pay, \"決済を依頼\")\n    Rel(pay, gate, \"決済を転送\")"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>同じコードを異なる行幅で整形する｜Prettier | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/prettier-line-width">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 09</p><h1>同じコードを異なる行幅で整形する｜Prettier</h1><p>引数が増えると、同じJavaScriptが一行に収まりにくくなります。</p><p>Prettierの二つの設定で、そのコードをどこで改行するか見比べます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>フォーマッター</dt><dd>ソースコードの見た目を整える道具</dd><dt>パーサー</dt><dd>コードを構造として読み取る処理</dd></dl></section>
+<section><h2>比較のフローチャートで考える</h2><p>同じコードを二系統に分けます。</p><p>結果の違いを、設定した行幅に結び付けて読めます。</p>
+<div class="diagram" id="figure" role="img" aria-label="比較のフローチャート。同じコードを二系統に分けます。結果の違いを、設定した行幅に結び付けて読めます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart TD
+    A[&quot;同じJavaScript&quot;] --&gt; B[&quot;行幅40で整形&quot;]
+    A --&gt; C[&quot;行幅100で整形&quot;]
+    B --&gt; D[&quot;改行された箇所を比較&quot;]
+    C --&gt; D</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>コードをそのまま実行する。</p><p>引数を一つ増やして差を確認する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const [p,b,e]=await Promise.all([lib(&#x27;prettier@3.5.3/standalone&#x27;),lib(&#x27;prettier@3.5.3/plugins/babel&#x27;),lib(&#x27;prettier@3.5.3/plugins/estree&#x27;)]);say((await Promise.all([40,100].map(async printWidth=&gt;&#x27;行幅 &#x27;+printWidth+&#x27;\n&#x27;+await p.format(v,{parser:&#x27;babel&#x27;,plugins:[b.default,e.default],printWidth})))).join(&#x27;\n&#x27;))}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>40 のほうが複数行に分かれやすい。</p><p>行幅は改行の判断に使う目安。</p><p>長い文字列などは設定値を超えることがある。</p><p>差が出なければ、引数を増やして試す。</p></section>
+<section><h2>コードの要点</h2><p>JavaScriptのパーサーを指定して format し、printWidth を40と100で切り替える。</p></section>
+<section><h2>仕事で使うとき</h2><p>チームで整形設定を共有すると、レビューで変更内容を追いやすくなる。</p></section>
+<footer><p><a href="https://github.com/prettier/prettier">Prettierの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 9, "input": "sendReport(\"monthly sales report\", \"accounting department\", \"review the total\")", "diagram": "flowchart TD\n    A[\"同じJavaScript\"] --> B[\"行幅40で整形\"]\n    A --> C[\"行幅100で整形\"]\n    B --> D[\"改行された箇所を比較\"]\n    C --> D"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

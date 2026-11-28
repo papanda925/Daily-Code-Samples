@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>確認画面を閉じた後のフォーカスを追う｜dialog | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/dialog-focus-return">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 41</p><h1>確認画面を閉じた後のフォーカスを追う｜dialog</h1><p>確認画面を閉じた後に入力位置を見失うと、キーボード操作が続けにくくなります。</p><p>Escやキャンセルの後に焦点がどこへ戻るか調べます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>モーダル</dt><dd>開いている間は背後を操作できない画面</dd><dt>フォーカス</dt><dd>キー入力を受け取る要素</dd></dl></section>
+<section><h2>状態遷移図で考える</h2><p>矢印はフォーカスが移るきっかけです。</p><p>閉じ方が違っても、起点へ戻るかを見ます。</p>
+<div class="diagram" id="figure" role="img" aria-label="状態遷移図。矢印はフォーカスが移るきっかけです。閉じ方が違っても、起点へ戻るかを見ます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>stateDiagram-v2
+    state &quot;起点のボタン&quot; as Launch
+    state &quot;確認画面の中&quot; as Dialog
+    [*] --&gt; Launch
+    Launch --&gt; Dialog: 開く
+    Dialog --&gt; Launch: キャンセル
+    Dialog --&gt; Launch: Esc</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>確認画面を開く。</p><p>TabとEscを押す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>()=&gt;{const d=panel(&#x27;dialog&#x27;);el(&#x27;p&#x27;,d,&#x27;変更を続けますか？&#x27;);button(&#x27;キャンセル&#x27;,()=&gt;d.close(&#x27;cancel&#x27;),d);const b=button(&#x27;確認画面を開く&#x27;,()=&gt;d.showModal());d.onclose=()=&gt;say(document.activeElement===b?&#x27;起点のボタンに戻りました。&#x27;:&#x27;現在のフォーカス &#x27;+document.activeElement.tagName)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>閉じると起点のボタンに戻ることを確認できる。</p><p>確認画面を開いた直後に Tab を押す。</p><p>どのボタンへ移るかを確認する。</p><p>Escで閉じた場合も、クリックした場合と同じ起点を確認する。</p></section>
+<section><h2>コードの要点</h2><p>showModal() で表示し、キャンセル後に document.activeElement を読む。</p></section>
+<section><h2>仕事で使うとき</h2><p>フォーム内ではキャンセルでデータが消えないかも確認する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog">dialogの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 41, "input": "確認画面を開く", "diagram": "stateDiagram-v2\n    state \"起点のボタン\" as Launch\n    state \"確認画面の中\" as Dialog\n    [*] --> Launch\n    Launch --> Dialog: 開く\n    Dialog --> Launch: キャンセル\n    Dialog --> Launch: Esc"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

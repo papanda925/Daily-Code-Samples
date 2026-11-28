@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>障害連絡フローの分岐を図にする｜Mermaid | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/mermaid-incident-flow">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 12</p><h1>障害連絡フローの分岐を図にする｜Mermaid</h1><p>障害が起きたとき、連絡先を手順書から探すと時間がかかります。</p><p>重大度の分岐をMermaidで書き、連絡先までの道筋を見せます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>フローチャート</dt><dd>手順や分岐を矢印で示す図</dd><dt>ノード</dt><dd>図の中で作業や判断を表す箱</dd></dl></section>
+<section><h2>フローチャートで考える</h2><p>ひし形は判断を示します。</p><p>「はい」と「いいえ」で連絡先が変わります。</p>
+<div class="diagram" id="figure" role="img" aria-label="フローチャート。ひし形は判断を示します。「はい」と「いいえ」で連絡先が変わります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart TD
+    A[&quot;障害受付&quot;] --&gt; B{&quot;重大？&quot;}
+    B -- &quot;はい&quot; --&gt; C[&quot;責任者へ連絡&quot;]
+    B -- &quot;いいえ&quot; --&gt; D[&quot;担当へ連絡&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>図の「担当へ連絡」を別の文に変える。</p><p>軽微の分岐も追加する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{await drawing(v,panel());say(&#x27;図を更新しました。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>入力を変えると連絡経路が描き直される。</p><p>連絡すべき人を箱に入れる。</p><p>矢印には判断の結果を書く。</p><p>重大度の判定基準や連絡先の詳細は本文に置く。</p></section>
+<section><h2>コードの要点</h2><p>flowchart TD で重大度のノードから二つの矢印を出し、ラベルを付ける。</p></section>
+<section><h2>仕事で使うとき</h2><p>当番が図を見て連絡先を決められる粒度で書く。</p></section>
+<footer><p><a href="https://github.com/mermaid-js/mermaid">Mermaidの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 12, "input": "flowchart TD\n A[\"障害受付\"] --> B{\"重大？\"}\n B -- はい --> C[\"責任者へ連絡\"]\n B -- いいえ --> D[\"担当へ連絡\"]", "diagram": "flowchart TD\n    A[\"障害受付\"] --> B{\"重大？\"}\n    B -- \"はい\" --> C[\"責任者へ連絡\"]\n    B -- \"いいえ\" --> D[\"担当へ連絡\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

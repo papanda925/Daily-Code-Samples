@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>言語を明示するとコード表示はどう変わるか｜highlight.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/highlightjs-language-detection">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 16</p><h1>言語を明示するとコード表示はどう変わるか｜highlight.js</h1><p>コードを色分けすると、数値や変数を拾いやすくなります。</p><p>言語の自動判定と、JavaScriptに固定した場合を同じ入力で比べます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>構文強調</dt><dd>コードを役割ごとに色分けする表示</dd><dt>自動判定</dt><dd>入力の特徴から言語を推定する処理</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「自動判定」が変わると「言語指定」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「自動判定」が変わると「言語指定」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;短いコード&quot;] --&gt; B[&quot;自動判定&quot;] --&gt; C[&quot;言語指定&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>コードを変えて実行する。</p><p>自動判定と JavaScript 固定を比べる。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github.min.css&#x27;);const {default:h}=await lib(&#x27;highlight.js@11.11.1&#x27;);for(const x of [h.highlightAuto(v,[&#x27;javascript&#x27;,&#x27;python&#x27;,&#x27;json&#x27;]),h.highlight(v,{language:&#x27;javascript&#x27;})]){el(&#x27;h3&#x27;,scene,x.language||&#x27;判定なし&#x27;);const c=el(&#x27;code&#x27;,panel(&#x27;pre&#x27;));c.className=&#x27;hljs&#x27;;c.innerHTML=x.value}say(&#x27;上は自動判定。下は JavaScript 固定。&#x27;)}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>短い断片では判定が揺れることがある。</p><p>言語が同じと判定された場合は、Python風の短文でも比べる。</p><p>HTMLのコード表示に利用する場合は、ライブラリーの更新も管理する。</p></section>
+<section><h2>コードの要点</h2><p>highlightAuto の language を表示し、highlight の言語指定結果と比較する。</p></section>
+<section><h2>仕事で使うとき</h2><p>ドキュメントの言語が分かる場合は明示する。</p><p>読者もコピー先を判断しやすい。</p></section>
+<footer><p><a href="https://github.com/highlightjs/highlight.js">highlight.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 16, "input": "const total = 42", "diagram": "flowchart LR\n    A[\"短いコード\"] --> B[\"自動判定\"] --> C[\"言語指定\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

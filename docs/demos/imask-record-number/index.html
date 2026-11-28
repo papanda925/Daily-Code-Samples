@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>伝票番号の画面表示と保存値を分ける｜IMask | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/imask-record-number">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 34</p><h1>伝票番号の画面表示と保存値を分ける｜IMask</h1><p>伝票番号に区切りがあると読みやすくなります。</p><p>入力欄にハイフンを表示しながら、保存には数字の並びを使います。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>入力マスク</dt><dd>入力中に形式をそろえるルール</dd><dt>保存値</dt><dd>システムに渡す値</dd></dl></section>
+<section><h2>シーケンス図で考える</h2><p>上から下に読みます。</p><p>入力欄の見せ方と保存用の値を別の矢印で示します。</p>
+<div class="diagram" id="figure" role="img" aria-label="シーケンス図。上から下に読みます。入力欄の見せ方と保存用の値を別の矢印で示します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>sequenceDiagram
+    participant U as 入力者
+    participant I as 入力欄
+    participant S as 保存先
+    U-&gt;&gt;I: 123456 を入力
+    I--&gt;&gt;U: 123-456 と表示
+    opt 保存したとき
+        I-&gt;&gt;S: 123456 を渡す
+    end</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>123456 と入力する。</p><p>文字や短い番号も試す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {default:I}=await lib(&#x27;imask@7.6.1&#x27;);const m=I(field(&#x27;text&#x27;),{mask:&#x27;000-000&#x27;});const update=()=&gt;say({表示:m.value,保存:m.unmaskedValue});m.unmaskedValue=v;m.on(&#x27;accept&#x27;,update);update();cleanup=()=&gt;m.destroy()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>表示は 123-456。</p><p>保存値は 123456。</p><p>先頭が0の番号も試す。</p><p>識別番号を数値へ変換すると先頭の0が落ちるため、保存値は用途に合う型にする。</p></section>
+<section><h2>コードの要点</h2><p>000-000 のマスクを指定して value と unmaskedValue を表示する。</p></section>
+<section><h2>仕事で使うとき</h2><p>表示を整えても所定の桁数かは別途検証する。</p></section>
+<footer><p><a href="https://github.com/uNmAnNeR/imaskjs">IMaskの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 34, "input": "123456", "diagram": "sequenceDiagram\n    participant U as 入力者\n    participant I as 入力欄\n    participant S as 保存先\n    U->>I: 123456 を入力\n    I-->>U: 123-456 と表示\n    opt 保存したとき\n        I->>S: 123456 を渡す\n    end"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

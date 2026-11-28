@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>全体量が判明した時点で進捗を切り替える｜progress | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/progress-known-total">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 47</p><h1>全体量が判明した時点で進捗を切り替える｜progress</h1><p>集計を始めた時点では、全体で何件あるか分からないことがあります。</p><p>総件数が判明する前と後で、進捗欄を切り替えます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>不定進捗</dt><dd>全体量が分からない進捗</dd><dt>確定進捗</dt><dd>処理済み量と全体量を示せる進捗</dd></dl></section>
+<section><h2>状態遷移図で考える</h2><p>全体量が分かる瞬間に表示が切り替わります。</p><p>その時点で処理件数が0でも確定進捗を表示できます。</p>
+<div class="diagram" id="figure" role="img" aria-label="状態遷移図。全体量が分かる瞬間に表示が切り替わります。その時点で処理件数が0でも確定進捗を表示できます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>stateDiagram-v2
+    state &quot;全体量が未定&quot; as Unknown
+    state &quot;0件以上を処理済み&quot; as Known
+    state &quot;完了&quot; as Complete
+    [*] --&gt; Unknown
+    Unknown --&gt; Known: 全体量が10件と判明
+    Known --&gt; Complete: 10件処理</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>未定と 0 と 6 を試す。</p><p>表示と件数を比べる。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const p=panel(&#x27;progress&#x27;),q=field(&#x27;text&#x27;);p.max=10;p.setAttribute(&#x27;aria-label&#x27;,&#x27;処理の進み具合&#x27;);q.value=v;const update=()=&gt;{if(q.value.trim()===&#x27;&#x27;||!Number.isFinite(Number(q.value))){p.removeAttribute(&#x27;value&#x27;);say(&#x27;全体量を調査中&#x27;)}else{p.value=Number(q.value);say(p.position*10+&#x27; / 10 件&#x27;)}};q.oninput=update;update()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>未定と 0/10 は異なる状態になる。</p><p>件数が判明した瞬間に進捗を初期化できる。</p><p>処理済み件数が増えたら値だけを更新する。</p></section>
+<section><h2>コードの要点</h2><p>準備時はvalueを外し、件数が分かったら max=10 と現在値を設定する。</p></section>
+<section><h2>仕事で使うとき</h2><p>全体量が判明するまでは割合を推測で表示しない。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress">progressの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 47, "input": "未定", "diagram": "stateDiagram-v2\n    state \"全体量が未定\" as Unknown\n    state \"0件以上を処理済み\" as Known\n    state \"完了\" as Complete\n    [*] --> Unknown\n    Unknown --> Known: 全体量が10件と判明\n    Known --> Complete: 10件処理"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

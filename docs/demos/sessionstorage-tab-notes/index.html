@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>一時入力の保存範囲を再読み込みと別タブで確認する｜sessionStorage | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/sessionstorage-tab-notes">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 52</p><h1>一時入力の保存範囲を再読み込みと別タブで確認する｜sessionStorage</h1><p>作業中の入力を再読み込み後も残したい場合があります。</p><p>タブを開き直す場合や別タブの場合と比べ、どこまで引き継がれるか確かめます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>セッション</dt><dd>この例ではタブに関連付く作業期間</dd><dt>オリジン</dt><dd>方式とホスト名とポートの組み合わせ</dd></dl></section>
+<section><h2>シーケンス図で考える</h2><p>どのタブがどの保存領域にアクセスするかを示します。</p><p>独立した別タブと再読み込みを比べます。</p>
+<div class="diagram" id="figure" role="img" aria-label="シーケンス図。どのタブがどの保存領域にアクセスするかを示します。独立した別タブと再読み込みを比べます。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>sequenceDiagram
+    participant A as 元のタブ
+    participant S as 元のタブの保存領域
+    participant B as 独立の別タブ
+    A-&gt;&gt;S: メモを保存
+    A-&gt;&gt;S: 再読み込み後に取得
+    S--&gt;&gt;A: メモを返す
+    Note over B: 独立した保存領域で開始</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>メモを保存して再読み込みする。</p><p>アドレスを別のタブに直接入力する。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const k=&#x27;DailyCode52&#x27;;say(sessionStorage.getItem(k)??&#x27;保存した値はありません。&#x27;);button(&#x27;保存&#x27;,()=&gt;{sessionStorage.setItem(k,input.value);say(&#x27;このタブに保存しました。&#x27;)});button(&#x27;削除&#x27;,()=&gt;{sessionStorage.removeItem(k);say(&#x27;削除しました。&#x27;)})}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>再読み込みでは残る。</p><p>独立した別タブでは通常引き継がれない。</p><p>タブを複製した場合は初期値を引き継ぐことがある。</p><p>比較用のタブは新しく開き、アドレスを直接入力する。</p></section>
+<section><h2>コードの要点</h2><p>sessionStorage に保存して再読込し、アドレスを直接入力した別タブでも同じ値があるか確認する。</p></section>
+<section><h2>仕事で使うとき</h2><p>機密情報や長期保存が必要なデータの置き場にはしない。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage">sessionStorageの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 52, "input": "下書きメモ", "diagram": "sequenceDiagram\n    participant A as 元のタブ\n    participant S as 元のタブの保存領域\n    participant B as 独立の別タブ\n    A->>S: メモを保存\n    A->>S: 再読み込み後に取得\n    S-->>A: メモを返す\n    Note over B: 独立した保存領域で開始"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

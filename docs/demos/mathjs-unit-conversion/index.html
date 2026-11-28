@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>混在する寸法の単位をそろえる｜math.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/mathjs-unit-conversion">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 23</p><h1>混在する寸法の単位をそろえる｜math.js</h1><p>寸法表にインチとセンチが混ざると、そのままでは比較しづらくなります。</p><p>両方をミリに変換し、長さ以外が混ざった場合の扱いも見ます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>単位変換</dt><dd>同じ量を別の単位に直す処理</dd><dt>次元</dt><dd>長さや質量など量の種類</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「センチ表記」が変わると「ミリへ換算」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「センチ表記」が変わると「ミリへ換算」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;インチ表記&quot;] --&gt; B[&quot;センチ表記&quot;] --&gt; C[&quot;ミリへ換算&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>1 in と 2.54 cm を比べる。</p><p>次は 1 kg を入れる。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {unit}=await lib(&#x27;mathjs@14.3.1&#x27;);say(split(v).map(x=&gt;{try{return x+&#x27; → &#x27;+unit(x).to(&#x27;mm&#x27;).format({precision:10})}catch{return x+&#x27; → 長さとして変換できません&#x27;}}).join(&#x27;\n&#x27;))}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>長さはいずれも25.4 mm。</p><p>質量は長さへ変換できない。</p><p>25.4 mm と 25.4 の違いに注意する。</p><p>後者だけでは元の単位が分からないので、入力として受け付けるなら既定の単位を明示する。</p></section>
+<section><h2>コードの要点</h2><p>math.unit で各値を読み、mm に変換して表示する。</p></section>
+<section><h2>仕事で使うとき</h2><p>設計データを統合するときは単位も一緒に保存する。</p></section>
+<footer><p><a href="https://github.com/josdejong/mathjs">math.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 23, "input": "1 in,2.54 cm", "diagram": "flowchart LR\n    A[\"インチ表記\"] --> B[\"センチ表記\"] --> C[\"ミリへ換算\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

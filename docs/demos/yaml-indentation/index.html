@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>設定ファイルのインデントで構造が変わる理由｜yaml | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/yaml-indentation">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 31</p><h1>設定ファイルのインデントで構造が変わる理由｜yaml</h1><p>YAMLでは、キーの手前の空白が親子関係を決めます。</p><p>一行の空白を消し、同じ名前がどこへ移るかを見ます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>YAML</dt><dd>設定を階層で書けるテキスト形式</dd><dt>インデント</dt><dd>行頭の空白で示す階層</dd></dl></section>
+<section><h2>マインドマップで考える</h2><p>中央から左右のケースを読みます。</p><p>port の先頭に空白を付けると所属先が変わります。</p>
+<div class="diagram" id="figure" role="img" aria-label="マインドマップ。中央から左右のケースを読みます。port の先頭に空白を付けると所属先が変わります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>mindmap
+    root((設定の階層))
+      インデントあり
+        server の中に port
+      インデントなし
+        server と port が同じ階層</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>port の先頭を2空白にする。</p><p>次に空白を消す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {parseDocument}=await lib(&#x27;yaml@2.7.0&#x27;);const y=parseDocument(v);say(y.errors.length?y.errors.map(x=&gt;x.message):y.toJS())}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>同じキーが別の階層に移る。</p><p>空白を消すと server の値が空になり、port が同じ階層に移る。</p><p>エラーがない場合でも設定の意味が変わる点が重要だ。</p></section>
+<section><h2>コードの要点</h2><p>parseDocument の結果をJSON表示し、errors があれば位置を確認する。</p></section>
+<section><h2>仕事で使うとき</h2><p>設定変更は整形後だけでなく、変換した構造でもレビューする。</p></section>
+<footer><p><a href="https://github.com/eemeli/yaml">yamlの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 31, "input": "server:\n  port: 8080", "diagram": "mindmap\n    root((設定の階層))\n      インデントあり\n        server の中に port\n      インデントなし\n        server と port が同じ階層"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

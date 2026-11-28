@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>空欄と形式違いを一つずつ検出する｜フォーム制約検証 | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/form-validity-email">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 45</p><h1>空欄と形式違いを一つずつ検出する｜フォーム制約検証</h1><p>メールアドレス欄が空の場合と、書式が違う場合では、直す箇所が違います。</p><p>ブラウザーから理由を二つに分けて取得します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>制約検証</dt><dd>入力が条件を満たすかを確かめる機能</dd><dt>形式違い</dt><dd>入力済みの値が要求された形と異なる状態</dd></dl></section>
+<section><h2>分岐のフローチャートで考える</h2><p>ひし形で「空欄」を確認します。</p><p>結果によって次に進む先が変わります。</p>
+<div class="diagram" id="figure" role="img" aria-label="分岐のフローチャート。ひし形で「空欄」を確認します。結果によって次に進む先が変わります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart TD
+    A[&quot;メール欄を確認&quot;] --&gt; B{&quot;空欄？&quot;}
+    B -- &quot;はい&quot; --&gt; C[&quot;入力が必要と表示&quot;]
+    B -- &quot;いいえ&quot; --&gt; D[&quot;メール形式を確認&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>空欄と abc と demo@example.test を試す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const q=field(&#x27;email&#x27;);q.required=true;q.value=v;const update=()=&gt;say({空欄:q.validity.valueMissing,形式違い:q.validity.typeMismatch,通過:q.validity.valid});q.oninput=update;update()}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>空欄と形式違いが別々の理由として出る。</p><p>ブラウザーは形式を見て判断する。</p><p>受信先のアドレスが実際に存在するかは、この検証からは分からない。</p></section>
+<section><h2>コードの要点</h2><p>type=email と required を指定して validity の valueMissing と typeMismatch を見る。</p></section>
+<section><h2>仕事で使うとき</h2><p>画面で検証していても、受信する側で同じ前提を確認する。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">フォーム制約検証の参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 45, "input": "abc", "diagram": "flowchart TD\n    A[\"メール欄を確認\"] --> B{\"空欄？\"}\n    B -- \"はい\" --> C[\"入力が必要と表示\"]\n    B -- \"いいえ\" --> D[\"メール形式を確認\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

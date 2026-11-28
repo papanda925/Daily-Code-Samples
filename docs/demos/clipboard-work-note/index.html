@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>整形した作業メモを一操作でコピーする｜Clipboard API | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/clipboard-work-note">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 58</p><h1>整形した作業メモを一操作でコピーする｜Clipboard API</h1><p>作業メモを毎回選択してコピーする操作は手数がかかります。</p><p>ボタンで整形済みの文をコピーし、貼り付けて確かめます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>クリップボード</dt><dd>コピーしたデータを一時的に保持する場所</dd><dt>セキュアコンテキスト</dt><dd>通常はHTTPSやlocalhostで提供される安全な実行環境</dd></dl></section>
+<section><h2>処理のフローチャートで考える</h2><p>左から右に読みます。</p><p>「コピー操作」が変わると「貼り付け先」にどう影響するかを予想します。</p>
+<div class="diagram" id="figure" role="img" aria-label="処理のフローチャート。左から右に読みます。「コピー操作」が変わると「貼り付け先」にどう影響するかを予想します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>flowchart LR
+    A[&quot;作業メモ&quot;] --&gt; B[&quot;コピー操作&quot;] --&gt; C[&quot;貼り付け先&quot;]</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>コピーを押す。</p><p>貼り付け欄で結果を見る。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const p=panel(&#x27;textarea&#x27;);p.setAttribute(&#x27;aria-label&#x27;,&#x27;コピー用の整形済み作業メモ&#x27;);p.readOnly=true;p.value=&#x27;【作業メモ】\n- &#x27;+v;const paste=panel(&#x27;textarea&#x27;);paste.setAttribute(&#x27;aria-label&#x27;,&#x27;貼り付けて確認&#x27;);paste.placeholder=&#x27;ここに貼り付けて確認&#x27;;button(&#x27;コピー&#x27;,async()=&gt;{try{await navigator.clipboard.writeText(p.value);say(&#x27;コピーしました。&#x27;)}catch{p.select();say(&#x27;選択した文を手動でコピーしてください。&#x27;)}})}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>対応環境では整形済みのメモが貼り付く。</p><p>失敗時は手動で選択できる。</p><p>操作後は貼り付けた値で結果を確認する。</p><p>利用者のクリック直後にコピーを呼ぶと、ブラウザーの操作条件に合わせやすい。</p></section>
+<section><h2>コードの要点</h2><p>ボタン操作で navigator.clipboard.writeText を呼び、結果を貼り付け欄で確認する。</p></section>
+<section><h2>仕事で使うとき</h2><p>コピーの成功表示はAPIの処理が完了してから出す。</p></section>
+<footer><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API">Clipboard APIの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 58, "input": "定例作業を確認", "diagram": "flowchart LR\n    A[\"作業メモ\"] --> B[\"コピー操作\"] --> C[\"貼り付け先\"]"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

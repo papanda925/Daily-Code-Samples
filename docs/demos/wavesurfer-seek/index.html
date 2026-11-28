@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>長い録音を波形から頭出しする｜wavesurfer.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/wavesurfer-seek">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 38</p><h1>長い録音を波形から頭出しする｜wavesurfer.js</h1><p>長い録音から話し始めを探すには、音の強弱が目印になります。</p><p>音の大きい箇所がある実験用音声で、波形から再生位置を選びます。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>波形</dt><dd>音の振幅を時間順に描いたもの</dd><dt>頭出し</dt><dd>再生したい位置に移動すること</dd></dl></section>
+<section><h2>タイムラインで考える</h2><p>区間ごとに音量の違いを示します。</p><p>ライブデモでは波形から2秒付近を探します。</p>
+<div class="diagram" id="figure" role="img" aria-label="タイムライン。区間ごとに音量の違いを示します。ライブデモでは波形から2秒付近を探します。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>timeline
+    title 実験用の音声
+    0〜2秒 : 小さい音
+    2〜3秒 : 大きい音
+    3〜6秒 : 小さい音</code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>波形の山の手前をクリックする。</p><p>再生を押す。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async()=&gt;{const {default:W}=await lib(&#x27;wavesurfer.js@7.9.1&#x27;);const rate=8000,count=rate*6,b=new ArrayBuffer(44+count*2),d=new DataView(b);for(const [o,s] of [[0,&#x27;RIFF&#x27;],[8,&#x27;WAVEfmt &#x27;],[36,&#x27;data&#x27;]])for(const [i,c] of [...s].entries())d.setUint8(o+i,c.charCodeAt(0));for(const [o,x] of [[4,b.byteLength-8],[16,16],[24,rate],[28,rate*2],[40,count*2]])d.setUint32(o,x,true);for(const [o,x] of [[20,1],[22,1],[32,2],[34,16]])d.setUint16(o,x,true);for(let i=0;i&lt;count;i++){const t=i/rate;d.setInt16(44+2*i,Math.sin(t*Math.PI*600)*(t&gt;2&amp;&amp;t&lt;3?13000:1200),true)}const w=W.create({container:panel(),height:100,waveColor:&#x27;#38836a&#x27;,progressColor:&#x27;#bb491f&#x27;});cleanup=()=&gt;w.destroy();await w.loadBlob(new Blob([b],{type:&#x27;audio/wav&#x27;}));w.on(&#x27;interaction&#x27;,t=&gt;say(t.toFixed(2)+&#x27;秒&#x27;));button(&#x27;再生・停止&#x27;,()=&gt;w.playPause())}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>選んだ位置から音が流れる。</p><p>音の小さいところも再生できる。</p><p>探したい発言の近くで音量が一定なら、書き起こしや時刻のメモを組み合わせる。</p></section>
+<section><h2>コードの要点</h2><p>再生せずに波形をクリックして位置を移し、その後に再生する。</p></section>
+<section><h2>仕事で使うとき</h2><p>音の内容を判断するときは再生して聞く。</p><p>波形は位置の目印に使う。</p></section>
+<footer><p><a href="https://github.com/katspaugh/wavesurfer.js">wavesurfer.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 38, "input": "波形で位置を選ぶ", "diagram": "timeline\n    title 実験用の音声\n    0〜2秒 : 小さい音\n    2〜3秒 : 大きい音\n    3〜6秒 : 小さい音"}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

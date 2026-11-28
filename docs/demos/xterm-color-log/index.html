@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>端末の色付きログの仕組みを確かめる｜xterm.js | Daily Code</title><link rel="stylesheet" href="../browser-library-labs/daily.css"></head>
+<body><main><nav aria-label="記事の移動"><a href="../browser-library-labs/">記事一覧</a><a href="https://github.com/papanda925/Daily-Code-Samples/tree/main/web/xterm-color-log">GitHub教材</a></nav>
+<header><p class="series">Daily Code / 17</p><h1>端末の色付きログの仕組みを確かめる｜xterm.js</h1><p>端末の色付きログには、画面に出ない命令が含まれます。</p><p>赤を開始する命令と、色を元に戻す命令を分けて観察します。</p><a class="action" href="#live">ライブデモへ</a></header>
+<section><h2>最初に知っておく用語</h2><dl><dt>制御シーケンス</dt><dd>端末の表示を操作する文字の並び</dd><dt>リセット</dt><dd>色などを初期状態へ戻す命令</dd></dl></section>
+<section><h2>パケット図で考える</h2><p>一続きのバイト列を区間で見ます。</p><p>図の範囲はビット番号です。</p><p>色の解除を外すと、次の文字まで赤になります。</p>
+<div class="diagram" id="figure" role="img" aria-label="パケット図。一続きのバイト列を区間で見ます。図の範囲はビット番号です。色の解除を外すと、次の文字まで赤になります。">図を読み込み中</div>
+<details><summary>Mermaidのソースを見る</summary><pre><code>packet-beta
+    0-39: &quot;ESC[31m 赤を開始&quot;
+    40-79: &quot;ERROR&quot;
+    80-111: &quot;ESC[0m 色を解除&quot;
+    112-135: &quot;空白とOK&quot; </code></pre></details></section>
+<section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>on と off で実行する。</p><p>OK の色を見る。</p>
+<label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
+<div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{css(&#x27;https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css&#x27;);const {Terminal}=await lib(&#x27;@xterm/xterm@5.5.0&#x27;);const t=new Terminal({rows:3,cols:32,disableStdin:true});t.open(panel());const s=&#x27;\x1b[31mERROR&#x27;+(v===&#x27;off&#x27;?&#x27;&#x27;:&#x27;\x1b[0m&#x27;)+&#x27; OK&#x27;;t.write(s);cleanup=()=&gt;t.dispose();say(JSON.stringify(s))}</code></pre></details></section>
+<section><h2>結果の見方</h2><p>解除を送らなければ OK にも赤が残る。</p><p>端末に渡される ESC は目に見えない文字だ。</p><p>結果欄にはエスケープ表記が出る。</p><p>赤色の指示と解除の間にどの文字があるかを見る。</p></section>
+<section><h2>コードの要点</h2><p>Terminal.write の結果と、制御文字を見える形にした文字列を並べる。</p></section>
+<section><h2>仕事で使うとき</h2><p>ログ保存時は画面用の色と記録内容を分ける。</p></section>
+<footer><p><a href="https://github.com/xtermjs/xterm.js">xterm.jsの参照資料</a></p><p>本文はAIを利用して作成しました。</p></footer></main><script id="settings" type="application/json">{"id": 17, "input": "on", "diagram": "packet-beta\n    0-39: \"ESC[31m 赤を開始\"\n    40-79: \"ERROR\"\n    80-111: \"ESC[0m 色を解除\"\n    112-135: \"空白とOK\" "}</script><script src="../browser-library-labs/daily.js" defer></script></body></html>

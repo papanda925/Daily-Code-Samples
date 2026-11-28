@@ -26,6 +26,7 @@ HTMLの `<template>` にカードの構造を作り、入力した名前ごと�
 - 同じ構造の行やカードを作るときに使えます。構造の修正場所をひな形へまとめられます。
 - ひな形に `id` を含めて複数複製する場合、複製後に一意なIDへ書き換えます。重複IDはラベル、ARIA参照、CSS/JavaScriptの検索を誤らせます。
 - ユーザー入力を `innerHTML` に流し込まず、文字として表示したい箇所には `textContent` を使います。
+- `cloneNode()` は `addEventListener()` で登録したイベントリスナーを複製しません。複製後にイベントを登録するか、親要素のイベント委譲を使います。
 - template内にカスタム要素がある場合、template.contentは別documentに属するため、対象document側でカスタム要素を使うときは `document.importNode(template.content, true)` を検討してください。この教材は通常の `p` 要素だけです。
 - このデモはカンマを区切り文字とする簡易入力です。名前にカンマを含めるCSVエスケープには対応していません。
 

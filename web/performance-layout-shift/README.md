@@ -85,5 +85,6 @@ GitのHTML・README・共通コードは照合しました。Node.jsで共通Jav
 - [MDN: LayoutShift](https://developer.mozilla.org/en-US/docs/Web/API/LayoutShift)
 - [WICG: Layout Instability API](https://wicg.github.io/layout-instability/)
 - [web.dev: Cumulative Layout Shift](https://web.dev/articles/cls)
+- [Mermaid 11.12.2 MIT License](https://github.com/mermaid-js/mermaid/blob/mermaid%4011.12.2/LICENSE)（共通図描画コードが利用）
 
 本文はAIを利用して作成しました。

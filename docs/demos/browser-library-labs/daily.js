@@ -105,7 +105,7 @@ const scene=document.getElementById('scene');
 const result=document.getElementById('result');
 const run=document.getElementById('run');
 const figure=document.getElementById('figure');
-const noInput=new Set([30,33,35,37,38,41,42,48,49,51,54,55,56,59,60]);
+const noInput=new Set([30,33,37,38,41,42,48,49,51,54,55,56,59,60]);
 input.value=settings.id===57?(new URL(location.href).searchParams.get('department')??settings.input):settings.input;
 if(noInput.has(settings.id)){input.hidden=true;document.querySelector('label[for="input"]').hidden=true}
 run.onclick=async()=>{

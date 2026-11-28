@@ -1,57 +1,57 @@
 # 申請JSONのどの項目が不正か表示する｜Zod
 
-Zod 4.6.7 のオブジェクトスキーマで、JSONの `quantity` が数値の整数かを検証します。文字列の `"2"` と数値の `2` の違い、エラーの項目パスを試せます。
+入力欄に同じ2が見えても、文字列と数値では型が違います。Zodで数量を検査し、利用者に示すエラーの位置を取り出します。
 
-対応記事ID: `20261128-79-02`
+## 最初に知っておく用語
+
+- **スキーマ**は、入力の形と制約を定めたルールです。
+- **パス**は、誤りが起きた項目の位置です。
+
+## 分岐のフローチャートで考える
+
+ひし形で「quantity の型は整数」を確認します。結果によって次に進む先が変わります。
+
+```mermaid
+flowchart TD
+    A["数量を入力"] --> B{"quantity の型は整数？"}
+    B -- "はい" --> C["入力を受け付ける"]
+    B -- "いいえ" --> D["項目名を付けて知らせる"]
+```
 
 ## ライブデモ
 
-[申請JSONの数量を検証するデモ](https://papanda925.github.io/Daily-Code-Samples/demos/zod-quantity-validation/#live)
+[公開用ライブデモ](https://papanda925.github.io/Daily-Code-Samples/demos/zod-quantity-validation/#live) ／ [実装HTML](../../docs/demos/zod-quantity-validation/index.html) ／ [共通JavaScript](../../docs/demos/browser-library-labs/daily.js)
 
-## 試し方
+1. 現行のブラウザーでデモを開く。Mermaidの描画や一部のライブラリーに外部通信を使用する。
+2. 「実行」を押す。下記の値や画面内の操作欄を試す。
 
-1. 初期値 `{"quantity":"2"}` のまま「実行」を押します。
-2. 結果にエラーの位置 `quantity` が表示されます。JSONでは引用符の有無で文字列と数値が異なります。
-3. `{"quantity":2}` に変えて実行します。整数なので成功し、検証済みデータが表示されます。
-4. `{"quantity":2.5}` を試します。数値ではありますが整数ではないため失敗します。
-5. `{"quantity":-1}` を試します。このスキーマは整数を求めるだけなので成功します。負数も禁止したい業務なら条件を追加してください。
+数量を文字列のまま実行する。引用符を外して実行する。
 
-## 仕組み
+### 結果の見方
 
-`JSON.parse` で文字列をJSON値に変換し、`z.object({ quantity: z.number().int() }).safeParse(...)` でスキーマに照らします。失敗時は `error.issues` の `path` と `message` を画面に表示します。`z.number()` は文字列を自動で数値に直しません。変換したい入力は、型変換を明示し、変換前後をそれぞれテストします。
+文字列では quantity がエラーになる。数値の 2 は通る。
 
-この教材は Zod **4.6.7** に固定しています。Zod 4では `.int()` がJavaScriptの安全な整数範囲も検査します。極端に大きな整数をJSON Numberに入れると、Zodへ渡る前にJavaScriptで精度が失われる場合があります。非常に大きな整数を扱う設計では、文字列など別の表現を検討してください。
+引用符を外すと値の見た目は同じでも型が変わる。入力画面で数量を数値として送る設計なら、負数と小数も別のテストにする。
 
-デモはJSON構文の解析を先に行います。そのためJSONとして壊れた入力はZodの項目エラーではなく、JSON.parseの構文エラーになります。項目不足・型違い・小数は、構文が正しいJSONをスキーマが検査します。
+## コードの要点
 
-## 業務利用での注意
+z.number().int() を含むオブジェクトを safeParse し、失敗時に issue の path を表示する。
 
-- `z.number().int()` は負数や業務上の最大数を制限しません。必要な場合は `.nonnegative()`、`.positive()`、`.min()`、`.max()` などを要件に合わせて追加します。
-- ブラウザー側の検証は入力体験の改善です。信頼境界ではないため、サーバー/APIでも同じ制約を検証してください。
-- エラーメッセージに利用者の入力値や機密情報を追加で含めないでください。ログに保存するデータも絞ります。
-- サンプル入力は画面内で処理され、サーバー保存・送信はありません。ZodはESモジュール配信元から読み込まれ、ページの図はMermaidの外部配信を使います。
+実装はデモ画面の「実装コード」で確認できます。
 
-## トラブルシューティング
+## 仕事で使うとき
 
-- `quantity` のエラーになる: 値が引用符付き文字列でないか、JSONの項目名と型を確認します。
-- 数値なのに失敗する: `2.5` は整数ではありません。入力の小数を許可するのか、数量の業務要件を確認します。
-- Zodのエラーが表示されない: JSON構文が無効だと、検証前の `JSON.parse` で止まります。括弧、カンマ、引用符を確認します。
-- CDNから読み込めない: ネットワーク制限やブラウザーの開発者コンソールを確認します。
-- 余分なJSON項目がある: デモのスキーマは `quantity` だけを明示しています。外部APIで未知のキーを受け付けるか拒否するかも仕様として決めてください。
+APIが受け取る型を操作画面の担当者と共有する。型変換を行うならその前後を別にテストする。
 
-## 公式資料・ライセンス
+## 参考資料
 
-- [Zod基本の使い方（公式）](https://zod.dev/basics) — `safeParse` と成功・失敗の結果
-- [Zodエラーのカスタマイズ（公式）](https://zod.dev/error-customization) — issue配列、メッセージ、path
-- [Zod 4移行ガイド（公式）](https://zod.dev/v4/changelog) — `.int()` の安全な整数制約
-- [Zod v4.6.7 package metadata](https://github.com/colinhacks/zod/blob/v4.6.7/packages/zod/package.json)
-- [Zod v4.6.7 LICENSE](https://github.com/colinhacks/zod/blob/v4.6.7/LICENSE)
-- [実装HTML](../../docs/demos/zod-quantity-validation/index.html) · [共通JavaScript](../../docs/demos/browser-library-labs/daily.js)
+- [Zodの参照資料](https://github.com/colinhacks/zod)
+- [Mermaidの図の書き方](https://mermaid.js.org/intro/syntax-reference.html)
 
-ZodはMITライセンスです。
+本文はAIを利用して作成しました。
 
-## 検証状況
+## 実行環境と検証
 
-実施: Node.js 24.22.3 の `node --check` がPASS。Python HTMLParserで実際のHTMLから `#live`、`#input`、`#run` を確認。Zod v4.6.7の固定指定、JSON.parse後にsafeParseを呼ぶ実装、エラーpath、READMEの専用ライブURLを静的照合しました。
+JavaScriptの構文とファイル間の対応を確認した。 Pagesでの各機能の実行とMermaidの描画は検証範囲に含まれていない。
 
-未確認: Pages上の表示とブラウザー操作、スクリーンリーダーによる確認。npmからZodを取得する試みは実行環境のネットワーク制限で失敗したため、Zodパッケージ自体の実行テストは未実施です。
+図が表示されない場合は、本文の読み方とMermaidソースを参照する。デモ欄に取得エラーが出る場合は通信条件を確認する。検証用の架空データを使う。

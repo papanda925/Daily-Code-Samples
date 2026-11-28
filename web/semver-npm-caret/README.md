@@ -144,4 +144,4 @@ npm test
 npm run demo -- "^0.2.3" 0.2.2 0.2.3 0.2.9 0.3.0
 ```
 
-`demo.test.cjs` は `node:test` で、caretの3パターン、プレリリース、形式不正の計5ケースを確認します。依存ライブラリーは `package.json` で semver 7.8.5 に固定しています。
+`demo.test.cjs` は `node:test` で、3種類のcaret上限、上限系列のプレリリース、プレリリース指定、形式不正を確認します。n` で semver 7.8.5 に固定しています。

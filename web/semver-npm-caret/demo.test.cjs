@@ -9,17 +9,20 @@ test('caret range with nonzero major accepts minor and patch but stops at next m
   assert.equal(semver.satisfies('1.2.3', '^1.2.3'), true);
   assert.equal(semver.satisfies('1.9.0', '^1.2.3'), true);
   assert.equal(semver.satisfies('2.0.0', '^1.2.3'), false);
+  assert.equal(semver.satisfies('2.0.0-beta.1', '^1.2.3'), false);
 });
 
 test('caret range with zero major stops at next minor', () => {
   assert.equal(semver.satisfies('0.2.2', '^0.2.3'), false);
   assert.equal(semver.satisfies('0.2.9', '^0.2.3'), true);
   assert.equal(semver.satisfies('0.3.0', '^0.2.3'), false);
+  assert.equal(semver.satisfies('0.3.0-beta.1', '^0.2.3'), false);
 });
 
 test('caret range with zero major and minor stops at next patch', () => {
   assert.equal(semver.satisfies('0.0.3', '^0.0.3'), true);
   assert.equal(semver.satisfies('0.0.4', '^0.0.3'), false);
+  assert.equal(semver.satisfies('0.0.4-beta.1', '^0.0.3'), false);
 });
 
 test('prereleases require an opted-in comparator for the same tuple', () => {

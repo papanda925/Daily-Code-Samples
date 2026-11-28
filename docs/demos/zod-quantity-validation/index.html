@@ -13,7 +13,7 @@
 <section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>数量を文字列のまま実行する。</p><p>引用符を外して実行する。</p>
 <label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
 <div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
-<details><summary>実装コード</summary><pre><code>async v=&gt;{const {z}=await lib(&#x27;zod@3.24.2&#x27;);const r=z.object({quantity:z.number().int()}).safeParse(JSON.parse(v));say(r.success?r.data:r.error.issues.map(x=&gt;({位置:x.path.join(&#x27;.&#x27;),理由:x.message})))}</code></pre></details></section>
+<details><summary>実装コード</summary><pre><code>async v=&gt;{const {z}=await lib(&#x27;zod@4.6.7&#x27;);const r=z.object({quantity:z.number().int()}).safeParse(JSON.parse(v));say(r.success?r.data:r.error.issues.map(x=&gt;({位置:x.path.join(&#x27;.&#x27;),理由:x.message})))}</code></pre></details></section>
 <section><h2>結果の見方</h2><p>文字列では quantity がエラーになる。</p><p>数値の 2 は通る。</p><p>引用符を外すと値の見た目は同じでも型が変わる。</p><p>入力画面で数量を数値として送る設計なら、負数と小数も別のテストにする。</p></section>
 <section><h2>コードの要点</h2><p>z.number().int() を含むオブジェクトを safeParse し、失敗時に issue の path を表示する。</p></section>
 <section><h2>仕事で使うとき</h2><p>APIが受け取る型を操作画面の担当者と共有する。</p><p>型変換を行うならその前後を別にテストする。</p></section>

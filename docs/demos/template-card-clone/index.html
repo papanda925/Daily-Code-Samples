@@ -11,7 +11,7 @@
 <section id="live" class="lab" aria-labelledby="lab-title"><h2 id="lab-title">ライブデモ</h2><p>公開データや検証用のファイルで試してください。</p><p>備品Aと備品Bをカンマで並べる。</p><p>名前を増やして実行する。</p>
 <label for="input">実験する値</label><textarea id="input" rows="3"></textarea><button type="button" id="run">実行</button>
 <div id="scene"></div><pre id="result" role="status" aria-live="polite"></pre>
-<details><summary>実装コード</summary><pre><code>v=&gt;{const t=panel(&#x27;template&#x27;),p=el(&#x27;p&#x27;,t.content);p.className=&#x27;card&#x27;;for(const name of split(v)){const c=t.content.cloneNode(true);c.firstElementChild.textContent=name;scene.append(c)}say(split(v).length+&#x27; 枚を複製しました。&#x27;)}</code></pre></details></section>
+<details><summary>実装コード</summary><pre><code>v=&gt;{const names=split(v).filter(Boolean),t=panel(&#x27;template&#x27;),p=el(&#x27;p&#x27;,t.content);p.className=&#x27;card&#x27;;for(const name of names){const c=t.content.cloneNode(true);c.firstElementChild.textContent=name;scene.append(c)}say(names.length+&#x27; 枚を複製しました。&#x27;)}</code></pre></details></section>
 <section><h2>結果の見方</h2><p>それぞれのカードに別の名前が入る。</p><p>ひな形を追加しただけではカードは表示されない。</p><p>複製した内容を画面へ挿入したときに初めて表示される。</p></section>
 <section><h2>コードの要点</h2><p>template.content を cloneNode(true) で複製し、各名前を textContent で設定する。</p></section>
 <section><h2>仕事で使うとき</h2><p>複製する中身のIDは重ならないように設計する。</p></section>

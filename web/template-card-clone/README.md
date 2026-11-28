@@ -1,55 +1,55 @@
 # カードのひな形を複製して別々の内容を入れる｜template
 
-似たカードを追加するたびに画面の構造を書くと、項目が増えたときの修正が大変です。ひな形を複製し、一枚ずつ内容を入れます。
+HTMLの `<template>` にカードの構造を作り、入力した名前ごとに複製します。空欄を除外し、文字列をHTMLとして解釈せず表示する流れを試せます。
 
-## 最初に知っておく用語
-
-- **テンプレート**は、複製して再利用するひな形です。
-- **クローン**は、構造をコピーした要素です。
-
-## 処理のフローチャートで考える
-
-左から右に読みます。「複製した要素」が変わると「個別の内容」にどう影響するかを予想します。
-
-```mermaid
-flowchart LR
-    A["カードのひな形"] --> B["複製した要素"] --> C["個別の内容"]
-```
+対応記事ID: `20261128-79-02`
 
 ## ライブデモ
 
-[公開用ライブデモ](https://papanda925.github.io/Daily-Code-Samples/demos/template-card-clone/#live) ／ [実装HTML](../../docs/demos/template-card-clone/index.html) ／ [共通JavaScript](../../docs/demos/browser-library-labs/daily.js)
+[カードひな形の複製デモ](https://papanda925.github.io/Daily-Code-Samples/demos/template-card-clone/#live)
 
-1. 現行のブラウザーでデモを開く。Mermaidの描画や一部のライブラリーに外部通信を使用する。
-2. 「実行」を押す。下記の値や画面内の操作欄を試す。
+## 試し方
 
-備品Aと備品Bをカンマで並べる。名前を増やして実行する。
+1. 初期値 `備品A,備品B` のまま「実行」を押します。2つのカードが表示されます。
+2. `備品A,備品B,備品C` に変えて再実行します。3枚になり、既存カードと新しいカードが別の内容を持ちます。
+3. `備品A,,備品B,` と入力します。カンマ区切り要素の前後空白を除去したあと、空欄は捨てるため2枚だけ表示されます。
+4. `<img src=x onerror=alert(1)>` のような文字列を試すと、HTML要素にならず文字として表示されます。
 
-### 結果の見方
+## 仕組み
 
-それぞれのカードに別の名前が入る。
+実行コードは空の `template` 要素を作り、その `content`（DocumentFragment）へ `p.card` のひな形を1つ入れます。各名前ごとに `cloneNode(true)` で複製し、`textContent` を設定してから画面へ追加します。名前を入れた後に複製するのではなく、同じ形のひな形から独立したノードを作ります。
 
-ひな形を追加しただけではカードは表示されない。複製した内容を画面へ挿入したときに初めて表示される。
+`<template>` の中身は文書にそのまま表示されません。複製し、文書へ挿入した後にカードとして見えるようになります。空欄は `split(v).filter(Boolean)` で無視します。
 
-## コードの要点
+## 実務に使うとき
 
-template.content を cloneNode(true) で複製し、各名前を textContent で設定する。
+- 同じ構造の行やカードを作るときに使えます。構造の修正場所をひな形へまとめられます。
+- ひな形に `id` を含めて複数複製する場合、複製後に一意なIDへ書き換えます。重複IDはラベル、ARIA参照、CSS/JavaScriptの検索を誤らせます。
+- ユーザー入力を `innerHTML` に流し込まず、文字として表示したい箇所には `textContent` を使います。
+- このデモはカンマを区切り文字とする簡易入力です。名前にカンマを含めるCSVエスケープには対応していません。
 
-実装はデモ画面の「実装コード」で確認できます。
+## トラブルシューティング
 
-## 仕事で使うとき
+- カードが表示されない: 「実行」を押したか、入力に空白以外の名前があるか確認します。
+- 1枚しか出ない: 区切りが半角カンマ `,` か確認します。
+- 空白カードが出る: 固定した教材版で `filter(Boolean)` が反映されているかを確認します。
+- 名前がHTMLとして働く: 実装が `textContent` ではなく `innerHTML` を使っていないか確認します。
+- 図が見えない: Mermaidの外部読込条件を確認し、本文にある図の説明とソースも参照します。
 
-複製する中身のIDは重ならないように設計する。
+## 公式資料とライセンス
 
-## 参考資料
+- [WHATWG HTML Standard: template element](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element)
+- [WHATWG DOM Standard: Node.cloneNode](https://dom.spec.whatwg.org/#dom-node-clonenode)
+- [WHATWG DOM Standard: Node.textContent](https://dom.spec.whatwg.org/#dom-node-textcontent)
+- [MDN: HTMLTemplateElement.content](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/content)
+- [MDN: Node.cloneNode()](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)
+- [Mermaid v11.12.2 LICENSE](https://github.com/mermaid-js/mermaid/blob/mermaid%4011.12.2/LICENSE)
+- [実装HTML](../../docs/demos/template-card-clone/index.html) · [共通JavaScript](../../docs/demos/browser-library-labs/daily.js)
 
-- [templateの参照資料](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
-- [Mermaidの図の書き方](https://mermaid.js.org/intro/syntax-reference.html)
+HTML template and DOM cloning APIs are web standards and are not external JS library dependencies. Mermaid used for diagrams is MIT-licensed. The demo uses Mermaid from an external CDN when displaying diagrams.
 
-本文はAIを利用して作成しました。
+## 検証状況
 
-## 実行環境と検証
+実施: Node.js構文検査、Python HTMLParserで実際のHTMLの `#live`、`#input`、`#run` を確認。コード例・操作名・入力値・空欄除外ロジック・固定ライブURLを静的照合しました。
 
-Node.jsで実行処理を確認した。 Pagesでの各機能の実行とMermaidの描画は検証範囲に含まれていない。
-
-図が表示されない場合は、本文の読み方とMermaidソースを参照する。デモ欄に取得エラーが出る場合は通信条件を確認する。検証用の架空データを使う。
+未確認: GitHub Pages上でのブラウザー表示・実操作、複数ブラウザー間の表示、支援技術による操作、Mermaidの描画。HTML DOMの実ブラウザー動作試験は実行していません。

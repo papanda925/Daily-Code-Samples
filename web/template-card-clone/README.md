@@ -41,6 +41,7 @@ HTMLの `<template>` にカードの構造を作り、入力した名前ごと�
 - [WHATWG HTML Standard: template element](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element)
 - [WHATWG DOM Standard: Node.cloneNode](https://dom.spec.whatwg.org/#dom-node-clonenode)
 - [WHATWG DOM Standard: Node.textContent](https://dom.spec.whatwg.org/#dom-node-textcontent)
+- [WHATWG DOM Standard: Document.importNode()](https://dom.spec.whatwg.org/#dom-document-importnode)
 - [MDN: HTMLTemplateElement.content](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTemplateElement/content)
 - [MDN: Node.cloneNode()](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)
 - [Mermaid v11.12.2 LICENSE](https://github.com/mermaid-js/mermaid/blob/mermaid%4011.12.2/LICENSE)
